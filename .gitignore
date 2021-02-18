@@ -7,6 +7,11 @@
 node_modules/
 dist/
 
+# gatsby files
+.cache/
+public
+
+
 # Compiled Java class files
 *.class
 
