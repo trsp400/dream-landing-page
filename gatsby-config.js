@@ -1,3 +1,7 @@
+require('dotenv').config({
+  path: `.env.${process.env.NODE_ENV}`,
+});
+
 module.exports = {
   siteMetadata: {
     title: `Dream Machine BeCapital`,
@@ -28,10 +32,10 @@ module.exports = {
       },
     },
     {
-      resolve: "gatsby-plugin-web-font-loader",
+      resolve: 'gatsby-plugin-web-font-loader',
       options: {
         custom: {
-          families: ["Trasandina"],
+          families: ['Trasandina'],
           urls: [`${__dirname}/static/fonts/fonts.css`],
         },
       },
@@ -47,13 +51,13 @@ module.exports = {
         start_url: `/`,
         background_color: `#1A4A73`,
         theme_color: `#1A4A73`,
-        lang: "pt-br",
+        lang: 'pt-br',
         display: `standalone`,
-        icon: "src/assets/logo/svg/bec_logo_rgb.svg",
+        icon: 'src/assets/logo/svg/bec_logo_rgb.svg',
       },
     },
     // this (optional) plugin enables Progressive Web App + Offline functionality
     // To learn more, visit: https://gatsby.dev/offline
     `gatsby-plugin-offline`,
   ],
-}
+};
