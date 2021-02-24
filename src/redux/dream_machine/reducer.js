@@ -10,55 +10,39 @@ const INITIAL_STATE = {
     email: '',
     yearlyAverageArray: [],
   },
-  stepOne: {
-    objective: '',
-    objectiveCost: 0,
-    period: '',
-    yearOrMonth: 'anos',
-  },
-  stepTwo: {
-    monthlySupport: 0,
-    currentInvestments: 0,
-    monthlyLifeCost: 0,
-    monthlyIncome: 0,
-  },
-  stepThree: {
-    investmentsPlacement: [],
-    currentAssets: [],
-  },
+  path: '',
+  objective: '',
+  objectiveCost: 0,
+  period: '',
+  yearOrMonth: 'anos',
+  monthlySupport: 0,
+  currentInvestments: 0,
+  monthlyLifeCost: 0,
+  monthlyIncome: 0,
+  investmentsPlacement: [],
+  currentAssets: [],
 };
 
 export default (state = INITIAL_STATE, action) => {
-  const stepOne = action?.payload?.stepOne;
-  const stepTwo = action?.payload?.stepTwo;
-  const stepThree = action?.payload?.stepThree;
+  const { payload } = action;
 
   switch (action.type) {
     case actions.CHANGE_FORM_STATE:
       return {
         ...state,
-        stepOne: {
-          ...state.stepOne,
-          objective: stepOne?.objective,
-          objectiveCost: stepOne?.objectiveCost,
-          period: stepOne?.period,
-          yearOrMonth: stepOne?.yearOrMonth,
-        },
-        stepTwo: {
-          ...state.stepTwo,
-          monthlySupport: stepTwo?.monthlySupport,
-          currentInvestments: stepTwo?.currentInvestments,
-          monthlyLifeCost: stepTwo?.monthlyLifeCost,
-          monthlyIncome: stepTwo?.monthlyIncome,
-        },
-        stepThree: {
-          ...state.stepThree,
-          investmentsPlacement: stepThree?.investmentsPlacement,
-          currentAssets: stepThree?.currentAssets,
-        },
-        currentStep: action?.payload?.currentStep,
-        result: action?.payload?.result,
-        resultSuccess: action?.payload?.resultSuccess || null,
+        objective: payload?.objective,
+        objectiveCost: payload?.objectiveCost,
+        period: payload?.period,
+        yearOrMonth: payload?.yearOrMonth,
+        monthlySupport: payload?.monthlySupport,
+        currentInvestments: payload?.currentInvestments,
+        monthlyLifeCost: payload?.monthlyLifeCost,
+        monthlyIncome: payload?.monthlyIncome,
+        investmentsPlacement: payload?.investmentsPlacement,
+        currentAssets: payload?.currentAssets,
+        currentStep: payload?.currentStep,
+        resultSuccess: payload?.resultSuccess || null,
+        path: payload?.path,
       };
     case actions.SEND_DREAM_MACHINE_RESULT_TO_API_SUCCESS:
       return {

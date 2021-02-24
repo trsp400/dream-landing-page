@@ -1,8 +1,8 @@
 module.exports = {
   siteMetadata: {
-    title: `Dream Machine BeCapital`,
+    title: `Máquina dos Sonhos BeCapital`,
     author: `@BeCapitaltech`,
-    description: `Uma nova maneira de pensar e agir no mercado de capitais. Acreditamos que investir é para todos.`,
+    description: `Máquina dos Sonhos BeCapital`,
     siteUrl: `https://maquinadossonhos.be.capital/`,
   },
   plugins: [
