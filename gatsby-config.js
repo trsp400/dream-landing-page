@@ -1,22 +1,9 @@
 module.exports = {
   siteMetadata: {
-    title: `Dream Machine BeCapital`,
+    title: `Máquina dos Sonhos BeCapital`,
     author: `@BeCapitaltech`,
-    description: `Uma nova maneira de pensar e agir no mercado de capitais. Acreditamos que investir é para todos.`,
+    description: `Máquina dos Sonhos BeCapital`,
     siteUrl: `https://maquinadossonhos.be.capital/`,
-    social: {
-      linkedin: `https://www.linkedin.com/company/71399542/`,
-      instagram: `https://www.instagram.com/becapital.oficial/`,
-      youtube: `https://www.youtube.com/channel/UCLImIm6777cZiGmjaRuFcwQ?view_as=subscriber`,
-      facebook: `https://www.facebook.com/becapital.oficial/`,
-    },
-    socialAuthors: {
-      antonio: `https://www.linkedin.com/in/reisalbuquerque/`,
-      paulo: `https://www.linkedin.com/in/paulo-paiva-8611259b/`,
-      leonardo: `https://www.linkedin.com/in/leonardo-duarte-a594441b9/`,
-      calebe: `https://www.linkedin.com/in/calebevieira/`,
-      washington: `https://www.linkedin.com/in/washingtonsantos/`,
-    },
   },
   plugins: [
     `gatsby-plugin-react-helmet`,
@@ -28,10 +15,10 @@ module.exports = {
       },
     },
     {
-      resolve: "gatsby-plugin-web-font-loader",
+      resolve: 'gatsby-plugin-web-font-loader',
       options: {
         custom: {
-          families: ["Trasandina"],
+          families: ['Trasandina'],
           urls: [`${__dirname}/static/fonts/fonts.css`],
         },
       },
@@ -42,18 +29,17 @@ module.exports = {
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
-        name: `Dream Machine BeCapital`,
-        short_name: `Dream Machine BeCapital`,
+        name: `Máquina dos Sonhos BeCapital`,
+        short_name: `Máquina dos Sonhos BeCapital`,
         start_url: `/`,
         background_color: `#1A4A73`,
         theme_color: `#1A4A73`,
-        lang: "pt-br",
+        lang: 'pt-br',
         display: `standalone`,
-        icon: "src/assets/logo/svg/bec_logo_rgb.svg",
+        icon: 'src/assets/logo/svg/bec_logo_rgb.svg',
       },
     },
-    // this (optional) plugin enables Progressive Web App + Offline functionality
-    // To learn more, visit: https://gatsby.dev/offline
+
     `gatsby-plugin-offline`,
   ],
-}
+};
