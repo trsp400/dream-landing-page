@@ -29,8 +29,8 @@ module.exports = {
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
-        name: `Dream Machine BeCapital`,
-        short_name: `Dream Machine BeCapital`,
+        name: `Máquina dos Sonhos BeCapital`,
+        short_name: `Máquina dos Sonhos BeCapital`,
         start_url: `/`,
         background_color: `#1A4A73`,
         theme_color: `#1A4A73`,
@@ -39,8 +39,7 @@ module.exports = {
         icon: 'src/assets/logo/svg/bec_logo_rgb.svg',
       },
     },
-    // this (optional) plugin enables Progressive Web App + Offline functionality
-    // To learn more, visit: https://gatsby.dev/offline
+
     `gatsby-plugin-offline`,
   ],
 };
