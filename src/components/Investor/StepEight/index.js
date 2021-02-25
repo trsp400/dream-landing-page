@@ -1,6 +1,8 @@
 import React, { useCallback } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
+import { navigate } from 'gatsby';
+
 import { changeFormState } from '../../../redux/dream_machine/actions';
 
 const StepEight = () => {
@@ -29,7 +31,7 @@ const StepEight = () => {
         step anterior
       </button>
       <br />
-      <button type="button" onClick={() => handleDispatch('', 3)}>
+      <button type="button" onClick={() => navigate('/resultado')}>
         {' '}
         Proximo step
       </button>
