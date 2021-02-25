@@ -1,7 +1,7 @@
 import actions from '../actions';
 
 const INITIAL_STATE = {
-  currentStep: 0,
+  currentStep: null,
   resultSuccess: null,
   result: {
     monthlyRate: 0,

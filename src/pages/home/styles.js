@@ -9,6 +9,4 @@ export const Container = styled(BootstrapContainer)``;
 
 export const ButtonContainer = styled(ButtonGroup)``;
 
-export const Button = styled(BootstrapButton)`
-  /* width: 500px; */
-`;
+export const Button = styled(BootstrapButton)``;

@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 
 import { changeFormState } from '../../../redux/dream_machine/actions';
 
-const StepTwo = () => {
+const StepThree = () => {
   const dispatch = useDispatch();
   const store = useSelector(({ dreamMachine }) => dreamMachine);
   const { currentStep, objectiveCost } = store;
@@ -13,7 +13,6 @@ const StepTwo = () => {
 
   const handleDispatch = useCallback(
     step => {
-      console.log(step);
       dispatch(
         changeFormState({
           ...store,
@@ -32,20 +31,20 @@ const StepTwo = () => {
   return (
     <div>
       <h2>Step: {currentStep}</h2>
-      <button type="button" onClick={() => handleDispatch(1)}>
+      <button type="button" onClick={() => handleDispatch(2)}>
         {' '}
         step anterior
       </button>
       <br />
-      <button type="button" onClick={() => handleDispatch(3)}>
+      <button type="button" onClick={() => handleDispatch(4)}>
         {' '}
         Proximo step
       </button>
       <br />
-      <span>Qual o valor do seu objetivo?</span>
+      <span>De quanto voce precisa?</span>
       <input type="text" ref={inputRef} />
     </div>
   );
 };
 
-export default StepTwo;
+export default StepThree;
