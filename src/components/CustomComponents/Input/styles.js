@@ -1,3 +1,4 @@
+import React from 'react';
 import styled from 'styled-components';
 import { Form } from 'react-bootstrap';
 
@@ -5,7 +6,7 @@ const { Control, Group } = Form;
 
 export const InputWrap = styled(Group)``;
 
-export const InputText = styled(Control).attrs({
+const InputStyled = styled(Control).attrs({
   custom: true,
 })`
   border: 0;
@@ -30,3 +31,5 @@ export const InputText = styled(Control).attrs({
       theme.mobileTheme.colors.primary.orange};
   }
 `;
+
+export const InputText = ({ inputRef }) => <InputStyled ref={inputRef} />;
