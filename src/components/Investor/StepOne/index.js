@@ -1,4 +1,5 @@
-import React, { useCallback } from 'react';
+/* eslint-disable jsx-a11y/no-onchange */
+import React, { useCallback, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { changeFormState } from '../../../redux/dream_machine/actions';
@@ -6,19 +7,22 @@ import { changeFormState } from '../../../redux/dream_machine/actions';
 const StepOne = () => {
   const dispatch = useDispatch();
   const store = useSelector(({ dreamMachine }) => dreamMachine);
-  const { currentStep, path } = store;
+
+  const { currentStep, path, investmentsPlacement } = store;
+
+  const [inputValue, setInputValue] = useState(investmentsPlacement);
 
   const handleDispatch = useCallback(
-    (event, step, property, value) => {
+    step => {
       dispatch(
         changeFormState({
           ...store,
           currentStep: step,
-          [property]: value,
+          investmentsPlacement: inputValue,
         }),
       );
     },
-    [dispatch, store],
+    [dispatch, store, inputValue],
   );
 
   const title = path === 'beginner' ? 'Iniciante' : 'Já é investidor';
@@ -27,16 +31,37 @@ const StepOne = () => {
     <div>
       <h1>{title}</h1>
       <h2>Step: {currentStep}</h2>
-
-      <button type="button" onClick={() => handleDispatch('', 0)}>
-        {' '}
+      <button type="button" onClick={() => handleDispatch(0)}>
         step anterior
       </button>
       <br />
-      <button type="button" onClick={() => handleDispatch('', 2)}>
-        {' '}
+      <button type="button" onClick={() => handleDispatch(2)}>
         Proximo step
       </button>
+
+      <br />
+
+      <span>onde voce ja investe: </span>
+
+      <select
+        name="decision"
+        value={inputValue}
+        onChange={event => {
+          if (inputValue.includes(event.target.value)) {
+            return setInputValue(
+              inputValue.filter(value => value !== event.target.value),
+            );
+          }
+
+          return setInputValue([...inputValue, event.target.value]);
+        }}
+        multiple
+      >
+        <option value="Banco Comercial">Banco Comercial</option>
+        <option value="Banco Financeiro">Banco Financeiro</option>
+        <option value="Corretora">Corretora</option>
+        <option value="Exchange">Exchange</option>
+      </select>
     </div>
   );
 };

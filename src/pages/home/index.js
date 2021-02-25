@@ -1,7 +1,7 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
-import { Container, Button } from './styles';
+import { Container, ButtonContainer, Button } from './styles';
 
 import { changeFormState } from '../../redux/dream_machine/actions';
 
@@ -24,6 +24,8 @@ const Home = () => {
 
   const { currentStep, path } = store;
 
+  console.log(store);
+
   const onChangeStep = (step, selectedPath) => {
     dispatch(
       changeFormState({
@@ -42,12 +44,18 @@ const Home = () => {
     />
   ) : (
     <Container>
-      <Button type="button" onClick={() => onChangeStep(1, 'beginner')}>
-        Começar agora
-      </Button>
-      <Button type="button" onClick={() => onChangeStep(1, 'investor')}>
-        Já sei onde investir
-      </Button>
+      <ButtonContainer>
+        <Button
+          variant="warning"
+          type="button"
+          onClick={() => onChangeStep(1, 'beginner')}
+        >
+          Começar agora
+        </Button>
+        <Button type="button" onClick={() => onChangeStep(1, 'investor')}>
+          Já sei onde investir
+        </Button>
+      </ButtonContainer>
     </Container>
   );
 };

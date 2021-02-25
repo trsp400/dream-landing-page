@@ -32,8 +32,7 @@ const StepEight = () => {
       </button>
       <br />
       <button type="button" onClick={() => navigate('/resultado')}>
-        {' '}
-        Proximo step
+        OK
       </button>
     </div>
   );
