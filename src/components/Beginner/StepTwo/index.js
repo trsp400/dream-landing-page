@@ -13,7 +13,6 @@ const StepTwo = () => {
 
   const handleDispatch = useCallback(
     step => {
-      console.log(step);
       dispatch(
         changeFormState({
           ...store,

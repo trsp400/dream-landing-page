@@ -24,8 +24,6 @@ const Home = () => {
 
   const { currentStep, path } = store;
 
-  console.log(store);
-
   const onChangeStep = (step, selectedPath) => {
     dispatch(
       changeFormState({
