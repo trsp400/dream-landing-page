@@ -2,6 +2,7 @@ import React, { useCallback } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { changeFormState } from '../../../redux/dream_machine/actions';
+import Input from '../../CustomComponents/Input';
 
 const StepTwo = () => {
   const dispatch = useDispatch();
@@ -36,6 +37,7 @@ const StepTwo = () => {
         {' '}
         Proximo step
       </button>
+      <Input />
     </div>
   );
 };
