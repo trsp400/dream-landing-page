@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 
 import { changeFormState } from '../../../redux/dream_machine/actions';
 
-import { Select, Option } from '../../CustomComponents/Select';
+import CheckBox from '../../CustomComponents/CheckBox';
 
 const options = [
   'Banco Comercial',
@@ -83,16 +83,11 @@ const StepOne = () => {
 
       <span>onde voce ja investe: </span>
 
-      <Select
-        name="decision"
+      <CheckBox
+        options={options}
         inputValue={inputValue}
-        multiple
         setInputValue={setInputValue}
-      >
-        {options.map(o => (
-          <Option value={o}> {o} </Option>
-        ))}
-      </Select>
+      />
     </div>
   );
 };
