@@ -1,37 +1,57 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useState, useRef, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+
+import { navigate } from 'gatsby';
 
 import { changeFormState } from '../../../redux/dream_machine/actions';
 
 const StepSeven = () => {
   const dispatch = useDispatch();
   const store = useSelector(({ dreamMachine }) => dreamMachine);
-  const { currentStep } = store;
+  const {
+    currentStep,
+    result: { email },
+  } = store;
+
+  const [inputValue] = useState(email);
+  const inputRef = useRef(null);
 
   const handleDispatch = useCallback(
-    (event, step, property, value) => {
+    step => {
       dispatch(
         changeFormState({
           ...store,
           currentStep: step,
-          [property]: value,
+          result: {
+            ...store?.result,
+            email: inputRef?.current?.value,
+          },
         }),
       );
     },
     [dispatch, store],
   );
 
+  useEffect(() => {
+    inputRef.current.value = inputValue;
+  }, [inputValue]);
+
   return (
     <div>
       <h2>Step: {currentStep}</h2>
-      <button type="button" onClick={() => handleDispatch('', 6)}>
+      <button type="button" onClick={() => handleDispatch(6)}>
         {' '}
         step anterior
       </button>
       <br />
-      <button type="button" onClick={() => handleDispatch('', 8)}>
-        {' '}
-        Proximo step
+
+      <br />
+      <br />
+      <span>Email: </span>
+      <input type="text" ref={inputRef} />
+
+      <button type="button" onClick={() => navigate('/resultado')}>
+        OK
       </button>
     </div>
   );
