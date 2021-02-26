@@ -84,7 +84,7 @@ export const FormStyled = styled.div`
 
 export const RadioLabel = styled.span`
   display: grid;
-  justify-content: center;
+  justify-content: flex-start;
   align-content: center;
   color: #fff;
 `;

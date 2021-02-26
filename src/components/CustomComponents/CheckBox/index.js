@@ -25,7 +25,7 @@ const CheckBox = ({ options, inputValue, setInputValue }) => {
       {chunkedData.map((row, rowIndex) => (
         <div key={rowIndex} className="row col-6">
           {row.map(col => (
-            <LabelStyled>
+            <LabelStyled className="col-12">
               <SpanInput>
                 <CheckStyled
                   name={col}
