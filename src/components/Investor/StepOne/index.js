@@ -4,6 +4,8 @@ import { useSelector, useDispatch } from 'react-redux';
 
 import { changeFormState } from '../../../redux/dream_machine/actions';
 
+import Gallery, { Card } from '../../Gallery';
+
 const StepOne = () => {
   const dispatch = useDispatch();
   const store = useSelector(({ dreamMachine }) => dreamMachine);
@@ -59,41 +61,45 @@ const StepOne = () => {
   const title = path === 'beginner' ? 'Iniciante' : 'Já é investidor';
 
   return (
-    <div>
-      <h1>{title}</h1>
-      <h2>Step: {currentStep}</h2>
-      <button type="button" onClick={() => resetStore()}>
-        step anterior
-      </button>
-      <br />
-      <button type="button" onClick={() => handleDispatch(2)}>
-        Proximo step
-      </button>
+    <Gallery>
+      <Card label="Banco Financeiro" />
+      <Card label="Banco Comercial" />
+    </Gallery>
+    // <div>
+    //   <h1>{title}</h1>
+    //   <h2>Step: {currentStep}</h2>
+    //   <button type="button" onClick={() => resetStore()}>
+    //     step anterior
+    //   </button>
+    //   <br />
+    //   <button type="button" onClick={() => handleDispatch(2)}>
+    //     Proximo step
+    //   </button>
 
-      <br />
+    //   <br />
 
-      <span>onde voce ja investe: </span>
+    //   <span>onde voce ja investe: </span>
 
-      <select
-        name="decision"
-        value={inputValue}
-        onChange={event => {
-          if (inputValue.includes(event.target.value)) {
-            return setInputValue(
-              inputValue.filter(value => value !== event.target.value),
-            );
-          }
+    //   <select
+    //     name="decision"
+    //     value={inputValue}
+    //     onChange={event => {
+    //       if (inputValue.includes(event.target.value)) {
+    //         return setInputValue(
+    //           inputValue.filter(value => value !== event.target.value),
+    //         );
+    //       }
 
-          return setInputValue([...inputValue, event.target.value]);
-        }}
-        multiple
-      >
-        <option value="Banco Comercial">Banco Comercial</option>
-        <option value="Banco Financeiro">Banco Financeiro</option>
-        <option value="Corretora">Corretora</option>
-        <option value="Exchange">Exchange</option>
-      </select>
-    </div>
+    //       return setInputValue([...inputValue, event.target.value]);
+    //     }}
+    //     multiple
+    //   >
+    //     <option value="Banco Comercial">Banco Comercial</option>
+    //     <option value="Banco Financeiro">Banco Financeiro</option>
+    //     <option value="Corretora">Corretora</option>
+    //     <option value="Exchange">Exchange</option>
+    //   </select>
+    // </div>
   );
 };
 
