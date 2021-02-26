@@ -5,8 +5,7 @@ export const InputStyled = styled.input`
   padding: 0;
   height: calc(1.5em + 0.75rem + 15px);
   width: 17.625rem;
-  font-size: 1.8rem;
-  font-weight: 400;
+  font: normal normal 400 2.5rem Trasandina;
   text-align: center;
   color: #979797;
   background-color: transparent;
