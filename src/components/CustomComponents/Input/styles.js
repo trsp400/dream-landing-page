@@ -1,19 +1,11 @@
-import React from 'react';
 import styled from 'styled-components';
-import { Form } from 'react-bootstrap';
 
-const { Control, Group } = Form;
-
-export const InputWrap = styled(Group)``;
-
-const InputStyled = styled(Control).attrs({
-  custom: true,
-})`
+export const InputStyled = styled.input`
   border: 0;
   padding: 0;
-  height: calc(1.5em + 0.75rem + 2px);
-  width: 70%;
-  font-size: 1.4rem;
+  height: calc(1.5em + 0.75rem + 15px);
+  width: 17.625rem;
+  font-size: 1.8rem;
   font-weight: 400;
   text-align: center;
   color: #979797;
@@ -31,5 +23,3 @@ const InputStyled = styled(Control).attrs({
       theme.mobileTheme.colors.primary.orange};
   }
 `;
-
-export const InputText = ({ inputRef }) => <InputStyled ref={inputRef} />;

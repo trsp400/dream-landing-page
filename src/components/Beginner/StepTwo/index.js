@@ -1,4 +1,4 @@
-import React, { useCallback, useRef, useState, useEffect } from 'react';
+import React, { useCallback, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { changeFormState } from '../../../redux/dream_machine/actions';
@@ -9,8 +9,7 @@ const StepTwo = () => {
   const store = useSelector(({ dreamMachine }) => dreamMachine);
   const { currentStep, objectiveCost } = store;
 
-  const [inputValue] = useState(objectiveCost);
-  const inputRef = useRef(null);
+  const [inputValue, setInputValue] = useState(objectiveCost);
 
   const handleDispatch = useCallback(
     step => {
@@ -18,16 +17,18 @@ const StepTwo = () => {
         changeFormState({
           ...store,
           currentStep: step,
-          objectiveCost: inputRef?.current?.value,
+          objectiveCost:
+            parseFloat(
+              inputValue
+                ?.replace(/R$/gi, '')
+                .replace(/./gi, '')
+                .replace(/,/gi, '.'),
+            ) || inputValue,
         }),
       );
     },
-    [dispatch, store],
+    [dispatch, store, inputValue],
   );
-
-  useEffect(() => {
-    inputRef.current.value = inputValue;
-  }, [inputValue]);
 
   return (
     <div style={{ backgroundColor: 'blue' }}>
@@ -43,7 +44,7 @@ const StepTwo = () => {
       </button>
       <br />
       <span>Qual o valor do seu objetivo?</span>
-      <Input ref={inputRef} />
+      <Input value={inputValue} setInputValue={setInputValue} type="currency" />
     </div>
   );
 };

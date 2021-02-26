@@ -1,11 +1,11 @@
-import React, { forwardRef } from 'react';
+import React from 'react';
 import NumberFormat from 'react-number-format';
 
-import { InputWrap, InputText } from './styles';
+import { InputStyled } from './styles';
 
-const Input = forwardRef((props, ref) => (
+const Input = ({ value, type, setInputValue }) => (
   <div>
-    <InputWrap className="mb-3 d-flex justify-content-center">
+    {type === 'currency' && (
       <NumberFormat
         // name={field}
         displayType="input"
@@ -15,11 +15,11 @@ const Input = forwardRef((props, ref) => (
         decimalScale={2}
         prefix="R$ "
         placeholder="R$ 0,00"
-        customInput={InputText}
-        inputRef={ref}
+        customInput={InputStyled}
+        value={value}
+        onChange={event => setInputValue(event.target.value)}
       />
-    </InputWrap>
+    )}
   </div>
-));
-
+);
 export default Input;
