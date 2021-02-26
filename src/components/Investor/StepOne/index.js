@@ -4,6 +4,15 @@ import { useSelector, useDispatch } from 'react-redux';
 
 import { changeFormState } from '../../../redux/dream_machine/actions';
 
+import { Select, Option } from '../../CustomComponents/Select';
+
+const options = [
+  'Banco Comercial',
+  'Banco Financeiro',
+  'Corretora',
+  'Exchange',
+];
+
 const StepOne = () => {
   const dispatch = useDispatch();
   const store = useSelector(({ dreamMachine }) => dreamMachine);
@@ -74,25 +83,16 @@ const StepOne = () => {
 
       <span>onde voce ja investe: </span>
 
-      <select
+      <Select
         name="decision"
-        value={inputValue}
-        onChange={event => {
-          if (inputValue.includes(event.target.value)) {
-            return setInputValue(
-              inputValue.filter(value => value !== event.target.value),
-            );
-          }
-
-          return setInputValue([...inputValue, event.target.value]);
-        }}
+        inputValue={inputValue}
         multiple
+        setInputValue={setInputValue}
       >
-        <option value="Banco Comercial">Banco Comercial</option>
-        <option value="Banco Financeiro">Banco Financeiro</option>
-        <option value="Corretora">Corretora</option>
-        <option value="Exchange">Exchange</option>
-      </select>
+        {options.map(o => (
+          <Option value={o}> {o} </Option>
+        ))}
+      </Select>
     </div>
   );
 };
