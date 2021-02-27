@@ -10,10 +10,11 @@ interface CardProps extends BootstrapCardProps {
   labelColor?: string;
   backgroundColor?: string;
   onClick(event, value): void;
+  arrayValues?: Array<String>;
 }
 
 interface GalleryProps {
-  store?: object;
+  arrayValues?: Array<String>;
   onClick(): void;
   children: any;
 }
@@ -22,19 +23,23 @@ interface RowProps {
   children: any;
 }
 
-const Gallery: React.FC<GalleryProps> = ({ children, store, onClick }) => {
+const IconGallery: React.FC<GalleryProps> = ({
+  children,
+  arrayValues,
+  onClick,
+}) => {
   return (
     <Container>
       {children.length > 1
         ? children.map(child => {
             return React.cloneElement(child, {
-              store,
+              arrayValues,
               onClick,
               key: Math.random(),
             });
           })
         : React.cloneElement(children, {
-            store,
+            arrayValues,
             onClick,
             key: Math.random(),
           })}
@@ -67,11 +72,15 @@ export const Card: React.FC<CardProps> = ({
   labelColor,
   backgroundColor,
   onClick,
-  ...props
+  arrayValues,
 }) => {
   return (
-    <CardContainer onClick={event => onClick(event, label)}>
-      <CardBody iconSize={iconSize} backgroundcolor={backgroundColor}>
+    <CardContainer onClick={event => (onClick ? onClick(event, label) : null)}>
+      <CardBody
+        checked={arrayValues.includes(label)}
+        iconsize={iconSize}
+        backgroundcolor={backgroundColor}
+      >
         {icon}
       </CardBody>
       <CardFooter color={labelColor}>{label}</CardFooter>
@@ -79,4 +88,4 @@ export const Card: React.FC<CardProps> = ({
   );
 };
 
-export default memo(Gallery);
+export default memo(IconGallery);
