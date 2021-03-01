@@ -1,8 +1,18 @@
+/* eslint-disable import/no-unresolved */
+/* eslint-disable import/extensions */
 import React, { useCallback, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { changeFormState } from '../../../redux/dream_machine/actions';
 
+import CheckBox from '../../CustomComponents/CheckBox';
+
+const options = [
+  'Banco Comercial',
+  'Banco Financeiro',
+  'Corretora',
+  'Exchange',
+];
 import { Container } from 'react-bootstrap';
 
 const StepOne = () => {
@@ -71,41 +81,11 @@ const StepOne = () => {
         Proximo step
       </button>
 
-      <div>
-        <h1>{title}</h1>
-        <h2>Step: {currentStep}</h2>
-        <button type="button" onClick={() => resetStore()}>
-          step anterior
-        </button>
-        <br />
-        <button type="button" onClick={() => handleDispatch(2)}>
-          Proximo step
-        </button>
+      <br />
 
-        <br />
+      <span>onde voce ja investe: </span>
 
-        <span>onde voce ja investe: </span>
-
-        <select
-          name="decision"
-          value={arrayValues}
-          onChange={event => {
-            if (arrayValues.includes(event.target.value)) {
-              return setArrayValues(
-                arrayValues.filter(value => value !== event.target.value),
-              );
-            }
-
-            return setArrayValues([...arrayValues, event.target.value]);
-          }}
-          multiple
-        >
-          <option value="Banco Comercial">Banco Comercial</option>
-          <option value="Banco Financeiro">Banco Financeiro</option>
-          <option value="Corretora">Corretora</option>
-          <option value="Exchange">Exchange</option>
-        </select>
-      </div>
+      <CheckBox options={options} state={inputValue} setState={setInputValue} />
     </Container>
   );
 };
