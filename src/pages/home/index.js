@@ -35,11 +35,13 @@ const Home = () => {
   };
 
   return currentStep > 0 ? (
-    <RenderSelectedFormPath
-      currentStep={currentStep}
-      store={store}
-      path={path}
-    />
+    <div>
+      <RenderSelectedFormPath
+        currentStep={currentStep}
+        store={store}
+        path={path}
+      />
+    </div>
   ) : (
     <Container>
       <ButtonContainer>

@@ -12,7 +12,7 @@ const INITIAL_STATE = {
   },
   path: '',
   objective: null,
-  objectiveCost: null,
+  objectiveCost: '',
   period: null,
   yearOrMonth: 'anos',
   monthlySupport: null,
