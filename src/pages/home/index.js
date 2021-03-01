@@ -1,7 +1,6 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
-import { Image } from 'react-bootstrap';
 import {
   Container,
   Header,
@@ -58,9 +57,9 @@ const Home = () => {
       <Header>
         <Logo />
       </Header>
+          <MaquinaDosSonhos />
       <MainHome>
         <PresentationSection>
-          <MaquinaDosSonhos />
           <h1>Quer descobrir o investimento ideal para você?</h1>
           <p>
             Nosso orientador financeiro te ajudará a encontrar o título mais
@@ -75,10 +74,10 @@ const Home = () => {
           glow
           onClick={() => onChangeStep(1, 'beginner')}
         >
-          Começar agora
+          COMEÇAR AGORA
         </Button>
         <Button variant="beorange" onClick={() => onChangeStep(1, 'investor')}>
-          Já sei onde investir
+          JÁ SEI ONDE INVESTIR
         </Button>
         </ButtonSection>
       </MainHome>

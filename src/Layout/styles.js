@@ -302,10 +302,10 @@ export const Main = styled.main`
   flex-direction: column;
   align-items: center;
 
-  margin-top: 100px;
+  /* margin-top: 100px; */
 
-  ${media.lessThan('1577px')`
+  /* ${media.lessThan('1577px')`
     margin-top: 100px;
 
-  `}
+  `} */
 `;
