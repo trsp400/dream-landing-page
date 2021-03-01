@@ -1,4 +1,4 @@
-import React, { useCallback, useRef, useEffect, useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { changeFormState } from '../../../redux/dream_machine/actions';
@@ -6,10 +6,10 @@ import { changeFormState } from '../../../redux/dream_machine/actions';
 const StepThree = () => {
   const dispatch = useDispatch();
   const store = useSelector(({ dreamMachine }) => dreamMachine);
-  const { currentStep, period } = store;
+  const { currentStep, period, yearOrMonth } = store;
 
-  const [inputValue] = useState(period);
-  const inputRef = useRef(null);
+  const [inputValue, setInputValue] = useState(period);
+  const [inputYearOrMonth, setInputYearOrMonth] = useState(yearOrMonth);
 
   const handleDispatch = useCallback(
     step => {
@@ -17,16 +17,13 @@ const StepThree = () => {
         changeFormState({
           ...store,
           currentStep: step,
-          period: inputRef?.current?.value,
+          period: inputValue,
+          yearOrMonth: inputYearOrMonth,
         }),
       );
     },
-    [dispatch, store],
+    [dispatch, store, inputValue, inputYearOrMonth],
   );
-
-  useEffect(() => {
-    inputRef.current.value = inputValue;
-  }, [inputValue]);
 
   return (
     <div>
@@ -43,7 +40,11 @@ const StepThree = () => {
 
       <br />
       <span>em quanto tempo?</span>
-      <input type="text" ref={inputRef} />
+      <input
+        type="text"
+        value={inputValue}
+        onChange={e => setInputValue(e.target.value)}
+      />
     </div>
   );
 };
