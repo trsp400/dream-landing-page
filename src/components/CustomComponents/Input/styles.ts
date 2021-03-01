@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const InputStyledCurrency = styled.input`
+export const InputStyledNumber = styled.input`
   border: 0;
   padding: 0;
   height: calc(1.5em + 0.75rem + 15px);

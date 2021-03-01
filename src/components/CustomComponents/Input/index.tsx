@@ -2,9 +2,9 @@ import React, { FC } from 'react';
 import NumberFormat from 'react-number-format';
 
 import {
-  InputStyledCurrency,
-  InputStyledText,
+  InputStyledNumber,
   InputStyledTextContainer,
+  InputStyledText,
 } from './styles';
 
 interface InputProps {
@@ -13,9 +13,10 @@ interface InputProps {
   type: 'currency' | 'email' | 'text';
   state: number;
   setState(value: any): void;
+  placeholder?: string;
 }
 
-const Input: FC<InputProps> = ({ state, type, setState }) => (
+const Input: FC<InputProps> = ({ state, type, setState, placeholder }) => (
   <>
     {type === 'currency' ? (
       <NumberFormat
@@ -27,7 +28,7 @@ const Input: FC<InputProps> = ({ state, type, setState }) => (
         decimalScale={2}
         prefix="R$ "
         placeholder="R$ 0,00"
-        customInput={InputStyledCurrency}
+        customInput={InputStyledNumber}
         value={state}
         onChange={event => setState(event.target.value)}
       />
@@ -50,6 +51,18 @@ const Input: FC<InputProps> = ({ state, type, setState }) => (
           required
         />
       </InputStyledTextContainer>
+    ) : type === 'period' ? (
+      <NumberFormat
+        // name={field}
+        displayType="input"
+        allowNegative={false}
+        decimalSeparator={false}
+        pattern="[0-9]*"
+        placeholder={placeholder}
+        customInput={InputStyledNumber}
+        value={state || ''}
+        onChange={event => setState(event.target.value)}
+      />
     ) : (
       <div />
     )}
