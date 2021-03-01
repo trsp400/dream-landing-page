@@ -13,6 +13,7 @@ const options = [
   'Corretora',
   'Exchange',
 ];
+import { Container } from 'react-bootstrap';
 
 const StepOne = () => {
   const dispatch = useDispatch();
@@ -20,7 +21,7 @@ const StepOne = () => {
 
   const { currentStep, path, investmentsPlacement } = store;
 
-  const [inputValue, setInputValue] = useState(investmentsPlacement);
+  const [arrayValues, setArrayValues] = useState(investmentsPlacement);
 
   const handleDispatch = useCallback(
     step => {
@@ -28,11 +29,11 @@ const StepOne = () => {
         changeFormState({
           ...store,
           currentStep: step,
-          investmentsPlacement: inputValue,
+          investmentsPlacement: arrayValues,
         }),
       );
     },
-    [dispatch, store, inputValue],
+    [dispatch, store, arrayValues],
   );
 
   const resetStore = useCallback(() => {
@@ -69,13 +70,13 @@ const StepOne = () => {
   const title = path === 'beginner' ? 'Iniciante' : 'Já é investidor';
 
   return (
-    <div>
-      <h1>{title}</h1>
+    <Container>
+      <h2>{title}</h2>
       <h2>Step: {currentStep}</h2>
       <button type="button" onClick={() => resetStore()}>
         step anterior
       </button>
-      <br />
+
       <button type="button" onClick={() => handleDispatch(2)}>
         Proximo step
       </button>
@@ -85,7 +86,7 @@ const StepOne = () => {
       <span>onde voce ja investe: </span>
 
       <CheckBox options={options} state={inputValue} setState={setInputValue} />
-    </div>
+    </Container>
   );
 };
 
