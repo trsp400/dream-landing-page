@@ -46,11 +46,13 @@ const Home = () => {
   };
 
   return currentStep > 0 ? (
-    <RenderSelectedFormPath
-      currentStep={currentStep}
-      store={store}
-      path={path}
-    />
+    <div>
+      <RenderSelectedFormPath
+        currentStep={currentStep}
+        store={store}
+        path={path}
+      />
+    </div>
   ) : (
     <Container>
       <Header>
@@ -67,16 +69,17 @@ const Home = () => {
         </PresentationSection>
 
         <ButtonSection>
-          <Button
-            variant="warning"
-            type="button"
-            onClick={() => onChangeStep(1, 'beginner')}
-          >
-            Começar agora
-          </Button>
-          <Button type="button" onClick={() => onChangeStep(1, 'investor')}>
-            Já sei onde investir
-          </Button>
+        <Button
+          ripple
+          variant="beorange"
+          glow
+          onClick={() => onChangeStep(1, 'beginner')}
+        >
+          Começar agora
+        </Button>
+        <Button variant="beorange" onClick={() => onChangeStep(1, 'investor')}>
+          Já sei onde investir
+        </Button>
         </ButtonSection>
       </MainHome>
     </Container>

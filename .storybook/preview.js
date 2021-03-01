@@ -1,4 +1,14 @@
 
+import './reset.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
+
+
+import React from 'react';
+import { ThemeProvider } from 'styled-components';
+import { mobileTheme, desktopTheme } from '../src/themes/default';
+
+import GlobalStyle from '../src/themes/globalStyles';
+
 import { action } from "@storybook/addon-actions"
 
 // Gatsby's Link overrides:
@@ -18,3 +28,26 @@ global.__BASE_PATH__ = "/"
 window.___navigate = pathname => {
   action("NavigateTo:")(pathname)
 }
+
+// .storybook/preview.js
+
+export const decorators = [
+  (Story) => (
+    <ThemeProvider
+    theme={{
+      desktopTheme,
+      mobileTheme,
+    }}
+    >
+      <>
+      <GlobalStyle/>
+      <Story />
+      </>
+    </ThemeProvider>
+  ),
+];
+
+export const parameters = {
+  layout: 'centered',
+  controls: { expanded: true },
+};

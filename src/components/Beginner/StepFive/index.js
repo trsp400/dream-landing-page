@@ -1,15 +1,17 @@
-import React, { useCallback, useRef, useState, useEffect } from 'react';
+/* eslint-disable import/extensions */
+/* eslint-disable import/no-unresolved */
+import React, { useCallback, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { changeFormState } from '../../../redux/dream_machine/actions';
+import Input from '../../CustomComponents/Input';
 
 const StepFive = () => {
   const dispatch = useDispatch();
   const store = useSelector(({ dreamMachine }) => dreamMachine);
   const { currentStep, monthlySupport } = store;
 
-  const [inputValue] = useState(monthlySupport);
-  const inputRef = useRef(null);
+  const [inputValue, setInputValue] = useState(monthlySupport);
 
   const handleDispatch = useCallback(
     step => {
@@ -17,16 +19,18 @@ const StepFive = () => {
         changeFormState({
           ...store,
           currentStep: step,
-          monthlySupport: inputRef?.current?.value,
+          monthlySupport:
+            parseFloat(
+              inputValue
+                ?.replace(/R$/gi, '')
+                .replace(/./gi, '')
+                .replace(/,/gi, '.'),
+            ) || inputValue,
         }),
       );
     },
-    [dispatch, store],
+    [dispatch, store, inputValue],
   );
-
-  useEffect(() => {
-    inputRef.current.value = inputValue;
-  }, [inputValue]);
 
   return (
     <div>
@@ -44,7 +48,7 @@ const StepFive = () => {
       <br />
       <br />
       <span>Quanto voce pode investir por mes?</span>
-      <input type="text" ref={inputRef} />
+      <Input state={inputValue} setState={setInputValue} type="currency" />
     </div>
   );
 };

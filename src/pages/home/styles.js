@@ -1,11 +1,11 @@
 import styled from 'styled-components';
-import {
-  Container as BootstrapContainer,
-  Button as BootstrapButton,
-  ButtonGroup,
-} from 'react-bootstrap';
+import { Container as BootstrapContainer, ButtonGroup } from 'react-bootstrap';
 
-export const Container = styled(BootstrapContainer)``;
+import RippleButton from '../../components/Button';
+
+export const Container = styled(BootstrapContainer)`
+  height: 100vh;
+`;
 
 export const Header = styled.header``;
 export const MainHome = styled.main``;
@@ -13,4 +13,10 @@ export const PresentationSection = styled.section``;
 
 export const ButtonSection = styled(ButtonGroup)``;
 
-export const Button = styled(BootstrapButton)``;
+export const ButtonContainer = styled(ButtonGroup)`
+  height: 5rem;
+  flex-direction: column;
+  justify-content: space-between;
+`;
+
+export const Button = styled(RippleButton)``;

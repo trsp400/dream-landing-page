@@ -6,6 +6,7 @@ addons.setConfig({
   theme: create({
     base: 'dark',
     brandTitle: "Máquina dos sonhos - ui components",
+    brandUrl: "maquinadossonhos.be.capital",
     colorSecondary: '#7159c1',
     appBg: '#0b0a0d',
     appContentBg: '#16161A',
@@ -13,6 +14,7 @@ addons.setConfig({
     textColor: '#fff',
     barTextColor: '#E6E6E6',
     barSelectedColor: '#ffffff',
-    barBg: '#1b1a1f',
+    barBg: '#000',
+
   })
 })
