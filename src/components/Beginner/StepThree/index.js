@@ -19,8 +19,6 @@ const StepThree = () => {
   const [inputValue, setInputValue] = useState(period);
   const [inputYearOrMonth, setInputYearOrMonth] = useState(yearOrMonth);
 
-  console.log(inputYearOrMonth, yearOrMonth);
-
   const handleDispatch = useCallback(
     step => {
       dispatch(
