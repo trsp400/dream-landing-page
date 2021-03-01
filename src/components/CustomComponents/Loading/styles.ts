@@ -9,8 +9,8 @@ export const ContainerLoading = styled.div`
 
   .box-itens {
     position: relative;
-    width: 120px;
-    height: 120px;
+    width: var(--size);
+    height: var(--size);
   }
 
   .box-itens span {
@@ -19,7 +19,7 @@ export const ContainerLoading = styled.div`
     left: 0;
     width: 100%;
     height: 100%;
-    transform: rotate(calc(18deg * var(--item)));
+    transform: rotate(calc(var(--speed) * var(--item)));
   }
 
   .box-itens span::before {
