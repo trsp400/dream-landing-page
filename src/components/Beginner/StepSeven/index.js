@@ -1,9 +1,12 @@
-import React, { useCallback, useState, useRef, useEffect } from 'react';
+/* eslint-disable import/extensions */
+/* eslint-disable import/no-unresolved */
+import React, { useCallback, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { navigate } from 'gatsby';
 
 import { changeFormState } from '../../../redux/dream_machine/actions';
+import Input from '../../CustomComponents/Input';
 
 const StepSeven = () => {
   const dispatch = useDispatch();
@@ -13,8 +16,7 @@ const StepSeven = () => {
     result: { email },
   } = store;
 
-  const [inputValue] = useState(email);
-  const inputRef = useRef(null);
+  const [inputValue, setInputValue] = useState(email);
 
   const handleDispatch = useCallback(
     step => {
@@ -24,17 +26,20 @@ const StepSeven = () => {
           currentStep: step,
           result: {
             ...store?.result,
-            email: inputRef?.current?.value,
+            email: inputValue,
           },
         }),
       );
     },
-    [dispatch, store],
+    [dispatch, store, inputValue],
   );
 
-  useEffect(() => {
-    inputRef.current.value = inputValue;
-  }, [inputValue]);
+  const handleOnClink = params => {
+    const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    const verify = re.test(String(params).toLowerCase());
+
+    verify && navigate('/resultado');
+  };
 
   return (
     <div>
@@ -48,9 +53,9 @@ const StepSeven = () => {
       <br />
       <br />
       <span>Email: </span>
-      <input type="text" ref={inputRef} />
+      <Input state={inputValue} setState={setInputValue} type="email" />
 
-      <button type="button" onClick={() => navigate('/resultado')}>
+      <button type="button" onClick={() => handleOnClink(inputValue)}>
         OK
       </button>
     </div>

@@ -10,7 +10,7 @@ import {
 interface InputProps {
   children: JSX.Element[] | JSX.Element | any;
   className?: string;
-  type: 'currency' | 'mail' | 'text';
+  type: 'currency' | 'email' | 'text';
   state: number;
   setState(value: any): void;
 }
@@ -36,7 +36,18 @@ const Input: FC<InputProps> = ({ state, type, setState }) => (
         <InputStyledText
           placeholder="Outros"
           value={state || ''}
+          type={type}
           onChange={event => setState(event.target.value)}
+        />
+      </InputStyledTextContainer>
+    ) : type === 'email' ? (
+      <InputStyledTextContainer>
+        <InputStyledText
+          placeholder="E-mail"
+          value={state || ''}
+          type={type}
+          onChange={event => setState(event.target.value)}
+          required
         />
       </InputStyledTextContainer>
     ) : (

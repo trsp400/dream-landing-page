@@ -33,7 +33,7 @@ const StepTwo = () => {
   );
 
   return (
-    <div style={{ backgroundColor: 'blue' }}>
+    <div>
       <h2>Step: {currentStep}</h2>
       <button type="button" onClick={() => handleDispatch(1)}>
         {' '}

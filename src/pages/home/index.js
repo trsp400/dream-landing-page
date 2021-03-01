@@ -35,7 +35,7 @@ const Home = () => {
   };
 
   return currentStep > 0 ? (
-    <div styles={{ backgroundColor: 'blue' }}>
+    <div>
       <RenderSelectedFormPath
         currentStep={currentStep}
         store={store}
