@@ -8,6 +8,8 @@ import { changeFormState } from '../../redux/dream_machine/actions';
 import RenderInvestorForm from '../../components/RenderInvestorSteps';
 import RenderBeginnerForm from '../../components/RenderBeginnerSteps';
 
+import LineChart from '../../components/LineChart';
+
 const RenderSelectedFormPath = ({ currentStep, store, path }) => {
   const paths = {
     investor: <RenderInvestorForm currentStep={currentStep} store={store} />,
@@ -21,6 +23,7 @@ const Home = () => {
   const dispatch = useDispatch();
 
   const store = useSelector(({ dreamMachine }) => dreamMachine);
+  const { isMobileView } = useSelector(({ settings }) => settings);
 
   const { currentStep, path } = store;
 
@@ -44,7 +47,8 @@ const Home = () => {
     </div>
   ) : (
     <Container>
-      <ButtonContainer>
+      <LineChart isMobileView={isMobileView} />
+      {/* <ButtonContainer>
         <Button
           ripple
           variant="beorange"
@@ -56,7 +60,7 @@ const Home = () => {
         <Button variant="beorange" onClick={() => onChangeStep(1, 'investor')}>
           Já sei onde investir
         </Button>
-      </ButtonContainer>
+      </ButtonContainer> */}
     </Container>
   );
 };

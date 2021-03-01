@@ -85,7 +85,11 @@ const StepOne = () => {
 
       <span>onde voce ja investe: </span>
 
-      <CheckBox options={options} state={inputValue} setState={setInputValue} />
+      <CheckBox
+        options={options}
+        state={arrayValues}
+        setState={setArrayValues}
+      />
     </Container>
   );
 };
