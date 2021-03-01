@@ -19,6 +19,14 @@ module.exports = {
       },
     },
     {
+      resolve: 'gatsby-plugin-react-svg',
+      options: {
+        rule: {
+          include: /icons/,
+        },
+      },
+    },
+    {
       resolve: 'gatsby-plugin-web-font-loader',
       options: {
         custom: {
@@ -43,7 +51,6 @@ module.exports = {
         icon: 'src/assets/logo/svg/bec_logo_rgb.svg',
       },
     },
-
     `gatsby-plugin-offline`,
   ],
 };

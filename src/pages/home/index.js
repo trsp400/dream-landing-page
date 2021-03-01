@@ -46,13 +46,14 @@ const Home = () => {
     <Container>
       <ButtonContainer>
         <Button
-          variant="warning"
-          type="button"
+          ripple
+          variant="beorange"
+          glow
           onClick={() => onChangeStep(1, 'beginner')}
         >
           Começar agora
         </Button>
-        <Button type="button" onClick={() => onChangeStep(1, 'investor')}>
+        <Button variant="beorange" onClick={() => onChangeStep(1, 'investor')}>
           Já sei onde investir
         </Button>
       </ButtonContainer>

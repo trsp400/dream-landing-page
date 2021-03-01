@@ -1,8 +1,19 @@
-/* eslint-disable jsx-a11y/no-onchange */
+/* eslint-disable import/no-unresolved */
+/* eslint-disable import/extensions */
 import React, { useCallback, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { changeFormState } from '../../../redux/dream_machine/actions';
+
+import CheckBox from '../../CustomComponents/CheckBox';
+
+const options = [
+  'Banco Comercial',
+  'Banco Financeiro',
+  'Corretora',
+  'Exchange',
+];
+import { Container } from 'react-bootstrap';
 
 const StepOne = () => {
   const dispatch = useDispatch();
@@ -10,7 +21,7 @@ const StepOne = () => {
 
   const { currentStep, path, investmentsPlacement } = store;
 
-  const [inputValue, setInputValue] = useState(investmentsPlacement);
+  const [arrayValues, setArrayValues] = useState(investmentsPlacement);
 
   const handleDispatch = useCallback(
     step => {
@@ -18,11 +29,11 @@ const StepOne = () => {
         changeFormState({
           ...store,
           currentStep: step,
-          investmentsPlacement: inputValue,
+          investmentsPlacement: arrayValues,
         }),
       );
     },
-    [dispatch, store, inputValue],
+    [dispatch, store, arrayValues],
   );
 
   const resetStore = useCallback(() => {
@@ -59,13 +70,13 @@ const StepOne = () => {
   const title = path === 'beginner' ? 'Iniciante' : 'Já é investidor';
 
   return (
-    <div>
-      <h1>{title}</h1>
+    <Container>
+      <h2>{title}</h2>
       <h2>Step: {currentStep}</h2>
       <button type="button" onClick={() => resetStore()}>
         step anterior
       </button>
-      <br />
+
       <button type="button" onClick={() => handleDispatch(2)}>
         Proximo step
       </button>
@@ -74,26 +85,8 @@ const StepOne = () => {
 
       <span>onde voce ja investe: </span>
 
-      <select
-        name="decision"
-        value={inputValue}
-        onChange={event => {
-          if (inputValue.includes(event.target.value)) {
-            return setInputValue(
-              inputValue.filter(value => value !== event.target.value),
-            );
-          }
-
-          return setInputValue([...inputValue, event.target.value]);
-        }}
-        multiple
-      >
-        <option value="Banco Comercial">Banco Comercial</option>
-        <option value="Banco Financeiro">Banco Financeiro</option>
-        <option value="Corretora">Corretora</option>
-        <option value="Exchange">Exchange</option>
-      </select>
-    </div>
+      <CheckBox options={options} state={inputValue} setState={setInputValue} />
+    </Container>
   );
 };
 
