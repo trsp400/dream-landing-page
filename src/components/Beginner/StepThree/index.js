@@ -51,7 +51,7 @@ const StepThree = () => {
       <Input
         state={inputValue}
         setState={setInputValue}
-        type="period"
+        type="number"
         placeholder={listPeriods[inputYearOrMonth]}
       />
     </div>
