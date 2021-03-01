@@ -1,3 +1,5 @@
+/* eslint-disable import/no-unresolved */
+/* eslint-disable import/extensions */
 import React, { useCallback, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
@@ -44,7 +46,7 @@ const StepTwo = () => {
       </button>
       <br />
       <span>Qual o valor do seu objetivo?</span>
-      <Input value={inputValue} setInputValue={setInputValue} type="currency" />
+      <Input state={inputValue} setState={setInputValue} type="currency" />
     </div>
   );
 };

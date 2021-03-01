@@ -1,16 +1,17 @@
-import React, { useCallback, useState, useRef, useEffect } from 'react';
+/* eslint-disable import/no-unresolved */
+/* eslint-disable import/extensions */
+import React, { useCallback, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { changeFormState } from '../../../redux/dream_machine/actions';
+import Input from '../../CustomComponents/Input';
 
 const StepOne = () => {
   const dispatch = useDispatch();
   const store = useSelector(({ dreamMachine }) => dreamMachine);
-
   const { currentStep, path, objective } = store;
 
-  const [inputValue] = useState(objective);
-  const inputRef = useRef(null);
+  const [inputValue, setInputValue] = useState(objective);
 
   const handleDispatch = useCallback(
     step => {
@@ -18,11 +19,11 @@ const StepOne = () => {
         changeFormState({
           ...store,
           currentStep: step,
-          objective: inputRef?.current?.value,
+          objective: inputValue,
         }),
       );
     },
-    [dispatch, store, inputRef],
+    [dispatch, store, inputValue],
   );
 
   const resetStore = useCallback(() => {
@@ -56,10 +57,6 @@ const StepOne = () => {
     );
   }, [dispatch, store]);
 
-  useEffect(() => {
-    inputRef.current.value = inputValue;
-  }, [inputValue]);
-
   const title = path === 'beginner' ? 'Iniciante' : 'Já é investidor';
 
   return (
@@ -77,7 +74,7 @@ const StepOne = () => {
       <br />
 
       <span>Qual seu objetivo?</span>
-      <input type="text" ref={inputRef} />
+      <Input state={inputValue} setState={setInputValue} type="text" />
     </div>
   );
 };
