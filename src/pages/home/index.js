@@ -1,12 +1,23 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
-import { Container, ButtonContainer, Button } from './styles';
+import { Image } from 'react-bootstrap';
+import {
+  Container,
+  Header,
+  MainHome,
+  PresentationSection,
+  ButtonSection,
+  Button,
+} from './styles';
 
 import { changeFormState } from '../../redux/dream_machine/actions';
 
 import RenderInvestorForm from '../../components/RenderInvestorSteps';
 import RenderBeginnerForm from '../../components/RenderBeginnerSteps';
+
+import Logo from '../../assets/logo/svg/logo_header_mobile.svg';
+import MaquinaDosSonhos from '../../assets/logo/svg/maquinaDosSonhos.svg';
 
 const RenderSelectedFormPath = ({ currentStep, store, path }) => {
   const paths = {
@@ -42,18 +53,32 @@ const Home = () => {
     />
   ) : (
     <Container>
-      <ButtonContainer>
-        <Button
-          variant="warning"
-          type="button"
-          onClick={() => onChangeStep(1, 'beginner')}
-        >
-          Começar agora
-        </Button>
-        <Button type="button" onClick={() => onChangeStep(1, 'investor')}>
-          Já sei onde investir
-        </Button>
-      </ButtonContainer>
+      <Header>
+        <Logo />
+      </Header>
+      <MainHome>
+        <PresentationSection>
+          <MaquinaDosSonhos />
+          <h1>Quer descobrir o investimento ideal para você?</h1>
+          <p>
+            Nosso orientador financeiro te ajudará a encontrar o título mais
+            adequado para você atingir seu objetivo.
+          </p>
+        </PresentationSection>
+
+        <ButtonSection>
+          <Button
+            variant="warning"
+            type="button"
+            onClick={() => onChangeStep(1, 'beginner')}
+          >
+            Começar agora
+          </Button>
+          <Button type="button" onClick={() => onChangeStep(1, 'investor')}>
+            Já sei onde investir
+          </Button>
+        </ButtonSection>
+      </MainHome>
     </Container>
   );
 };

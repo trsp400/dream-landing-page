@@ -42,6 +42,7 @@ module.exports = {
     "react-hooks/exhaustive-deps": "warn",
     "no-use-before-define": ["error", { "functions": false,}],
     "react/prop-types": 0,
+    "import/no-unresolved": [2, { ignore: ['\.img$', '\.svg'] }],
     "no-plusplus": ["error", { "allowForLoopAfterthoughts": true }],
     "no-unused-expressions": [2, { allowShortCircuit: true, allowTernary: true }],
     "no-return-assign": ["error", "except-parens"],

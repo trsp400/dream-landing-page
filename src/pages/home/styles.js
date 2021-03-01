@@ -7,6 +7,10 @@ import {
 
 export const Container = styled(BootstrapContainer)``;
 
-export const ButtonContainer = styled(ButtonGroup)``;
+export const Header = styled.header``;
+export const MainHome = styled.main``;
+export const PresentationSection = styled.section``;
+
+export const ButtonSection = styled(ButtonGroup)``;
 
 export const Button = styled(BootstrapButton)``;
