@@ -43,7 +43,6 @@ module.exports = {
         icon: 'src/assets/logo/svg/bec_logo_rgb.svg',
       },
     },
-
     `gatsby-plugin-offline`,
   ],
 };

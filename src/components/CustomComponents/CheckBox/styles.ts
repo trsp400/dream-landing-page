@@ -27,7 +27,7 @@ export const LabelStyled = styled.label`
   margin-bottom: 3rem;
 `;
 
-export const SpanInput = styled.span`
+export const SpanInputStyled = styled.span`
   display: grid;
   grid-template-areas: 'checkbox';
   justify-content: center;
@@ -59,7 +59,7 @@ export const SpanInput = styled.span`
   }
 `;
 
-export const SpanControl = styled.span`
+export const SpanControlStyled = styled.span`
   display: inline-grid;
   width: 1.5em;
   height: 1.5em;
@@ -82,7 +82,7 @@ export const FormStyled = styled.div`
   line-height: 1;
 `;
 
-export const RadioLabel = styled.span`
+export const RadioLabelStyled = styled.span`
   display: grid;
   justify-content: flex-start;
   align-content: center;

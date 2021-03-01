@@ -1,4 +1,5 @@
-/* eslint-disable jsx-a11y/no-onchange */
+/* eslint-disable import/no-unresolved */
+/* eslint-disable import/extensions */
 import React, { useCallback, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
@@ -83,11 +84,7 @@ const StepOne = () => {
 
       <span>onde voce ja investe: </span>
 
-      <CheckBox
-        options={options}
-        inputValue={inputValue}
-        setInputValue={setInputValue}
-      />
+      <CheckBox options={options} state={inputValue} setState={setInputValue} />
     </div>
   );
 };
