@@ -43,7 +43,7 @@ module.exports = {
       { allowShortCircuit: true, allowTernary: true },
     ],
     'no-return-assign': ['error', 'except-parens'],
-    'import/no-extraneous-dependencies': ['error', { devDependencies: true }],
+    'import/no-extraneous-dependencies': ['warn', { devDependencies: true }],
     'jsx-a11y/label-has-associated-control': [
       2,
       {
