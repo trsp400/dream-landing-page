@@ -1,49 +1,21 @@
-import React, { useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import React from 'react';
+import { useSelector } from 'react-redux';
 
-import { changeFormState } from '../../redux/dream_machine/actions';
+import Layout from '../../Layout';
+import LineChart from '../../components/LineChart';
 
 import { Container } from './styles';
 
 const Result = () => {
-  const dispatch = useDispatch();
-  const store = useSelector(({ dreamMachine }) => dreamMachine);
-
-  useEffect(() => {
-    dispatch(
-      changeFormState({
-        ...store,
-        currentStep: null,
-        resultSuccess: null,
-        result: {
-          monthlyRate: 0,
-          annualRate: 0,
-          riskProfile: '',
-          email: '',
-          yearlyAverageArray: [],
-        },
-        path: '',
-        objective: null,
-        objectiveCost: null,
-        period: null,
-        yearOrMonth: 'anos',
-        monthlySupport: null,
-        currentInvestments: null,
-        decision: null,
-        monthlyLifeCost: null,
-        monthlyIncome: null,
-        investmentsPlacement: [],
-        desiredInvestmentsPlacement: [],
-        otherInvestments: null,
-        currentAssets: [],
-      }),
-    );
-  }, [dispatch, store]);
+  const { isMobileView } = useSelector(({ settings }) => settings);
 
   return (
-    <Container>
-      <h1>Resultado</h1>
-    </Container>
+    <Layout>
+      <Container>
+        <h1>Resultado</h1>
+        <LineChart slider isMobileView={isMobileView} theme="white" />
+      </Container>
+    </Layout>
   );
 };
 

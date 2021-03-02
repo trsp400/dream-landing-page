@@ -2,11 +2,12 @@ import React, { memo } from 'react';
 import { Chart, Geom, Axis, Tooltip, Legend, Slider } from 'bizcharts';
 
 interface LineChartProps {
-  isMobileView: Boolean;
-  data: Array<Object>;
-  slider: Boolean;
-  height: Number;
-  lineColor: string;
+  isMobileView?: Boolean;
+  data?: Array<{ x: Number; y: Number }>;
+  slider?: Boolean;
+  height?: Number;
+  lineColor?: string;
+  theme?: 'default' | 'white' | 'dark';
 }
 
 const LineChart: React.FC<LineChartProps> = ({
@@ -15,6 +16,7 @@ const LineChart: React.FC<LineChartProps> = ({
   slider,
   height,
   lineColor,
+  theme,
 }) => {
   const fakeData = [
     { x: 2021, y: '7199.66' },
@@ -53,120 +55,142 @@ const LineChart: React.FC<LineChartProps> = ({
     );
   };
 
+  if (!theme) theme = 'default';
+
+  const colors: object = {
+    white: {
+      font: '#000',
+      backgroundColor: '#FFF',
+    },
+    dark: {
+      font: '#FFF',
+      backgroundColor: '#141414',
+    },
+    default: {
+      font: '#FFF',
+      backgroundColor: 'none',
+    },
+  };
+
   return (
-    <Chart
-      height={height}
-      data={data?.length ? data : fakeData}
-      scale={{
-        x: {
-          type: 'cat',
-          tickCount: data?.length || 10,
-        },
+    <div
+      style={{
+        backgroundColor: colors[theme].backgroundColor,
+        borderRadius: 6,
       }}
-      autoFit
-      appendPadding={10}
     >
-      <Legend position="top-left" visible={false} />
-      <Axis
-        name="x"
-        animate
-        label={{
-          style: {
-            fill: '#FFF',
+      <Chart
+        height={height || 400}
+        data={data?.length ? data : fakeData}
+        scale={{
+          x: {
+            type: 'cat',
+            tickCount: data?.length || 10,
           },
         }}
-      />
-      <Axis
-        name="y"
-        label={{
-          formatter: val =>
-            isMobileView
-              ? formatNumberToInternationalSystem(val, 1)
-              : new Intl.NumberFormat('pt-BR', {
-                  style: 'currency',
-                  currency: 'BRL',
-                }).format(parseFloat(val)),
-          style: {
-            fill: '#FFF',
-          },
-        }}
-      />
-      <Tooltip
-        useHtml
-        g2-tooltip={{
-          boxShadow: 'none',
-          color: '#fff',
-          backgroundColor: '#222',
-        }}
-        enterable={false}
-        itemTpl={
-          '<li data-index={index}>' +
-          '<span style="background-color:{color};width:8px;height:8px;border-radius:50%;display:inline-block;margin-right:8px;"></span>' +
-          `Valor: {value}` +
-          '</li>'
-        }
-      />
-      <Geom
-        animate
-        type="line"
-        position="x*y"
-        size={2}
-        color={lineColor || '#EA5E45'}
-        tooltip={[
-          'x*y',
-          (x, y) => {
-            return {
-              name: x,
-              value: new Intl.NumberFormat('pt-BR', {
-                style: 'currency',
-                currency: 'BRL',
-              }).format(y),
-            };
-          },
-        ]}
-      />
-      <Geom
-        type="point"
-        position="x*y"
-        size={4}
-        shape=""
-        color={'#EA5E45'}
-        style={{
-          stroke: '#fff',
-          lineWidth: 1,
-        }}
-        tooltip={[
-          'x*y',
-          (x, y) => {
-            return {
-              title: x,
-              value: new Intl.NumberFormat('pt-BR', {
-                style: 'currency',
-                currency: 'BRL',
-              }).format(y),
-            };
-          },
-        ]}
-        label={[
-          'y',
-          yValue => {
-            return {
-              content: isMobileView
-                ? ''
+        autoFit
+        appendPadding={25}
+        pure
+        theme={theme === 'dark' && 'dark'}
+      >
+        <Legend position="top-left" visible={false} />
+        <Axis
+          name="x"
+          animate
+          label={{
+            style: {
+              fill: colors[theme].font,
+            },
+          }}
+        />
+        <Axis
+          name="y"
+          grid
+          label={{
+            formatter: val =>
+              isMobileView
+                ? formatNumberToInternationalSystem(val, 1)
                 : new Intl.NumberFormat('pt-BR', {
                     style: 'currency',
                     currency: 'BRL',
-                  }).format(yValue),
-              style: {
-                fill: '#EA5E45',
-              },
-            };
-          },
-        ]}
-      />
-
-      {slider ? <Slider /> : null}
-    </Chart>
+                  }).format(parseFloat(val)),
+            style: {
+              fill: colors[theme].font,
+            },
+          }}
+        />
+        <Tooltip
+          useHtml
+          enterable={true}
+          itemTpl={
+            `<li data-index={index} style="background-color:red; opacity: 0.1">` +
+            `<span style="background-color:{color};width:8px;height:8px;border-radius:50%;display:inline-block;margin-right:8px;"></span>` +
+            `Valor: {value}` +
+            '</li>'
+          }
+        />
+        <Geom
+          animate
+          type="line"
+          position="x*y"
+          size={2}
+          color={lineColor || '#EA5E45'}
+          tooltip={[
+            'x*y',
+            (x, y) => {
+              return {
+                name: x,
+                value: new Intl.NumberFormat('pt-BR', {
+                  style: 'currency',
+                  currency: 'BRL',
+                }).format(y),
+              };
+            },
+          ]}
+        />
+        <Geom
+          type="point"
+          position="x*y"
+          size={4}
+          shape=""
+          color={'#EA5E45'}
+          style={{
+            stroke: colors[theme].font,
+            lineWidth: 1,
+          }}
+          tooltip={[
+            'x*y',
+            (x, y) => {
+              return {
+                title: x,
+                value: new Intl.NumberFormat('pt-BR', {
+                  style: 'currency',
+                  currency: 'BRL',
+                }).format(y),
+                backgroundColor: colors[theme].backgroundColor,
+              };
+            },
+          ]}
+          label={[
+            'y',
+            yValue => {
+              return {
+                content: isMobileView
+                  ? ''
+                  : new Intl.NumberFormat('pt-BR', {
+                      style: 'currency',
+                      currency: 'BRL',
+                    }).format(yValue),
+                style: {
+                  fill: '#EA5E45',
+                },
+              };
+            },
+          ]}
+        />
+        {slider ? <Slider /> : null}
+      </Chart>
+    </div>
   );
 };
 
