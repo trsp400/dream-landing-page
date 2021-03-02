@@ -16,7 +16,7 @@ const Loading: FC<LoadingProps> = ({
   size = '120px',
   speed = 'normal',
 }) => {
-  const nums = _.range(1, 21);
+  const nums = _.range(1, 100);
 
   const speedValues = {
     normal: '18deg',

@@ -1,9 +1,10 @@
-import React, { useCallback, useState, useRef, useEffect } from 'react';
+import React, { useCallback, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { navigate } from 'gatsby';
 
 import { changeFormState } from '../../../redux/dream_machine/actions';
+import Input from '../../CustomComponents/Input';
 
 const StepEight = () => {
   const dispatch = useDispatch();
@@ -13,8 +14,7 @@ const StepEight = () => {
     result: { email },
   } = store;
 
-  const [inputValue] = useState(email);
-  const inputRef = useRef(null);
+  const [inputValue, setInputValue] = useState(email);
 
   const handleDispatch = useCallback(
     step => {
@@ -24,17 +24,13 @@ const StepEight = () => {
           currentStep: step,
           result: {
             ...store?.result,
-            email: inputRef?.current?.value,
+            email: inputValue,
           },
         }),
       );
     },
     [dispatch, store],
   );
-
-  useEffect(() => {
-    inputRef.current.value = inputValue;
-  }, [inputValue]);
 
   return (
     <div>
@@ -48,7 +44,7 @@ const StepEight = () => {
       <br />
       <br />
       <span>Email: </span>
-      <input type="text" ref={inputRef} />
+      <Input state={inputValue} setState={setInputValue} type="text" />
 
       <button
         type="button"
