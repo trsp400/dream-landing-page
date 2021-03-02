@@ -6,6 +6,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { changeFormState } from '../../../redux/dream_machine/actions';
 
 import CheckBox from '../../CustomComponents/CheckBox';
+import SvgImg from '../../../assets/icons/checkbox-icon.svg';
 
 const options = [
   'Banco Comercial',
@@ -77,6 +78,8 @@ const StepOne = () => {
         step anterior
       </button>
 
+      <br />
+
       <button type="button" onClick={() => handleDispatch(2)}>
         Proximo step
       </button>
@@ -85,7 +88,12 @@ const StepOne = () => {
 
       <span>onde voce ja investe: </span>
 
-      <CheckBox options={options} state={inputValue} setState={setInputValue} />
+      <CheckBox
+        options={options}
+        state={arrayValues}
+        setState={setArrayValues}
+        image={<SvgImg />}
+      />
     </Container>
   );
 };

@@ -54,9 +54,10 @@ interface CheckBoxProps extends InputHTMLAttributes<HTMLInputElement> {
   state: string[];
   setState(value: any): void;
   className?: any;
+  image: JSX.Element[] | JSX.Element;
 }
 
-const CheckBox: FC<CheckBoxProps> = ({ options, state, setState }) => {
+const CheckBox: FC<CheckBoxProps> = ({ options, state, setState, image }) => {
   const chunkedData = _.chunk(options, 2);
 
   const handleInputChange = (e, option) => {
@@ -79,21 +80,7 @@ const CheckBox: FC<CheckBoxProps> = ({ options, state, setState }) => {
                   checked={state.some(value => value === col)}
                   onChange={e => handleInputChange(e, col)}
                 />
-                <SpanControl className="checkbox__control">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 24 24"
-                    aria-hidden="true"
-                    focusable="false"
-                  >
-                    <path
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="3"
-                      d="M1.73 12.91l6.37 6.37L22.79 4.59"
-                    />
-                  </svg>
-                </SpanControl>
+                <SpanControl className="checkbox__control">{image}</SpanControl>
               </SpanInput>
               <RadioLabel className="radio__label">{col}</RadioLabel>
             </Label>
