@@ -1,13 +1,16 @@
 import styled from 'styled-components';
-import {
-  Container as BootstrapContainer,
-  Button as BootstrapButton,
-} from 'react-bootstrap';
+import { Container as BootstrapContainer } from 'react-bootstrap';
 
 import { Modal, Header, Body } from '../../components/CustomComponents/Modal';
+import RippleButton from '../../components/Button';
 
 export const Container = styled(BootstrapContainer)``;
-export const Button = styled(BootstrapButton)``;
+
+export const ButtonContainer = styled.div`
+  display: flex;
+  flex: 1;
+`;
+export const Button = styled(RippleButton)``;
 
 export const ModalStyled = styled(Modal)`
   .custom-content {
