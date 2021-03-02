@@ -17,7 +17,7 @@ const StepThree = () => {
   const { currentStep, period, yearOrMonth } = store;
 
   const [inputValue, setInputValue] = useState(period);
-  const [inputYearOrMonth] = useState(yearOrMonth);
+  const [inputYearOrMonth, setInputYearOrMonth] = useState(yearOrMonth);
 
   const handleDispatch = useCallback(
     step => {
@@ -48,10 +48,23 @@ const StepThree = () => {
 
       <br />
       <span>em quanto tempo?</span>
+
+      {Object.keys(listPeriods).map(item => (
+        <button
+          style={{
+            backgroundColor: item === inputYearOrMonth ? 'orange' : 'blue',
+          }}
+          onClick={() => setInputYearOrMonth(item)}
+          key={item}
+        >
+          {listPeriods[item]}
+        </button>
+      ))}
+
       <Input
         state={inputValue}
         setState={setInputValue}
-        type="period"
+        type="number"
         placeholder={listPeriods[inputYearOrMonth]}
       />
     </div>
