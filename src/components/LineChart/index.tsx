@@ -1,39 +1,22 @@
-import React, { memo, useState, useEffect } from 'react';
-import {
-  VictoryChart,
-  VictoryLine,
-  VictoryTooltip,
-  Curve,
-  VictoryClipContainer,
-  VictoryLabel,
-  VictoryAxis,
-  VictoryContainer,
-  VictoryVoronoiContainer,
-} from 'victory';
-
-import {
-  G2,
-  Chart,
-  Geom,
-  Axis,
-  Tooltip,
-  Coord,
-  Label,
-  Legend,
-  View,
-  Annotation,
-  Shape,
-  Facet,
-  Util,
-  Slider,
-} from 'bizcharts';
+import React, { memo } from 'react';
+import { Chart, Geom, Axis, Tooltip, Legend, Slider } from 'bizcharts';
 
 interface LineChartProps {
   isMobileView: Boolean;
+  data: Array<Object>;
+  slider: Boolean;
+  height: Number;
+  lineColor: string;
 }
 
-const LineChart: React.FC<LineChartProps> = ({ isMobileView }) => {
-  const data = [
+const LineChart: React.FC<LineChartProps> = ({
+  isMobileView,
+  data,
+  slider,
+  height,
+  lineColor,
+}) => {
+  const fakeData = [
     { x: 2021, y: '7199.66' },
     { x: 2022, y: '19849.63' },
     { x: 2023, y: '41179.62' },
@@ -45,20 +28,6 @@ const LineChart: React.FC<LineChartProps> = ({ isMobileView }) => {
     { x: 2029, y: '1193434.79' },
     { x: 2030, y: '1500000' },
   ];
-
-  const cols = {
-    x: {
-      type: 'cat',
-      alias: 'teste',
-      tickCount: 10,
-    },
-  };
-
-  const [width, setWidth] = useState(window.innerWidth);
-
-  const updateWidth = ev => {
-    setWidth(ev.target.innerWidth);
-  };
 
   const formatNumberToInternationalSystem = (num, digits) => {
     const si = [
@@ -84,27 +53,29 @@ const LineChart: React.FC<LineChartProps> = ({ isMobileView }) => {
     );
   };
 
-  useEffect(() => {
-    window.addEventListener('resize', updateWidth);
-    console.log(width);
-
-    return () => {
-      window.removeEventListener('resize', updateWidth);
-    };
-  }, []);
-
   return (
     <Chart
-      height={400}
-      data={data}
-      scale={cols}
+      height={height}
+      data={data?.length ? data : fakeData}
+      scale={{
+        x: {
+          type: 'cat',
+          tickCount: data?.length || 10,
+        },
+      }}
       autoFit
-      interactions={['element-active']}
       appendPadding={10}
-      pure
     >
       <Legend position="top-left" visible={false} />
-      <Axis name="x" animate />
+      <Axis
+        name="x"
+        animate
+        label={{
+          style: {
+            fill: '#FFF',
+          },
+        }}
+      />
       <Axis
         name="y"
         label={{
@@ -115,6 +86,9 @@ const LineChart: React.FC<LineChartProps> = ({ isMobileView }) => {
                   style: 'currency',
                   currency: 'BRL',
                 }).format(parseFloat(val)),
+          style: {
+            fill: '#FFF',
+          },
         }}
       />
       <Tooltip
@@ -124,9 +98,7 @@ const LineChart: React.FC<LineChartProps> = ({ isMobileView }) => {
           color: '#fff',
           backgroundColor: '#222',
         }}
-        style={{
-          color: 'red',
-        }}
+        enterable={false}
         itemTpl={
           '<li data-index={index}>' +
           '<span style="background-color:{color};width:8px;height:8px;border-radius:50%;display:inline-block;margin-right:8px;"></span>' +
@@ -139,7 +111,7 @@ const LineChart: React.FC<LineChartProps> = ({ isMobileView }) => {
         type="line"
         position="x*y"
         size={2}
-        color={'#EA5E45'}
+        color={lineColor || '#EA5E45'}
         tooltip={[
           'x*y',
           (x, y) => {
@@ -157,12 +129,24 @@ const LineChart: React.FC<LineChartProps> = ({ isMobileView }) => {
         type="point"
         position="x*y"
         size={4}
-        shape={'circle'}
+        shape=""
         color={'#EA5E45'}
         style={{
           stroke: '#fff',
           lineWidth: 1,
         }}
+        tooltip={[
+          'x*y',
+          (x, y) => {
+            return {
+              title: x,
+              value: new Intl.NumberFormat('pt-BR', {
+                style: 'currency',
+                currency: 'BRL',
+              }).format(y),
+            };
+          },
+        ]}
         label={[
           'y',
           yValue => {
@@ -181,119 +165,8 @@ const LineChart: React.FC<LineChartProps> = ({ isMobileView }) => {
         ]}
       />
 
-      <Slider />
+      {slider ? <Slider /> : null}
     </Chart>
-    // <svg
-    //   viewBox={'0 0' + ' ' + width + ' ' + '350'}
-    //   preserveAspectRatio="none"
-    //   width="100%"
-    // >
-    //   <VictoryChart
-    //     standalone={false}
-    //     width={width}
-    //     style={{
-    //       parent: {
-    //         maxWidth: '100%',
-    //       },
-    //     }}
-    //     containerComponent={
-    //       <VictoryVoronoiContainer
-    //         voronoiDimension="x"
-    //         labels={({ datum }) => `y: ${datum.y}`}
-    //         labelComponent={
-    //           <VictoryTooltip
-    //             cornerRadius={0}
-    //             flyoutStyle={{ fill: 'white' }}
-    //           />
-    //         }
-    //       />
-    //     }
-    //     padding={
-    //       isMobileView
-    //         ? { left: 90, top: 50, bottom: 10, right: 20 }
-    //         : { left: 200, top: 50, bottom: 50, right: 100 }
-    //     }
-    //   >
-    //     <VictoryAxis
-    //       tickValues={data.map(object => object.x)}
-    //       tickFormat={tick => `${tick}`}
-    //       axisLabelComponent={
-    //         <VictoryLabel
-    //           style={{
-    //             color: '#FFF',
-    //             textDecorationColor: '#FFF',
-    //           }}
-    //           dy={30}
-    //         />
-    //       }
-    //       tickLabelComponent={<VictoryLabel angle={45} dx={15} />}
-    //       tickCount={
-    //         isMobileView ? (data.length > 5 ? 4 : data.length) : data.length
-    //       }
-    //       label={'Tempo'}
-    //     />
-    //     <VictoryAxis
-    //       dependentAxis
-    //       tickValues={data.map(object => object.y)}
-    //       tickFormat={tick =>
-    //         isMobileView
-    //           ? formatNumberToInternationalSystem(tick, 1)
-    //           : new Intl.NumberFormat('pt-BR', {
-    //               style: 'currency',
-    //               currency: 'BRL',
-    //             }).format(tick)
-    //       }
-    //       axisLabelComponent={<VictoryLabel dy={isMobileView ? -40 : -110} />}
-    //       label={'Crescimento financeiro'}
-    //     />
-
-    //     <VictoryLine
-    //       animate={{
-    //         duration: 3000,
-    //         onLoad: { duration: 3000 },
-    //       }}
-    //       style={{
-    //         data: {
-    //           stroke: '#EA5E45',
-    //           strokeWidth: ({ active }) => (active ? 4 : 2),
-    //         },
-    //         labels: { fill: '#EA5E45' },
-    //       }}
-    //       data={data}
-    //       dataComponent={<Curve />}
-    //       groupComponent={
-    //         <VictoryClipContainer
-    //           clipPadding={{ top: 2000, right: 150, left: 150 }}
-    //         />
-    //       }
-    //       containerComponent={<VictoryContainer responsive={false} />}
-    //       interpolation="natural"
-    //       labelComponent={
-    //         <VictoryLabel
-    //           dy={() => {
-    //             if (width >= 769) return -5;
-    //           }}
-    //           dx={() => {
-    //             if (width >= 769) return 45;
-    //           }}
-    //           style={{
-    //             color: '#FFF',
-    //             fontSize: 10,
-    //             angle: isMobileView ? 0 : -45,
-    //           }}
-    //         />
-    //       }
-    //       labels={({ datum }) =>
-    //         isMobileView
-    //           ? ''
-    //           : new Intl.NumberFormat('pt-BR', {
-    //               style: 'currency',
-    //               currency: 'BRL',
-    //             }).format(datum.y)
-    //       }
-    //     />
-    //   </VictoryChart>
-    // </svg>
   );
 };
 

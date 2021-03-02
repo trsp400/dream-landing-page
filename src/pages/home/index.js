@@ -47,7 +47,16 @@ const Home = () => {
     </div>
   ) : (
     <Container>
-      <LineChart isMobileView={isMobileView} />
+      <LineChart
+        data={[
+          { x: 2021, y: 6975.64 },
+          { x: 2022, y: 18408.09 },
+          { x: 2023, y: 36376.74 },
+        ]}
+        isMobileView={isMobileView}
+        height={400}
+        slider
+      />
       {/* <ButtonContainer>
         <Button
           ripple
