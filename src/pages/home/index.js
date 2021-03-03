@@ -15,7 +15,7 @@ import { changeFormState } from '../../redux/dream_machine/actions';
 import RenderInvestorForm from '../../components/RenderInvestorSteps';
 import RenderBeginnerForm from '../../components/RenderBeginnerSteps';
 
-import Logo from '../../assets/logo/svg/logo_header_mobile.svg';
+import Logo from '../../assets/logo/svg/bec_logo.svg';
 import MaquinaDosSonhos from '../../assets/logo/svg/maquinaDosSonhos.svg';
 
 const RenderSelectedFormPath = ({ currentStep, store, path }) => {
@@ -76,7 +76,7 @@ const Home = () => {
         >
           COMEÇAR AGORA
         </Button>
-        <Button variant="beorange" onClick={() => onChangeStep(1, 'investor')}>
+        <Button variant="beblue" onClick={() => onChangeStep(1, 'investor')}>
           JÁ SEI ONDE INVESTIR
         </Button>
         </ButtonSection>
