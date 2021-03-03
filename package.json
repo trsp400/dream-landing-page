@@ -35,8 +35,17 @@
     "styled-media-query": "^2.1.2"
   },
   "devDependencies": {
-    "@types/react-redux": "^7.1.16",
+    "@babel/core": "^7.13.8",
+    "@storybook/addon-actions": "^6.1.20",
+    "@storybook/addon-docs": "^6.1.21",
+    "@storybook/addon-essentials": "^6.1.20",
+    "@storybook/addon-links": "^6.1.20",
+    "@storybook/addons": "^6.1.20",
+    "@storybook/react": "^6.1.20",
+    "@storybook/theming": "^6.1.20",
     "@types/styled-components": "^5.1.7",
+    "babel-loader": "^8.2.2",
+    "babel-preset-react-app": "^10.0.0",
     "eslint": "^7.20.0",
     "eslint-config-airbnb": "^18.2.1",
     "eslint-config-airbnb-base": "^14.2.1",
@@ -59,7 +68,9 @@
     "start": "NODE_ENV=development npm run develop",
     "serve": "gatsby serve",
     "clean": "gatsby clean",
-    "test": "NODE_ENV=test echo \"Write tests! -> https://gatsby.dev/unit-testing\" && exit 1"
+    "test": "NODE_ENV=test echo \"Write tests! -> https://gatsby.dev/unit-testing\" && exit 1",
+    "storybook": "start-storybook -p 6006",
+    "build-storybook": "build-storybook"
   },
   "repository": {
     "type": "git",

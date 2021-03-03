@@ -2,14 +2,22 @@
 import React, { useCallback, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
+import ListDecicion from '../../CustomComponents/ListDecision';
+
 import { changeFormState } from '../../../redux/dream_machine/actions';
+
+const options = [
+  'Aumentar para R$ 1.200 no fim do seu ciclo de investimento, sem eventuais riscos.',
+  'Ter a possibilidade de aumentar para R$ 1.500 no fim do seu ciclo, com um pequeno risco.',
+  'Aumentar para R$ 1.200 no fim do seu ciclo de investimento, sem eventuais riscos.',
+];
 
 const StepSix = () => {
   const dispatch = useDispatch();
   const store = useSelector(({ dreamMachine }) => dreamMachine);
   const { currentStep, decision } = store;
 
-  const [inputValue, setInputvalue] = useState(decision);
+  const [inputValue, setInputvalue] = useState(options.indexOf(decision));
 
   const handleDispatch = useCallback(
     step => {
@@ -17,7 +25,7 @@ const StepSix = () => {
         changeFormState({
           ...store,
           currentStep: step,
-          decision: inputValue,
+          decision: options[inputValue],
         }),
       );
     },
@@ -39,17 +47,13 @@ const StepSix = () => {
 
       <br />
       <br />
-      <span>Se voce tivesse 1000...</span>
+      <span>Se você investisse R$ 1.000, qual seria a sua preferência?</span>
 
-      <select
-        name="decision"
-        value={inputValue}
-        onChange={event => setInputvalue(event.target.value)}
-      >
-        <option value="1200">R$1200</option>
-        <option value="1500">R$1500</option>
-        <option value="2000">R$2000</option>
-      </select>
+      <ListDecicion
+        options={options}
+        state={inputValue}
+        setState={setInputvalue}
+      />
     </div>
   );
 };
