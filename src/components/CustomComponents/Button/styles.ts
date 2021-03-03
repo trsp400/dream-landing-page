@@ -1,27 +1,34 @@
 /* eslint-disable no-shadow */
-import styled, { keyframes, css } from 'styled-components';
+import styled, {
+  keyframes,
+  css,
+  FlattenInterpolation,
+  ThemeProps,
+  ThemeProviderProps,
+} from 'styled-components';
 import { darken } from 'polished';
 
 import media from 'styled-media-query';
-
-interface ThemeProps {
-  desktopTheme: any;
-}
 
 interface RippleButtonProps {
   ripple?: Boolean;
   disabled?: Boolean;
   glow?: Boolean;
-  theme?: ThemeProps;
+  theme?: String;
   variant?: 'beorange' | 'beblue' | 'bewhite' | 'begreen';
 }
 
-const themeType = {
+interface TypesPropsTheme {
+  beblue: FlattenInterpolation<ThemeProps<any>>;
+  beorange: FlattenInterpolation<ThemeProps<any>>;
+  bewhite: FlattenInterpolation<ThemeProps<any>>;
+  begreen: FlattenInterpolation<ThemeProps<any>>;
+}
+
+const themeType: TypesPropsTheme = {
   beblue: css`
-    background: ${(props: RippleButtonProps) =>
-      props.theme.desktopTheme.colors.primary.blue};
-    color: ${(props: RippleButtonProps) =>
-      props.theme.desktopTheme.colors.primary.white};
+    background: #1a4a73;
+    color: #fff;
 
     ${(props: RippleButtonProps) =>
       props?.glow &&
@@ -30,22 +37,17 @@ const themeType = {
       `}
 
     &:hover {
-      background: ${(props: RippleButtonProps) =>
-        darken(0.1, props.theme.desktopTheme.colors.primary.blue)};
+      background: ${(props: RippleButtonProps) => darken(0.1, '#1a4a73')};
     }
 
     span.drop {
-      background: ${(props: RippleButtonProps) =>
-        props.theme.desktopTheme.colors.secondary.blue};
+      background: #1a4a73;
     }
   `,
 
   beorange: css`
-    background: ${(props: RippleButtonProps) =>
-      props.theme.desktopTheme.colors.primary.orange};
-    color: ${(props: RippleButtonProps) =>
-      props.theme.desktopTheme.colors.primary.white};
-
+    background: #ea5e45;
+    color: #fff;
     ${(props: RippleButtonProps) =>
       props?.glow &&
       css`
@@ -54,29 +56,20 @@ const themeType = {
 
     &:hover {
       background: ${(props: RippleButtonProps) =>
-        props.disabled
-          ? props => props.theme.desktopTheme.colors.primary.orange
-          : props =>
-              darken(0.1, props.theme.desktopTheme.colors.primary.orange)};
+        props.disabled ? '#ea5e45' : darken(0.1, '#ea5e45')};
       cursor: ${(props: RippleButtonProps) =>
         props.disabled ? 'not-allowed' : 'pointer'};
     }
 
     span.drop {
-      background: ${(props: RippleButtonProps) =>
-        props.theme.desktopTheme.colors.secondary.orange};
+      background: #ea5e45;
     }
   `,
 
   bewhite: css`
-    background: ${(props: RippleButtonProps) =>
-      props.theme.desktopTheme.colors.primary.white};
-    color: ${(props: RippleButtonProps) =>
-      props.theme.desktopTheme.colors.primary.orange};
-    border: 1px
-      ${(props: RippleButtonProps) =>
-        props.theme.desktopTheme.colors.primary.orange}
-      solid;
+    background: #fff;
+    color: #ea5e45;
+    border: 1px #ea5e45 solid;
 
     ${(props: RippleButtonProps) =>
       props?.glow &&
@@ -85,16 +78,13 @@ const themeType = {
       `}
 
     span.drop {
-      background: ${(props: RippleButtonProps) =>
-        props.theme.desktopTheme.colors.secondary.orange};
+      background: #ea5e45;
     }
   `,
 
   begreen: css`
-    background: ${(props: RippleButtonProps) =>
-      props.theme.desktopTheme.colors.primary.green};
-    color: ${(props: RippleButtonProps) =>
-      props.theme.desktopTheme.colors.primary.white};
+    background: #3abe00;
+    color: #fff;
 
     ${(props: RippleButtonProps) =>
       props?.glow &&
@@ -104,10 +94,7 @@ const themeType = {
 
     &:hover {
       background: ${(props: RippleButtonProps) =>
-        props.disabled
-          ? props => props.theme.desktopTheme.colors.primary.green
-          : props =>
-              darken(0.1, props.theme.desktopTheme.colors.primary.green)};
+        props.disabled ? '#3ABE00' : darken(0.1, '#3ABE00')};
       cursor: ${(props: RippleButtonProps) =>
         props.disabled ? 'not-allowed' : 'pointer'};
     }
@@ -154,31 +141,12 @@ export const CustomButton = styled.button<RippleButtonProps>`
   border-right-color: transparent;
   border-bottom-color: transparent;
   border-left-color: transparent;
-  padding: 0.375rem 0.75rem;
+  padding: 10px 0;
   font-size: 1rem;
   line-height: 1.5;
   border-radius: 0.25rem;
   transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
     border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
-
-  /* padding: 15px 30px;
-
-  ${media.greaterThan('1577px')`
-    height: 2.8rem;
-  `}
-
-  ${media.lessThan('1577px')`
-    height: 2.5rem;
-  `}
-
-  ${media.lessThan('480px')`
-    height: 40px;
-    width: 260px;
-  `}
-
-  ${media.lessThan('248px')`
-    padding: 12px 0 12px;
-  `} */
 
   font: normal normal bold 20px/26px Trasandina;
 
