@@ -2,6 +2,7 @@ import actions from '../actions';
 
 const INITIAL_STATE = {
   isMobileView: false,
+  size: 0,
 };
 
 export default function changeSettings(state = INITIAL_STATE, action) {
@@ -12,11 +13,13 @@ export default function changeSettings(state = INITIAL_STATE, action) {
       if (size <= 768) {
         return {
           ...state,
+          size,
           isMobileView: true,
         };
       }
       return {
         ...state,
+        size,
         isMobileView: false,
       };
 
