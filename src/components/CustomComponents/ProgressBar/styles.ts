@@ -16,7 +16,7 @@ export const Container = styled.div`
 export const Bar = styled.span<BarProps>`
   width: 70%;
   max-width: 10vh;
-  height: 2px;
+  height: 5px;
   ${props =>
     props?.currentStep
       ? css<BarProps>`
