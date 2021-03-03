@@ -22,13 +22,21 @@ const RenderProgressBar: React.FC<RenderProgressBarProps> = ({
     case 'investor':
       return (
         <ProgressBarContainer>
-          <ProgressBar length={8} currentStep={currentStep} barSize={30} />
+          <ProgressBar
+            length={8}
+            currentStep={currentStep}
+            barColor="#EA5E45"
+          />
         </ProgressBarContainer>
       );
     case 'beginner':
       return (
         <ProgressBarContainer>
-          <ProgressBar length={7} currentStep={currentStep} barSize={30} />
+          <ProgressBar
+            length={7}
+            currentStep={currentStep}
+            barColor="#EA5E45"
+          />
         </ProgressBarContainer>
       );
     default:
@@ -41,8 +49,9 @@ const Layout = props => {
   const dispatch = useDispatch();
 
   const { currentStep, path } = useSelector(({ dreamMachine }) => dreamMachine);
+  const { isMobileView } = useSelector(({ settings }) => settings);
 
-  const children = props?.children; // eslint-disable-line
+  const children = props?.children;
 
   useEffect(() => {
     dispatch(screenResize(width));
@@ -50,7 +59,7 @@ const Layout = props => {
 
   return (
     <Container>
-      {currentStep && (
+      {currentStep && isMobileView && (
         <RenderProgressBar path={path} currentStep={currentStep} />
       )}
       <Main>{children}</Main>

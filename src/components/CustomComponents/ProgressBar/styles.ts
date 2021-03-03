@@ -3,18 +3,18 @@ import styled, { css } from 'styled-components';
 interface BarProps {
   currentStep?: Boolean;
   barColor?: string;
-  barSize?: number;
 }
 
 export const Container = styled.div`
   display: inline-flex;
   flex-direction: row;
+  flex: 1;
   justify-content: center;
   align-items: center;
 `;
 
 export const Bar = styled.span<BarProps>`
-  width: ${props => props.barSize}px;
+  width: 70%;
   max-width: 10vh;
   height: 2px;
   ${props =>
@@ -26,5 +26,5 @@ export const Bar = styled.span<BarProps>`
           background-color: rgba(255, 255, 255, 0.5);
         `}
 
-  margin: 10px;
+  margin: 15px 4px 0px 4px;
 `;

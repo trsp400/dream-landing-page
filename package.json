@@ -35,6 +35,7 @@
     "styled-media-query": "^2.1.2"
   },
   "devDependencies": {
+    "@types/react-redux": "^7.1.16",
     "@types/styled-components": "^5.1.7",
     "eslint": "^7.20.0",
     "eslint-config-airbnb": "^18.2.1",

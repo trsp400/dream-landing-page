@@ -7,14 +7,12 @@ interface ProgressBarProps {
   length: number;
   currentStep?: number;
   barColor?: string;
-  barSize?: number;
 }
 
 const ProgressBar: React.FC<ProgressBarProps> = ({
   length,
   currentStep,
   barColor,
-  barSize,
 }) => {
   let bars = [];
 
@@ -26,8 +24,9 @@ const ProgressBar: React.FC<ProgressBarProps> = ({
         <Container key={index}>
           {React.cloneElement(bar, {
             currentStep: index === currentStep - 1,
-            barColor: barColor || '#EA5E45',
-            barSize: barSize || 25,
+            style: {
+              backgroundColor: index < currentStep && (barColor || '#EA5E45'),
+            },
           })}
         </Container>
       ))}
