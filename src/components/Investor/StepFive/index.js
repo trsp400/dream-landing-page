@@ -1,6 +1,7 @@
-import React, { useCallback, useRef, useState, useEffect } from 'react';
+import React, { useCallback, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
+import Input from '../../CustomComponents/Input';
 import { changeFormState } from '../../../redux/dream_machine/actions';
 
 const StepFive = () => {
@@ -8,8 +9,7 @@ const StepFive = () => {
   const store = useSelector(({ dreamMachine }) => dreamMachine);
   const { currentStep, currentInvestments } = store;
 
-  const [inputValue] = useState(currentInvestments);
-  const inputRef = useRef(null);
+  const [inputValue, setInputValue] = useState(currentInvestments);
 
   const handleDispatch = useCallback(
     step => {
@@ -17,16 +17,12 @@ const StepFive = () => {
         changeFormState({
           ...store,
           currentStep: step,
-          currentInvestments: inputRef?.current?.value,
+          currentInvestments: inputValue,
         }),
       );
     },
-    [dispatch, store],
+    [dispatch, store, inputValue],
   );
-
-  useEffect(() => {
-    inputRef.current.value = inputValue;
-  }, [inputValue]);
 
   return (
     <div>
@@ -44,7 +40,7 @@ const StepFive = () => {
       <br />
       <br />
       <span>Quanto voce pode investir hoje?</span>
-      <input type="text" ref={inputRef} />
+      <Input state={inputValue} setState={setInputValue} type="currency" />
     </div>
   );
 };

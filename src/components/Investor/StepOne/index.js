@@ -1,5 +1,3 @@
-/* eslint-disable import/no-unresolved */
-/* eslint-disable import/extensions */
 import React, { useCallback, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
@@ -8,13 +6,14 @@ import { changeFormState } from '../../../redux/dream_machine/actions';
 import CheckBox from '../../CustomComponents/CheckBox';
 import SvgImg from '../../../assets/icons/checkbox-icon.svg';
 
+import { Container } from 'react-bootstrap';
+
 const options = [
   'Banco Comercial',
   'Banco Financeiro',
   'Corretora',
   'Exchange',
 ];
-import { Container } from 'react-bootstrap';
 
 const StepOne = () => {
   const dispatch = useDispatch();
@@ -87,7 +86,6 @@ const StepOne = () => {
       <br />
 
       <span>onde voce ja investe: </span>
-
       <CheckBox
         options={options}
         state={arrayValues}

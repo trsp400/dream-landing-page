@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 
 import Layout from '../../Layout';
-import LineChart from '../../components/LineChart';
+import LineChart from '../../components/CustomComponents/LineChart';
 
 import {
   Container,

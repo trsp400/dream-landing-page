@@ -1,5 +1,3 @@
-/* eslint-disable import/no-unresolved */
-/* eslint-disable import/extensions */
 import React, { useCallback, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 

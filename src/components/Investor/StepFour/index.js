@@ -1,15 +1,15 @@
-import React, { useCallback, useRef, useEffect, useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { changeFormState } from '../../../redux/dream_machine/actions';
+import Input from '../../CustomComponents/Input';
 
 const StepFour = () => {
   const dispatch = useDispatch();
   const store = useSelector(({ dreamMachine }) => dreamMachine);
   const { currentStep, period } = store;
 
-  const [inputValue] = useState(period);
-  const inputRef = useRef(null);
+  const [inputValue, setInputValue] = useState(period);
 
   const handleDispatch = useCallback(
     step => {
@@ -17,33 +17,32 @@ const StepFour = () => {
         changeFormState({
           ...store,
           currentStep: step,
-          period: inputRef?.current?.value,
+          period: inputValue,
         }),
       );
     },
-    [dispatch, store],
+    [dispatch, store, inputValue],
   );
-
-  useEffect(() => {
-    inputRef.current.value = inputValue;
-  }, [inputValue]);
 
   return (
     <div>
       <h2>Step: {currentStep}</h2>
       <button type="button" onClick={() => handleDispatch(3)}>
-        {' '}
         step anterior
       </button>
       <br />
       <button type="button" onClick={() => handleDispatch(5)}>
-        {' '}
         Proximo step
       </button>
 
       <br />
       <span>em quanto tempo?</span>
-      <input type="text" ref={inputRef} />
+      <Input
+        state={inputValue}
+        setState={setInputValue}
+        type="number"
+        placeholder="Tempo"
+      />
     </div>
   );
 };
