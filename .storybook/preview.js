@@ -5,6 +5,9 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 import React from 'react';
 import { ThemeProvider } from 'styled-components';
+import { configureActions } from '@storybook/addon-actions'
+import { DocsPage, DocsContainer } from '@storybook/addon-docs/blocks'
+
 import { mobileTheme, desktopTheme } from '../src/themes/default';
 
 import GlobalStyle from '../src/themes/globalStyles';
@@ -22,12 +25,17 @@ global.___loader = {
 // This global variable is prevents the "__BASE_PATH__ is not defined" error inside Storybook.
 global.__BASE_PATH__ = "/"
 
-// Navigating through a gatsby app using gatsby-link or any other gatsby component will use the `___navigate` method.
-// In Storybook it makes more sense to log an action than doing an actual navigate. Checkout the actions addon docs for more info: https://github.com/storybookjs/storybook/tree/master/addons/actions.
 
 window.___navigate = pathname => {
   action("NavigateTo:")(pathname)
 }
+
+
+configureActions({
+  depth: 5,
+  clearOnStoryChange: true,
+  limit: 20
+})
 
 // .storybook/preview.js
 
@@ -50,4 +58,8 @@ export const decorators = [
 export const parameters = {
   layout: 'centered',
   controls: { expanded: true },
+  docs: {
+    container: DocsContainer,
+    page: DocsPage,
+  },
 };

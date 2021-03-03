@@ -1,122 +1,122 @@
 @font-face {
   font-family: "Trasandina";
 
-  src: url("trasandina/Trasandina-Regular.otf") format("opentype");
+  src: url("s3://becapital-assets/font-trasandina/trasandina/Trasandina-Regular.otf") format("opentype");
   font-weight: 500;
   font-style: normal;
 }
 @font-face {
   font-family: "Trasandina";
 
-  src: url("trasandina/Trasandina-Regular-Italic.otf") format("opentype");
+  src: url("s3://becapital-assets/font-trasandina/trasandina/Trasandina-Regular-Italic.otf") format("opentype");
   font-weight: 500;
   font-style: italic;
 }
 @font-face {
   font-family: "Trasandina";
 
-  src: url("trasandina/Trasandina-Black-Italic.otf") format("opentype");
+  src: url("s3://becapital-assets/font-trasandina/trasandina/Trasandina-Black-Italic.otf") format("opentype");
   font-weight: 500;
   font-style: italic;
 }
 @font-face {
   font-family: "Trasandina";
 
-  src: url("trasandina/Trasandina-Black.otf") format("opentype");
+  src: url("s3://becapital-assets/font-trasandina/trasandina/Trasandina-Black.otf") format("opentype");
    font-weight: 500;
   font-style: normal;
 }
 @font-face {
   font-family: "Trasandina";
 
-  src: url("trasandina/Trasandina-Bold-Italic.otf") format("opentype");
+  src: url("s3://becapital-assets/font-trasandina/trasandina/Trasandina-Bold-Italic.otf") format("opentype");
   font-weight: 700;
   font-style: italic;
 }
 @font-face {
   font-family: "Trasandina";
 
-  src: url("trasandina/Trasandina-Bold.otf") format("opentype");
+  src: url("s3://becapital-assets/font-trasandina/trasandina/Trasandina-Bold.otf") format("opentype");
   font-weight: 700;
   font-style: normal;
 }
 @font-face {
   font-family: "Trasandina";
 
-  src: url("trasandina/Trasandina-Book-Italic.otf") format("opentype");
+  src: url("s3://becapital-assets/font-trasandina/trasandina/Trasandina-Book-Italic.otf") format("opentype");
   font-weight: 400;
   font-style: italic;
 }
 @font-face {
   font-family: "Trasandina";
 
-  src: url("trasandina/Trasandina-Book.otf") format("opentype");
+  src: url("s3://becapital-assets/font-trasandina/trasandina/Trasandina-Book.otf") format("opentype");
   font-weight: 400;
   font-style: normal;
 }
 @font-face {
   font-family: "Trasandina";
 
-  src: url("trasandina/Trasandina-ExtraLight.otf") format("opentype");
+  src: url("s3://becapital-assets/font-trasandina/trasandina/Trasandina-ExtraLight.otf") format("opentype");
   font-weight: 200;
   font-style: normal;
 }
 @font-face {
   font-family: "Trasandina";
 
-  src: url("trasandina/Trasandina-ExtraLight-Italic.otf") format("opentype");
+  src: url("s3://becapital-assets/font-trasandina/trasandina/Trasandina-ExtraLight-Italic.otf") format("opentype");
   font-weight: 200;
   font-style: italic;
 }
 @font-face {
   font-family: "Trasandina";
 
-  src: url("trasandina/Trasandina-Light.otf") format("opentype");
+  src: url("s3://becapital-assets/font-trasandina/trasandina/Trasandina-Light.otf") format("opentype");
    font-weight: 300;
   font-style: normal;
 }
 @font-face {
   font-family: "Trasandina";
 
-  src: url("trasandina/Trasandina-Light-Italic.otf") format("opentype");
+  src: url("s3://becapital-assets/font-trasandina/trasandina/Trasandina-Light-Italic.otf") format("opentype");
   font-weight: 300;
   font-style: italic;
 }
 @font-face {
   font-family: "Trasandina";
 
-  src: url("trasandina/Trasandina-Black-Italic.otf") format("opentype");
+  src: url("s3://becapital-assets/font-trasandina/trasandina/Trasandina-Black-Italic.otf") format("opentype");
   font-weight: 600;
   font-style: italic;
 }
 @font-face {
   font-family: "Trasandina";
-  src: url("trasandina/Trasandina-Medium.otf") format("opentype");
+  src: url("s3://becapital-assets/font-trasandina/trasandina/Trasandina-Medium.otf") format("opentype");
   font-weight: 600;
 }
 @font-face {
   font-family: "Trasandina";
     font-style: normal;
 
-  src: url("trasandina/Trasandina-Thin-Italic.otf") format("opentype");
+  src: url("s3://becapital-assets/font-trasandina/trasandina/Trasandina-Thin-Italic.otf") format("opentype");
    font-weight: 100;
   font-style: italic;
 }
 @font-face {
   font-family: "Trasandina";
-  src: url("trasandina/Trasandina-Thin.otf") format("opentype");
+  src: url("s3://becapital-assets/font-trasandina/trasandina/Trasandina-Thin.otf") format("opentype");
     font-weight: 100;
   font-style: normal;
 }
 @font-face {
   font-family: "Trasandina";
-  src: url("trasandina/Trasandina-Ultra-Italic.otf") format("opentype");
+  src: url("s3://becapital-assets/font-trasandina/trasandina/Trasandina-Ultra-Italic.otf") format("opentype");
   font-weight: 900;
   font-style: italic;
 }
 @font-face {
   font-family: "Trasandina";
-  src: url("trasandina/Trasandina-Ultra.otf") format("opentype");
+  src: url("s3://becapital-assets/font-trasandina/trasandina/Trasandina-Ultra.otf") format("opentype");
   font-weight: 900;
   font-style: normal;
 }
