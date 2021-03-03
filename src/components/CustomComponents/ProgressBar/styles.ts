@@ -17,6 +17,7 @@ export const Bar = styled.span<BarProps>`
   width: 70%;
   max-width: 10vh;
   height: 5px;
+  transition: background-color 0.3s ease-in-out;
   ${props =>
     props?.currentStep
       ? css<BarProps>`
