@@ -1,10 +1,9 @@
-/* eslint-disable import/no-unresolved */
-/* eslint-disable import/extensions */
 import React, { useCallback, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { changeFormState } from '../../../redux/dream_machine/actions';
 import Input from '../../CustomComponents/Input';
+import MessageFeedback from '../../CustomComponents/MessageFeedback';
 
 const StepOne = () => {
   const dispatch = useDispatch();
@@ -74,6 +73,11 @@ const StepOne = () => {
       <br />
 
       <span>Qual seu objetivo?</span>
+      <MessageFeedback strong="lighter">Olá, vamos começar ?</MessageFeedback>
+
+      <MessageFeedback strong="normal">
+        Qual o seu objetivo de vida?
+      </MessageFeedback>
       <Input state={inputValue} setState={setInputValue} type="text" />
     </div>
   );

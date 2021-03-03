@@ -30,7 +30,7 @@ const Input: FC<InputProps> = ({ state, type, setState, placeholder }) => (
         placeholder="R$ 0,00"
         customInput={InputStyledNumber}
         value={state}
-        onChange={event => setState(event.target.value)}
+        onChange={event => setState(event?.target?.value)}
       />
     ) : type === 'text' ? (
       <InputStyledTextContainer>
@@ -38,7 +38,7 @@ const Input: FC<InputProps> = ({ state, type, setState, placeholder }) => (
           placeholder="Outros"
           value={state || ''}
           type={type}
-          onChange={event => setState(event.target.value)}
+          onChange={event => setState(event?.target?.value)}
         />
       </InputStyledTextContainer>
     ) : type === 'email' ? (
@@ -47,7 +47,7 @@ const Input: FC<InputProps> = ({ state, type, setState, placeholder }) => (
           placeholder="E-mail"
           value={state || ''}
           type={type}
-          onChange={event => setState(event.target.value)}
+          onChange={event => setState(event?.target?.value)}
           required
         />
       </InputStyledTextContainer>
@@ -61,7 +61,7 @@ const Input: FC<InputProps> = ({ state, type, setState, placeholder }) => (
         placeholder={placeholder}
         customInput={InputStyledNumber}
         value={state || ''}
-        onChange={event => setState(event.target.value)}
+        onChange={event => setState(event?.target?.value)}
       />
     ) : (
       <div />
