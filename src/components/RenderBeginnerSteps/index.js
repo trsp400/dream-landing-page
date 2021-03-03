@@ -7,6 +7,7 @@ import StepFour from '../Beginner/StepFour';
 import StepFive from '../Beginner/StepFive';
 import StepSix from '../Beginner/StepSix';
 import StepSeven from '../Beginner/StepSeven';
+import StepEight from '../Beginner/StepEight';
 
 const RenderFormSteps = ({ currentStep }) => {
   switch (currentStep) {
@@ -24,6 +25,8 @@ const RenderFormSteps = ({ currentStep }) => {
       return <StepSix />;
     case 7:
       return <StepSeven />;
+    case 8:
+      return <StepEight />;
     default:
       return null;
   }

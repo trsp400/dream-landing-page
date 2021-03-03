@@ -127,7 +127,7 @@ const drop = keyframes`
   }
 `;
 
-export const CustomButton = styled.button<ButtonProps>`
+export const CustomButton = styled.button<RippleButtonProps>`
   /* fixar ripple no meio do botão */
   display: flex;
   justify-content: center;

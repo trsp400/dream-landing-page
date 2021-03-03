@@ -2,6 +2,7 @@ import styled from 'styled-components';
 
 export const InputStyledNumber = styled.input`
   border: 0;
+  border-bottom: 3px solid transparent;
   padding: 0;
   height: calc(1.5em + 0.75rem + 15px);
   width: 17.625rem;

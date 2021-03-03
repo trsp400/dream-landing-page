@@ -10,7 +10,7 @@ import {
 interface InputProps {
   children: JSX.Element[] | JSX.Element | any;
   className?: string;
-  type: 'currency' | 'email' | 'text';
+  type: 'currency' | 'email' | 'text' | 'number';
   state: number;
   setState(value: any): void;
   placeholder?: string;
@@ -51,7 +51,7 @@ const Input: FC<InputProps> = ({ state, type, setState, placeholder }) => (
           required
         />
       </InputStyledTextContainer>
-    ) : type === 'period' ? (
+    ) : type === 'number' ? (
       <NumberFormat
         // name={field}
         displayType="input"

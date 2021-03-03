@@ -1,22 +1,17 @@
 /* eslint-disable import/extensions */
 /* eslint-disable import/no-unresolved */
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
-import { navigate } from 'gatsby';
-
 import { changeFormState } from '../../../redux/dream_machine/actions';
-import Input from '../../CustomComponents/Input';
+
+import Loading from '../../CustomComponents/Loading';
 
 const StepSeven = () => {
   const dispatch = useDispatch();
+  const [loading, setLoading] = useState(false);
   const store = useSelector(({ dreamMachine }) => dreamMachine);
-  const {
-    currentStep,
-    result: { email },
-  } = store;
-
-  const [inputValue, setInputValue] = useState(email);
+  const { currentStep } = store;
 
   const handleDispatch = useCallback(
     step => {
@@ -24,22 +19,19 @@ const StepSeven = () => {
         changeFormState({
           ...store,
           currentStep: step,
-          result: {
-            ...store?.result,
-            email: inputValue,
-          },
         }),
       );
     },
-    [dispatch, store, inputValue],
+    [dispatch, store],
   );
 
-  const handleOnClink = params => {
-    const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    const verify = re.test(String(params).toLowerCase());
+  useEffect(() => {
+    setTimeout(() => setLoading(true), 3000);
+  });
 
-    verify && navigate('/resultado');
-  };
+  useEffect(() => {
+    if (loading) handleDispatch(8);
+  }, [loading]);
 
   return (
     <div>
@@ -49,15 +41,9 @@ const StepSeven = () => {
         step anterior
       </button>
       <br />
-
+      {!loading && <Loading />}
       <br />
       <br />
-      <span>Email: </span>
-      <Input state={inputValue} setState={setInputValue} type="email" />
-
-      <button type="button" onClick={() => handleOnClink(inputValue)}>
-        OK
-      </button>
     </div>
   );
 };
