@@ -1,5 +1,4 @@
 import { createGlobalStyle } from 'styled-components';
-// import './fonts.css';
 
 const GlobalStyle = createGlobalStyle`
 
@@ -10,7 +9,7 @@ const GlobalStyle = createGlobalStyle`
     box-sizing: border-box;
     list-style: none;
     text-decoration: none;
-    /* font-family: Trasandina; */
+    /* font-family: 'Trasandina'; */
   }
 
   *:focus{
