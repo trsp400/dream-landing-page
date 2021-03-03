@@ -9,14 +9,7 @@ import {
 
 function* sendDreamMachineResultToAPIRequest(action) {
   try {
-    const dataObject = {
-      ...action?.payload?.result,
-      ...action?.payload?.stepOne,
-      ...action?.payload?.stepTwo,
-      ...action?.payload?.steThree,
-    };
-
-    yield call(api.post, 'website/dream_machine_result', dataObject);
+    yield call(api.post, 'website/dream_machine_result', ...action?.payload);
 
     yield put(sendDreamMachineResultToAPISuccess(action?.payload));
   } catch (error) {

@@ -1,11 +1,11 @@
 import actions from '../actions';
 
 const INITIAL_STATE = {
-  currentStep: null,
+  currentStep: 0,
   resultSuccess: null,
   result: {
-    monthlyRate: 0,
-    annualRate: 0,
+    monthlyRate: '',
+    annualRate: '',
     riskProfile: '',
     email: '',
     yearlyAverageArray: [],
@@ -48,8 +48,7 @@ export default (state = INITIAL_STATE, action) => {
         desiredInvestmentsPlacement: payload?.desiredInvestmentsPlacement,
         otherInvestments: payload?.otherInvestments,
         result: {
-          ...state?.result,
-          email: payload?.result?.email,
+          ...payload?.result,
         },
         resultSuccess: payload?.resultSuccess || null,
         path: payload?.path,

@@ -49,7 +49,7 @@ const Home = () => {
           ripple
           variant="beorange"
           glow
-          onClick={() => onChangeStep(1, 'beginner')}
+          onClick={() => onChangeStep(7, 'beginner')}
         >
           Começar agora
         </Button>
