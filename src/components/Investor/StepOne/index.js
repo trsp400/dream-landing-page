@@ -3,17 +3,19 @@ import { useSelector, useDispatch } from 'react-redux';
 
 import { changeFormState } from '../../../redux/dream_machine/actions';
 
-import CheckBox from '../../CustomComponents/CheckBox';
-import SvgImg from '../../../assets/icons/checkbox-icon.svg';
+import CoinIcon from '../../../assets/icons/accounting-coins.svg';
+import SavingBankIcon from '../../../assets/icons/saving-bank-1.svg';
+import SavingBagIcon from '../../../assets/icons/saving-bag-increase.svg';
+import BrokerIcon from '../../../assets/icons/building-modern-2.svg';
+import AssetsIcon from '../../../assets/icons/money-bag-dollar.svg';
+import ExchangeIcon from '../../../assets/icons/accounting-coins-bill.svg';
 
-import { Container } from 'react-bootstrap';
+import Button from '../../CustomComponents/Button';
 
-const options = [
-  'Banco Comercial',
-  'Banco Financeiro',
-  'Corretora',
-  'Exchange',
-];
+import MessageFeedback from '../../CustomComponents/MessageFeedback';
+import IconGallery, { Card, Row } from '../../CustomComponents/IconGallery';
+
+import { Container, Footer } from './styles';
 
 const StepOne = () => {
   const dispatch = useDispatch();
@@ -67,31 +69,96 @@ const StepOne = () => {
     );
   }, [dispatch, store]);
 
+  const handleCardClick = (event, label) => {
+    if (arrayValues.includes(label)) {
+      return setArrayValues(arrayValues.filter(value => value !== label));
+    }
+
+    return setArrayValues([...arrayValues, label]);
+  };
+
   const title = path === 'beginner' ? 'Iniciante' : 'Já é investidor';
 
   return (
     <Container>
-      <h2>{title}</h2>
-      <h2>Step: {currentStep}</h2>
-      <button type="button" onClick={() => resetStore()}>
-        step anterior
-      </button>
+      <MessageFeedback strong="lighter">Olá, vamos começar ?</MessageFeedback>
 
-      <br />
+      <MessageFeedback strong="bold">Onde você já investe?</MessageFeedback>
 
-      <button type="button" onClick={() => handleDispatch(2)}>
-        Proximo step
-      </button>
+      <IconGallery onClick={handleCardClick} arrayValues={arrayValues}>
+        <Row>
+          <Card
+            backgroundColor="#EA5E45"
+            icon={<SavingBankIcon />}
+            iconSize={40}
+            label="Banco Comercial"
+            labelColor="#FFF"
+            labelSize={12}
+          />
+          <Card
+            backgroundColor="#EA5E45"
+            icon={<SavingBagIcon />}
+            iconSize={40}
+            label="Banco de Investimentos"
+            labelColor="#FFF"
+            labelSize={12}
+          />
+        </Row>
+        <Row>
+          <Card
+            backgroundColor="#EA5E45"
+            icon={<BrokerIcon />}
+            iconSize={40}
+            label="Corretora"
+            labelColor="#FFF"
+            labelSize={12}
+          />
+          <Card
+            backgroundColor="#EA5E45"
+            icon={<AssetsIcon />}
+            iconSize={40}
+            label="Assets"
+            labelColor="#FFF"
+            labelSize={12}
+          />
+        </Row>
+        <Row>
+          <Card
+            backgroundColor="#EA5E45"
+            icon={<ExchangeIcon />}
+            iconSize={40}
+            label="Exchange"
+            labelColor="#FFF"
+            labelSize={12}
+          />
+        </Row>
+      </IconGallery>
 
-      <br />
+      <Footer>
+        <Button
+          ripple
+          variant="beblue"
+          glow
+          onClick={() => handleDispatch(0)}
+          style={{
+            width: '30%',
+          }}
+        >
+          {'<='}
+        </Button>
 
-      <span>onde voce ja investe: </span>
-      <CheckBox
-        options={options}
-        state={arrayValues}
-        setState={setArrayValues}
-        image={<SvgImg />}
-      />
+        <Button
+          ripple
+          variant="beorange"
+          glow
+          onClick={() => handleDispatch(2)}
+          style={{
+            width: '30%',
+          }}
+        >
+          OK
+        </Button>
+      </Footer>
     </Container>
   );
 };

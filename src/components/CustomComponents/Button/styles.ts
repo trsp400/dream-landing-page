@@ -182,7 +182,7 @@ export const CustomButton = styled.button<RippleButtonProps>`
 
   font: normal normal bold 20px/26px Trasandina;
 
-  ${(props: RippleButtonProps) => themeType[props.type || 'beorange']}
+  ${(props: RippleButtonProps) => themeType[props.variant || 'beorange']}
 
   span.drop {
     position: absolute;
