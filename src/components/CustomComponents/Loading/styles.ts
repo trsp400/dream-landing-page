@@ -38,9 +38,10 @@ export const ContainerLoading = styled.div`
     0% {
       transform: scale(1.2);
       background: var(--color);
-      box-shadow: 0 0 10px var(--color), 0 0 20px var(--color),
+      /* box-shadow: 0 0 10px var(--color), 0 0 20px var(--color),
         0 0 40px var(--color), 0 0 60px var(--color), 0 0 80px var(--color),
-        0 0 100px var(--color);
+        0 0 50px var(--color); */
+      filter: drop-shadow(0px 0px 2px #ea5e45) drop-shadow(0px 0px 5px #ea5e45);
     }
 
     75%,

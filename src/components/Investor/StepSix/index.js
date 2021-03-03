@@ -1,15 +1,15 @@
-import React, { useCallback, useRef, useState, useEffect } from 'react';
+import React, { useCallback, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { changeFormState } from '../../../redux/dream_machine/actions';
+import Input from '../../CustomComponents/Input';
 
 const StepSix = () => {
   const dispatch = useDispatch();
   const store = useSelector(({ dreamMachine }) => dreamMachine);
   const { currentStep, monthlySupport } = store;
 
-  const [inputValue] = useState(monthlySupport);
-  const inputRef = useRef(null);
+  const [inputValue, setInputValue] = useState(monthlySupport);
 
   const handleDispatch = useCallback(
     step => {
@@ -17,34 +17,28 @@ const StepSix = () => {
         changeFormState({
           ...store,
           currentStep: step,
-          monthlySupport: inputRef?.current?.value,
+          monthlySupport: inputValue,
         }),
       );
     },
-    [dispatch, store],
+    [dispatch, store, inputValue],
   );
-
-  useEffect(() => {
-    inputRef.current.value = inputValue;
-  }, [inputValue]);
 
   return (
     <div>
       <h2>Step: {currentStep}</h2>
       <button type="button" onClick={() => handleDispatch(5)}>
-        {' '}
         step anterior
       </button>
       <br />
       <button type="button" onClick={() => handleDispatch(7)}>
-        {' '}
         Proximo step
       </button>
 
       <br />
       <br />
       <span>Quanto voce pode investir por mes?</span>
-      <input type="text" ref={inputRef} />
+      <Input state={inputValue} setState={setInputValue} type="currency" />
     </div>
   );
 };

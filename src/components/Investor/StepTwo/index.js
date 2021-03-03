@@ -4,6 +4,8 @@ import { useSelector, useDispatch } from 'react-redux';
 
 import { changeFormState } from '../../../redux/dream_machine/actions';
 
+import Input from '../../CustomComponents/Input';
+
 const StepTwo = () => {
   const dispatch = useDispatch();
   const store = useSelector(({ dreamMachine }) => dreamMachine);
@@ -65,19 +67,10 @@ const StepTwo = () => {
 
       <br />
       <span>Outro: </span>
-      <input
+      <Input
+        state={otherInvestmentsInput}
+        setState={setOtherInvestmentsInput}
         type="text"
-        value={otherInvestmentsInput}
-        onChange={event => {
-          setOtherInvestmentsInput(event?.target?.value);
-          if (inputValue.includes(event.target.value)) {
-            return setInputValue(
-              inputValue.filter(value => value !== event.target.value),
-            );
-          }
-
-          return setInputValue([...inputValue, event.target.value]);
-        }}
       />
     </div>
   );
