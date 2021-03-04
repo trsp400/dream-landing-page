@@ -25,15 +25,17 @@ export const CardBody = styled(Card.Body)`
   background-color: ${props => props?.backgroundcolor};
   border-radius: 10px;
   margin: 0 auto;
-
+  padding: 10px;
   margin-bottom: 5px;
 
   flex: none;
 
+  box-shadow: 1px 1px 5px 1px ${props => props?.backgroundcolor};
+
   ${props =>
     props.checked &&
     css`
-      box-shadow: 2px -10px 25px 2px ${props.backgroundcolor};
+      box-shadow: 1px 1px 10px 1px #000;
     `}
 
   svg {
@@ -48,6 +50,7 @@ export const CardFooter = styled(Card.Footer)`
   background-color: ${props => props.theme.desktopTheme.colors.primary.blue};
   color: ${props => props.color};
 
+  font-size: ${props => props.labelSize}px;
   text-align: center;
-  width: 150px;
+  width: 140px;
 `;

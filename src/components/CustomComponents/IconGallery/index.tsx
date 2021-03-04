@@ -10,7 +10,8 @@ interface CardProps extends BootstrapCardProps {
   labelColor?: string;
   backgroundColor?: string;
   onClick(event, value): void;
-  arrayValues?: Array<String>;
+  arrayValues?: string | String[];
+  labelSize?: number;
 }
 
 interface GalleryProps {
@@ -73,17 +74,20 @@ export const Card: React.FC<CardProps> = ({
   backgroundColor,
   onClick,
   arrayValues,
+  labelSize,
 }) => {
   return (
     <CardContainer onClick={event => (onClick ? onClick(event, label) : null)}>
       <CardBody
-        checked={arrayValues.includes(label)}
+        checked={arrayValues && arrayValues.includes(label)}
         iconsize={iconSize}
         backgroundcolor={backgroundColor}
       >
         {icon}
       </CardBody>
-      <CardFooter color={labelColor}>{label}</CardFooter>
+      <CardFooter labelSize={labelSize || 15} color={labelColor}>
+        {label}
+      </CardFooter>
     </CardContainer>
   );
 };

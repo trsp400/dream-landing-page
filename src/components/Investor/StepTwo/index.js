@@ -4,14 +4,29 @@ import { useSelector, useDispatch } from 'react-redux';
 
 import { changeFormState } from '../../../redux/dream_machine/actions';
 
+import SvgImg from '../../../assets/icons/checkbox-icon.svg';
+
 import Input from '../../CustomComponents/Input';
+import CheckBox from '../../CustomComponents/CheckBox';
+import MessageFeedback from '../../CustomComponents/MessageFeedback';
+
+import Button from '../../CustomComponents/Button';
+
+import { Footer, Container } from './styles';
+
+const options = [
+  'Banco Comercial',
+  'Banco Financeiro',
+  'Corretora',
+  'Exchange',
+];
 
 const StepTwo = () => {
   const dispatch = useDispatch();
   const store = useSelector(({ dreamMachine }) => dreamMachine);
   const { currentStep, desiredInvestmentsPlacement, otherInvestments } = store;
 
-  const [inputValue, setInputValue] = useState(desiredInvestmentsPlacement);
+  const [arrayValues, setArrayValues] = useState(desiredInvestmentsPlacement);
   const [otherInvestmentsInput, setOtherInvestmentsInput] = useState(
     otherInvestments,
   );
@@ -22,25 +37,30 @@ const StepTwo = () => {
         changeFormState({
           ...store,
           currentStep: step,
-          desiredInvestmentsPlacement: inputValue,
+          desiredInvestmentsPlacement: arrayValues,
           otherInvestments: otherInvestmentsInput,
         }),
       );
     },
-    [dispatch, store, inputValue, otherInvestmentsInput],
+    [dispatch, store, arrayValues, otherInvestmentsInput],
   );
 
   return (
-    <div>
-      <h2>Step: {currentStep}</h2>
+    <Container>
+      <MessageFeedback strong="lighter">Incrível! ?</MessageFeedback>
+
+      <MessageFeedback strong="bold">
+        Onde você deseja investir?
+      </MessageFeedback>
+      {/* <h2>Step: {currentStep}</h2>
       <button type="button" onClick={() => handleDispatch(1)}>
         step anterior
       </button>
       <br />
       <button type="button" onClick={() => handleDispatch(3)}>
         Proximo step
-      </button>
-      <br />
+      </button> */}
+      {/* <br />
       <span>onde voce deseja investir: </span>
 
       <select
@@ -63,7 +83,14 @@ const StepTwo = () => {
         <option value="Investimento Externo">Investimento Externo</option>
         <option value="Fundos de Investimentos">Fundos de Investimentos</option>
         <option value="Criptomoedas">Criptomoedas</option>
-      </select>
+      </select> */}
+
+      <CheckBox
+        options={options}
+        state={arrayValues}
+        setState={setArrayValues}
+        image={<SvgImg />}
+      />
 
       <br />
       <span>Outro: </span>
@@ -72,7 +99,33 @@ const StepTwo = () => {
         setState={setOtherInvestmentsInput}
         type="text"
       />
-    </div>
+
+      <Footer>
+        <Button
+          ripple
+          variant="beblue"
+          glow
+          onClick={() => handleDispatch(1)}
+          style={{
+            width: '30%',
+          }}
+        >
+          {'<='}
+        </Button>
+
+        <Button
+          ripple
+          variant="beorange"
+          glow
+          onClick={() => handleDispatch(3)}
+          style={{
+            width: '30%',
+          }}
+        >
+          OK
+        </Button>
+      </Footer>
+    </Container>
   );
 };
 

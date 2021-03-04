@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { Container as BootstrapContainer } from 'react-bootstrap';
 
 import { Modal, Header, Body } from '../../components/CustomComponents/Modal';
-import RippleButton from '../../components/Button';
+import RippleButton from '../../components/CustomComponents/Button';
 
 export const Container = styled(BootstrapContainer)``;
 

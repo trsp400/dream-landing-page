@@ -1,5 +1,11 @@
 /* eslint-disable no-shadow */
-import styled, { keyframes, css, FlattenInterpolation, ThemeProps, ThemeProviderProps } from 'styled-components';
+import styled, {
+  keyframes,
+  css,
+  FlattenInterpolation,
+  ThemeProps,
+  ThemeProviderProps,
+} from 'styled-components';
 import { darken } from 'polished';
 
 import media from 'styled-media-query';
@@ -13,16 +19,15 @@ interface RippleButtonProps {
 }
 
 interface TypesPropsTheme {
-  beblue: FlattenInterpolation<ThemeProps<any>>,
-  beorange: FlattenInterpolation<ThemeProps<any>>,
-  bewhite: FlattenInterpolation<ThemeProps<any>>,
-  begreen: FlattenInterpolation<ThemeProps<any>>,
+  beblue: FlattenInterpolation<ThemeProps<any>>;
+  beorange: FlattenInterpolation<ThemeProps<any>>;
+  bewhite: FlattenInterpolation<ThemeProps<any>>;
+  begreen: FlattenInterpolation<ThemeProps<any>>;
 }
-
 
 const themeType: TypesPropsTheme = {
   beblue: css`
-    background: #1A4A73;
+    background: #1a4a73;
     color: #fff;
 
     ${(props: RippleButtonProps) =>
@@ -32,8 +37,7 @@ const themeType: TypesPropsTheme = {
       `}
 
     &:hover {
-      background: ${(props: RippleButtonProps) =>
-        darken(0.1, "#1a4a73")};
+      background: ${(props: RippleButtonProps) => darken(0.1, '#1a4a73')};
     }
 
     span.drop {
@@ -42,7 +46,7 @@ const themeType: TypesPropsTheme = {
   `,
 
   beorange: css`
-    background: #EA5E45;
+    background: #ea5e45;
     color: #fff;
     ${(props: RippleButtonProps) =>
       props?.glow &&
@@ -52,9 +56,7 @@ const themeType: TypesPropsTheme = {
 
     &:hover {
       background: ${(props: RippleButtonProps) =>
-        props.disabled
-          ? "#ea5e45"
-          : darken(0.1, "#ea5e45")};
+        props.disabled ? '#ea5e45' : darken(0.1, '#ea5e45')};
       cursor: ${(props: RippleButtonProps) =>
         props.disabled ? 'not-allowed' : 'pointer'};
     }
@@ -81,7 +83,7 @@ const themeType: TypesPropsTheme = {
   `,
 
   begreen: css`
-    background: #3ABE00;
+    background: #3abe00;
     color: #fff;
 
     ${(props: RippleButtonProps) =>
@@ -92,9 +94,7 @@ const themeType: TypesPropsTheme = {
 
     &:hover {
       background: ${(props: RippleButtonProps) =>
-        props.disabled
-          ? "#3ABE00"
-          : darken(0.1, "#3ABE00")};
+        props.disabled ? '#3ABE00' : darken(0.1, '#3ABE00')};
       cursor: ${(props: RippleButtonProps) =>
         props.disabled ? 'not-allowed' : 'pointer'};
     }
@@ -148,28 +148,9 @@ export const CustomButton = styled.button<RippleButtonProps>`
   transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
     border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 
-  /* padding: 15px 30px;
-
-  ${media.greaterThan('1577px')`
-    height: 2.8rem;
-  `}
-
-  ${media.lessThan('1577px')`
-    height: 2.5rem;
-  `}
-
-  ${media.lessThan('480px')`
-    height: 40px;
-    width: 260px;
-  `}
-
-  ${media.lessThan('248px')`
-    padding: 12px 0 12px;
-  `} */
-
   font: normal normal bold 20px/26px Trasandina;
 
-  ${(props: RippleButtonProps) => themeType[props?.variant || 'beorange']}
+  ${(props: RippleButtonProps) => themeType[props.variant || 'beorange']}
 
   span.drop {
     position: absolute;
