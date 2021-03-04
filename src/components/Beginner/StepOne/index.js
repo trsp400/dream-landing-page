@@ -88,7 +88,7 @@ const StepOne = () => {
     <Container>
       <MessageFeedback strong="lighter">Olá, vamos começar ?</MessageFeedback>
 
-      <MessageFeedback strong="normal">
+      <MessageFeedback strong="bold">
         Qual o seu objetivo de vida?
       </MessageFeedback>
 
@@ -97,36 +97,36 @@ const StepOne = () => {
           <Card
             backgroundColor="#EA5E45"
             icon={<WeddingIcon />}
-            iconSize={40}
-            label="Banco Comercial"
+            iconSize={50}
+            label="CASAMENTO"
             labelColor="#FFF"
-            labelSize={12}
+            labelSize={10}
           />
           <Card
             backgroundColor="#EA5E45"
             icon={<HouseIcon />}
-            iconSize={40}
-            label="Banco de Investimentos"
+            iconSize={50}
+            label="CASA"
             labelColor="#FFF"
-            labelSize={12}
+            labelSize={10}
           />
         </Row>
         <Row>
           <Card
             backgroundColor="#EA5E45"
             icon={<BeachIcon />}
-            iconSize={40}
-            label="Corretora"
+            iconSize={50}
+            label="APOSENTADORIA"
             labelColor="#FFF"
-            labelSize={12}
+            labelSize={10}
           />
           <Card
             backgroundColor="#EA5E45"
             icon={<WorldIcon />}
-            iconSize={40}
-            label="Assets"
+            iconSize={50}
+            label="INTERCÂMBIO"
             labelColor="#FFF"
-            labelSize={12}
+            labelSize={10}
           />
         </Row>
 
@@ -134,18 +134,18 @@ const StepOne = () => {
           <Card
             backgroundColor="#EA5E45"
             icon={<CarIcon />}
-            iconSize={40}
-            label="Exchange"
+            iconSize={50}
+            label="AUTOMÓVEL"
             labelColor="#FFF"
-            labelSize={12}
+            labelSize={10}
           />
           <Card
             backgroundColor="#EA5E45"
             icon={<MoneyIcon />}
-            iconSize={40}
-            label="Exchange"
+            iconSize={50}
+            label="INDEPENDÊNCIA FINANCEIRA"
             labelColor="#FFF"
-            labelSize={12}
+            labelSize={10}
           />
         </Row>
       </IconGallery>

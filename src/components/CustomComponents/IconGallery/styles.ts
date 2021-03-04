@@ -25,10 +25,12 @@ export const CardBody = styled(Card.Body)`
   background-color: ${props => props?.backgroundcolor};
   border-radius: 10px;
   margin: 0 auto;
-
+  padding: 10px;
   margin-bottom: 5px;
 
   flex: none;
+
+  box-shadow: 1px 1px 5px 1px ${props => props?.backgroundcolor};
 
   ${props =>
     props.checked &&

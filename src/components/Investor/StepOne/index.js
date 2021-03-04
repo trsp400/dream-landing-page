@@ -90,46 +90,46 @@ const StepOne = () => {
           <Card
             backgroundColor="#EA5E45"
             icon={<SavingBankIcon />}
-            iconSize={40}
-            label="Banco Comercial"
+            iconSize={50}
+            label="BANCO COMERCIAL"
             labelColor="#FFF"
-            labelSize={12}
+            labelSize={10}
           />
           <Card
             backgroundColor="#EA5E45"
             icon={<SavingBagIcon />}
-            iconSize={40}
-            label="Banco de Investimentos"
+            iconSize={50}
+            label="BANCO DE INVESTIMENTOS"
             labelColor="#FFF"
-            labelSize={12}
+            labelSize={10}
           />
         </Row>
         <Row>
           <Card
             backgroundColor="#EA5E45"
             icon={<BrokerIcon />}
-            iconSize={40}
+            iconSize={50}
             label="Corretora"
             labelColor="#FFF"
-            labelSize={12}
+            labelSize={10}
           />
           <Card
             backgroundColor="#EA5E45"
             icon={<AssetsIcon />}
-            iconSize={40}
-            label="Assets"
+            iconSize={50}
+            label="ASSETS"
             labelColor="#FFF"
-            labelSize={12}
+            labelSize={10}
           />
         </Row>
         <Row>
           <Card
             backgroundColor="#EA5E45"
             icon={<ExchangeIcon />}
-            iconSize={40}
-            label="Exchange"
+            iconSize={50}
+            label="EXCHANGE"
             labelColor="#FFF"
-            labelSize={12}
+            labelSize={10}
           />
         </Row>
       </IconGallery>
