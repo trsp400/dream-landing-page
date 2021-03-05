@@ -11,14 +11,14 @@ import {
   ListDecisionCheckStyled,
 } from './styles';
 
-interface ListDecicionProps {
+interface ListDecisionProps {
   children?: JSX.Element[] | JSX.Element | any;
   className?: string;
   options: string[];
   state: number;
   setState(value: any): void;
 }
-const ListDecicion: FC<ListDecicionProps> = ({ options, state, setState }) => {
+const ListDecision: FC<ListDecisionProps> = ({ options, state, setState }) => {
   return (
     <Container>
       <Row className="justify-content-md-center">
@@ -27,7 +27,13 @@ const ListDecicion: FC<ListDecicionProps> = ({ options, state, setState }) => {
             state === index ? colors.primary.blue : colors.primary.orange;
 
           return (
-            <Col md={4} xl={4} className="d-flex justify-content-center">
+            <Col
+              md={4}
+              xl={4}
+              className="d-flex justify-content-center"
+              onClick={() => setState(index)}
+              style={{ cursor: 'pointer' }}
+            >
               <ListDecisionContainerStyled>
                 <Row style={{ width: '100%' }}>
                   <Col
@@ -59,4 +65,4 @@ const ListDecicion: FC<ListDecicionProps> = ({ options, state, setState }) => {
   );
 };
 
-export default ListDecicion;
+export default ListDecision;

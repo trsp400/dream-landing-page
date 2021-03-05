@@ -18,6 +18,7 @@ export const ListDecisionContainerStyled = styled.div`
   width: 100%;
   margin: 20px 0;
   padding: 10px;
+  position: relative;
   background-color: ${({ theme }) => theme.mobileTheme.colors.primary.orange};
   border-radius: 10px;
   box-shadow: 0px 0px 6px 1px
@@ -30,6 +31,7 @@ export const ListDecisionCheckStyled = styled.div`
   width: 14px;
 
   margin: 0 auto;
+  position: absolute;
 
   background-color: var(--color);
   box-shadow: inset 0px 0px 4px rgba(0, 0, 0, 0.25),

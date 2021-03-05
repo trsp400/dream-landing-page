@@ -3,6 +3,9 @@ import { useSelector, useDispatch } from 'react-redux';
 
 import { changeFormState } from '../../../redux/dream_machine/actions';
 import Input from '../../CustomComponents/Input';
+import Button from '../../CustomComponents/Button';
+import MessageFeedback from '../../CustomComponents/MessageFeedback';
+import { Container, Body, Footer } from './styles';
 
 const StepThree = () => {
   const dispatch = useDispatch();
@@ -25,19 +28,39 @@ const StepThree = () => {
   );
 
   return (
-    <div>
-      <h2>Step: {currentStep}</h2>
-      <button type="button" onClick={() => handleDispatch(2)}>
-        step anterior
-      </button>
-      <br />
-      <button type="button" onClick={() => handleDispatch(4)}>
-        Proximo step
-      </button>
-      <br />
-      <span>De quanto voce precisa?</span>
-      <Input state={inputValue} setState={setInputValue} type="currency" />
-    </div>
+    <Container>
+      <Body>
+        <MessageFeedback strong="lighter">OK!</MessageFeedback>
+        <MessageFeedback strong="bold">De quanto você precisa?</MessageFeedback>
+
+        <Input state={inputValue} setState={setInputValue} type="currency" />
+      </Body>
+      <Footer>
+        <Button
+          ripple
+          variant="beblue"
+          glow
+          onClick={() => handleDispatch(2)}
+          style={{
+            width: '30%',
+          }}
+        >
+          {'<='}
+        </Button>
+
+        <Button
+          ripple
+          variant="beorange"
+          glow
+          onClick={() => handleDispatch(4)}
+          style={{
+            width: '30%',
+          }}
+        >
+          OK
+        </Button>
+      </Footer>
+    </Container>
   );
 };
 

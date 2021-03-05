@@ -1,10 +1,3 @@
-/**
- * SEO component that queries for data with
- *  Gatsby's useStaticQuery React hook
- *
- * See: https://www.gatsbyjs.com/docs/use-static-query/
- */
-
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Helmet } from 'react-helmet';
@@ -18,6 +11,7 @@ function SEO({ description, lang, meta, title }) {
           siteMetadata {
             title
             description
+            siteUrl
             author
           }
         }
@@ -33,8 +27,7 @@ function SEO({ description, lang, meta, title }) {
       htmlAttributes={{
         lang,
       }}
-      title={title}
-      titleTemplate={defaultTitle ? `%s | ${defaultTitle}` : null}
+      title={title || defaultTitle}
       meta={[
         {
           name: `description`,
@@ -42,7 +35,7 @@ function SEO({ description, lang, meta, title }) {
         },
         {
           property: `og:title`,
-          content: title,
+          content: title || defaultTitle,
         },
         {
           property: `og:description`,
@@ -51,6 +44,14 @@ function SEO({ description, lang, meta, title }) {
         {
           property: `og:type`,
           content: `website`,
+        },
+        {
+          property: `og:url`,
+          content: site.siteMetadata?.siteUrl,
+        },
+        {
+          property: 'og:image',
+          content: '../assets/icons/bec_logo_rgb.svg',
         },
         {
           name: `twitter:card`,
@@ -62,7 +63,12 @@ function SEO({ description, lang, meta, title }) {
         },
         {
           name: `twitter:title`,
-          content: title,
+          content: title || defaultTitle,
+        },
+        {
+          name: 'keywords',
+          content:
+            'BeCapital, be capital, becapital, Becapital, investimentos, máquina dos sonhos, maquina dos sonhos, dinheiro, independência financeira',
         },
         {
           name: `twitter:description`,
@@ -74,7 +80,7 @@ function SEO({ description, lang, meta, title }) {
 }
 
 SEO.defaultProps = {
-  lang: `en`,
+  lang: `pt-BR`,
   meta: [],
   description: ``,
 };

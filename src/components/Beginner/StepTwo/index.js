@@ -1,10 +1,12 @@
-/* eslint-disable import/no-unresolved */
-/* eslint-disable import/extensions */
 import React, { useCallback, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { changeFormState } from '../../../redux/dream_machine/actions';
 import Input from '../../CustomComponents/Input';
+import Button from '../../CustomComponents/Button';
+import MessageFeedback from '../../CustomComponents/MessageFeedback';
+
+import { Container, Body, Footer } from './styles';
 
 const StepTwo = () => {
   const dispatch = useDispatch();
@@ -33,21 +35,42 @@ const StepTwo = () => {
   );
 
   return (
-    <div>
-      <h2>Step: {currentStep}</h2>
-      <button type="button" onClick={() => handleDispatch(1)}>
-        {' '}
-        step anterior
-      </button>
-      <br />
-      <button type="button" onClick={() => handleDispatch(3)}>
-        {' '}
-        Proximo step
-      </button>
-      <br />
-      <span>Qual o valor do seu objetivo?</span>
-      <Input state={inputValue} setState={setInputValue} type="currency" />
-    </div>
+    <Container>
+      <Body>
+        <MessageFeedback strong="lighter">
+          Que legal! Com a Máquina dos Sonhos da BeCapital você consegue [...]
+          com tranquilidade!
+        </MessageFeedback>
+        <MessageFeedback strong="bold">De quanto você precisa?</MessageFeedback>
+
+        <Input state={inputValue} setState={setInputValue} type="currency" />
+      </Body>
+      <Footer>
+        <Button
+          ripple
+          variant="beblue"
+          glow
+          onClick={() => handleDispatch(1)}
+          style={{
+            width: '30%',
+          }}
+        >
+          {'<='}
+        </Button>
+
+        <Button
+          ripple
+          variant="beorange"
+          glow
+          onClick={() => handleDispatch(3)}
+          style={{
+            width: '30%',
+          }}
+        >
+          OK
+        </Button>
+      </Footer>
+    </Container>
   );
 };
 

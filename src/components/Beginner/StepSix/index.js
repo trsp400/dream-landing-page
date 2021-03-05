@@ -1,8 +1,12 @@
 /* eslint-disable jsx-a11y/no-onchange */
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
-import ListDecicion from '../../CustomComponents/ListDecision';
+import ListDecision from '../../CustomComponents/ListDecision';
+import Button from '../../CustomComponents/Button';
+import MessageFeedback from '../../CustomComponents/MessageFeedback';
+import Loading from '../../CustomComponents/Loading';
+import { Container, Body, Footer } from './styles';
 
 import { changeFormState } from '../../../redux/dream_machine/actions';
 
@@ -12,12 +16,23 @@ const options = [
   'Aumentar para R$ 1.200 no fim do seu ciclo de investimento, sem eventuais riscos.',
 ];
 
-const StepSix = () => {
+const RenderLoading = ({ setLoading, dispatch }) => {
+  useEffect(() => {
+    setTimeout(() => {
+      setLoading(false);
+      dispatch(7);
+    }, 3000);
+  });
+  return <Loading />;
+};
+
+const StepSeven = () => {
   const dispatch = useDispatch();
   const store = useSelector(({ dreamMachine }) => dreamMachine);
   const { currentStep, decision } = store;
+  const [loading, setLoading] = useState(false);
 
-  const [inputValue, setInputvalue] = useState(options.indexOf(decision));
+  const [inputValue, setInputvalue] = useState(decision);
 
   const handleDispatch = useCallback(
     step => {
@@ -25,37 +40,59 @@ const StepSix = () => {
         changeFormState({
           ...store,
           currentStep: step,
-          decision: options[inputValue],
+          decision: inputValue,
         }),
       );
     },
     [dispatch, store, inputValue],
   );
 
-  return (
-    <div>
-      <h2>Step: {currentStep}</h2>
-      <button type="button" onClick={() => handleDispatch(5)}>
-        {' '}
-        step anterior
-      </button>
-      <br />
-      <button type="button" onClick={() => handleDispatch(7)}>
-        {' '}
-        Proximo step
-      </button>
+  return loading ? (
+    <RenderLoading setLoading={setLoading} dispatch={handleDispatch} />
+  ) : (
+    <Container>
+      <Body>
+        <MessageFeedback strong="lighter">
+          Vamos entender melhor os seus objetivos...
+        </MessageFeedback>
+        <MessageFeedback strong="bold">
+          Se você investisse R$1.000, qual seria a sua preferência?
+        </MessageFeedback>
 
-      <br />
-      <br />
-      <span>Se você investisse R$ 1.000, qual seria a sua preferência?</span>
+        <ListDecision
+          options={options}
+          state={inputValue}
+          setState={setInputvalue}
+        />
+      </Body>
 
-      <ListDecicion
-        options={options}
-        state={inputValue}
-        setState={setInputvalue}
-      />
-    </div>
+      <Footer>
+        <Button
+          ripple
+          variant="beblue"
+          glow
+          onClick={() => handleDispatch(5)}
+          style={{
+            width: '30%',
+          }}
+        >
+          {'<='}
+        </Button>
+
+        <Button
+          ripple
+          variant="beorange"
+          glow
+          onClick={() => setLoading(true)}
+          style={{
+            width: '30%',
+          }}
+        >
+          OK
+        </Button>
+      </Footer>
+    </Container>
   );
 };
 
-export default StepSix;
+export default StepSeven;

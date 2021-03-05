@@ -3,13 +3,22 @@ import { useSelector, useDispatch } from 'react-redux';
 
 import { changeFormState } from '../../../redux/dream_machine/actions';
 import Input from '../../CustomComponents/Input';
+import Button from '../../CustomComponents/Button';
+import MessageFeedback from '../../CustomComponents/MessageFeedback';
+import { Container, ButtonContainer, Body, Footer } from './styles';
+
+const listPeriods = {
+  anos: 'Anos',
+  meses: 'Meses',
+};
 
 const StepFour = () => {
   const dispatch = useDispatch();
   const store = useSelector(({ dreamMachine }) => dreamMachine);
-  const { currentStep, period } = store;
+  const { currentStep, period, yearOrMonth } = store;
 
   const [inputValue, setInputValue] = useState(period);
+  const [inputYearOrMonth, setInputYearOrMonth] = useState(yearOrMonth);
 
   const handleDispatch = useCallback(
     step => {
@@ -18,6 +27,7 @@ const StepFour = () => {
           ...store,
           currentStep: step,
           period: inputValue,
+          yearOrMonth: inputYearOrMonth,
         }),
       );
     },
@@ -25,25 +35,62 @@ const StepFour = () => {
   );
 
   return (
-    <div>
-      <h2>Step: {currentStep}</h2>
-      <button type="button" onClick={() => handleDispatch(3)}>
-        step anterior
-      </button>
-      <br />
-      <button type="button" onClick={() => handleDispatch(5)}>
-        Proximo step
-      </button>
+    <Container>
+      <Body>
+        <MessageFeedback strong="lighter">OK!</MessageFeedback>
+        <MessageFeedback strong="bold">Em quanto tempo?</MessageFeedback>
 
-      <br />
-      <span>em quanto tempo?</span>
-      <Input
-        state={inputValue}
-        setState={setInputValue}
-        type="number"
-        placeholder="Tempo"
-      />
-    </div>
+        <ButtonContainer>
+          {Object.keys(listPeriods).map(item => (
+            <Button
+              variant={item === inputYearOrMonth ? 'beorange' : 'beblue'}
+              ripple
+              glow
+              style={{
+                width: '30%',
+              }}
+              onClick={() => setInputYearOrMonth(item)}
+              key={item}
+            >
+              {listPeriods[item]}
+            </Button>
+          ))}
+        </ButtonContainer>
+
+        <Input
+          state={inputValue}
+          setState={setInputValue}
+          type="number"
+          placeholder="Tempo"
+        />
+      </Body>
+
+      <Footer>
+        <Button
+          ripple
+          variant="beblue"
+          glow
+          onClick={() => handleDispatch(3)}
+          style={{
+            width: '30%',
+          }}
+        >
+          {'<='}
+        </Button>
+
+        <Button
+          ripple
+          variant="beorange"
+          glow
+          onClick={() => handleDispatch(5)}
+          style={{
+            width: '30%',
+          }}
+        >
+          OK
+        </Button>
+      </Footer>
+    </Container>
   );
 };
 

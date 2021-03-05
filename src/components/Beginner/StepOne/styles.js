@@ -44,3 +44,10 @@ export const BodyStyled = styled(Body)`
 export const Footer = styled.div`
   display: flex;
 `;
+
+export const ButtonContainer = styled.div`
+  display: flex;
+  flex: 1;
+  flex-direction: row;
+  justify-content: space-between;
+`;

@@ -47,44 +47,11 @@ const StepTwo = () => {
 
   return (
     <Container>
-      <MessageFeedback strong="lighter">Incrível! ?</MessageFeedback>
+      <MessageFeedback strong="lighter">Incrível!</MessageFeedback>
 
       <MessageFeedback strong="bold">
         Onde você deseja investir?
       </MessageFeedback>
-      {/* <h2>Step: {currentStep}</h2>
-      <button type="button" onClick={() => handleDispatch(1)}>
-        step anterior
-      </button>
-      <br />
-      <button type="button" onClick={() => handleDispatch(3)}>
-        Proximo step
-      </button> */}
-      {/* <br />
-      <span>onde voce deseja investir: </span>
-
-      <select
-        name="decision"
-        value={inputValue}
-        onChange={event => {
-          if (inputValue.includes(event.target.value)) {
-            return setInputValue(
-              inputValue.filter(value => value !== event.target.value),
-            );
-          }
-
-          return setInputValue([...inputValue, event.target.value]);
-        }}
-        multiple
-      >
-        <option value="Renda Fixa">Renda Fixa</option>
-        <option value="COE">COE</option>
-        <option value="Renda Variável">Renda Variável</option>
-        <option value="Investimento Externo">Investimento Externo</option>
-        <option value="Fundos de Investimentos">Fundos de Investimentos</option>
-        <option value="Criptomoedas">Criptomoedas</option>
-      </select> */}
-
       <CheckBox
         options={options}
         state={arrayValues}
