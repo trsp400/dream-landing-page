@@ -11,9 +11,7 @@ function* sendDreamMachineResultToAPIRequest(action) {
   try {
     const dataObject = {
       ...action?.payload?.result,
-      ...action?.payload?.stepOne,
-      ...action?.payload?.stepTwo,
-      ...action?.payload?.steThree,
+      ...action?.payload,
     };
 
     yield call(api.post, 'website/dream_machine_result', dataObject);

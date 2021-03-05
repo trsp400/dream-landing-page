@@ -3,34 +3,30 @@ import { useSelector, useDispatch } from 'react-redux';
 
 import { navigate } from 'gatsby';
 
-import { changeFormState } from '../../../redux/dream_machine/actions';
+import {
+  changeFormState,
+  sendDreamMachineResultToAPIRequest,
+} from '../../../redux/dream_machine/actions';
 import Input from '../../CustomComponents/Input';
 
 const StepEight = () => {
   const dispatch = useDispatch();
   const store = useSelector(({ dreamMachine }) => dreamMachine);
-  const {
-    currentStep,
-    result: { email },
-  } = store;
+  const { currentStep, result } = store;
 
-  const [inputValue, setInputValue] = useState(email);
+  const [inputValue, setInputValue] = useState(result?.email);
 
-  const handleDispatch = useCallback(
-    step => {
-      dispatch(
-        changeFormState({
-          ...store,
-          currentStep: step,
-          result: {
-            ...store?.result,
-            email: inputValue,
-          },
-        }),
-      );
-    },
-    [dispatch, store],
-  );
+  const handleDispatch = useCallback(() => {
+    dispatch(
+      sendDreamMachineResultToAPIRequest({
+        ...store,
+        currentStep: null,
+        result: {
+          ...result,
+        },
+      }),
+    );
+  }, [dispatch, store]);
 
   return (
     <div>
@@ -49,12 +45,7 @@ const StepEight = () => {
       <button
         type="button"
         onClick={() => {
-          dispatch(
-            changeFormState({
-              ...store,
-              currentStep: null,
-            }),
-          );
+          handleDispatch();
           navigate('/resultado');
         }}
       >
