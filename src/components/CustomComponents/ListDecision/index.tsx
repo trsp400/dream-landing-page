@@ -27,7 +27,13 @@ const ListDecision: FC<ListDecisionProps> = ({ options, state, setState }) => {
             state === index ? colors.primary.blue : colors.primary.orange;
 
           return (
-            <Col md={4} xl={4} className="d-flex justify-content-center">
+            <Col
+              md={4}
+              xl={4}
+              className="d-flex justify-content-center"
+              onClick={() => setState(index)}
+              style={{ cursor: 'pointer' }}
+            >
               <ListDecisionContainerStyled>
                 <Row style={{ width: '100%' }}>
                   <Col
