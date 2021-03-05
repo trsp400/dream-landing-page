@@ -18,7 +18,6 @@ const LineChart: React.FC<LineChartProps> = ({
   lineColor,
   theme,
 }) => {
-  console.log(data);
   const fakeData = [
     { x: 2021, y: '7199.66' },
     { x: 2022, y: '19849.63' },

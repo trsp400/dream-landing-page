@@ -2,7 +2,6 @@ const error = require('./lib/error');
 const utils = require('./lib/common');
 
 export default (periods, payment, present, future, type, guess) => {
-  console.log(periods, payment, present, future, type, guess);
   guess = guess === undefined ? 0.01 : guess;
   future = future === undefined ? 0 : future;
   type = type === undefined ? 0 : type;

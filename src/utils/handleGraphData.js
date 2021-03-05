@@ -58,7 +58,6 @@ export default function handleGraphData(
   objectiveCost,
   months,
 ) {
-  console.log(currentValue, monthlyPayment, monthlyRate, objectiveCost, months);
   let firstTime = true;
   const arr = [];
   let monthlyYield;
@@ -67,21 +66,45 @@ export default function handleGraphData(
 
   const period = months || 1;
 
-  for (let i = 0; i <= period; i++) {
-    const j = i - 1;
-    if (firstTime) {
-      monthlyYield = currentValue * (monthlyRate / 100) + monthlyPayment;
-      arr.push(currentValue + monthlyYield);
-      firstTime = false;
-    } else {
-      monthlyYield = arr[j] * (monthlyRate / 100) + monthlyPayment;
-      arr.push(arr[j] + monthlyYield);
-      yieldBetweenPeriod.push(parseFloat(arr[j].toFixed(2)));
+  const achievedObjectiveCost =
+    monthlyPayment * period + currentValue > objectiveCost;
+
+  if (!achievedObjectiveCost) {
+    for (let i = 0; i <= period; i++) {
+      const j = i - 1;
+      if (firstTime) {
+        monthlyYield = currentValue * (monthlyRate / 100) + monthlyPayment;
+        arr.push(currentValue + monthlyYield);
+        firstTime = false;
+      } else {
+        monthlyYield = arr[j] * (monthlyRate / 100) + monthlyPayment;
+        arr.push(arr[j] + monthlyYield);
+        yieldBetweenPeriod.push(parseFloat(arr[j].toFixed(2)));
+      }
     }
+
+    const desiredValue = objectiveCost || 0;
+
+    yieldBetweenPeriod.push(parseFloat(desiredValue.toFixed(2)));
+    return callback(yieldBetweenPeriod, returnAveragePerYear);
+  } else {
+    const newPeriod = (objectiveCost - currentValue) / monthlyPayment;
+    const newPeriodParsed =
+      newPeriod > parseInt(newPeriod.toFixed(0))
+        ? parseInt(newPeriod.toFixed(0)) + 1
+        : parseInt(newPeriod.toFixed(0));
+
+    for (let i = 0; i <= newPeriodParsed; i++) {
+      const j = i - 1;
+      if (firstTime) {
+        arr.push(currentValue + monthlyPayment);
+        firstTime = false;
+      } else {
+        arr.push(arr[j] + monthlyPayment);
+        yieldBetweenPeriod.push(parseFloat(arr[j].toFixed(2)));
+      }
+    }
+
+    return callback(yieldBetweenPeriod, returnAveragePerYear);
   }
-
-  const desiredValue = objectiveCost || 0;
-
-  yieldBetweenPeriod.push(parseFloat(desiredValue.toFixed(2)));
-  return callback(yieldBetweenPeriod, returnAveragePerYear);
 }

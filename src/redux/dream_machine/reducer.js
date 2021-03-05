@@ -10,6 +10,8 @@ const INITIAL_STATE = {
     riskProfile: '',
     email: '',
     yearlyAverageArray: [],
+    achievedObjectiveCost: false,
+    newPeriod: 0,
   },
   path: '',
   objective: null,

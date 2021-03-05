@@ -1,13 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
+import _ from 'lodash';
 
 import Layout from '../../Layout';
 import LineChart from '../../components/CustomComponents/LineChart';
-
-import handleGraphData, {
-  generateChunks,
-  generateGraphDataObject,
-} from '../../utils/handleGraphData';
 
 import {
   Container,
@@ -20,43 +16,38 @@ import {
 
 const Result = () => {
   const [showModal, setShowModal] = useState(false);
-  const [data, setData] = useState([]);
   const { isMobileView } = useSelector(({ settings }) => settings);
   const store = useSelector(({ dreamMachine }) => dreamMachine);
 
-  const { result } = store;
+  const {
+    result: { yearlyAverageArray, achievedObjectiveCost, newPeriod },
+    objectiveCost,
+  } = store;
 
-  const storeObj = {
-    currentInvestments: 'R$ 3.000,55',
-    monthlyPayment: 'R$ 2.000,79',
-    objectiveCost: 'R$ 40.000,87',
-    period: '10',
-    yearOrMonth: 'anos',
-  };
+  const arrayNewPeriod = [];
+  let newPeriodChunk;
 
-  const period = parseInt(storeObj.period);
-  const monthlyRate = parseFloat(result.monthlyRate);
-  const yearOrMonth = storeObj.yearOrMonth;
-  const monthlyPayment = parseFloat(
-    storeObj.monthlyPayment
-      .replace('R$ ', '')
-      .replace('.', '')
-      .replace(',', '.'),
-  );
-  const currentInvestments = parseFloat(
-    storeObj.currentInvestments
-      .replace('R$ ', '')
-      .replace('.', '')
-      .replace(',', '.'),
-  );
-  const objectiveCost = parseFloat(
-    storeObj.objectiveCost
-      .replace('R$ ', '')
-      .replace('.', '')
-      .replace(',', '.'),
-  );
+  if (newPeriod) {
+    for (let i = 1; i < newPeriod; i++) {
+      arrayNewPeriod.push(i);
+    }
 
-  const months = yearOrMonth === 'anos' ? period * 12 : period;
+    arrayNewPeriod.push(newPeriod);
+
+    newPeriodChunk = _.chunk(arrayNewPeriod, 12);
+  }
+
+  const countYearNewPeriod = (() => {
+    const isYear = newPeriodChunk.filter(n => n.length === 12);
+
+    return isYear.length;
+  })();
+
+  const countMonthNewPeriod =
+    newPeriodChunk[newPeriodChunk.length - 1].length < 12 &&
+    newPeriodChunk[newPeriodChunk.length - 1].length;
+
+  const [data] = useState(yearlyAverageArray);
 
   const fakeData = [
     {
@@ -64,54 +55,6 @@ const Result = () => {
       y: objectiveCost || 1000,
     },
   ];
-
-  console.log(
-    currentInvestments,
-    monthlyPayment,
-    monthlyRate,
-    objectiveCost,
-    months,
-    period,
-  );
-
-  useEffect(() => {
-    console.log(
-      currentInvestments,
-      monthlyPayment,
-      monthlyRate,
-      objectiveCost,
-      months,
-      period,
-    );
-    const averageArray = handleGraphData(
-      generateChunks,
-      currentInvestments || 0,
-      monthlyPayment || 0,
-      monthlyRate || 0,
-      objectiveCost || 0,
-      months || 0,
-    );
-
-    const initialAverageArray = generateGraphDataObject(
-      averageArray,
-      months,
-      objectiveCost,
-    );
-
-    const finalAverageArray = initialAverageArray.map(item => ({
-      x: item.x,
-      y: item.y,
-    }));
-
-    if (finalAverageArray.length > 1) {
-      finalAverageArray.pop();
-    }
-
-    // console.log(averageArray, initialAverageArray, finalAverageArray);
-
-    if (finalAverageArray.length < 1) setData(fakeData);
-    else setData(finalAverageArray);
-  }, []);
 
   return (
     <Layout>
@@ -122,7 +65,7 @@ const Result = () => {
           isMobileView={isMobileView}
           theme="white"
           height={400}
-          data={data}
+          data={data.length ? data : fakeData}
         />
 
         <ButtonContainer>
@@ -130,6 +73,23 @@ const Result = () => {
             Veja sua descrição
           </Button>
         </ButtonContainer>
+
+        {achievedObjectiveCost && (
+          <p style={{ color: '#fff', marginTop: '2rem' }}>
+            Você conseguiria alcaçar este valor em{' '}
+            {countYearNewPeriod
+              ? countYearNewPeriod > 1
+                ? `${countYearNewPeriod} anos`
+                : `${countYearNewPeriod} ano`
+              : ''}{' '}
+            {countYearNewPeriod && countMonthNewPeriod ? `e` : ''}{' '}
+            {countMonthNewPeriod
+              ? countMonthNewPeriod > 1
+                ? `${countMonthNewPeriod} meses`
+                : `${countMonthNewPeriod} mês`
+              : ''}{' '}
+          </p>
+        )}
 
         <ModalStyled
           state={showModal}

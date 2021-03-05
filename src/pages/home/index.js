@@ -57,7 +57,7 @@ const Home = () => {
       <Header>
         <Logo />
       </Header>
-          <MaquinaDosSonhos />
+      <MaquinaDosSonhos />
       <MainHome>
         <PresentationSection>
           <h1>Quer descobrir o investimento ideal para você?</h1>
@@ -68,17 +68,17 @@ const Home = () => {
         </PresentationSection>
 
         <ButtonSection>
-        <Button
-          ripple
-          variant="beorange"
-          glow
-          onClick={() => onChangeStep(7, 'beginner')}
-        >
-          COMEÇAR AGORA
-        </Button>
-        <Button variant="beblue" onClick={() => onChangeStep(1, 'investor')}>
-          JÁ SEI ONDE INVESTIR
-        </Button>
+          <Button
+            ripple
+            variant="beorange"
+            glow
+            onClick={() => onChangeStep(7, 'beginner')}
+          >
+            COMEÇAR AGORA
+          </Button>
+          <Button variant="beblue" onClick={() => onChangeStep(1, 'investor')}>
+            JÁ SEI ONDE INVESTIR
+          </Button>
         </ButtonSection>
       </MainHome>
     </Container>

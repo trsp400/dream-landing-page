@@ -16,11 +16,25 @@ export const createResultObject = (
 ) => {
   const isYearOrMonthPeriod = yearOrMonth === 'anos' ? period * 12 : period;
 
-  const guessValue = isYearOrMonthPeriod > 120 ? 0.1 : 0.2;
+  const achievedObjectiveCost =
+    monthlySupport * isYearOrMonthPeriod + currentInvestments >= objectiveCost;
+
+  const newPeriod = (objectiveCost - currentInvestments) / monthlySupport;
+  const newPeriodParsed =
+    newPeriod > parseInt(newPeriod.toFixed(0))
+      ? parseInt(newPeriod.toFixed(0)) + 1
+      : parseInt(newPeriod.toFixed(0));
+
+  const trulyPeriod = achievedObjectiveCost
+    ? newPeriodParsed
+    : isYearOrMonthPeriod;
+
+  // const guessValue = isYearOrMonthPeriod > 120 ? 0.02 : 0.01;
+  const guessValue = 0.02;
 
   const monthlyRate = parseFloat(
     calculateRate(
-      isYearOrMonthPeriod,
+      trulyPeriod,
       -monthlySupport || -0,
       -currentInvestments || -0,
       objectiveCost || 0,
@@ -39,12 +53,12 @@ export const createResultObject = (
     monthlySupport || 0,
     monthlyRate || 0,
     objectiveCost || 0,
-    isYearOrMonthPeriod || 0,
+    trulyPeriod || 0,
   );
 
   const yearlyAverageArray = generateGraphDataObject(
     averageArray,
-    isYearOrMonthPeriod,
+    trulyPeriod,
     objectiveCost,
   );
 
@@ -54,5 +68,7 @@ export const createResultObject = (
     // riskProfile,
     email,
     yearlyAverageArray,
+    achievedObjectiveCost,
+    newPeriod: newPeriodParsed,
   };
 };

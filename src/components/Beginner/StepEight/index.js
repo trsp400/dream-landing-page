@@ -19,11 +19,11 @@ const StepEight = () => {
   const [validEmail, setValidEmail] = useState(true);
 
   const storeObj = {
-    currentInvestments: 'R$ 3.000,55',
-    monthlySupport: 'R$ 2.000,79',
-    objectiveCost: 'R$ 40.000,87',
+    objectiveCost: 'R$ 1.000.000,00',
     period: '10',
     yearOrMonth: 'anos',
+    currentInvestments: 'R$ 300.000,00',
+    monthlySupport: 'R$ 1.500,00',
   };
 
   const period = parseInt(storeObj.period);
@@ -31,19 +31,19 @@ const StepEight = () => {
   const monthlySupport = parseFloat(
     storeObj.monthlySupport
       .replace('R$ ', '')
-      .replace('.', '')
+      .replace(/\./g, '')
       .replace(',', '.'),
   );
   const currentInvestments = parseFloat(
     storeObj.currentInvestments
       .replace('R$ ', '')
-      .replace('.', '')
+      .replace(/\./g, '')
       .replace(',', '.'),
   );
   const objectiveCost = parseFloat(
     storeObj.objectiveCost
       .replace('R$ ', '')
-      .replace('.', '')
+      .replace(/\./g, '')
       .replace(',', '.'),
   );
 
@@ -63,8 +63,6 @@ const StepEight = () => {
   );
 
   const handleDispatchResultState = () => {
-    console.log(period, monthlySupport, currentInvestments, objectiveCost);
-
     const resultObject = createResultObject(
       period,
       yearOrMonth,
@@ -82,14 +80,6 @@ const StepEight = () => {
         },
       }),
     );
-    // dispatch(
-    //   sendDreamMachineResultToAPIRequest({
-    //     ...store,
-    //     result: {
-    //       ...resultObject,
-    //     },
-    //   }),
-    // );
   };
 
   function emailIsValid(dataEmail) {
@@ -100,10 +90,7 @@ const StepEight = () => {
     const isValidEmail = emailIsValid(email);
 
     if (isValidEmail) {
-      // setRequestLoading(true);
       handleDispatchResultState();
-
-      // handleDispatch(null);
       setValidEmail(true);
       navigate('/resultado');
       return true;
@@ -119,10 +106,6 @@ const StepEight = () => {
     setInputValue(value);
     return valid;
   };
-
-  useEffect(() => {
-    console.log(store);
-  }, [store]);
 
   return (
     <div>
