@@ -1,20 +1,20 @@
-import React, { useCallback, useState } from 'react';
+import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { navigate } from 'gatsby';
 
-import {
-  changeFormState,
-  sendDreamMachineResultToAPIRequest,
-} from '../../../redux/dream_machine/actions';
+import { sendDreamMachineResultToAPIRequest } from '../../../redux/dream_machine/actions';
 import Input from '../../CustomComponents/Input';
 import { createResultObject } from '../../../utils/handleResultObject';
+import Loading from '../../CustomComponents/Loading';
+import Button from '../../CustomComponents/Button';
+import MessageFeedback from '../../CustomComponents/MessageFeedback';
+import { Container, Body, Footer } from './styles';
 
 const StepEight = () => {
   const dispatch = useDispatch();
   const store = useSelector(({ dreamMachine }) => dreamMachine);
   const {
-    currentStep,
     investmentsPlacement,
     desiredInvestmentsPlacement,
     result: { email },
@@ -41,21 +41,6 @@ const StepEight = () => {
     store.objectiveCost.replace('R$ ', '').replace(/\./g, '').replace(',', '.'),
   );
 
-  const handleDispatch = useCallback(
-    step => {
-      dispatch(
-        changeFormState({
-          ...store,
-          currentStep: step,
-          result: {
-            email: inputValue,
-          },
-        }),
-      );
-    },
-    [dispatch, store, inputValue],
-  );
-
   const handleDispatchResultState = () => {
     const resultObject = createResultObject(
       period,
@@ -69,13 +54,13 @@ const StepEight = () => {
     );
 
     dispatch(
-      // sendDreamMachineResultToAPIRequest({
-      changeFormState({
+      sendDreamMachineResultToAPIRequest({
         ...store,
         result: {
           ...resultObject,
         },
       }),
+      navigate('/resultado'),
     );
   };
 
@@ -105,30 +90,47 @@ const StepEight = () => {
   };
 
   return (
-    <div>
-      <h2>Step: {currentStep}</h2>
-      <button type="button" onClick={() => handleDispatch(7)}>
-        {' '}
-        step anterior
-      </button>
-      <br />
+    <Container>
+      <Body>
+        <MessageFeedback strong="normal">
+          Para receber o <strong>resultado completo</strong> do seu perfil,
+          deixei aqui o seu e-mail:
+        </MessageFeedback>
 
-      <br />
-      <br />
-      <span>Email: </span>
-      <Input
-        state={inputValue}
-        setState={checkValidEmailOnInputChange}
-        type="text"
-      />
-      {!validEmail ? (
-        <span className="email-error body__four">Digite um e-mail válido!</span>
-      ) : null}
+        <Input
+          state={inputValue}
+          setState={checkValidEmailOnInputChange}
+          type="text"
+          placeholder="E-mail"
+        />
 
-      <button type="button" onClick={() => handleOnClink(inputValue)}>
-        OK
-      </button>
-    </div>
+        {!validEmail ? (
+          <span style={{ color: 'red' }}>Digite um e-mail válido!</span>
+        ) : null}
+
+        <span style={{ color: 'white' }}>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam molestie
+          ac lorem et vulputate. Praesent dapibus, augue ut euismod mattis,
+          massa leo tempus erat, et aliquam nulla turpis sed nisi. Praesent id
+          ipsum est. Integer posuere interdum eros. Nam nec aliquet ipsum, at
+          sodales elit. Phasellus eget enim mi.
+        </span>
+      </Body>
+
+      <Footer>
+        <Button
+          ripple
+          variant="beorange"
+          glow
+          onClick={() => handleOnClink(inputValue)}
+          style={{
+            width: '100%',
+          }}
+        >
+          OK
+        </Button>
+      </Footer>
+    </Container>
   );
 };
 

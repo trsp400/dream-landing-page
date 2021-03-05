@@ -54,8 +54,6 @@ const Result = () => {
       return newPeriodChunk[newPeriodChunk.length - 1].length;
   })();
 
-  const [data] = useState(yearlyAverageArray);
-
   const fakeData = [
     {
       x: 2020,
@@ -66,57 +64,59 @@ const Result = () => {
   return (
     <Layout>
       <SEO title="Resultado | Máquina dos Sonhos" />
-      <Container>
-        <h1>Resultado</h1>
-        <LineChart
-          slider
-          isMobileView={isMobileView}
-          theme="white"
-          height={400}
-          data={data.length ? data : fakeData}
-        />
+      {yearlyAverageArray.length ? (
+        <Container>
+          <h1>Resultado</h1>
+          <LineChart
+            slider
+            isMobileView={isMobileView}
+            theme="white"
+            height={400}
+            data={yearlyAverageArray.length ? yearlyAverageArray : fakeData}
+          />
 
-        <ButtonContainer>
-          <Button onClick={() => setShowModal(true)} ripple glow>
-            Veja sua descrição
-          </Button>
-        </ButtonContainer>
+          <ButtonContainer>
+            <Button onClick={() => setShowModal(true)} ripple glow>
+              Veja sua descrição
+            </Button>
+          </ButtonContainer>
 
-        {achievedObjectiveCost && (
-          <p style={{ color: '#fff', marginTop: '2rem' }}>
-            Você conseguiria alcaçar este valor em{' '}
-            {countYearNewPeriod
-              ? countYearNewPeriod > 1
-                ? `${countYearNewPeriod} anos`
-                : `${countYearNewPeriod} ano`
-              : ''}{' '}
-            {countYearNewPeriod && countMonthNewPeriod ? `e` : ''}{' '}
-            {countMonthNewPeriod
-              ? countMonthNewPeriod > 1
-                ? `${countMonthNewPeriod} meses`
-                : `${countMonthNewPeriod} mês`
-              : ''}{' '}
-          </p>
-        )}
+          {achievedObjectiveCost && (
+            <p style={{ color: '#fff', marginTop: '2rem' }}>
+              Você conseguiria alcaçar este valor em{' '}
+              {countYearNewPeriod
+                ? countYearNewPeriod > 1
+                  ? `${countYearNewPeriod} anos`
+                  : `${countYearNewPeriod} ano`
+                : ''}{' '}
+              {countYearNewPeriod && countMonthNewPeriod ? `e` : ''}{' '}
+              {countMonthNewPeriod
+                ? countMonthNewPeriod > 1
+                  ? `${countMonthNewPeriod} meses`
+                  : `${countMonthNewPeriod} mês`
+                : ''}{' '}
+            </p>
+          )}
 
-        <ModalStyled
-          state={showModal}
-          setState={setShowModal}
-          contentClassName="custom-content"
-          dialogClassName="custom-dialog"
-        >
-          <HeaderStyled closeButton />
-          <BodyStyled>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-            aliquip ex ea commodo consequat. Duis aute irure dolor in
-            reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-            pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-            culpa qui officia deserunt mollit anim id est laborum.
-          </BodyStyled>
-        </ModalStyled>
-      </Container>
+          <ModalStyled
+            state={showModal}
+            setState={setShowModal}
+            contentClassName="custom-content"
+            dialogClassName="custom-dialog"
+          >
+            <HeaderStyled closeButton />
+            <BodyStyled>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+              enim ad minim veniam, quis nostrud exercitation ullamco laboris
+              nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
+              reprehenderit in voluptate velit esse cillum dolore eu fugiat
+              nulla pariatur. Excepteur sint occaecat cupidatat non proident,
+              sunt in culpa qui officia deserunt mollit anim id est laborum.
+            </BodyStyled>
+          </ModalStyled>
+        </Container>
+      ) : null}
     </Layout>
   );
 };

@@ -11,14 +11,14 @@ import {
   ListDecisionCheckStyled,
 } from './styles';
 
-interface ListDecicionProps {
+interface ListDecisionProps {
   children?: JSX.Element[] | JSX.Element | any;
   className?: string;
   options: string[];
   state: number;
   setState(value: any): void;
 }
-const ListDecicion: FC<ListDecicionProps> = ({ options, state, setState }) => {
+const ListDecision: FC<ListDecisionProps> = ({ options, state, setState }) => {
   return (
     <Container>
       <Row className="justify-content-md-center">
@@ -59,4 +59,4 @@ const ListDecicion: FC<ListDecicionProps> = ({ options, state, setState }) => {
   );
 };
 
-export default ListDecicion;
+export default ListDecision;

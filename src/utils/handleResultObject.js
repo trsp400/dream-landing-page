@@ -66,6 +66,16 @@ export const createResultObject = (
     trulyPeriod,
     objectiveCost,
   );
+  console.log(
+    averageArray,
+    trulyPeriod,
+    yearlyAverageArray,
+    period,
+    yearOrMonth,
+    monthlySupport,
+    currentInvestments,
+    objectiveCost,
+  );
 
   return {
     monthlyRate,

@@ -1,51 +1,87 @@
-/* eslint-disable import/extensions */
-/* eslint-disable import/no-unresolved */
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
-import { changeFormState } from '../../../redux/dream_machine/actions';
+import { navigate } from 'gatsby';
 
+import {
+  changeFormState,
+  sendDreamMachineResultToAPIRequest,
+} from '../../../redux/dream_machine/actions';
+
+import Input from '../../CustomComponents/Input';
 import Loading from '../../CustomComponents/Loading';
+import Button from '../../CustomComponents/Button';
+import MessageFeedback from '../../CustomComponents/MessageFeedback';
+import { Container, Body, Footer } from './styles';
 
-const StepSeven = () => {
+const StepEight = () => {
   const dispatch = useDispatch();
-  const [loading, setLoading] = useState(false);
   const store = useSelector(({ dreamMachine }) => dreamMachine);
-  const { currentStep } = store;
+  const {
+    result: { email },
+    resultSuccess,
+  } = store;
 
-  const handleDispatch = useCallback(
-    step => {
-      dispatch(
-        changeFormState({
-          ...store,
-          currentStep: step,
-        }),
-      );
-    },
-    [dispatch, store],
-  );
+  const [inputValue, setInputValue] = useState(email);
+  const [error, setError] = useState(false);
 
-  useEffect(() => {
-    setTimeout(() => setLoading(true), 3000);
-  });
+  const [requestLoading, setRequestLoading] = useState(false);
 
-  useEffect(() => {
-    if (loading) handleDispatch(8);
-  }, [loading]);
+  const handleSubmit = useCallback(() => {
+    setRequestLoading(true);
+    dispatch(
+      sendDreamMachineResultToAPIRequest({
+        ...store,
+        currentStep: null,
+        result: {
+          ...store?.result,
+          email: inputValue,
+        },
+      }),
+      navigate('/resultado'),
+    );
+  }, [dispatch, store]);
 
   return (
-    <div>
-      <h2>Step: {currentStep}</h2>
-      <button type="button" onClick={() => handleDispatch(6)}>
-        {' '}
-        step anterior
-      </button>
-      <br />
-      {!loading && <Loading />}
-      <br />
-      <br />
-    </div>
+    <Container>
+      <Body>
+        <MessageFeedback strong="normal">
+          Para receber o <strong>resultado completo</strong> do seu perfil,
+          deixei aqui o seu e-mail:
+        </MessageFeedback>
+
+        <Input
+          state={inputValue}
+          setState={setInputValue}
+          type="text"
+          placeholder="E-mail"
+        />
+
+        <span style={{ color: 'white' }}>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam molestie
+          ac lorem et vulputate. Praesent dapibus, augue ut euismod mattis,
+          massa leo tempus erat, et aliquam nulla turpis sed nisi. Praesent id
+          ipsum est. Integer posuere interdum eros. Nam nec aliquet ipsum, at
+          sodales elit. Phasellus eget enim mi.
+        </span>
+      </Body>
+
+      <Footer>
+        <Button
+          ripple
+          variant="beorange"
+          glow
+          onClick={() => handleSubmit()}
+          style={{
+            width: '100%',
+          }}
+        >
+          OK
+        </Button>
+      </Footer>
+      {requestLoading && <Loading size="5" />}
+    </Container>
   );
 };
 
-export default StepSeven;
+export default StepEight;

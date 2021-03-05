@@ -59,18 +59,12 @@ export default (state = INITIAL_STATE, action) => {
     case actions.SEND_DREAM_MACHINE_RESULT_TO_API_SUCCESS:
       return {
         ...state,
-        ...state.stepOne,
-        ...state.stepTwo,
-        ...state.stepThree,
         result: action?.payload?.result,
         resultSuccess: true,
       };
     case actions.SEND_DREAM_MACHINE_RESULT_TO_API_FAILURE:
       return {
         ...state,
-        ...state.stepOne,
-        ...state.stepTwo,
-        ...state.stepThree,
         result: {},
         resultSuccess: false,
       };

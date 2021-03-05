@@ -49,7 +49,7 @@ const StepTwo = () => {
 
   return (
     <Container>
-      <MessageFeedback strong="lighter">Incrível! ?</MessageFeedback>
+      <MessageFeedback strong="lighter">Incrível!</MessageFeedback>
 
       <MessageFeedback strong="bold">
         Onde você deseja investir?
