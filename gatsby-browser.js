@@ -6,7 +6,7 @@ import { Provider } from 'react-redux';
 import { mobileTheme, desktopTheme } from './src/themes/default';
 import GlobalStyle from './src/themes/globalStyles';
 
-import SEO from './src/components/seo';
+import SEO from './src/components/CustomComponents/Seo';
 
 import store from './src/redux/store';
 
