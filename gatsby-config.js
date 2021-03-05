@@ -6,7 +6,7 @@ module.exports = {
   siteMetadata: {
     title: `Máquina dos Sonhos BeCapital`,
     author: `@BeCapitaltech`,
-    description: `Máquina dos Sonhos BeCapital`,
+    description: `Quer descobrir o investimento ideal para você?`,
     siteUrl: `https://maquinadossonhos.be.capital/`,
   },
   plugins: [
