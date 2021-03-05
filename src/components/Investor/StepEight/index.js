@@ -3,7 +3,10 @@ import { useSelector, useDispatch } from 'react-redux';
 
 import { navigate } from 'gatsby';
 
-import { changeFormState } from '../../../redux/dream_machine/actions';
+import {
+  changeFormState,
+  sendDreamMachineResultToAPIRequest,
+} from '../../../redux/dream_machine/actions';
 import Input from '../../CustomComponents/Input';
 import { createResultObject } from '../../../utils/handleResultObject';
 
@@ -66,6 +69,7 @@ const StepEight = () => {
     );
 
     dispatch(
+      // sendDreamMachineResultToAPIRequest({
       changeFormState({
         ...store,
         result: {
