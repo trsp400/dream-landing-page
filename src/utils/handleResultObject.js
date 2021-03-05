@@ -13,6 +13,8 @@ export const createResultObject = (
   currentInvestments,
   objectiveCost,
   email,
+  investmentsPlacement,
+  desiredInvestmentsPlacement,
 ) => {
   const isYearOrMonthPeriod = yearOrMonth === 'anos' ? period * 12 : period;
 
@@ -45,7 +47,10 @@ export const createResultObject = (
 
   const annualRate = parseFloat(monthlyRate * 12).toFixed(2);
 
-  // const riskProfile = checkRiskProfile(stepThree?.currentAssets);
+  const riskProfile = checkRiskProfile({
+    investmentsPlacement,
+    desiredInvestmentsPlacement,
+  });
 
   const averageArray = handleGraphData(
     generateChunks,
@@ -65,7 +70,7 @@ export const createResultObject = (
   return {
     monthlyRate,
     annualRate,
-    // riskProfile,
+    riskProfile,
     email,
     yearlyAverageArray,
     achievedObjectiveCost,

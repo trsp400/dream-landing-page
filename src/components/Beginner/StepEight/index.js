@@ -1,4 +1,4 @@
-import React, { useCallback, useState, useEffect } from 'react';
+import React, { useCallback, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { navigate } from 'gatsby';
@@ -12,39 +12,30 @@ const StepEight = () => {
   const store = useSelector(({ dreamMachine }) => dreamMachine);
   const {
     currentStep,
+    investmentsPlacement,
+    desiredInvestmentsPlacement,
     result: { email },
   } = store;
 
   const [inputValue, setInputValue] = useState(email);
   const [validEmail, setValidEmail] = useState(true);
 
-  const storeObj = {
-    objectiveCost: 'R$ 1.000.000,00',
-    period: '10',
-    yearOrMonth: 'anos',
-    currentInvestments: 'R$ 300.000,00',
-    monthlySupport: 'R$ 1.500,00',
-  };
-
-  const period = parseInt(storeObj.period);
-  const yearOrMonth = storeObj.yearOrMonth;
+  const period = parseInt(store.period);
+  const yearOrMonth = store.yearOrMonth;
   const monthlySupport = parseFloat(
-    storeObj.monthlySupport
+    store.monthlySupport
       .replace('R$ ', '')
       .replace(/\./g, '')
       .replace(',', '.'),
   );
   const currentInvestments = parseFloat(
-    storeObj.currentInvestments
+    store.currentInvestments
       .replace('R$ ', '')
       .replace(/\./g, '')
       .replace(',', '.'),
   );
   const objectiveCost = parseFloat(
-    storeObj.objectiveCost
-      .replace('R$ ', '')
-      .replace(/\./g, '')
-      .replace(',', '.'),
+    store.objectiveCost.replace('R$ ', '').replace(/\./g, '').replace(',', '.'),
   );
 
   const handleDispatch = useCallback(
@@ -70,6 +61,8 @@ const StepEight = () => {
       currentInvestments,
       objectiveCost,
       inputValue,
+      investmentsPlacement,
+      desiredInvestmentsPlacement,
     );
 
     dispatch(

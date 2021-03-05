@@ -58,7 +58,7 @@ interface CheckBoxProps extends InputHTMLAttributes<HTMLInputElement> {
 }
 
 const CheckBox: FC<CheckBoxProps> = ({ options, state, setState, image }) => {
-  const chunkedData = _.chunk(options, 2);
+  const chunkedData = _.chunk(options, options.length / 2);
 
   const handleInputChange = (e, option) => {
     if (state.includes(option)) {

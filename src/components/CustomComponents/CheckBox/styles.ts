@@ -2,8 +2,8 @@ import styled from 'styled-components';
 
 export const CheckStyled = styled.input`
   opacity: 0;
-  width: 1.5em;
-  height: 1.5em;
+  width: 2em;
+  height: 2em;
 
   &:focus + .checkbox__control {
     box-shadow: 0 0 0 0.01em #fff,
@@ -23,7 +23,7 @@ export const LabelStyled = styled.label`
   display: grid;
   grid-template-columns: min-content auto;
   grid-gap: 0.5em;
-  font: normal normal 400 1.3rem Trasandina;
+  font: normal normal 400 15px Trasandina;
   margin-bottom: 3rem;
 `;
 
@@ -39,8 +39,8 @@ export const SpanInputStyled = styled.span`
 
   input {
     opacity: 0;
-    width: 1em;
-    height: 1em;
+    width: 2em;
+    height: 2em;
 
     &:focus + .checkbox__control {
       box-shadow: 0 0 0 0.05em
@@ -61,8 +61,8 @@ export const SpanInputStyled = styled.span`
 
 export const SpanControlStyled = styled.span`
   display: inline-grid;
-  width: 1.5em;
-  height: 1.5em;
+  width: 2em;
+  height: 2em;
   border-radius: 0.25em;
   border: 0.15em solid ${({ theme }) => theme.mobileTheme.colors.primary.orange};
   color: ${({ theme }) => theme.mobileTheme.colors.primary.orange};
@@ -78,7 +78,7 @@ export const FormStyled = styled.div`
   display: grid;
   place-content: center;
   grid-gap: 2rem;
-  padding: 2rem;
+  padding: 2rem 0;
   line-height: 1;
 `;
 

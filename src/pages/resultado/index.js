@@ -25,7 +25,7 @@ const Result = () => {
   } = store;
 
   const arrayNewPeriod = [];
-  let newPeriodChunk;
+  let newPeriodChunk = [];
 
   if (newPeriod) {
     for (let i = 1; i < newPeriod; i++) {
@@ -38,14 +38,19 @@ const Result = () => {
   }
 
   const countYearNewPeriod = (() => {
+    if (!newPeriodChunk.length) return 0;
+
     const isYear = newPeriodChunk.filter(n => n.length === 12);
 
     return isYear.length;
   })();
 
-  const countMonthNewPeriod =
-    newPeriodChunk[newPeriodChunk.length - 1].length < 12 &&
-    newPeriodChunk[newPeriodChunk.length - 1].length;
+  const countMonthNewPeriod = (() => {
+    if (!newPeriodChunk.length) return 0;
+
+    if (newPeriodChunk[newPeriodChunk.length - 1].length < 12)
+      return newPeriodChunk[newPeriodChunk.length - 1].length;
+  })();
 
   const [data] = useState(yearlyAverageArray);
 
