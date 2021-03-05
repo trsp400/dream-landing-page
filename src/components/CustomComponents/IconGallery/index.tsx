@@ -3,20 +3,20 @@ import { CardProps as BootstrapCardProps } from 'react-bootstrap';
 
 import { Container, CardContainer, CardBody, CardFooter, Grid } from './styles';
 
-interface CardProps extends BootstrapCardProps {
+export interface CardProps extends BootstrapCardProps {
   icon?: JSX.Element[] | JSX.Element;
   iconSize: number;
   label?: string;
   labelColor?: string;
   backgroundColor?: string;
-  onClick(event, value): void;
+  onClick?: (event, value: string) => void;
   arrayValues?: string | String[];
   labelSize?: number;
 }
 
 interface GalleryProps {
   arrayValues?: Array<String>;
-  onClick(): void;
+  onClick?: () => void;
   children: any;
 }
 
@@ -48,9 +48,9 @@ const IconGallery: React.FC<GalleryProps> = ({
   );
 };
 
-export const Row: React.FC<RowProps> = ({ children, ...props }) => {
+export const Row: React.FC<RowProps> = ({ children ,...props }) => {
   return (
-    <Grid>
+    <Grid lonelySon={!children?.length}>
       {children.length > 1
         ? children.map(child => {
             return React.cloneElement(child, {
@@ -77,7 +77,7 @@ export const Card: React.FC<CardProps> = ({
   labelSize,
 }) => {
   return (
-    <CardContainer onClick={event => (onClick ? onClick(event, label) : null)}>
+    <CardContainer onClick={event => (onClick ? onClick(event, label) : null)} >
       <CardBody
         checked={arrayValues && arrayValues.includes(label)}
         iconsize={iconSize}
@@ -86,7 +86,8 @@ export const Card: React.FC<CardProps> = ({
         {icon}
       </CardBody>
       <CardFooter labelSize={labelSize || 15} color={labelColor}>
-        {label}
+          {label}
+
       </CardFooter>
     </CardContainer>
   );

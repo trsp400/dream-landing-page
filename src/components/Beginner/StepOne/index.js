@@ -2,6 +2,7 @@ import React, { useCallback, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { changeFormState } from '../../../redux/dream_machine/actions';
+import  Modal from '../../CustomComponents/Modal'
 
 import WeddingIcon from '../../../assets/icons/wedding-cake.svg';
 import HouseIcon from '../../../assets/icons/house-chimney-2.svg';
@@ -15,7 +16,10 @@ import Button from '../../CustomComponents/Button';
 import MessageFeedback from '../../CustomComponents/MessageFeedback';
 import IconGallery, { Card, Row } from '../../CustomComponents/IconGallery';
 
-import { Container, Footer } from './styles';
+import { Container,Footer, BodyStyled, HeaderStyled, ModalStyled } from './styles';
+
+const labelSize = 8.8;
+const iconSize = 40
 
 const StepOne = () => {
   const dispatch = useDispatch();
@@ -28,6 +32,7 @@ const StepOne = () => {
   const [arrayValues, setArrayValues] = useState(
     typeof objective === 'object' ? objective : null,
   );
+  const [isVisibleModal, setIsVisibleModal] = useState(false)
 
   const handleDispatch = useCallback(
     step => {
@@ -43,6 +48,8 @@ const StepOne = () => {
   );
 
   const handleCardClick = (event, label) => {
+    console.log(label)
+
     setArrayValues([label]);
     return setInputValue('');
   };
@@ -85,10 +92,13 @@ const StepOne = () => {
   }, [dispatch, store]);
 
   return (
+    <>
     <Container>
-      <MessageFeedback strong="lighter">Olá, vamos começar ?</MessageFeedback>
+      <MessageFeedback strong="lighter" animationSpeed={3000}>
+        Olá, vamos começar ?
+      </MessageFeedback>
 
-      <MessageFeedback strong="bold">
+      <MessageFeedback strong="bold" animationSpeed={3000} animationDelay={1000}>
         Qual o seu objetivo de vida?
       </MessageFeedback>
 
@@ -97,36 +107,36 @@ const StepOne = () => {
           <Card
             backgroundColor="#EA5E45"
             icon={<WeddingIcon />}
-            iconSize={50}
+            iconSize={iconSize}
             label="CASAMENTO"
             labelColor="#FFF"
-            labelSize={10}
+            labelSize={labelSize}
           />
           <Card
             backgroundColor="#EA5E45"
             icon={<HouseIcon />}
-            iconSize={50}
+            iconSize={iconSize}
             label="CASA"
             labelColor="#FFF"
-            labelSize={10}
+            labelSize={labelSize}
           />
         </Row>
         <Row>
           <Card
             backgroundColor="#EA5E45"
             icon={<BeachIcon />}
-            iconSize={50}
+            iconSize={iconSize}
             label="APOSENTADORIA"
             labelColor="#FFF"
-            labelSize={10}
+            labelSize={labelSize}
           />
           <Card
             backgroundColor="#EA5E45"
             icon={<WorldIcon />}
-            iconSize={50}
+            iconSize={iconSize}
             label="INTERCÂMBIO"
             labelColor="#FFF"
-            labelSize={10}
+            labelSize={labelSize}
           />
         </Row>
 
@@ -134,18 +144,18 @@ const StepOne = () => {
           <Card
             backgroundColor="#EA5E45"
             icon={<CarIcon />}
-            iconSize={50}
+            iconSize={iconSize}
             label="AUTOMÓVEL"
             labelColor="#FFF"
-            labelSize={10}
+            labelSize={labelSize}
           />
           <Card
             backgroundColor="#EA5E45"
             icon={<MoneyIcon />}
-            iconSize={50}
+            iconSize={iconSize}
             label="INDEPENDÊNCIA FINANCEIRA"
             labelColor="#FFF"
-            labelSize={10}
+            labelSize={labelSize}
           />
         </Row>
       </IconGallery>
@@ -178,6 +188,12 @@ const StepOne = () => {
         <Input state={inputValue} setState={handleInputChange} type="text" />
       </Footer>
     </Container>
+    <Modal
+      state={isVisibleModal}
+    >
+      <span>OLÁ</span>
+    </Modal>
+    </>
   );
 };
 

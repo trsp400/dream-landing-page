@@ -3,33 +3,57 @@ import {
   Card,
   Container as BootstrapContainer,
   Row as BootstrapRow,
+  CardProps as BootstrapCardProps
 } from 'react-bootstrap';
 
+
+interface PropsCardBody {
+  checked: boolean,
+  iconsize: number,
+  backgroundcolor: string
+}
+
+interface PropsGrid {
+  lonelySon?: boolean;
+}
+
 export const Container = styled(BootstrapContainer)`
-  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
 `;
 
-export const Grid = styled(BootstrapRow)``;
+export const Grid = styled.section<PropsGrid>`
+  display: flex;
+  position: relative;
+
+  justify-content: ${props => props.lonelySon ? "center" : "space-between"} ;
+`;
 
 export const CardContainer = styled(Card)`
-  border: 0;
-  outline: 0;
-  margin: 0 auto;
-  padding: 2px;
-  background-color: ${props => props.theme.desktopTheme.colors.primary.blue};
+  display: flex;
+  flex-direction: column;
+  width: 38%;
+  height: 27%;
+
+  position: relative;
+
+
+  align-items: center;
+  border: none;
+
+
+  background-color: transparent;
   cursor: pointer;
+
 `;
 
-export const CardBody = styled(Card.Body)`
+export const CardBody = styled(Card.Body)<PropsCardBody>`
+  position: relative;
   border: none;
   background-color: ${props => props?.backgroundcolor};
-  border-radius: 10px;
-  margin: 0 auto;
-  padding: 10px;
-  margin-bottom: 5px;
-
-  flex: none;
-
+  border-radius: 6px;
+  margin: 0;
+  padding: 15px;
   box-shadow: 1px 1px 5px 1px ${props => props?.backgroundcolor};
 
   ${props =>
@@ -41,16 +65,16 @@ export const CardBody = styled(Card.Body)`
   svg {
     height: ${props => props.iconsize}px;
     fill: #fff;
-    margin: 0;
   }
 `;
 
 export const CardFooter = styled(Card.Footer)`
+  display: flex;
+  /* height: 100%; */
   border: none;
-  background-color: ${props => props.theme.desktopTheme.colors.primary.blue};
   color: ${props => props.color};
-
+  font-weight: 600;
   font-size: ${props => props.labelSize}px;
   text-align: center;
-  width: 140px;
+
 `;

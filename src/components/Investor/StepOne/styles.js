@@ -9,6 +9,8 @@ export const Container = styled(BootstrapContainer)`
   flex: 1;
 `;
 
+
+
 export const Footer = styled.div`
   display: flex;
   flex-direction: row;

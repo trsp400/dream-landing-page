@@ -17,6 +17,9 @@ import IconGallery, { Card, Row } from '../../CustomComponents/IconGallery';
 
 import { Container, Footer } from './styles';
 
+const labelSize = 8.8;
+const iconSize = 40
+
 const StepOne = () => {
   const dispatch = useDispatch();
   const store = useSelector(({ dreamMachine }) => dreamMachine);
@@ -90,46 +93,46 @@ const StepOne = () => {
           <Card
             backgroundColor="#EA5E45"
             icon={<SavingBankIcon />}
-            iconSize={50}
+            iconSize={iconSize}
             label="BANCO COMERCIAL"
             labelColor="#FFF"
-            labelSize={10}
+            labelSize={labelSize}
           />
           <Card
             backgroundColor="#EA5E45"
             icon={<SavingBagIcon />}
-            iconSize={50}
+            iconSize={iconSize}
             label="BANCO DE INVESTIMENTOS"
             labelColor="#FFF"
-            labelSize={10}
+            labelSize={labelSize}
           />
         </Row>
         <Row>
           <Card
             backgroundColor="#EA5E45"
             icon={<BrokerIcon />}
-            iconSize={50}
+            iconSize={iconSize}
             label="Corretora"
             labelColor="#FFF"
-            labelSize={10}
+            labelSize={labelSize}
           />
           <Card
             backgroundColor="#EA5E45"
             icon={<AssetsIcon />}
-            iconSize={50}
+            iconSize={iconSize}
             label="ASSETS"
             labelColor="#FFF"
-            labelSize={10}
+            labelSize={labelSize}
           />
         </Row>
         <Row>
           <Card
             backgroundColor="#EA5E45"
             icon={<ExchangeIcon />}
-            iconSize={50}
+            iconSize={iconSize}
             label="EXCHANGE"
             labelColor="#FFF"
-            labelSize={10}
+            labelSize={labelSize}
           />
         </Row>
       </IconGallery>

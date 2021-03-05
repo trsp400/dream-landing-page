@@ -1,4 +1,5 @@
 import React, { FC } from 'react';
+import { ModalProps as ModalPropsForCustom } from 'react-bootstrap';
 
 import {
   ModalStyled,
@@ -8,13 +9,14 @@ import {
   FooterStyled,
 } from './styles';
 
-interface ModalProps {
+interface ModalProps extends ModalPropsForCustom {
   children?: JSX.Element[] | JSX.Element | any;
   className?: string;
   contentClassName?: string;
   dialogClassName?: string;
   state: boolean;
   setState(value: any): void;
+
 }
 
 interface ChildrenProps {
@@ -42,7 +44,7 @@ export const Modal: FC<ModalProps> = ({
   dialogClassName,
   setState,
   ...props
-}) => (
+} : ModalProps) => (
   <ModalStyled
     size="sm"
     show={state}

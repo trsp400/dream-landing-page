@@ -14,6 +14,7 @@ export const ListDecisionContainerStyled = styled.div`
   height: 85%;
   display: flex;
   justify-content: center;
+  cursor: pointer;
   width: 100%;
   margin: 20px 0;
   padding: 10px;
@@ -21,6 +22,7 @@ export const ListDecisionContainerStyled = styled.div`
   border-radius: 10px;
   box-shadow: 0px 0px 6px 1px
     ${({ theme }) => theme.mobileTheme.colors.primary.orange};
+
 `;
 
 export const ListDecisionCheckStyled = styled.div`
