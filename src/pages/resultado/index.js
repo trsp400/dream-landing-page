@@ -4,6 +4,8 @@ import { useSelector } from 'react-redux';
 import Layout from '../../Layout';
 import LineChart from '../../components/CustomComponents/LineChart';
 
+import SEO from '../../components/CustomComponents/Seo';
+
 import {
   Container,
   Button,
@@ -19,6 +21,7 @@ const Result = () => {
 
   return (
     <Layout>
+      <SEO title="Resultado | Máquina dos Sonhos" />
       <Container>
         <h1>Resultado</h1>
 
