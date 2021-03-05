@@ -7,7 +7,6 @@ import {
   changeFormState,
   sendDreamMachineResultToAPIRequest,
 } from '../../../redux/dream_machine/actions';
-
 import Input from '../../CustomComponents/Input';
 import Loading from '../../CustomComponents/Loading';
 import Button from '../../CustomComponents/Button';
