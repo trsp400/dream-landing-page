@@ -1,10 +1,12 @@
-/* eslint-disable import/extensions */
-/* eslint-disable import/no-unresolved */
 import React, { useCallback, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { changeFormState } from '../../../redux/dream_machine/actions';
 import Input from '../../CustomComponents/Input';
+import Button from '../../CustomComponents/Button';
+import MessageFeedback from '../../CustomComponents/MessageFeedback';
+
+import { Container, Body, Footer, ButtonContainer } from './styles';
 
 const listPeriods = {
   anos: 'Anos',
@@ -34,40 +36,62 @@ const StepThree = () => {
   );
 
   return (
-    <div>
-      <h2>Step: {currentStep}</h2>
-      <button type="button" onClick={() => handleDispatch(2)}>
-        {' '}
-        step anterior
-      </button>
-      <br />
-      <button type="button" onClick={() => handleDispatch(4)}>
-        {' '}
-        Proximo step
-      </button>
+    <Container>
+      <Body>
+        <MessageFeedback strong="lighter">OK!</MessageFeedback>
+        <MessageFeedback strong="bold">Em quanto tempo?</MessageFeedback>
 
-      <br />
-      <span>em quanto tempo?</span>
+        <ButtonContainer>
+          {Object.keys(listPeriods).map(item => (
+            <Button
+              variant={item === inputYearOrMonth ? 'beorange' : 'beblue'}
+              ripple
+              glow
+              style={{
+                width: '30%',
+              }}
+              onClick={() => setInputYearOrMonth(item)}
+              key={item}
+            >
+              {listPeriods[item]}
+            </Button>
+          ))}
+        </ButtonContainer>
 
-      {Object.keys(listPeriods).map(item => (
-        <button
+        <Input
+          state={inputValue}
+          setState={setInputValue}
+          type="number"
+          placeholder="Tempo"
+        />
+      </Body>
+
+      <Footer>
+        <Button
+          ripple
+          variant="beblue"
+          glow
+          onClick={() => handleDispatch(2)}
           style={{
-            backgroundColor: item === inputYearOrMonth ? 'orange' : 'blue',
+            width: '30%',
           }}
-          onClick={() => setInputYearOrMonth(item)}
-          key={item}
         >
-          {listPeriods[item]}
-        </button>
-      ))}
+          {'<='}
+        </Button>
 
-      <Input
-        state={inputValue}
-        setState={setInputValue}
-        type="number"
-        placeholder={listPeriods[inputYearOrMonth]}
-      />
-    </div>
+        <Button
+          ripple
+          variant="beorange"
+          glow
+          onClick={() => handleDispatch(4)}
+          style={{
+            width: '30%',
+          }}
+        >
+          OK
+        </Button>
+      </Footer>
+    </Container>
   );
 };
 
