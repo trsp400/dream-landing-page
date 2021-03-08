@@ -1,5 +1,6 @@
 import React, { useCallback, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { ToastContainer, toast } from 'react-toastify';
 
 import { changeFormState } from '../../../redux/dream_machine/actions';
 
@@ -17,10 +18,17 @@ import IconGallery, { Card, Row } from '../../CustomComponents/IconGallery';
 
 import { Container, Footer } from './styles';
 
+import toastConfig from '../../../utils/toastConfig';
+
 const StepOne = () => {
   const dispatch = useDispatch();
   const store = useSelector(({ dreamMachine }) => dreamMachine);
   const { currentStep, path, objective } = store;
+
+  const notify = useCallback(
+    () => toast('Por favor, selecione uma opção!', toastConfig),
+    [],
+  );
 
   const [inputValue, setInputValue] = useState(
     typeof objective === 'string' && objective,
@@ -31,7 +39,9 @@ const StepOne = () => {
 
   const handleDispatch = useCallback(
     step => {
-      dispatch(
+      if (!inputValue && !arrayValues?.length) return notify();
+
+      return dispatch(
         changeFormState({
           ...store,
           currentStep: step,
@@ -42,16 +52,16 @@ const StepOne = () => {
     [dispatch, store, arrayValues, inputValue],
   );
 
-  const handleCardClick = (event, label) => {
+  const handleCardClick = useCallback((event, label) => {
     setArrayValues([label]);
     return setInputValue('');
-  };
+  }, []);
 
-  const handleInputChange = value => {
+  const handleInputChange = useCallback(value => {
     setArrayValues(null);
 
     setInputValue(value);
-  };
+  }, []);
 
   const resetStore = useCallback(() => {
     dispatch(
@@ -86,6 +96,7 @@ const StepOne = () => {
 
   return (
     <Container>
+      <ToastContainer />
       <MessageFeedback strong="lighter">Olá, vamos começar ?</MessageFeedback>
 
       <MessageFeedback strong="bold">

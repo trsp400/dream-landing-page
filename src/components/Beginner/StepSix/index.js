@@ -2,6 +2,8 @@
 import React, { useCallback, useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
+import { ToastContainer, toast } from 'react-toastify';
+
 import ListDecision from '../../CustomComponents/ListDecision';
 import Button from '../../CustomComponents/Button';
 import MessageFeedback from '../../CustomComponents/MessageFeedback';
@@ -9,6 +11,8 @@ import Loading from '../../CustomComponents/Loading';
 import { Container, Body, Footer } from './styles';
 
 import { changeFormState } from '../../../redux/dream_machine/actions';
+
+import toastConfig from '../../../utils/toastConfig';
 
 const options = [
   'Aumentar para R$ 1.200 no fim do seu ciclo de investimento, sem eventuais riscos.',
@@ -34,8 +38,14 @@ const StepSeven = () => {
 
   const [inputValue, setInputvalue] = useState(decision);
 
+  const notify = useCallback(
+    () => toast('Por favor, selecione uma opção!', toastConfig),
+    [],
+  );
+
   const handleDispatch = useCallback(
     step => {
+      if (!inputValue && step > currentStep) return notify();
       dispatch(
         changeFormState({
           ...store,
@@ -51,6 +61,7 @@ const StepSeven = () => {
     <RenderLoading setLoading={setLoading} dispatch={handleDispatch} />
   ) : (
     <Container>
+      <ToastContainer />
       <Body>
         <MessageFeedback strong="lighter">
           Vamos entender melhor os seus objetivos...
@@ -83,7 +94,11 @@ const StepSeven = () => {
           ripple
           variant="beorange"
           glow
-          onClick={() => setLoading(true)}
+          onClick={() => {
+            if (!inputValue) return notify();
+
+            return setLoading(true);
+          }}
           style={{
             width: '30%',
           }}

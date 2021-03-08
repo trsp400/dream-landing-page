@@ -1,6 +1,8 @@
 import React, { useCallback, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
+import { ToastContainer, toast } from 'react-toastify';
+
 import { changeFormState } from '../../../redux/dream_machine/actions';
 import Input from '../../CustomComponents/Input';
 import Button from '../../CustomComponents/Button';
@@ -15,9 +17,24 @@ const StepTwo = () => {
 
   const [inputValue, setInputValue] = useState(objectiveCost);
 
+  const notify = useCallback(
+    () =>
+      toast('Por favor, digite um valor!', {
+        style: {
+          marginTop: 10,
+        },
+        type: 'error',
+        autoClose: 2500,
+        pauseOnFocusLoss: true,
+      }),
+    [],
+  );
+
   const handleDispatch = useCallback(
     step => {
-      dispatch(
+      if (!inputValue && step > currentStep) return notify();
+
+      return dispatch(
         changeFormState({
           ...store,
           currentStep: step,
@@ -36,6 +53,7 @@ const StepTwo = () => {
 
   return (
     <Container>
+      <ToastContainer />
       <Body>
         <MessageFeedback strong="lighter">
           Que legal! Com a Máquina dos Sonhos da BeCapital você consegue [...]

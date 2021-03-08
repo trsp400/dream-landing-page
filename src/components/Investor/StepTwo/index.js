@@ -2,6 +2,9 @@
 import React, { useCallback, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
+import { ToastContainer, toast } from 'react-toastify';
+import toastConfig from '../../../utils/toastConfig';
+
 import { changeFormState } from '../../../redux/dream_machine/actions';
 
 import SvgImg from '../../../assets/icons/checkbox-icon.svg';
@@ -27,12 +30,20 @@ const StepTwo = () => {
   const { currentStep, desiredInvestmentsPlacement, otherInvestments } = store;
 
   const [arrayValues, setArrayValues] = useState(desiredInvestmentsPlacement);
+
+  const notify = useCallback(
+    () => toast('Por favor, selecione uma opção!', toastConfig),
+    [],
+  );
+
   const [otherInvestmentsInput, setOtherInvestmentsInput] = useState(
     otherInvestments,
   );
 
   const handleDispatch = useCallback(
     step => {
+      if (!arrayValues?.length && !otherInvestmentsInput && step > currentStep)
+        return notify();
       dispatch(
         changeFormState({
           ...store,
@@ -47,6 +58,7 @@ const StepTwo = () => {
 
   return (
     <Container>
+      <ToastContainer />
       <MessageFeedback strong="lighter">Incrível!</MessageFeedback>
 
       <MessageFeedback strong="bold">

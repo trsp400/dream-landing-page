@@ -1,5 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
+
+import { navigate } from 'gatsby';
 
 import Layout from '../../Layout';
 import LineChart from '../../components/CustomComponents/LineChart';
@@ -15,9 +17,16 @@ import {
   ModalStyled,
 } from './styles';
 
-const Result = () => {
+const Result = ({ location }) => {
   const [showModal, setShowModal] = useState(false);
+  const { result } = useSelector(({ dreamMachine }) => dreamMachine);
   const { isMobileView } = useSelector(({ settings }) => settings);
+
+  useEffect(() => {
+    if (!result?.yearlyAverageArray?.length) {
+      navigate('/');
+    }
+  }, []);
 
   return (
     <Layout>

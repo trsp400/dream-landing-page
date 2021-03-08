@@ -1,6 +1,9 @@
 import React, { useCallback, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
+import { ToastContainer, toast } from 'react-toastify';
+import toastConfig from '../../../utils/toastConfig';
+
 import { changeFormState } from '../../../redux/dream_machine/actions';
 
 import CoinIcon from '../../../assets/icons/accounting-coins.svg';
@@ -25,8 +28,14 @@ const StepOne = () => {
 
   const [arrayValues, setArrayValues] = useState(investmentsPlacement);
 
+  const notify = useCallback(
+    () => toast('Por favor, selecione uma opção!', toastConfig),
+    [],
+  );
+
   const handleDispatch = useCallback(
     step => {
+      if (!arrayValues.length && step > currentStep) return notify();
       dispatch(
         changeFormState({
           ...store,
@@ -81,6 +90,7 @@ const StepOne = () => {
 
   return (
     <Container>
+      <ToastContainer />
       <MessageFeedback strong="lighter">Olá, vamos começar ?</MessageFeedback>
 
       <MessageFeedback strong="bold">Onde você já investe?</MessageFeedback>

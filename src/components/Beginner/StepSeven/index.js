@@ -2,6 +2,7 @@ import React, { useCallback, useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { navigate } from 'gatsby';
+import { ToastContainer, toast } from 'react-toastify';
 
 import {
   changeFormState,
@@ -13,6 +14,8 @@ import Loading from '../../CustomComponents/Loading';
 import Button from '../../CustomComponents/Button';
 import MessageFeedback from '../../CustomComponents/MessageFeedback';
 import { Container, Body, Footer } from './styles';
+
+import toastConfig from '../../../utils/toastConfig';
 
 const StepEight = () => {
   const dispatch = useDispatch();
@@ -27,7 +30,13 @@ const StepEight = () => {
 
   const [requestLoading, setRequestLoading] = useState(false);
 
+  const notify = useCallback(
+    () => toast('Por favor, digite um valor!', toastConfig),
+    [],
+  );
+
   const handleSubmit = useCallback(() => {
+    if (!inputValue) return notify();
     setRequestLoading(true);
     dispatch(
       sendDreamMachineResultToAPIRequest({
@@ -44,6 +53,7 @@ const StepEight = () => {
 
   return (
     <Container>
+      <ToastContainer />
       <Body>
         <MessageFeedback strong="normal">
           Para receber o <strong>resultado completo</strong> do seu perfil,

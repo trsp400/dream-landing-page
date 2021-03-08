@@ -1,6 +1,9 @@
 import React, { useCallback, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
+import { ToastContainer, toast } from 'react-toastify';
+import toastConfig from '../../../utils/toastConfig';
+
 import { changeFormState } from '../../../redux/dream_machine/actions';
 import Input from '../../CustomComponents/Input';
 import Button from '../../CustomComponents/Button';
@@ -20,8 +23,14 @@ const StepFour = () => {
   const [inputValue, setInputValue] = useState(period);
   const [inputYearOrMonth, setInputYearOrMonth] = useState(yearOrMonth);
 
+  const notify = useCallback(
+    () => toast('Por favor, digite um valor!', toastConfig),
+    [],
+  );
+
   const handleDispatch = useCallback(
     step => {
+      if (!inputValue && step > currentStep) return notify();
       dispatch(
         changeFormState({
           ...store,
@@ -36,6 +45,7 @@ const StepFour = () => {
 
   return (
     <Container>
+      <ToastContainer />
       <Body>
         <MessageFeedback strong="lighter">OK!</MessageFeedback>
         <MessageFeedback strong="bold">Em quanto tempo?</MessageFeedback>
