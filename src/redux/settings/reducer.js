@@ -1,8 +1,14 @@
+import { toast } from 'react-toastify';
 import actions from '../actions';
+
+import toastConfig from '../../utils/toastConfig';
+
+const notify = message => toast(message, toastConfig);
 
 const INITIAL_STATE = {
   isMobileView: false,
   size: 0,
+  notify: message => notify(message),
 };
 
 export default function changeSettings(state = INITIAL_STATE, action) {

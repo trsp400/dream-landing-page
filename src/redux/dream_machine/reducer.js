@@ -8,7 +8,7 @@ const INITIAL_STATE = {
     monthlyRate: '',
     annualRate: '',
     riskProfile: '',
-    email: '',
+    email: null,
     yearlyAverageArray: [],
     achievedObjectiveCost: false,
     newPeriod: 0,

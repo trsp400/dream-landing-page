@@ -24,7 +24,7 @@ const ListDecision: FC<ListDecisionProps> = ({ options, state, setState }) => {
       <Row className="justify-content-md-center">
         {options.map((option, index) => {
           const color =
-            state === index ? colors.primary.blue : colors.primary.orange;
+            state === index + 1 ? colors.primary.blue : colors.primary.orange;
 
           return (
             <Col
@@ -32,8 +32,9 @@ const ListDecision: FC<ListDecisionProps> = ({ options, state, setState }) => {
               md={4}
               xl={4}
               className="d-flex justify-content-center"
-              onClick={() => setState(index)}
+              onClick={() => setState(index + 1)}
               style={{ cursor: 'pointer' }}
+              key={index + 1}
             >
               <ListDecisionContainerStyled>
                 <Row style={{ width: '100%' }}>
@@ -44,7 +45,7 @@ const ListDecision: FC<ListDecisionProps> = ({ options, state, setState }) => {
                   >
                     <ListDecisionCheckStyled
                       style={{ '--color': color } as CSSProperties}
-                      onClick={() => setState(index)}
+                      onClick={() => setState(index + 1)}
                     />
                   </Col>
                   <Col

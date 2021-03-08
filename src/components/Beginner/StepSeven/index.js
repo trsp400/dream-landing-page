@@ -14,6 +14,8 @@ import { Container, Body, Footer } from './styles';
 const StepEight = () => {
   const dispatch = useDispatch();
   const store = useSelector(({ dreamMachine }) => dreamMachine);
+  const { notify } = useSelector(({ settings }) => settings);
+
   const {
     investmentsPlacement,
     desiredInvestmentsPlacement,
@@ -54,6 +56,9 @@ const StepEight = () => {
       desiredInvestmentsPlacement,
     );
 
+    if (!inputValue) return notify('Por favor, digite seu e-mail!');
+    setRequestLoading(true);
+
     dispatch(
       sendDreamMachineResultToAPIRequest({
         ...store,
@@ -76,7 +81,6 @@ const StepEight = () => {
     const isValidEmail = emailIsValid(email);
 
     if (isValidEmail) {
-      setRequestLoading(true);
       handleDispatchResultState();
       setValidEmail(true);
       navigate('/resultado');
@@ -105,8 +109,7 @@ const StepEight = () => {
         <Input
           state={inputValue}
           setState={checkValidEmailOnInputChange}
-          type="text"
-          placeholder="E-mail"
+          type="email"
         />
         {!validEmail ? (
           <span style={{ color: 'red' }}>Digite um e-mail válido!</span>

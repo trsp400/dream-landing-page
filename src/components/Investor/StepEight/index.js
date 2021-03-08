@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { navigate } from 'gatsby';
@@ -6,6 +6,7 @@ import { navigate } from 'gatsby';
 import { sendDreamMachineResultToAPIRequest } from '../../../redux/dream_machine/actions';
 import { createResultObject } from '../../../utils/handleResultObject';
 import Input from '../../CustomComponents/Input';
+import Loading from '../../CustomComponents/Loading';
 import Button from '../../CustomComponents/Button';
 import MessageFeedback from '../../CustomComponents/MessageFeedback';
 import { Container, Body, Footer } from './styles';
@@ -13,6 +14,8 @@ import { Container, Body, Footer } from './styles';
 const StepEight = () => {
   const dispatch = useDispatch();
   const store = useSelector(({ dreamMachine }) => dreamMachine);
+  const { notify } = useSelector(({ settings }) => settings);
+
   const {
     investmentsPlacement,
     desiredInvestmentsPlacement,
@@ -21,6 +24,7 @@ const StepEight = () => {
 
   const [inputValue, setInputValue] = useState(email);
   const [validEmail, setValidEmail] = useState(true);
+  const [requestLoading, setRequestLoading] = useState(false);
 
   const period = parseInt(store.period);
   const yearOrMonth = store.yearOrMonth;
@@ -40,7 +44,7 @@ const StepEight = () => {
     store.objectiveCost.replace('R$ ', '').replace(/\./g, '').replace(',', '.'),
   );
 
-  const handleDispatchResultState = () => {
+  const handleDispatchResultState = useCallback(() => {
     const resultObject = createResultObject(
       period,
       yearOrMonth,
@@ -51,6 +55,9 @@ const StepEight = () => {
       investmentsPlacement,
       desiredInvestmentsPlacement,
     );
+
+    if (!inputValue) return notify('Por favor, digite seu e-mail!');
+    setRequestLoading(true);
 
     dispatch(
       sendDreamMachineResultToAPIRequest({
@@ -63,9 +70,8 @@ const StepEight = () => {
         currentInvestments,
         objectiveCost,
       }),
-      navigate('/resultado'),
     );
-  };
+  });
 
   function emailIsValid(dataEmail) {
     return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(dataEmail);
@@ -75,8 +81,8 @@ const StepEight = () => {
     const isValidEmail = emailIsValid(email);
 
     if (isValidEmail) {
-      handleDispatchResultState();
       setValidEmail(true);
+      handleDispatchResultState();
       navigate('/resultado');
       return true;
     }
@@ -103,8 +109,7 @@ const StepEight = () => {
         <Input
           state={inputValue}
           setState={checkValidEmailOnInputChange}
-          type="text"
-          placeholder="E-mail"
+          type="email"
         />
 
         {!validEmail ? (
@@ -133,6 +138,7 @@ const StepEight = () => {
           OK
         </Button>
       </Footer>
+      {requestLoading && <Loading size="5" />}
     </Container>
   );
 };
