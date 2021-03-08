@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 import {
@@ -9,6 +9,9 @@ import {
   ButtonSection,
   Button,
 } from './styles';
+
+import { useSpring, animated } from 'react-spring';
+// import useMeasure from '../../utils/useMeasure';
 
 import { changeFormState } from '../../redux/dream_machine/actions';
 
@@ -44,14 +47,25 @@ const Home = () => {
     );
   };
 
+  const springProps = useSpring({
+    opacity: 1,
+    delay: 0,
+    reset: currentStep,
+    transform: 'translateX(0px)',
+    from: {
+      opacity: 0,
+      transform: 'translateX(1000px)',
+    },
+  });
+
   return currentStep > 0 ? (
-    <div>
+    <animated.div style={{ ...springProps }}>
       <RenderSelectedFormPath
         currentStep={currentStep}
         store={store}
         path={path}
       />
-    </div>
+    </animated.div>
   ) : (
     <Container>
       <Header>
