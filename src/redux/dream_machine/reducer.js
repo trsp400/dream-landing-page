@@ -8,7 +8,7 @@ const INITIAL_STATE = {
     monthlyRate: 0,
     annualRate: 0,
     riskProfile: '',
-    email: '',
+    email: null,
     yearlyAverageArray: [],
   },
   path: '',

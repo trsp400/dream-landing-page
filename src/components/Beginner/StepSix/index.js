@@ -10,6 +10,8 @@ import { Container, Body, Footer } from './styles';
 
 import { changeFormState } from '../../../redux/dream_machine/actions';
 
+import toastConfig from '../../../utils/toastConfig';
+
 const options = [
   'Aumentar para R$ 1.200 no fim do seu ciclo de investimento, sem eventuais riscos.',
   'Ter a possibilidade de aumentar para R$ 1.500 no fim do seu ciclo, com um pequeno risco.',
@@ -29,6 +31,8 @@ const RenderLoading = ({ setLoading, dispatch }) => {
 const StepSeven = () => {
   const dispatch = useDispatch();
   const store = useSelector(({ dreamMachine }) => dreamMachine);
+  const { notify } = useSelector(({ settings }) => settings);
+
   const { currentStep, decision } = store;
   const [loading, setLoading] = useState(false);
 
@@ -36,6 +40,9 @@ const StepSeven = () => {
 
   const handleDispatch = useCallback(
     step => {
+      if (!inputValue && step > currentStep)
+        return notify('Por favor, selecione uma opção!');
+
       dispatch(
         changeFormState({
           ...store,
@@ -83,7 +90,11 @@ const StepSeven = () => {
           ripple
           variant="beorange"
           glow
-          onClick={() => setLoading(true)}
+          onClick={() => {
+            if (!inputValue) return notify();
+
+            return setLoading(true);
+          }}
           style={{
             width: '30%',
           }}

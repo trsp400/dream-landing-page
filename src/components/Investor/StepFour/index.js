@@ -1,6 +1,8 @@
 import React, { useCallback, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
+import toastConfig from '../../../utils/toastConfig';
+
 import { changeFormState } from '../../../redux/dream_machine/actions';
 import Input from '../../CustomComponents/Input';
 import Button from '../../CustomComponents/Button';
@@ -15,6 +17,8 @@ const listPeriods = {
 const StepFour = () => {
   const dispatch = useDispatch();
   const store = useSelector(({ dreamMachine }) => dreamMachine);
+  const { notify } = useSelector(({ settings }) => settings);
+
   const { currentStep, period, yearOrMonth } = store;
 
   const [inputValue, setInputValue] = useState(period);
@@ -22,6 +26,8 @@ const StepFour = () => {
 
   const handleDispatch = useCallback(
     step => {
+      if (!inputValue && step > currentStep)
+        return notify('Por favor, digite um valor!');
       dispatch(
         changeFormState({
           ...store,

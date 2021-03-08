@@ -1,5 +1,3 @@
-/* eslint-disable import/extensions */
-/* eslint-disable import/no-unresolved */
 import React, { useCallback, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
@@ -9,15 +7,22 @@ import Button from '../../CustomComponents/Button';
 import MessageFeedback from '../../CustomComponents/MessageFeedback';
 import { Container, Body, Footer } from './styles';
 
+import toastConfig from '../../../utils/toastConfig';
+
 const StepFour = () => {
   const dispatch = useDispatch();
   const store = useSelector(({ dreamMachine }) => dreamMachine);
+  const { notify } = useSelector(({ settings }) => settings);
+
   const { currentStep, currentInvestments } = store;
 
   const [inputValue, setInputValue] = useState(currentInvestments);
 
   const handleDispatch = useCallback(
     step => {
+      if (!inputValue && step > currentStep)
+        return notify('Por favor, digite um valor!');
+
       dispatch(
         changeFormState({
           ...store,

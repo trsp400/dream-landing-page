@@ -14,9 +14,13 @@ import Button from '../../CustomComponents/Button';
 import MessageFeedback from '../../CustomComponents/MessageFeedback';
 import { Container, Body, Footer } from './styles';
 
+import toastConfig from '../../../utils/toastConfig';
+
 const StepEight = () => {
   const dispatch = useDispatch();
   const store = useSelector(({ dreamMachine }) => dreamMachine);
+  const { notify } = useSelector(({ settings }) => settings);
+
   const {
     result: { email },
     resultSuccess,
@@ -28,6 +32,8 @@ const StepEight = () => {
   const [requestLoading, setRequestLoading] = useState(false);
 
   const handleSubmit = useCallback(() => {
+    if (!inputValue) return notify('Por favor, digite seu e-mail!');
+
     setRequestLoading(true);
     dispatch(
       sendDreamMachineResultToAPIRequest({

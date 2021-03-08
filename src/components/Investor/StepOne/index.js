@@ -3,7 +3,6 @@ import { useSelector, useDispatch } from 'react-redux';
 
 import { changeFormState } from '../../../redux/dream_machine/actions';
 
-import CoinIcon from '../../../assets/icons/accounting-coins.svg';
 import SavingBankIcon from '../../../assets/icons/saving-bank-1.svg';
 import SavingBagIcon from '../../../assets/icons/saving-bag-increase.svg';
 import BrokerIcon from '../../../assets/icons/building-modern-2.svg';
@@ -20,13 +19,16 @@ import { Container, Footer } from './styles';
 const StepOne = () => {
   const dispatch = useDispatch();
   const store = useSelector(({ dreamMachine }) => dreamMachine);
+  const { notify } = useSelector(({ settings }) => settings);
 
-  const { currentStep, path, investmentsPlacement } = store;
+  const { currentStep, investmentsPlacement } = store;
 
   const [arrayValues, setArrayValues] = useState(investmentsPlacement);
 
   const handleDispatch = useCallback(
     step => {
+      if (!arrayValues.length && step > currentStep)
+        return notify('Por favor, selecione uma opção!');
       dispatch(
         changeFormState({
           ...store,
@@ -42,7 +44,7 @@ const StepOne = () => {
     dispatch(
       changeFormState({
         ...store,
-        currentStep: null,
+        currentStep: 0,
         resultSuccess: null,
         result: {
           monthlyRate: 0,
@@ -76,8 +78,6 @@ const StepOne = () => {
 
     return setArrayValues([...arrayValues, label]);
   };
-
-  const title = path === 'beginner' ? 'Iniciante' : 'Já é investidor';
 
   return (
     <Container>
@@ -139,7 +139,7 @@ const StepOne = () => {
           ripple
           variant="beblue"
           glow
-          onClick={() => handleDispatch(0)}
+          onClick={() => resetStore()}
           style={{
             width: '30%',
           }}

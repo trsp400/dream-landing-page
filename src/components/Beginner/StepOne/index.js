@@ -17,9 +17,13 @@ import IconGallery, { Card, Row } from '../../CustomComponents/IconGallery';
 
 import { Container, Footer } from './styles';
 
+import toastConfig from '../../../utils/toastConfig';
+
 const StepOne = () => {
   const dispatch = useDispatch();
   const store = useSelector(({ dreamMachine }) => dreamMachine);
+  const { notify } = useSelector(({ settings }) => settings);
+
   const { currentStep, path, objective } = store;
 
   const [inputValue, setInputValue] = useState(
@@ -31,6 +35,9 @@ const StepOne = () => {
 
   const handleDispatch = useCallback(
     step => {
+      if (!inputValue && !arrayValues?.length)
+        return notify('Por favor, selecione uma opção!');
+
       dispatch(
         changeFormState({
           ...store,
@@ -42,16 +49,16 @@ const StepOne = () => {
     [dispatch, store, arrayValues, inputValue],
   );
 
-  const handleCardClick = (event, label) => {
+  const handleCardClick = useCallback((event, label) => {
     setArrayValues([label]);
     return setInputValue('');
-  };
+  }, []);
 
-  const handleInputChange = value => {
+  const handleInputChange = useCallback(value => {
     setArrayValues(null);
 
     setInputValue(value);
-  };
+  }, []);
 
   const resetStore = useCallback(() => {
     dispatch(

@@ -8,6 +8,8 @@ import MessageFeedback from '../../CustomComponents/MessageFeedback';
 
 import { Container, Body, Footer, ButtonContainer } from './styles';
 
+import toastConfig from '../../../utils/toastConfig';
+
 const listPeriods = {
   anos: 'Anos',
   meses: 'Meses',
@@ -16,6 +18,8 @@ const listPeriods = {
 const StepThree = () => {
   const dispatch = useDispatch();
   const store = useSelector(({ dreamMachine }) => dreamMachine);
+  const { notify } = useSelector(({ settings }) => settings);
+
   const { currentStep, period, yearOrMonth } = store;
 
   const [inputValue, setInputValue] = useState(period);
@@ -23,6 +27,9 @@ const StepThree = () => {
 
   const handleDispatch = useCallback(
     step => {
+      if (!inputValue && step > currentStep)
+        return notify('Por favor, digite um valor!');
+
       dispatch(
         changeFormState({
           ...store,
