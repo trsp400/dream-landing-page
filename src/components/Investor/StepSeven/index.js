@@ -2,14 +2,11 @@
 import React, { useCallback, useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
-import toastConfig from '../../../utils/toastConfig';
-
 import { changeFormState } from '../../../redux/dream_machine/actions';
 
 import ListDecision from '../../CustomComponents/ListDecision';
 import Button from '../../CustomComponents/Button';
 import MessageFeedback from '../../CustomComponents/MessageFeedback';
-import Loading from '../../CustomComponents/Loading';
 import { Container, Body, Footer } from './styles';
 
 const options = [
@@ -18,23 +15,12 @@ const options = [
   'Aumentar para R$ 1.200 no fim do seu ciclo de investimento, sem eventuais riscos.',
 ];
 
-const RenderLoading = ({ setLoading, dispatch }) => {
-  useEffect(() => {
-    setTimeout(() => {
-      setLoading(false);
-      dispatch(8);
-    }, 3000);
-  });
-  return <Loading />;
-};
-
 const StepSeven = () => {
   const dispatch = useDispatch();
   const store = useSelector(({ dreamMachine }) => dreamMachine);
   const { notify } = useSelector(({ settings }) => settings);
 
-  const { currentStep, decision } = store;
-  const [loading, setLoading] = useState(false);
+  const { decision } = store;
 
   const [inputValue, setInputvalue] = useState(decision);
 
@@ -51,9 +37,7 @@ const StepSeven = () => {
     [dispatch, store, inputValue],
   );
 
-  return loading ? (
-    <RenderLoading setLoading={setLoading} dispatch={handleDispatch} />
-  ) : (
+  return (
     <Container>
       <Body>
         <MessageFeedback strong="lighter">
@@ -89,7 +73,7 @@ const StepSeven = () => {
           glow
           onClick={() => {
             if (!inputValue) return notify('Por favor, selecione uma opção!');
-            setLoading(true);
+            return handleDispatch(8);
           }}
           style={{
             width: '30%',
