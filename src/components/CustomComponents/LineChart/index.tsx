@@ -123,12 +123,13 @@ const LineChart: React.FC<LineChartProps> = ({
           useHtml
           enterable={true}
           itemTpl={
-            `<li data-index={index} style="background-color:red; opacity: 0.1">` +
-            `<span style="background-color:{color};width:8px;height:8px;border-radius:50%;display:inline-block;margin-right:8px;"></span>` +
-            `Valor: {value}` +
-            '</li>'
+            '<ul style="list-style-type: none; padding: 5px;">' +
+            '<li data-index="style=&quot;background-color:red;" opacity:="" 0.1"="">' +
+            '<span style="background-color:{color};width:8px;height:8px;border-radius:50%;display:inline-block;margin-right: 10px;">' +
+            '</span>Valor: {value}</li></ul>``<li data-index={index} style="background-color:red; opacity: 0.1">'
           }
         />
+
         <Geom
           animate
           type="line"
