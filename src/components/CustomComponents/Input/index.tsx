@@ -48,7 +48,6 @@ const Input: FC<InputProps> = ({ state, type, setState, placeholder }) => (
           value={state || ''}
           type={type}
           onChange={event => {
-            console.log(event?.target?.value);
             setState(event?.target?.value);
           }}
           required
