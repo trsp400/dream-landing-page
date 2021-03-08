@@ -1,15 +1,10 @@
-import React, { useCallback, useState, useEffect } from 'react';
+import React, { useCallback, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { navigate } from 'gatsby';
 
-import {
-  changeFormState,
-  sendDreamMachineResultToAPIRequest,
-} from '../../../redux/dream_machine/actions';
-
+import { sendDreamMachineResultToAPIRequest } from '../../../redux/dream_machine/actions';
 import { createResultObject } from '../../../utils/handleResultObject';
-
 import Input from '../../CustomComponents/Input';
 import Loading from '../../CustomComponents/Loading';
 import Button from '../../CustomComponents/Button';
@@ -20,7 +15,6 @@ const StepEight = () => {
   const dispatch = useDispatch();
   const store = useSelector(({ dreamMachine }) => dreamMachine);
   const {
-    currentStep,
     investmentsPlacement,
     desiredInvestmentsPlacement,
     result: { email },
@@ -61,12 +55,15 @@ const StepEight = () => {
     );
 
     dispatch(
-      changeFormState({
+      sendDreamMachineResultToAPIRequest({
         ...store,
-        currentStep: null,
         result: {
           ...resultObject,
         },
+        period,
+        monthlySupport,
+        currentInvestments,
+        objectiveCost,
       }),
     );
   });

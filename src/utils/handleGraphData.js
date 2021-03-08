@@ -20,18 +20,18 @@ export function generateGraphDataObject(array, months, objectiveCost) {
     incompleteYear = item.length < 12 && !incompleteYear;
 
     return {
-      x: yearsBetweenTodayAndObjectivePerid[index],
-      y: parseFloat(yieldDividedByMonths.toFixed(2)),
+      Ano: yearsBetweenTodayAndObjectivePerid[index],
+      Media: parseFloat(yieldDividedByMonths.toFixed(2)),
     };
   });
 
   incompleteYear &&
     arrayResult.push({
-      x:
+      Ano:
         yearsBetweenTodayAndObjectivePerid[
           yearsBetweenTodayAndObjectivePerid.length - 1
         ],
-      y: parseFloat((objectiveCost || 0).toFixed(2)),
+      Media: parseFloat((objectiveCost || 0).toFixed(2)),
     });
 
   return arrayResult;

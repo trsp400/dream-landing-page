@@ -4,9 +4,8 @@ import { useSelector, useDispatch } from 'react-redux';
 import { navigate } from 'gatsby';
 
 import { sendDreamMachineResultToAPIRequest } from '../../../redux/dream_machine/actions';
-import Input from '../../CustomComponents/Input';
 import { createResultObject } from '../../../utils/handleResultObject';
-import Loading from '../../CustomComponents/Loading';
+import Input from '../../CustomComponents/Input';
 import Button from '../../CustomComponents/Button';
 import MessageFeedback from '../../CustomComponents/MessageFeedback';
 import { Container, Body, Footer } from './styles';
@@ -59,6 +58,10 @@ const StepEight = () => {
         result: {
           ...resultObject,
         },
+        period,
+        monthlySupport,
+        currentInvestments,
+        objectiveCost,
       }),
       navigate('/resultado'),
     );

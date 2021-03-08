@@ -4,6 +4,7 @@ export const Container = styled.div`
   width: 100%;
   height: auto;
   overflow: hidden;
+  background-color: ${({ theme }) => theme.mobileTheme.colors.primary.blue};
 `;
 
 export const ProgressBarContainer = styled.div`
