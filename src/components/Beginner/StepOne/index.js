@@ -1,6 +1,5 @@
 import React, { useCallback, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { ToastContainer, toast } from 'react-toastify';
 
 import { changeFormState } from '../../../redux/dream_machine/actions';
 
@@ -23,12 +22,9 @@ import toastConfig from '../../../utils/toastConfig';
 const StepOne = () => {
   const dispatch = useDispatch();
   const store = useSelector(({ dreamMachine }) => dreamMachine);
-  const { currentStep, path, objective } = store;
+  const { notify } = useSelector(({ settings }) => settings);
 
-  const notify = useCallback(
-    () => toast('Por favor, selecione uma opção!', toastConfig),
-    [],
-  );
+  const { currentStep, path, objective } = store;
 
   const [inputValue, setInputValue] = useState(
     typeof objective === 'string' && objective,
@@ -39,9 +35,10 @@ const StepOne = () => {
 
   const handleDispatch = useCallback(
     step => {
-      if (!inputValue && !arrayValues?.length) return notify();
+      if (!inputValue && !arrayValues?.length)
+        return notify('Por favor, selecione uma opção!');
 
-      return dispatch(
+      dispatch(
         changeFormState({
           ...store,
           currentStep: step,
@@ -96,7 +93,6 @@ const StepOne = () => {
 
   return (
     <Container>
-      <ToastContainer />
       <MessageFeedback strong="lighter">Olá, vamos começar ?</MessageFeedback>
 
       <MessageFeedback strong="bold">

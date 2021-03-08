@@ -1,8 +1,6 @@
 import React, { useCallback, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
-import { ToastContainer, toast } from 'react-toastify';
-
 import { changeFormState } from '../../../redux/dream_machine/actions';
 import Input from '../../CustomComponents/Input';
 import Button from '../../CustomComponents/Button';
@@ -14,18 +12,17 @@ import toastConfig from '../../../utils/toastConfig';
 const StepFour = () => {
   const dispatch = useDispatch();
   const store = useSelector(({ dreamMachine }) => dreamMachine);
+  const { notify } = useSelector(({ settings }) => settings);
+
   const { currentStep, currentInvestments } = store;
 
   const [inputValue, setInputValue] = useState(currentInvestments);
 
-  const notify = useCallback(
-    () => toast('Por favor, digite um valor!', toastConfig),
-    [],
-  );
-
   const handleDispatch = useCallback(
     step => {
-      if (!inputValue && step > currentStep) return notify();
+      if (!inputValue && step > currentStep)
+        return notify('Por favor, digite um valor!');
+
       dispatch(
         changeFormState({
           ...store,
@@ -45,7 +42,6 @@ const StepFour = () => {
 
   return (
     <Container>
-      <ToastContainer />
       <Body>
         <MessageFeedback strong="lighter">OK!</MessageFeedback>
         <MessageFeedback strong="bold">

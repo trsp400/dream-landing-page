@@ -2,7 +2,6 @@
 import React, { useCallback, useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
-import { ToastContainer, toast } from 'react-toastify';
 import toastConfig from '../../../utils/toastConfig';
 
 import { changeFormState } from '../../../redux/dream_machine/actions';
@@ -32,15 +31,12 @@ const RenderLoading = ({ setLoading, dispatch }) => {
 const StepSeven = () => {
   const dispatch = useDispatch();
   const store = useSelector(({ dreamMachine }) => dreamMachine);
+  const { notify } = useSelector(({ settings }) => settings);
+
   const { currentStep, decision } = store;
   const [loading, setLoading] = useState(false);
 
   const [inputValue, setInputvalue] = useState(decision);
-
-  const notify = useCallback(
-    () => toast('Por favor, selecione uma opção!', toastConfig),
-    [],
-  );
 
   const handleDispatch = useCallback(
     step => {
@@ -59,7 +55,6 @@ const StepSeven = () => {
     <RenderLoading setLoading={setLoading} dispatch={handleDispatch} />
   ) : (
     <Container>
-      <ToastContainer />
       <Body>
         <MessageFeedback strong="lighter">
           Vamos entender melhor os seus objetivos...
@@ -93,7 +88,7 @@ const StepSeven = () => {
           variant="beorange"
           glow
           onClick={() => {
-            if (!inputValue) return notify();
+            if (!inputValue) return notify('Por favor, selecione uma opção!');
             setLoading(true);
           }}
           style={{
