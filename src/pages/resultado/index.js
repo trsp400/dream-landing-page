@@ -64,7 +64,7 @@ const Result = () => {
   return (
     <Layout>
       <SEO title="Resultado | Máquina dos Sonhos" />
-      {yearlyAverageArray.length ? (
+      {yearlyAverageArray?.length ? (
         <Container>
           <h1>Resultado</h1>
           <LineChart
@@ -72,7 +72,7 @@ const Result = () => {
             isMobileView={isMobileView}
             theme="white"
             height={400}
-            data={yearlyAverageArray.length ? yearlyAverageArray : fakeData}
+            data={yearlyAverageArray?.length ? yearlyAverageArray : fakeData}
           />
 
           <ButtonContainer>
@@ -83,18 +83,18 @@ const Result = () => {
 
           {achievedObjectiveCost && (
             <p style={{ color: '#fff', marginTop: '2rem' }}>
-              Você conseguiria alcaçar este valor em{' '}
+              Você conseguiria alcaçar este valor em
               {countYearNewPeriod
                 ? countYearNewPeriod > 1
                   ? `${countYearNewPeriod} anos`
                   : `${countYearNewPeriod} ano`
-                : ''}{' '}
-              {countYearNewPeriod && countMonthNewPeriod ? `e` : ''}{' '}
+                : ''}
+              {countYearNewPeriod && countMonthNewPeriod ? `e` : ''}
               {countMonthNewPeriod
                 ? countMonthNewPeriod > 1
                   ? `${countMonthNewPeriod} meses`
                   : `${countMonthNewPeriod} mês`
-                : ''}{' '}
+                : ''}
             </p>
           )}
 

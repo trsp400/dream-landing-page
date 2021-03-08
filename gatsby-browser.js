@@ -13,7 +13,7 @@ import store from './src/redux/store';
 export const wrapPageElement = ({ element }) => {
   return (
     <Provider store={store}>
-      <SEO lang="pt-BR" />
+      <SEO lang="pt-BR" title="Máquina dos Sonhos BeCapital" />
       <ThemeProvider
         theme={{
           desktopTheme,

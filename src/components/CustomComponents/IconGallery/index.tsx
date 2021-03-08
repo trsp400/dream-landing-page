@@ -85,7 +85,7 @@ export const Card: React.FC<CardProps> = ({
       >
         {icon}
       </CardBody>
-      <CardFooter labelSize={labelSize || 15} color={labelColor}>
+      <CardFooter labelsize={labelSize || 15} color={labelColor}>
         {label}
       </CardFooter>
     </CardContainer>
