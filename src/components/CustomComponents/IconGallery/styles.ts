@@ -50,7 +50,7 @@ export const CardFooter = styled(Card.Footer)`
   background-color: ${props => props.theme.desktopTheme.colors.primary.blue};
   color: ${props => props.color};
 
-  font-size: ${props => props.labelSize}px;
+  font-size: ${props => props.labelsize}px;
   text-align: center;
   width: 140px;
 `;

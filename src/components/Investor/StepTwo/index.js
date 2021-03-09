@@ -17,10 +17,12 @@ import Button from '../../CustomComponents/Button';
 import { Footer, Container } from './styles';
 
 const options = [
-  'Banco Comercial',
-  'Banco Financeiro',
-  'Corretora',
-  'Exchange',
+  'Renda Fixa',
+  'Renda Variável',
+  'Fundo de Investimento',
+  'COE',
+  'Investimento Externo',
+  'Criptomoedas',
 ];
 
 const StepTwo = () => {
@@ -59,6 +61,7 @@ const StepTwo = () => {
       <MessageFeedback strong="bold">
         Onde você deseja investir?
       </MessageFeedback>
+
       <CheckBox
         options={options}
         state={arrayValues}

@@ -30,7 +30,7 @@ const StepTwo = () => {
             parseFloat(
               inputValue
                 ?.replace(/R$/gi, '')
-                .replace(/./gi, '')
+                .replace(/\./gi, '')
                 .replace(/,/gi, '.'),
             ) || inputValue,
         }),
