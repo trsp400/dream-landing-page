@@ -39,9 +39,9 @@ const StepOne = () => {
   );
   const [isVisibleModal, setIsVisibleModal] = useState(false)
 
-  useEffect(()=>{
-    resetStore()
-  },[])
+  // useEffect(()=>{
+  //   resetStore()
+  // },[])
 
   const handleDispatch = useCallback(
     (step, direction) => {
