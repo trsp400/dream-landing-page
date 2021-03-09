@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { changeFormState } from '../../../redux/dream_machine/actions';
@@ -39,10 +39,14 @@ const StepOne = () => {
   );
   const [isVisibleModal, setIsVisibleModal] = useState(false)
 
+  useEffect(()=>{
+    resetStore()
+  },[])
+
   const handleDispatch = useCallback(
     step => {
       if (!inputValue && !arrayValues?.length)
-        return notify('Por favor, selecione uma opção!');
+        return notify('Por favor, selecione uma objetivo!');
 
       dispatch(
         changeFormState({
