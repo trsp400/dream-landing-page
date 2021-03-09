@@ -25,13 +25,14 @@ const StepFour = () => {
   const [inputYearOrMonth, setInputYearOrMonth] = useState(yearOrMonth);
 
   const handleDispatch = useCallback(
-    step => {
+    (step, direction) => {
       if (!inputValue && step > currentStep)
         return notify('Por favor, digite um valor!');
       dispatch(
         changeFormState({
           ...store,
           currentStep: step,
+          direction,
           period: inputValue,
           yearOrMonth: inputYearOrMonth,
         }),
@@ -76,7 +77,7 @@ const StepFour = () => {
           ripple
           variant="beblue"
           glow
-          onClick={() => handleDispatch(3)}
+          onClick={() => handleDispatch(3, 'previous')}
           style={{
             width: '30%',
           }}
@@ -88,7 +89,7 @@ const StepFour = () => {
           ripple
           variant="beorange"
           glow
-          onClick={() => handleDispatch(5)}
+          onClick={() => handleDispatch(5, 'next')}
           style={{
             width: '30%',
           }}

@@ -26,13 +26,14 @@ const StepOne = () => {
   const [arrayValues, setArrayValues] = useState(investmentsPlacement);
 
   const handleDispatch = useCallback(
-    step => {
+    (step, direction) => {
       if (!arrayValues.length && step > currentStep)
         return notify('Por favor, selecione uma opção!');
       dispatch(
         changeFormState({
           ...store,
           currentStep: step,
+          direction,
           investmentsPlacement: arrayValues,
         }),
       );
@@ -151,7 +152,7 @@ const StepOne = () => {
           ripple
           variant="beorange"
           glow
-          onClick={() => handleDispatch(2)}
+          onClick={() => handleDispatch(2, 'next')}
           style={{
             width: '30%',
           }}

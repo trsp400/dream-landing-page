@@ -3,6 +3,7 @@ import actions from '../actions';
 
 const INITIAL_STATE = {
   currentStep: null,
+  direction: null,
   resultSuccess: null,
   result: {
     monthlyRate: 0,
@@ -45,6 +46,7 @@ export default (state = INITIAL_STATE, action) => {
         investmentsPlacement: payload?.investmentsPlacement,
         currentAssets: payload?.currentAssets,
         currentStep: payload?.currentStep,
+        direction: payload?.direction,
         decision: payload?.decision,
         desiredInvestmentsPlacement: payload?.desiredInvestmentsPlacement,
         otherInvestments: payload?.otherInvestments,

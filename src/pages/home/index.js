@@ -34,28 +34,47 @@ const Home = () => {
   const dispatch = useDispatch();
 
   const store = useSelector(({ dreamMachine }) => dreamMachine);
+  const { isMobileView } = useSelector(({ settings }) => settings);
 
-  const { currentStep, path } = store;
+  const { currentStep, path, direction } = store;
 
-  const onChangeStep = (step, selectedPath) => {
+  const onChangeStep = (step, selectedPath, direction) => {
     dispatch(
       changeFormState({
         ...store,
         currentStep: step,
         path: selectedPath,
+        direction,
       }),
     );
   };
+
+  const springConfig =
+    direction === 'previous'
+      ? {
+          transform: isMobileView ? 'translateX(0px)' : 'translateY(0px)',
+          from: {
+            opacity: 0,
+            transform: isMobileView
+              ? 'translateX(-1000px)'
+              : 'translateY(-1000px)',
+          },
+        }
+      : {
+          transform: isMobileView ? 'translateX(0px)' : 'translateY(0px)',
+          from: {
+            opacity: 0,
+            transform: isMobileView
+              ? 'translateX(1000px)'
+              : 'translateY(1000px)',
+          },
+        };
 
   const springProps = useSpring({
     opacity: 1,
     delay: 0,
     reset: currentStep,
-    transform: 'translateX(0px)',
-    from: {
-      opacity: 0,
-      transform: 'translateX(1000px)',
-    },
+    ...springConfig,
   });
 
   return currentStep > 0 ? (
@@ -90,7 +109,10 @@ const Home = () => {
           >
             COMEÇAR AGORA
           </Button>
-          <Button variant="beblue" onClick={() => onChangeStep(1, 'investor')}>
+          <Button
+            variant="beblue"
+            onClick={() => onChangeStep(1, 'investor', 'next')}
+          >
             JÁ SEI ONDE INVESTIR
           </Button>
         </ButtonSection>

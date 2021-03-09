@@ -39,7 +39,7 @@ const StepSeven = () => {
   const [inputValue, setInputvalue] = useState(decision);
 
   const handleDispatch = useCallback(
-    step => {
+    (step, direction) => {
       if (!inputValue && step > currentStep)
         return notify('Por favor, selecione uma opção!');
 
@@ -47,6 +47,7 @@ const StepSeven = () => {
         changeFormState({
           ...store,
           currentStep: step,
+          direction,
           decision: inputValue,
         }),
       );
@@ -78,7 +79,7 @@ const StepSeven = () => {
           ripple
           variant="beblue"
           glow
-          onClick={() => handleDispatch(5)}
+          onClick={() => handleDispatch(5, 'previous')}
           style={{
             width: '30%',
           }}

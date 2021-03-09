@@ -39,11 +39,12 @@ const StepSeven = () => {
   const [inputValue, setInputvalue] = useState(decision);
 
   const handleDispatch = useCallback(
-    step => {
+    (step, direction) => {
       dispatch(
         changeFormState({
           ...store,
           currentStep: step,
+          direction,
           decision: inputValue,
         }),
       );
@@ -75,7 +76,7 @@ const StepSeven = () => {
           ripple
           variant="beblue"
           glow
-          onClick={() => handleDispatch(6)}
+          onClick={() => handleDispatch(6, 'previous')}
           style={{
             width: '30%',
           }}
