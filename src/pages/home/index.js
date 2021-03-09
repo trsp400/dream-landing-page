@@ -73,6 +73,9 @@ const Home = () => {
   const springProps = useSpring({
     opacity: 1,
     delay: 0,
+    config: {
+      duration: 700,
+    },
     reset: currentStep,
     ...springConfig,
   });
