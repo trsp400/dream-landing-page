@@ -11,10 +11,10 @@ interface TextProps {
   placing: 'above' | 'bellow',
   animationSpeed?: number,
   animationDelay?: number,
-  image?: JSX.Element[] | JSX.Element;
+  icon?: JSX.Element[] | JSX.Element;
 }
 
-const Text: FC<TextProps> = ({ strong = 'normal', image = <SvgDefault />, children,animationSpeed, animationDelay ,...props }) => {
+const Text: FC<TextProps> = ({ strong = 'normal', icon = <SvgDefault />, children,animationSpeed, animationDelay, placing ,...props }) => {
 
   const refText = useRef<HTMLElement>(null)
 
@@ -47,16 +47,13 @@ const Text: FC<TextProps> = ({ strong = 'normal', image = <SvgDefault />, childr
         performWritingEffect(animationSpeed)
       }, animationDelay)
     }
-  }
+ }
 
-  const clearTimeOutAnimationWriting = () : void => {
-    clearTimeout(timeOut)
-  }
 
   return (
-    <TextStyled style={{ '--strong': strong } as CSSProperties} {...props}>
+    <TextStyled placing={placing}>
       <div>
-        {image}
+        {icon}
         <span className="text-specific" ref={refText}/>
       </div>
     </TextStyled>

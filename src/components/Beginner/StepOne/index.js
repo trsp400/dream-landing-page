@@ -10,16 +10,17 @@ import BeachIcon from '../../../assets/icons/beach-parasol-water.svg';
 import WorldIcon from '../../../assets/icons/travel-luggage-1.svg';
 import CarIcon from '../../../assets/icons/vintage-car-6.svg';
 import MoneyIcon from '../../../assets/icons/accounting-bills.svg';
+import OtherIcon from '../../../assets/icons/other-icon.svg';
+import LeftIcon from '../../../assets/icons/left-icon.svg'
 
 import Input from '../../CustomComponents/Input';
 import Button from '../../CustomComponents/Button';
-import MessageFeedback from '../../CustomComponents/MessageFeedback';
 import IconGallery, { Card, Row } from '../../CustomComponents/IconGallery';
 
-import { Container,Footer, BodyStyled, HeaderStyled, ModalStyled } from './styles';
+import { Container,Footer, BodyModalStyled, HeaderModalStyled, ModalStyled, MessageFeedbackStyle,   } from './styles';
 
 const labelSize = 8.8;
-const iconSize = 40
+const iconSize = 38
 
 const StepOne = () => {
   const dispatch = useDispatch();
@@ -48,16 +49,28 @@ const StepOne = () => {
   );
 
   const handleCardClick = (event, label) => {
-    console.log(label)
 
-    setArrayValues([label]);
-    return setInputValue('');
+    if(label.toLowerCase() !== "outros") {
+      setArrayValues([label])
+      return
+    }
+    setIsVisibleModal(!isVisibleModal);
+
+
+    handleDispatch(2)
   };
 
-  const handleInputChange = value => {
-    setArrayValues(null);
+  const handleInputChange = () => {
 
-    setInputValue(value);
+    setArrayValues(
+      arrayValue => {
+        arrayValue.shift()
+        arrayValue.push(inputValue.toUpperCase())
+        handleDispatch(2)
+      }
+    )
+
+
   };
 
   const resetStore = useCallback(() => {
@@ -90,17 +103,16 @@ const StepOne = () => {
       }),
     );
   }, [dispatch, store]);
-
   return (
     <>
     <Container>
-      <MessageFeedback strong="lighter" animationSpeed={3000}>
-        Olá, vamos começar ?
-      </MessageFeedback>
+      <MessageFeedbackStyle placing="above" animationSpeed={3000}>
+        Olá, vamos começar?
+      </MessageFeedbackStyle>
 
-      <MessageFeedback strong="bold" animationSpeed={3000} animationDelay={1000}>
+      <MessageFeedbackStyle placing="bellow" animationSpeed={3000} animationDelay={1000}>
         Qual o seu objetivo de vida?
-      </MessageFeedback>
+      </MessageFeedbackStyle>
 
       <IconGallery onClick={handleCardClick} arrayValues={arrayValues}>
         <Row>
@@ -158,41 +170,56 @@ const StepOne = () => {
             labelSize={labelSize}
           />
         </Row>
+        <Row>
+        <Card
+            backgroundColor="#EA5E45"
+            icon={<OtherIcon />}
+            iconSize={36}
+            label="OUTROS"
+            labelColor="#FFF"
+            labelSize={labelSize}
+          />
+        </Row>
       </IconGallery>
 
-      <Footer>
-        <Button
-          ripple
-          variant="beblue"
-          glow
-          onClick={() => resetStore()}
-          style={{
-            width: '30%',
-          }}
-        >
-          {'<='}
-        </Button>
 
-        <Button
-          ripple
-          variant="beorange"
-          glow
-          onClick={() => handleDispatch(2)}
-          style={{
-            width: '30%',
-          }}
-        >
-          OK
-        </Button>
-
-        <Input state={inputValue} setState={handleInputChange} type="text" />
-      </Footer>
     </Container>
-    <Modal
+    <ModalStyled
       state={isVisibleModal}
+      setState={setIsVisibleModal}
+      contentClassName="custom-content"
+      dialogClassName="custom-dialog"
     >
-      <span>OLÁ</span>
-    </Modal>
+      <HeaderModalStyled closeButton/>
+      <BodyModalStyled>
+        <div className="content-body">Descreva abaixo qual outro objetivo de vida.</div>
+        <Input state={inputValue} setState={setInputValue} type="text" />
+        <Footer>
+          <Button
+            ripple
+            variant="beblue"
+            glow
+            onClick={() => setIsVisibleModal(!isVisibleModal)}
+            style={{
+              width: '30%',
+            }}
+          >
+            Voltar
+          </Button>
+          <Button
+            ripple
+            variant="beorange"
+            glow
+            onClick={() => handleInputChange()}
+            style={{
+              width: '30%',
+            }}
+          >
+            OK
+          </Button>
+        </Footer>
+        </BodyModalStyled>
+    </ModalStyled>
     </>
   );
 };
