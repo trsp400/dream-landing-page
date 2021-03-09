@@ -28,6 +28,7 @@ const ListDecision: FC<ListDecisionProps> = ({ options, state, setState }) => {
 
           return (
             <Col
+              key={index}
               md={4}
               xl={4}
               className="d-flex justify-content-center"
