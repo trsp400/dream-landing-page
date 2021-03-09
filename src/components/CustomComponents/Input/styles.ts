@@ -28,6 +28,7 @@ export const InputStyledTextContainer = styled.div`
   border-radius: 5px;
   margin-bottom: 5px;
   padding: 5px 15px;
+  width: max-content;
   box-shadow: 0px 0px 8px 2px rgba(0, 0, 0, 0.51);
   -webkit-box-shadow: 0px 0px 8px 2px rgba(0, 0, 0, 0.51);
   -moz-box-shadow: 0px 0px 8px 2px rgba(0, 0, 0, 0.51);

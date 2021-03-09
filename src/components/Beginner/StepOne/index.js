@@ -22,9 +22,13 @@ import { Container,Footer, BodyModalStyled, HeaderModalStyled, ModalStyled, Mess
 const labelSize = 8.8;
 const iconSize = 38
 
+import toastConfig from '../../../utils/toastConfig';
+
 const StepOne = () => {
   const dispatch = useDispatch();
   const store = useSelector(({ dreamMachine }) => dreamMachine);
+  const { notify } = useSelector(({ settings }) => settings);
+
   const { currentStep, path, objective } = store;
 
   const [inputValue, setInputValue] = useState(
@@ -37,6 +41,9 @@ const StepOne = () => {
 
   const handleDispatch = useCallback(
     step => {
+      if (!inputValue && !arrayValues?.length)
+        return notify('Por favor, selecione uma opção!');
+
       dispatch(
         changeFormState({
           ...store,

@@ -2,6 +2,8 @@
 import React, { useCallback, useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
+import toastConfig from '../../../utils/toastConfig';
+
 import { changeFormState } from '../../../redux/dream_machine/actions';
 
 import ListDecision from '../../CustomComponents/ListDecision';
@@ -29,6 +31,8 @@ const RenderLoading = ({ setLoading, dispatch }) => {
 const StepSeven = () => {
   const dispatch = useDispatch();
   const store = useSelector(({ dreamMachine }) => dreamMachine);
+  const { notify } = useSelector(({ settings }) => settings);
+
   const { currentStep, decision } = store;
   const [loading, setLoading] = useState(false);
 
@@ -83,7 +87,10 @@ const StepSeven = () => {
           ripple
           variant="beorange"
           glow
-          onClick={() => setLoading(true)}
+          onClick={() => {
+            if (!inputValue) return notify('Por favor, selecione uma opção!');
+            setLoading(true);
+          }}
           style={{
             width: '30%',
           }}

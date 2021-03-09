@@ -2,6 +2,8 @@
 import React, { useCallback, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
+import toastConfig from '../../../utils/toastConfig';
+
 import { changeFormState } from '../../../redux/dream_machine/actions';
 
 import SvgImg from '../../../assets/icons/checkbox-icon.svg';
@@ -15,10 +17,12 @@ import Button from '../../CustomComponents/Button';
 import { Footer, Container } from './styles';
 
 const options = [
-  'Banco Comercial',
-  'Banco Financeiro',
-  'Corretora',
-  'Exchange',
+  'Renda Fixa',
+  'Renda Variável',
+  'Fundo de Investimento',
+  'COE',
+  'Investimento Externo',
+  'Criptomoedas',
 ];
 
 const StepTwo = () => {
@@ -27,12 +31,17 @@ const StepTwo = () => {
   const { currentStep, desiredInvestmentsPlacement, otherInvestments } = store;
 
   const [arrayValues, setArrayValues] = useState(desiredInvestmentsPlacement);
+
+  const { notify } = useSelector(({ settings }) => settings);
+
   const [otherInvestmentsInput, setOtherInvestmentsInput] = useState(
     otherInvestments,
   );
 
   const handleDispatch = useCallback(
     step => {
+      if (!arrayValues?.length && !otherInvestmentsInput && step > currentStep)
+        return notify('Por favor, selecione uma opção!');
       dispatch(
         changeFormState({
           ...store,
@@ -52,6 +61,7 @@ const StepTwo = () => {
       <MessageFeedback strong="bold">
         Onde você deseja investir?
       </MessageFeedback>
+
       <CheckBox
         options={options}
         state={arrayValues}

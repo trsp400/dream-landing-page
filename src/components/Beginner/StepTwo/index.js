@@ -11,12 +11,17 @@ import { Container, Body, Footer } from './styles';
 const StepTwo = () => {
   const dispatch = useDispatch();
   const store = useSelector(({ dreamMachine }) => dreamMachine);
+  const { notify } = useSelector(({ settings }) => settings);
+
   const { currentStep, objectiveCost } = store;
 
   const [inputValue, setInputValue] = useState(objectiveCost);
 
   const handleDispatch = useCallback(
     step => {
+      if (!inputValue && step > currentStep)
+        return notify('Por favor, digite um valor!');
+
       dispatch(
         changeFormState({
           ...store,
@@ -25,7 +30,7 @@ const StepTwo = () => {
             parseFloat(
               inputValue
                 ?.replace(/R$/gi, '')
-                .replace(/./gi, '')
+                .replace(/\./gi, '')
                 .replace(/,/gi, '.'),
             ) || inputValue,
         }),

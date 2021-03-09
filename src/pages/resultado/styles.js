@@ -9,8 +9,19 @@ export const Container = styled(BootstrapContainer)``;
 export const ButtonContainer = styled.div`
   display: flex;
   flex: 1;
+  justify-content: center;
 `;
-export const Button = styled(RippleButton)``;
+export const Button = styled(RippleButton)`
+  width: 50%;
+  font-size: 12px;
+  padding: 3px 1px;
+`;
+
+export const TextResult = styled.div`
+  text-align: center;
+  font: normal normal 400 13px Trasandina;
+  color: #fff;
+`;
 
 export const ModalStyled = styled(Modal)`
   .custom-content {
@@ -35,5 +46,6 @@ export const HeaderStyled = styled(Header)`
 `;
 export const BodyStyled = styled(Body)`
   color: #fff;
-  font: normal normal normal 1.2rem Trasandina;
+  font: normal normal normal 14px Trasandina;
+  text-align: center;
 `;

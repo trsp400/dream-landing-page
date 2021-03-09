@@ -8,15 +8,22 @@ import Button from '../../CustomComponents/Button';
 import MessageFeedback from '../../CustomComponents/MessageFeedback';
 import { Container, ButtonContainer, Body, Footer } from './styles';
 
+import toastConfig from '../../../utils/toastConfig';
+
 const StepFive = () => {
   const dispatch = useDispatch();
   const store = useSelector(({ dreamMachine }) => dreamMachine);
+  const { notify } = useSelector(({ settings }) => settings);
+
   const { currentStep, monthlySupport } = store;
 
   const [inputValue, setInputValue] = useState(monthlySupport);
 
   const handleDispatch = useCallback(
     step => {
+      if (!inputValue && step > currentStep)
+        return notify('Por favor, digite um valor!');
+
       dispatch(
         changeFormState({
           ...store,
@@ -25,7 +32,7 @@ const StepFive = () => {
             parseFloat(
               inputValue
                 ?.replace(/R$/gi, '')
-                .replace(/./gi, '')
+                .replace(/\./gi, '')
                 .replace(/,/gi, '.'),
             ) || inputValue,
         }),
