@@ -44,7 +44,7 @@ const StepOne = () => {
   },[])
 
   const handleDispatch = useCallback(
-    step => {
+    (step, direction) => {
       if (!inputValue && !arrayValues?.length)
         return notify('Por favor, selecione uma objetivo!');
 
@@ -52,6 +52,7 @@ const StepOne = () => {
         changeFormState({
           ...store,
           currentStep: step,
+          direction,
           objective: arrayValues || inputValue,
         }),
       );
@@ -192,7 +193,6 @@ const StepOne = () => {
           />
         </Row>
       </IconGallery>
-
 
     </Container>
     <ModalStyled

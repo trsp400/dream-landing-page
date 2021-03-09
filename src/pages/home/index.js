@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 import {
@@ -9,6 +9,9 @@ import {
   ButtonSection,
   Button,
 } from './styles';
+
+import { useSpring, animated } from 'react-spring';
+// import useMeasure from '../../utils/useMeasure';
 
 import { changeFormState } from '../../redux/dream_machine/actions';
 
@@ -31,27 +34,60 @@ const Home = () => {
   const dispatch = useDispatch();
 
   const store = useSelector(({ dreamMachine }) => dreamMachine);
+  const { isMobileView } = useSelector(({ settings }) => settings);
 
-  const { currentStep, path } = store;
+  const { currentStep, path, direction } = store;
 
-  const onChangeStep = (step, selectedPath) => {
+  const onChangeStep = (step, selectedPath, direction) => {
     dispatch(
       changeFormState({
         ...store,
         currentStep: step,
         path: selectedPath,
+        direction,
       }),
     );
   };
 
+  const springConfig =
+    direction === 'previous'
+      ? {
+          transform: isMobileView ? 'translateX(0px)' : 'translateY(0px)',
+          from: {
+            opacity: 0,
+            transform: isMobileView
+              ? 'translateX(-1000px)'
+              : 'translateY(-1000px)',
+          },
+        }
+      : {
+          transform: isMobileView ? 'translateX(0px)' : 'translateY(0px)',
+          from: {
+            opacity: 0,
+            transform: isMobileView
+              ? 'translateX(1000px)'
+              : 'translateY(1000px)',
+          },
+        };
+
+  const springProps = useSpring({
+    opacity: 1,
+    delay: 0,
+    config: {
+      duration: 700,
+    },
+    reset: currentStep,
+    ...springConfig,
+  });
+
   return currentStep > 0 ? (
-    <div>
+    <animated.div style={{ ...springProps }}>
       <RenderSelectedFormPath
         currentStep={currentStep}
         store={store}
         path={path}
       />
-    </div>
+    </animated.div>
   ) : (
     <Container>
       <Header>
@@ -76,7 +112,10 @@ const Home = () => {
           >
             COMEÇAR AGORA
           </Button>
-          <Button variant="beblue" onClick={() => onChangeStep(1, 'investor')}>
+          <Button
+            variant="beblue"
+            onClick={() => onChangeStep(1, 'investor', 'next')}
+          >
             JÁ SEI ONDE INVESTIR
           </Button>
         </ButtonSection>

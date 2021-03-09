@@ -19,13 +19,14 @@ const StepThree = () => {
   const [inputValue, setInputValue] = useState(objectiveCost);
 
   const handleDispatch = useCallback(
-    step => {
+    (step, direction) => {
       if (!inputValue && step > currentStep)
         return notify('Por favor, digite um valor!');
       dispatch(
         changeFormState({
           ...store,
           currentStep: step,
+          direction,
           objectiveCost: inputValue,
         }),
       );
@@ -46,7 +47,7 @@ const StepThree = () => {
           ripple
           variant="beblue"
           glow
-          onClick={() => handleDispatch(2)}
+          onClick={() => handleDispatch(2, 'previous')}
           style={{
             width: '30%',
           }}
@@ -58,7 +59,7 @@ const StepThree = () => {
           ripple
           variant="beorange"
           glow
-          onClick={() => handleDispatch(4)}
+          onClick={() => handleDispatch(4, 'next')}
           style={{
             width: '30%',
           }}

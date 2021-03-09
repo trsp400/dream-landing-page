@@ -18,7 +18,7 @@ const StepTwo = () => {
   const [inputValue, setInputValue] = useState(objectiveCost);
 
   const handleDispatch = useCallback(
-    step => {
+    (step, direction) => {
       if (!inputValue && step > currentStep)
         return notify('Por favor, digite um valor!');
 
@@ -26,6 +26,7 @@ const StepTwo = () => {
         changeFormState({
           ...store,
           currentStep: step,
+          direction,
           objectiveCost:
             parseFloat(
               inputValue
@@ -56,7 +57,7 @@ const StepTwo = () => {
           ripple
           variant="beblue"
           glow
-          onClick={() => handleDispatch(1)}
+          onClick={() => handleDispatch(1, 'previous')}
           style={{
             width: '30%',
           }}
@@ -68,7 +69,7 @@ const StepTwo = () => {
           ripple
           variant="beorange"
           glow
-          onClick={() => handleDispatch(3)}
+          onClick={() => handleDispatch(3, 'next')}
           style={{
             width: '30%',
           }}
