@@ -5,7 +5,7 @@ import _ from 'lodash';
 import Layout from '../../Layout';
 import LineChart from '../../components/CustomComponents/LineChart';
 import SEO from '../../components/CustomComponents/Seo';
-
+import Loading from '../../components/CustomComponents/Loading';
 import resultProfile from '../../utils/resultProfile';
 
 import {
@@ -165,7 +165,9 @@ const Result = ({ location }) => {
             </BodyStyled>
           </ModalStyled>
         </Container>
-      ) : null}
+      ) : (
+        <Loading />
+      )}
     </Layout>
   );
 };
