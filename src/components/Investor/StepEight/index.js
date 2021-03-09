@@ -3,13 +3,8 @@ import { useSelector, useDispatch } from 'react-redux';
 
 import { navigate } from 'gatsby';
 
-import toastConfig from '../../../utils/toastConfig';
-
-import {
-  changeFormState,
-  sendDreamMachineResultToAPIRequest,
-} from '../../../redux/dream_machine/actions';
-
+import { sendDreamMachineResultToAPIRequest } from '../../../redux/dream_machine/actions';
+import { createResultObject } from '../../../utils/handleResultObject';
 import Input from '../../CustomComponents/Input';
 import Loading from '../../CustomComponents/Loading';
 import Button from '../../CustomComponents/Button';
@@ -22,29 +17,86 @@ const StepEight = () => {
   const { notify } = useSelector(({ settings }) => settings);
 
   const {
+    investmentsPlacement,
+    desiredInvestmentsPlacement,
     result: { email },
-    resultSuccess,
   } = store;
 
   const [inputValue, setInputValue] = useState(email);
-
+  const [validEmail, setValidEmail] = useState(true);
   const [requestLoading, setRequestLoading] = useState(false);
 
-  const handleSubmit = useCallback(() => {
+  const period = parseInt(store.period);
+  const yearOrMonth = store.yearOrMonth;
+  const monthlySupport = parseFloat(
+    store.monthlySupport
+      .replace('R$ ', '')
+      .replace(/\./g, '')
+      .replace(',', '.'),
+  );
+  const currentInvestments = parseFloat(
+    store.currentInvestments
+      .replace('R$ ', '')
+      .replace(/\./g, '')
+      .replace(',', '.'),
+  );
+  const objectiveCost = parseFloat(
+    store.objectiveCost.replace('R$ ', '').replace(/\./g, '').replace(',', '.'),
+  );
+
+  const handleDispatchResultState = useCallback(() => {
+    const resultObject = createResultObject(
+      period,
+      yearOrMonth,
+      monthlySupport,
+      currentInvestments,
+      objectiveCost,
+      inputValue,
+      investmentsPlacement,
+      desiredInvestmentsPlacement,
+    );
+
     if (!inputValue) return notify('Por favor, digite seu e-mail!');
     setRequestLoading(true);
+
     dispatch(
       sendDreamMachineResultToAPIRequest({
         ...store,
-        currentStep: null,
         result: {
-          ...store?.result,
-          email: inputValue,
+          ...resultObject,
         },
+        period,
+        monthlySupport,
+        currentInvestments,
+        objectiveCost,
       }),
-      navigate('/resultado'),
     );
-  }, [dispatch, store]);
+  });
+
+  function emailIsValid(dataEmail) {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(dataEmail);
+  }
+
+  const handleOnClink = email => {
+    const isValidEmail = emailIsValid(email);
+
+    if (isValidEmail) {
+      setValidEmail(true);
+      handleDispatchResultState();
+      navigate('/resultado');
+      return true;
+    }
+
+    return setValidEmail(false);
+  };
+
+  const checkValidEmailOnInputChange = value => {
+    const valid = emailIsValid(value);
+    setValidEmail(valid);
+
+    setInputValue(value);
+    return valid;
+  };
 
   return (
     <Container>
@@ -56,10 +108,13 @@ const StepEight = () => {
 
         <Input
           state={inputValue}
-          setState={setInputValue}
-          type="text"
-          placeholder="E-mail"
+          setState={checkValidEmailOnInputChange}
+          type="email"
         />
+
+        {!validEmail ? (
+          <span style={{ color: 'red' }}>Digite um e-mail válido!</span>
+        ) : null}
 
         <span style={{ color: 'white' }}>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam molestie
@@ -75,7 +130,7 @@ const StepEight = () => {
           ripple
           variant="beorange"
           glow
-          onClick={() => handleSubmit()}
+          onClick={() => handleOnClink(inputValue)}
           style={{
             width: '100%',
           }}
