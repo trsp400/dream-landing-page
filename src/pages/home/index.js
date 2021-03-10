@@ -10,7 +10,7 @@ import {
   Button,
 } from './styles';
 
-import { useSpring, animated } from 'react-spring';
+import { useSpring, animated, config } from 'react-spring';
 // import useMeasure from '../../utils/useMeasure';
 
 import { changeFormState } from '../../redux/dream_machine/actions';
@@ -20,6 +20,8 @@ import RenderBeginnerForm from '../../components/RenderBeginnerSteps';
 
 import Logo from '../../assets/logo/svg/bec_logo.svg';
 import MaquinaDosSonhos from '../../assets/logo/svg/maquinaDosSonhos.svg';
+
+import ImageGallery from '../../components/CustomComponents/ImageGallery';
 
 const RenderSelectedFormPath = ({ currentStep, store, path }) => {
   const paths = {
@@ -71,11 +73,13 @@ const Home = () => {
         };
 
   const springProps = useSpring({
+    // to:
     opacity: 1,
     delay: 0,
-    config: {
-      duration: 700,
-    },
+    // enter: { opacity: 1, transform: 'translateX(0px)' },
+    // leave: { opacity: 0, transform: 'translateX(-400px)' },
+    config: { tension: 300, friction: 70 },
+
     reset: currentStep,
     ...springConfig,
   });
@@ -93,7 +97,9 @@ const Home = () => {
       <Header>
         <Logo />
       </Header>
-      <MaquinaDosSonhos />
+
+      {isMobileView ? <ImageGallery /> : <MaquinaDosSonhos />}
+
       <MainHome>
         <PresentationSection>
           <h1>Quer descobrir o investimento ideal para você?</h1>

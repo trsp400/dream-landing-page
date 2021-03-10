@@ -1,6 +1,10 @@
 import styled, { css } from 'styled-components';
 
-export const Container = styled.div`
+interface ContainerProps {
+  background?: any;
+}
+
+export const Container = styled.div<ContainerProps>`
   width: 100%;
   height: auto;
   overflow: hidden;
