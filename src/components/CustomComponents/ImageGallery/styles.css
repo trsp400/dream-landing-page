@@ -1,0 +1,16 @@
+.bg {
+  position: absolute;
+  top: 20%;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  scale: 1.5;
+  opacity: 0.5;
+  animation: width 2.5s;
+  background-size: contain;
+  background-repeat: no-repeat;
+  object-fit: contain;
+  background-position: center;
+  margin: 0 auto;
+  will-change: opacity;
+}
