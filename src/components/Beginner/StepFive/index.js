@@ -47,7 +47,7 @@ const StepFive = () => {
   return (
     <Container>
       <Body>
-      <MessageFeedbackStyle placing="above" animationSpeed={2000} animationDelay={900}>
+        <MessageFeedbackStyle placing="above" animationSpeed={2000} animationDelay={900}>
           Beleza!
         </MessageFeedbackStyle>
         <MessageFeedbackStyle placing="bellow" animationSpeed={2000} animationDelay={1300}>

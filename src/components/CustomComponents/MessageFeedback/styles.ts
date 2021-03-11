@@ -38,15 +38,15 @@ export const TextStyled = styled.div<PropsTextStyled>`
 
   div {
     width: 95%;
-    padding-left: 35px;
-
+    padding: 0 8px 0 26px;
+    line-height: 26px;
     overflow: hidden;
 
     svg {
-    position: absolute;
-    top: 8px;
-    left: 0;
-  }
+      position: absolute;
+      top: 8px;
+      left: 0;
+    }
 
     span {
       color: #fff;
