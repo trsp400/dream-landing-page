@@ -28,19 +28,16 @@ const ListDecision: FC<ListDecisionProps> = ({ options, state, setState }) => {
 
           return (
             <Col
-              key={index}
               md={4}
               xl={4}
               className="d-flex justify-content-center"
               onClick={() => setState(index + 1)}
-              style={{ cursor: 'pointer' }}
               key={index + 1}
             >
               <ListDecisionContainerStyled>
                 <Row style={{ width: '100%' }}>
                   <Col
                     className="col-1 d-flex justify-content-center"
-                    style={{ margin: 'auto 0' }}
                     md={12}
                   >
                     <ListDecisionCheckStyled

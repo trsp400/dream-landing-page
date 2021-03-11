@@ -9,15 +9,15 @@ export const Container = styled(ContainerBootstrap)``;
 export const Row = styled(RowBootstrap)``;
 export const Col = styled(ColBootstrap)``;
 
-export const ListDecisionContainerStyled = styled.div`
-  min-height: 85%;
-  height: 85%;
+export const ListDecisionContainerStyled = styled.section`
+  height: 60%;
   display: flex;
   justify-content: center;
+  align-items: center;
   cursor: pointer;
   width: 100%;
   margin: 20px 0;
-  padding: 10px;
+  /* padding: 10px; */
   position: relative;
   background-color: ${({ theme }) => theme.mobileTheme.colors.primary.orange};
   border-radius: 10px;
@@ -30,9 +30,6 @@ export const ListDecisionCheckStyled = styled.div`
   height: 14px;
   width: 14px;
 
-  margin: 0 auto;
-  position: absolute;
-
   background-color: var(--color);
   box-shadow: inset 0px 0px 4px rgba(0, 0, 0, 0.25),
     inset 0px 1px 2px 1px rgba(0, 0, 0, 0.25);
@@ -41,8 +38,9 @@ export const ListDecisionCheckStyled = styled.div`
 
 export const ListDecisionTextStyled = styled.p`
   width: 100%;
-  font: normal normal 400 16px Trasandina;
-  margin: auto 0;
+  font: 400 12px Trasandina;
+
   color: #fff;
-  height: max-content;
+  /* height: max-content; */
+  line-height: 14px;
 `;

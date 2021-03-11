@@ -25,10 +25,45 @@ export const MessageFeedbackStyle = styled(MessageFeedback)`
   }
 `;
 
-export const Footer = styled.div`
+export const BoxInput = styled.div`
+  position: relative;
+
   display: flex;
-  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+
+  width: 100%;
+  height: auto;
+  margin-top: 25px;
+
+  padding: 50px;
+`;
+
+export const Footer = styled.div`
+  position: fixed;
+  bottom: 10%;
+  width: 100%;
+  height: 10%;
+  display: flex;
+
   justify-content: space-between;
+  padding: 0 10%;
+
+  button {
+    width: 100%;
+    position: relative;
+
+    &:last-child {
+      margin-left: 10px;
+    }
+
+
+    svg {
+      height: 90%;
+    }
+
+  }
+
 `;
 
 export const ButtonContainer = styled.div`

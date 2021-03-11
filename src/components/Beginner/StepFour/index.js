@@ -49,7 +49,7 @@ const StepFour = () => {
       <MessageFeedbackStyle placing="above" animationSpeed={2000} animationDelay={900}>
           Beleza!
         </MessageFeedbackStyle>
-        <MessageFeedbackStyle placing="bellow" animationSpeed={2000} animationDelay={2800}>
+        <MessageFeedbackStyle placing="bellow" animationSpeed={2000} animationDelay={1300}>
         Quanto você pode investir hoje?
         </MessageFeedbackStyle>
         <BoxInput>

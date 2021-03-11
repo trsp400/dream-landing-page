@@ -38,7 +38,7 @@ export const TextStyled = styled.div<PropsTextStyled>`
 
   div {
     width: 95%;
-    padding-left: 24px;
+    padding-left: 35px;
 
     overflow: hidden;
 
