@@ -9,6 +9,7 @@ import Input from '../../CustomComponents/Input';
 import Loading from '../../CustomComponents/Loading';
 import Button from '../../CustomComponents/Button';
 import MessageFeedback from '../../CustomComponents/MessageFeedback';
+import { parseCurrencyFloat, parseStringInt } from '../../../utils/parseValues';
 import { Container, Body, Footer } from './styles';
 
 const StepEight = () => {
@@ -26,23 +27,11 @@ const StepEight = () => {
   const [validEmail, setValidEmail] = useState(true);
   const [requestLoading, setRequestLoading] = useState(false);
 
-  const period = parseInt(store.period);
+  const period = parseStringInt(store.period);
   const yearOrMonth = store.yearOrMonth;
-  const monthlySupport = parseFloat(
-    store.monthlySupport
-      .replace('R$ ', '')
-      .replace(/\./g, '')
-      .replace(',', '.'),
-  );
-  const currentInvestments = parseFloat(
-    store.currentInvestments
-      .replace('R$ ', '')
-      .replace(/\./g, '')
-      .replace(',', '.'),
-  );
-  const objectiveCost = parseFloat(
-    store.objectiveCost.replace('R$ ', '').replace(/\./g, '').replace(',', '.'),
-  );
+  const monthlySupport = parseCurrencyFloat(store.monthlySupport);
+  const currentInvestments = parseCurrencyFloat(store.currentInvestments);
+  const objectiveCost = parseCurrencyFloat(store.objectiveCost);
 
   const handleDispatchResultState = useCallback(() => {
     const resultObject = createResultObject(
