@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 import {
@@ -8,9 +8,10 @@ import {
   PresentationSection,
   ButtonSection,
   Button,
+  Background,
 } from './styles';
 
-import { useSpring, animated, config } from 'react-spring';
+import { useSpring, animated } from 'react-spring';
 
 import { changeFormState } from '../../redux/dream_machine/actions';
 
@@ -86,8 +87,7 @@ const Home = () => {
     <animated.div
       style={{
         ...springProps,
-        backgroundImage: `url('${Pattern}')`,
-        zIndex: 999,
+        height: '100vh',
       }}
     >
       <RenderSelectedFormPath
@@ -101,7 +101,7 @@ const Home = () => {
       <Header>
         <Logo />
       </Header>
-
+      <Background />
       {isMobileView ? <ImageGallery /> : <MaquinaDosSonhos />}
 
       <MainHome>

@@ -1,5 +1,6 @@
 import React, { useCallback, useState, useEffect, memo } from 'react';
 import { useTransition, animated } from 'react-spring';
+import { useSelector } from 'react-redux';
 
 import './styles.css';
 
@@ -18,15 +19,19 @@ const slides = [
 
 const Gallery = () => {
   const [index, setIndex] = useState(0);
+  const { screenSize } = useSelector(({ settings }) => settings);
 
   const transitions = useTransition(slides[index], item => item.id, {
     from: {
       opacity: 0,
-      transform: 'translateX(400px)',
+      transform: screenSize > 600 ? 'translateX(800px)' : 'translateX(400px)',
     },
 
     enter: { opacity: 0.5, transform: 'translateX(-10px)' },
-    leave: { opacity: 0, transform: 'translateX(-400px)' },
+    leave: {
+      opacity: 0,
+      transform: screenSize > 600 ? 'translateX(-800px)' : 'translateX(-400px)',
+    },
     config: {
       tension: 1000,
       friction: 600,
@@ -43,8 +48,8 @@ const Gallery = () => {
   const returnScaleForEachImage = useCallback(imageIndex => {
     const scales = {
       0: {
-        scale: '1.8',
-        top: '-10%',
+        scale: '1.5',
+        top: screenSize <= 1024 && screenSize >= 860 ? '-3%' : '-10%',
       },
       3: {
         top: '5%',
