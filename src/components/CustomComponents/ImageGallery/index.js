@@ -63,16 +63,7 @@ const Gallery = () => {
           ...returnScaleForEachImage(item.id),
         }}
         key={key}
-      >
-        <animated.div
-          style={{
-            backgroundImage: `url(${item.background})`,
-            opacity: 1,
-            position: 'relative',
-            zIndex: 9999,
-          }}
-        />
-      </animated.div>
+      />
     );
   });
 };

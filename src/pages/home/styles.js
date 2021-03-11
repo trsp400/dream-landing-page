@@ -3,6 +3,8 @@ import { Container as BootstrapContainer, ButtonGroup } from 'react-bootstrap';
 
 import RippleButton from '../../components/CustomComponents/Button';
 
+import Pattern from '../../images/background-pattern.png';
+
 export const Container = styled(BootstrapContainer)`
   height: 100vh;
   display: flex;
@@ -10,18 +12,21 @@ export const Container = styled(BootstrapContainer)`
   align-items: center;
   position: relative;
 
-  background: rgb(26, 74, 115);
+  /* background: rgb(26, 74, 115); */
   background: linear-gradient(
     180deg,
     rgba(26, 74, 115, 1) 52%,
     rgba(67, 106, 140, 1) 65%
   );
+
+  background-image: url('${Pattern}');
+
   width: 100vw;
   height: 100vh;
-  background-size: contain;
-  background-repeat: no-repeat;
-  object-fit: contain;
+  background-size: cover;
+  object-fit: cover;
   background-position: center;
+  z-index: 9999;
   > svg {
     position: absolute;
     top: -40px;
@@ -38,11 +43,16 @@ export const Header = styled.header`
   justify-content: center;
   align-items: center;
 
+  /* background-size: cover;
+  object-fit: cover;
+  background-position: center;
+ */
+  /* background-image: url('${Pattern}'); */
+
   box-shadow: 0px 3px 0px 0px #ea5e45;
 
   position: absolute;
   background-color: #1a4a73;
-  z-index: 99;
 
   svg {
     width: 50%;

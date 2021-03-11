@@ -1,14 +1,14 @@
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 
-interface ContainerProps {
-  background?: any;
-}
-
-export const Container = styled.div<ContainerProps>`
+export const Container = styled.div`
   width: 100%;
   height: auto;
   overflow: hidden;
   background-color: ${({ theme }) => theme.mobileTheme.colors.primary.blue};
+  background-size: cover;
+  background-repeat: no-repeat;
+  object-fit: cover;
+  background-position: center;
 `;
 
 export const ProgressBarContainer = styled.div`

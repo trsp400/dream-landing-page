@@ -26,7 +26,8 @@ const GlobalStyle = createGlobalStyle`
   }
 
   body {
-    background-color: ${({ theme }) => theme.mobileTheme.colors.primary.blue};
+    /* background-color: ${({ theme }) =>
+      theme.mobileTheme.colors.primary.blue}; */
     -webkit-font-smoothing: antialiased;
   }
 

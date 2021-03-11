@@ -5,9 +5,15 @@ import useWindowSize from '../utils/useWindowSizeHook';
 
 import { screenResize } from '../redux/settings/actions';
 
-import { Main, Container, ProgressBarContainer } from './styles';
+import {
+  Main,
+  Container,
+  ProgressBarContainer,
+  BackgroundPattern,
+} from './styles';
 
 import ProgressBar from '../components/CustomComponents/ProgressBar';
+import Pattern from '../images/background-pattern.png';
 
 interface RenderProgressBarProps {
   path: 'investor' | 'beginner';
@@ -58,7 +64,16 @@ const Layout = props => {
   }, [width, dispatch]);
 
   return (
-    <Container>
+    <Container
+      style={{
+        backgroundImage: `url(${Pattern})`,
+      }}
+    >
+      {/* <BackgroundPattern
+        style={{
+          backgroundImage: `url(${Pattern})`,
+        }}
+      /> */}
       {currentStep && isMobileView && (
         <RenderProgressBar path={path} currentStep={currentStep} />
       )}
