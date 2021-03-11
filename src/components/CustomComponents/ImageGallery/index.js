@@ -5,16 +5,15 @@ import { useSelector } from 'react-redux';
 import './styles.css';
 
 import Traveler from '../../../images/traveler.png';
-import TravelerBackground from '../../../images/traveler_background.png';
 import Chef from '../../../images/chef.png';
 import Ballet from '../../../images/ballet.png';
 import DreamMachine from '../../../images/maquinaDosSonhos.png';
 
 const slides = [
-  { id: 0, url: DreamMachine, background: TravelerBackground },
-  { id: 1, url: Traveler, background: TravelerBackground },
-  { id: 2, url: Chef, background: TravelerBackground },
-  { id: 3, url: Ballet, background: TravelerBackground },
+  { id: 0, url: DreamMachine },
+  { id: 1, url: Traveler },
+  { id: 2, url: Chef },
+  { id: 3, url: Ballet },
 ];
 
 const Gallery = () => {
