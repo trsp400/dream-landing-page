@@ -32,15 +32,18 @@ const Text: FC<TextProps> = ({
 
   const performWritingEffect = (speed : number):void => {
 
+    // const highlightedWord = children.split(" "). ;
     const dataEtructureText = children.split("");
 
     dataEtructureText.forEach((letter, index)=> {
       setTimeout(() => {
         if(refText.current){
+
           refText.current.innerHTML += letter
         }
       }, speed/100 * index)
     })
+
   }
 
   const renderAnimationWritingEffect = ():void => {
@@ -51,7 +54,6 @@ const Text: FC<TextProps> = ({
       }, animationDelay)
     }
  }
-
 
   return (
     <TextStyled placing={placing} largeLowSpace={largeLowSpace}>

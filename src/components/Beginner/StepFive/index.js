@@ -8,6 +8,8 @@ import Button from '../../CustomComponents/Button';
 import MessageFeedback from '../../CustomComponents/MessageFeedback';
 import { Container, ButtonContainer, Body, Footer } from './styles';
 
+import Lefticon from '../../../assets/icons/left-icon.svg'
+
 import toastConfig from '../../../utils/toastConfig';
 
 const StepFive = () => {
@@ -59,11 +61,8 @@ const StepFive = () => {
           variant="beblue"
           glow
           onClick={() => handleDispatch(4, 'previous')}
-          style={{
-            width: '30%',
-          }}
         >
-          {'<='}
+          <Lefticon />
         </Button>
 
         <Button
@@ -71,9 +70,6 @@ const StepFive = () => {
           variant="beorange"
           glow
           onClick={() => handleDispatch(6, 'next')}
-          style={{
-            width: '30%',
-          }}
         >
           OK
         </Button>
