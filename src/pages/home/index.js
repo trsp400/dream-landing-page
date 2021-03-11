@@ -17,7 +17,7 @@ import { changeFormState } from '../../redux/dream_machine/actions';
 import RenderInvestorForm from '../../components/RenderInvestorSteps';
 import RenderBeginnerForm from '../../components/RenderBeginnerSteps';
 
-import SpringerInterpolate from '../../components/CustomComponents/SpringerInterpolate';
+// import SpringerInterpolate from '../../components/CustomComponents/SpringerInterpolate';
 
 import Logo from '../../assets/logo/svg/bec_logo.svg';
 import MaquinaDosSonhos from '../../assets/logo/svg/maquinaDosSonhos.svg';
@@ -98,9 +98,10 @@ const Home = () => {
       {isMobileView ? (
         <MaquinaDosSonhos />
       ) : (
-        <SpringerInterpolate>
-          <MaquinaDosSonhosDesktop style={{ width: '500px' }} />
-        </SpringerInterpolate>
+        // <SpringerInterpolate>
+        //   <MaquinaDosSonhosDesktop style={{ width: '500px' }} />
+        // </SpringerInterpolate>
+        <MaquinaDosSonhosDesktop />
       )}
       <MainHome>
         <PresentationSection>
