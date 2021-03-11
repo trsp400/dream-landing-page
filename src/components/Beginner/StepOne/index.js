@@ -17,12 +17,13 @@ import Input from '../../CustomComponents/Input';
 import Button from '../../CustomComponents/Button';
 import IconGallery, { Card, Row } from '../../CustomComponents/IconGallery';
 
-import { Container,Footer, BodyModalStyled, HeaderModalStyled, ModalStyled, MessageFeedbackStyle,   } from './styles';
+import { Container,Footer, BodyModalStyled, HeaderModalStyled, ModalStyled, MessageFeedbackStyle } from './styles';
 
 const labelSize = 8.8;
 const iconSize = 38
 
 import toastConfig from '../../../utils/toastConfig';
+import { isNull } from 'lodash-es';
 
 const StepOne = () => {
   const dispatch = useDispatch();
@@ -31,21 +32,28 @@ const StepOne = () => {
 
   const { currentStep, path, objective } = store;
 
-  const [inputValue, setInputValue] = useState(
-    typeof objective === 'string' && objective,
-  );
-  const [arrayValues, setArrayValues] = useState(
-    typeof objective === 'object' ? objective : null,
-  );
+  const [inputValue, setInputValue] = useState("");
+  const [objectiveValue, setObjectiveValue] = useState("")
   const [isVisibleModal, setIsVisibleModal] = useState(false)
 
-  // useEffect(()=>{
-  //   resetStore()
-  // },[])
+  useEffect(() => {
+    (function() {
+      const mockObjectivesArrayDefault = ["CASAMENTO","CASA","APOSENTADORIA","INTERCÂMBIO","AUTOMÓVEL","INDEPENDÊNCIA FINANCEIRA"]
+
+      const indexStandardObjective = mockObjectivesArrayDefault.findIndex(defaultObjective => defaultObjective === objective)
+
+      if(indexStandardObjective < 0) {
+        setInputValue(objective)
+      }
+
+    })()
+  }, [objective])
 
   const handleDispatch = useCallback(
-    (step, direction) => {
-      if (!inputValue && !arrayValues?.length)
+
+    (objectiveValue, step, direction) => {
+
+      if (!objectiveValue)
         return notify('Por favor, selecione uma objetivo!');
 
       dispatch(
@@ -53,36 +61,44 @@ const StepOne = () => {
           ...store,
           currentStep: step,
           direction,
-          objective: arrayValues || inputValue,
+          objective: objectiveValue,
         }),
       );
     },
-    [dispatch, store, arrayValues, inputValue],
+    [dispatch, store, objectiveValue, inputValue],
   );
 
-  const handleCardClick = (event, label) => {
+
+
+  const handleCardClick = async (event, label) => {
 
     if(label.toLowerCase() !== "outros") {
-      setArrayValues([label])
-      return
+      insertValueInObjective("default", label)
+      return;
     }
+
+    setObjectiveValue(label)
     setIsVisibleModal(!isVisibleModal);
-
-
-    handleDispatch(2)
   };
 
-  const handleInputChange = () => {
 
-    setArrayValues(
-      arrayValue => {
-        arrayValue.shift()
-        arrayValue.push(inputValue.toUpperCase())
-        handleDispatch(2)
+
+  const insertValueInObjective = async (argElement, value) => {
+
+    const setValueInStateObjective = {
+      default: () => {
+       setObjectiveValue(value);
+       handleDispatch(value, 2, "next")
+
+      },
+      others: () => {
+        const valueUpperCase = value.toUpperCase()
+        handleDispatch(valueUpperCase, 2, "next")
       }
-    )
+    }
 
-
+    const resolvValueInStateObjective = setValueInStateObjective[argElement]
+    resolvValueInStateObjective();
   };
 
   const resetStore = useCallback(() => {
@@ -115,18 +131,19 @@ const StepOne = () => {
       }),
     );
   }, [dispatch, store]);
+
   return (
     <>
     <Container>
-      <MessageFeedbackStyle placing="above" animationSpeed={3000}>
+      <MessageFeedbackStyle placing="above" animationSpeed={3000} animationDelay={900}>
         Olá, vamos começar?
       </MessageFeedbackStyle>
 
-      <MessageFeedbackStyle placing="bellow" animationSpeed={3000} animationDelay={1000}>
+      <MessageFeedbackStyle placing="bellow" animationSpeed={3000} animationDelay={1500}>
         Qual o seu objetivo de vida?
       </MessageFeedbackStyle>
 
-      <IconGallery onClick={handleCardClick} arrayValues={arrayValues}>
+      <IconGallery onClick={handleCardClick} objectiveValue={objectiveValue}>
         <Row>
           <Card
             backgroundColor="#EA5E45"
@@ -221,7 +238,7 @@ const StepOne = () => {
             ripple
             variant="beorange"
             glow
-            onClick={() => handleInputChange()}
+            onClick={() => insertValueInObjective("others", inputValue)}
             style={{
               width: '30%',
             }}

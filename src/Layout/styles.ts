@@ -4,7 +4,8 @@ export const Container = styled.div`
   width: 100%;
   height: 100vh;
   overflow: hidden;
-  background-color: ${({ theme }) => theme.mobileTheme.colors.primary.blue};
+  /* background-color: ${({ theme }) => theme.mobileTheme.colors.primary.blue}; */
+  position: relative;
 `;
 
 export const ProgressBarContainer = styled.div`
@@ -18,6 +19,6 @@ export const ProgressBarContainer = styled.div`
 export const Main = styled.main`
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  /* justify-content: center; */
   height: 100%;
 `;

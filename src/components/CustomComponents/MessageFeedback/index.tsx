@@ -9,23 +9,26 @@ interface TextProps {
   className?: string;
   strong?: 'normal' | 'bold' | 'bolder' | 'italic' | 'lighter';
   placing: 'above' | 'bellow',
+  largeLowSpace?: boolean,
   animationSpeed?: number,
   animationDelay?: number,
   icon?: JSX.Element[] | JSX.Element;
 }
 
-const Text: FC<TextProps> = ({ strong = 'normal', icon = <SvgDefault />, children,animationSpeed, animationDelay, placing ,...props }) => {
+const Text: FC<TextProps> = ({
+  icon = <SvgDefault />,
+  children,
+  animationSpeed,
+  animationDelay,
+  placing ,
+  largeLowSpace = false,
+  ...props }) => {
 
   const refText = useRef<HTMLElement>(null)
 
   useEffect(() => {
     renderAnimationWritingEffect();
   }, [])
-
-  useEffect(() => {
-    return () => { console.log(refText.current.innerHTML) }
-  })
-
 
   const performWritingEffect = (speed : number):void => {
 
@@ -51,7 +54,7 @@ const Text: FC<TextProps> = ({ strong = 'normal', icon = <SvgDefault />, childre
 
 
   return (
-    <TextStyled placing={placing}>
+    <TextStyled placing={placing} largeLowSpace={largeLowSpace}>
       <div>
         {icon}
         <span className="text-specific" ref={refText}/>

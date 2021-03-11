@@ -2,7 +2,7 @@ import { createGlobalStyle } from 'styled-components';
 
 const GlobalStyle = createGlobalStyle`
 
-  *{
+  * {
     margin: 0;
     padding: 0;
     outline: 0;
@@ -18,9 +18,7 @@ const GlobalStyle = createGlobalStyle`
 
 
   html, body {
-    height: 100%;
-    background: #fff;
-    /* font-family: Trasandina; */
+    height: 100vh;
     width: 100%;
   }
 
@@ -30,10 +28,8 @@ const GlobalStyle = createGlobalStyle`
   }
 
   body, button, input, p, footer, div, li {
-    /* font-family: Trasandina; */
     outline: 0;
     border: 0;
-    box-sizing: border-box;
   }
 
   button{

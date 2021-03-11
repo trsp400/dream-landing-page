@@ -62,7 +62,9 @@ const Layout = props => {
       {!!currentStep && isMobileView && (
         <RenderProgressBar path={path} currentStep={currentStep} />
       )}
-      <Main>{children}</Main>
+      <Main>
+        {children}
+      </Main>
     </Container>
   );
 };

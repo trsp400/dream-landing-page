@@ -2,6 +2,7 @@ import styled, { css, CSSProp } from 'styled-components';
 
 interface PropsTextStyled {
   placing: 'above' | 'bellow',
+  largeLowSpace?: boolean,
 }
 
 interface PropsObjFormatTextPerPlacing {
@@ -22,12 +23,13 @@ const formatTextPerPlacing:PropsObjFormatTextPerPlacing = {
 export const TextStyled = styled.div<PropsTextStyled>`
   display: flex;
   width: 100%;
-  height: 30px;
+  height: ${props => props.largeLowSpace ? "18%" : "10%"};
   margin: 0 20px 0;
 
+  line-height: 5px;
+
   &:nth-child(2) {
-    height: 60px;
-    line-height: 26px;
+    height: 12%;
   }
 
   position: relative;
@@ -35,19 +37,22 @@ export const TextStyled = styled.div<PropsTextStyled>`
   ${ props =>  formatTextPerPlacing[props.placing]}
 
   div {
+    width: 95%;
     padding-left: 24px;
-    position: relative;
-  }
 
-  svg {
+    overflow: hidden;
+
+    svg {
     position: absolute;
     top: 8px;
     left: 0;
   }
 
-  span {
-    color: #fff;
+    span {
+      color: #fff;
+    }
   }
+
 
 `;
 

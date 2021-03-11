@@ -6,7 +6,9 @@ import Input from '../../CustomComponents/Input';
 import Button from '../../CustomComponents/Button';
 import MessageFeedback from '../../CustomComponents/MessageFeedback';
 
-import { Container, Body, Footer } from './styles';
+import Lefticon from '../../../assets/icons/left-icon.svg'
+
+import { Container, Body, MessageFeedbackStyle,BoxInput, Footer } from './styles';
 
 const StepTwo = () => {
   const dispatch = useDispatch();
@@ -44,13 +46,16 @@ const StepTwo = () => {
   return (
     <Container>
       <Body>
-        <MessageFeedback strong="lighter">
-          Que legal! Com a Máquina dos Sonhos da BeCapital você consegue [...]
-          com tranquilidade!
-        </MessageFeedback>
-        <MessageFeedback strong="bold">De quanto você precisa?</MessageFeedback>
+       <MessageFeedbackStyle placing="above" animationSpeed={2000} animationDelay={900} largeLowSpace>
+          Que legal! Com a Máquina dos Sonhos da BeCapital você consegue com tranquilidade!
+        </MessageFeedbackStyle>
+        <MessageFeedbackStyle placing="bellow" animationSpeed={2000} animationDelay={2800}>
+          De quanto você precisa?
+        </MessageFeedbackStyle>
 
-        <Input state={inputValue} setState={setInputValue} type="currency" />
+        <BoxInput>
+          <Input state={inputValue} setState={setInputValue} type="currency" />
+        </BoxInput>
       </Body>
       <Footer>
         <Button
@@ -58,11 +63,8 @@ const StepTwo = () => {
           variant="beblue"
           glow
           onClick={() => handleDispatch(1, 'previous')}
-          style={{
-            width: '30%',
-          }}
         >
-          {'<='}
+          <Lefticon />
         </Button>
 
         <Button
@@ -70,9 +72,7 @@ const StepTwo = () => {
           variant="beorange"
           glow
           onClick={() => handleDispatch(3, 'next')}
-          style={{
-            width: '30%',
-          }}
+
         >
           OK
         </Button>

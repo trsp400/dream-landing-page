@@ -10,12 +10,12 @@ export interface CardProps extends BootstrapCardProps {
   labelColor?: string;
   backgroundColor?: string;
   onClick?: (event, value: string) => void;
-  arrayValues?: string | String[];
+  objectiveValue?: string;
   labelSize?: number;
 }
 
 interface GalleryProps {
-  arrayValues?: Array<String>;
+  objectiveValue?: string;
   onClick?: () => void;
   children: any;
 }
@@ -26,7 +26,7 @@ interface RowProps {
 
 const IconGallery: React.FC<GalleryProps> = ({
   children,
-  arrayValues,
+  objectiveValue,
   onClick,
 }) => {
   return (
@@ -34,13 +34,13 @@ const IconGallery: React.FC<GalleryProps> = ({
       {children.length > 1
         ? children.map(child => {
             return React.cloneElement(child, {
-              arrayValues,
+              objectiveValue,
               onClick,
               key: Math.random(),
             });
           })
         : React.cloneElement(children, {
-            arrayValues,
+            objectiveValue,
             onClick,
             key: Math.random(),
           })}
@@ -73,13 +73,14 @@ export const Card: React.FC<CardProps> = ({
   labelColor,
   backgroundColor,
   onClick,
-  arrayValues,
+  objectiveValue,
   labelSize,
 }) => {
+
   return (
     <CardContainer onClick={event => (onClick ? onClick(event, label) : null)} >
       <CardBody
-        checked={arrayValues && arrayValues.includes(label)}
+        checked={objectiveValue === label}
         iconsize={iconSize}
         backgroundcolor={backgroundColor}
       >
