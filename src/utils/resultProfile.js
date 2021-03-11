@@ -1,4 +1,4 @@
-export default profile => {
+export default (profile = 'Conservador/Conservador') => {
   const [first, second] = profile.split('/');
 
   switch (first) {
