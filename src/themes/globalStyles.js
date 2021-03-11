@@ -1,4 +1,5 @@
 import { createGlobalStyle } from 'styled-components';
+import '../../static/fonts/fonts.css';
 
 const GlobalStyle = createGlobalStyle`
 
@@ -9,7 +10,7 @@ const GlobalStyle = createGlobalStyle`
     box-sizing: border-box;
     list-style: none;
     text-decoration: none;
-    /* font-family: 'Trasandina'; */
+    font-family: Trasandina;
   }
 
   *:focus{
@@ -18,7 +19,9 @@ const GlobalStyle = createGlobalStyle`
 
 
   html, body {
-    height: 100vh;
+    height: 100%;
+    background: #fff;
+    font-family: Trasandina;
     width: 100%;
   }
 
@@ -28,6 +31,7 @@ const GlobalStyle = createGlobalStyle`
   }
 
   body, button, input, p, footer, div, li {
+    font-family: Trasandina;
     outline: 0;
     border: 0;
   }
