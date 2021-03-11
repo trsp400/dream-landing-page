@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 import {
@@ -11,15 +11,17 @@ import {
 } from './styles';
 
 import { useSpring, animated } from 'react-spring';
-// import useMeasure from '../../utils/useMeasure';
 
 import { changeFormState } from '../../redux/dream_machine/actions';
 
 import RenderInvestorForm from '../../components/RenderInvestorSteps';
 import RenderBeginnerForm from '../../components/RenderBeginnerSteps';
 
+// import SpringerInterpolate from '../../components/CustomComponents/SpringerInterpolate';
+
 import Logo from '../../assets/logo/svg/bec_logo.svg';
 import MaquinaDosSonhos from '../../assets/logo/svg/maquinaDosSonhos.svg';
+import MaquinaDosSonhosDesktop from '../../assets/logo/svg/maquinaDosSonhosDesktop.svg';
 
 const RenderSelectedFormPath = ({ currentStep, store, path }) => {
   const paths = {
@@ -89,11 +91,18 @@ const Home = () => {
       />
     </animated.div>
   ) : (
-    <Container>
+    <Container isMobileView={isMobileView}>
       <Header>
         <Logo />
       </Header>
-      <MaquinaDosSonhos />
+      {isMobileView ? (
+        <MaquinaDosSonhos />
+      ) : (
+        // <SpringerInterpolate>
+        //   <MaquinaDosSonhosDesktop style={{ width: '500px' }} />
+        // </SpringerInterpolate>
+        <MaquinaDosSonhosDesktop />
+      )}
       <MainHome>
         <PresentationSection>
           <h1>Quer descobrir o investimento ideal para você?</h1>
