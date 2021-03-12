@@ -3,7 +3,7 @@ import '../../static/fonts/fonts.css';
 
 const GlobalStyle = createGlobalStyle`
 
-  *{
+  * {
     margin: 0;
     padding: 0;
     outline: 0;
@@ -34,7 +34,6 @@ const GlobalStyle = createGlobalStyle`
     font-family: Trasandina;
     outline: 0;
     border: 0;
-    box-sizing: border-box;
   }
 
   button{

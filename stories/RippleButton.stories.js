@@ -2,7 +2,7 @@ import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { action  } from '@storybook/addon-actions';
 
-import RippleButton from '../src/components/Button'
+import RippleButton from '../src/components/CustomComponents/Button'
 
 
 const style = {
