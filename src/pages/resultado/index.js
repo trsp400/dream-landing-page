@@ -5,44 +5,54 @@ import _ from 'lodash';
 import Layout from '../../Layout';
 import LineChart from '../../components/CustomComponents/LineChart';
 import SEO from '../../components/CustomComponents/Seo';
-import Loading from '../../components/CustomComponents/Loading';
 import resultProfile from '../../utils/resultProfile';
+import { parseCurrencyFloat } from '../../utils/parseValues';
 
 import {
   Container,
   Button,
   ButtonContainer,
-  BodyStyled,
-  HeaderStyled,
-  ModalStyled,
   TextResult,
+  ContainerRate,
+  ContainerRateTitle,
+  ContainerRateSubTitle,
+  ContainerRateBox,
+  ContainerRateBoxItems,
+  ButtonShowGraphic,
 } from './styles';
 import { navigate } from 'gatsby-link';
 
-const Result = ({ location }) => {
-  const [showModal, setShowModal] = useState(false);
+const Result = () => {
+  const [showGraphic, setShowGraphic] = useState(false);
   const { isMobileView } = useSelector(({ settings }) => settings);
   const store = useSelector(({ dreamMachine }) => dreamMachine);
 
   const {
     result: {
-      yearlyAverageArray,
       achievedObjectiveCost,
       newPeriod,
       monthlyRate,
       annualRate,
       riskProfile,
+      yearlyAverageArray,
     },
+    currentStep,
+    comingFromLastStep,
     resultSuccess,
-    objectiveCost,
   } = store;
+
+  const monthlySupport = parseCurrencyFloat(store.monthlySupport);
+  const currentInvestments = parseCurrencyFloat(store.currentInvestments);
+  const objectiveCost = parseCurrencyFloat(store.objectiveCost);
+
+  if (!comingFromLastStep) navigate('/');
 
   const resultRiskProfile = resultProfile(riskProfile);
 
   const arrayNewPeriod = [];
   let newPeriodChunk = [];
 
-  const yearlyAverageArrayModificad = yearlyAverageArray.map(y => ({
+  const yearlyAverageArrayModificad = yearlyAverageArray?.map(y => ({
     x: y.Ano,
     y: y.Media,
   }));
@@ -79,18 +89,60 @@ const Result = ({ location }) => {
     },
   ];
 
-  useEffect(() => {
-    setTimeout(() => {
-      if (!resultSuccess) navigate('/');
-    }, 15000);
-  }, []);
-
   return (
     <Layout>
       <SEO title="Resultado | Máquina dos Sonhos" />
-      {yearlyAverageArray?.length ? (
-        <Container>
-          <h1>Resultado</h1>
+      <Container
+        style={{
+          // justifyContent: showGraphic ? 'flex-start' : 'center',
+          justifyContent: 'center',
+        }}
+      >
+        <ContainerRate
+          style={
+            showGraphic
+              ? {
+                  marginTop: '1rem',
+                  padding: '18px 35px',
+                  animation: 'up 1s ease-in-out',
+                }
+              : { padding: '30px 35px', animation: 'down 1s ease-in-out' }
+          }
+        >
+          <ContainerRateTitle>Crescimento da Carteira</ContainerRateTitle>
+          <ContainerRateSubTitle>
+            Para conseguir alcançar seu objetivo,
+            <br />o seu patrimônio precisa performar
+          </ContainerRateSubTitle>
+
+          <ContainerRateBox>
+            {achievedObjectiveCost ? (
+              <>
+                <ContainerRateBoxItems bg="#c5dee5">
+                  AO MÊS: <strong>0,00%</strong>
+                </ContainerRateBoxItems>
+                <ContainerRateBoxItems bg="#fecfc4">
+                  AO ANO: <strong>0,00%</strong>
+                </ContainerRateBoxItems>
+              </>
+            ) : (
+              <>
+                <ContainerRateBoxItems bg="#c5dee5">
+                  AO MÊS: <strong>{monthlyRate}%</strong>
+                </ContainerRateBoxItems>
+                <ContainerRateBoxItems bg="#fecfc4">
+                  AO ANO: <strong>{annualRate}%</strong>
+                </ContainerRateBoxItems>
+              </>
+            )}
+          </ContainerRateBox>
+
+          <ButtonShowGraphic onClick={() => setShowGraphic(!showGraphic)}>
+            V
+          </ButtonShowGraphic>
+        </ContainerRate>
+
+        {showGraphic && (
           <LineChart
             slider
             isMobileView={isMobileView}
@@ -101,80 +153,68 @@ const Result = ({ location }) => {
                 ? yearlyAverageArrayModificad
                 : fakeData
             }
+            style={{ marginBottom: '2rem' }}
           />
+        )}
 
-          <TextResult>
-            {achievedObjectiveCost ? (
-              <p style={{ marginTop: '2rem' }}>
-                Você conseguiria alcaçar este valor em
-                {countYearNewPeriod
-                  ? countYearNewPeriod > 1
-                    ? ` ${countYearNewPeriod} anos`
-                    : ` ${countYearNewPeriod} ano`
-                  : ''}
-                {countYearNewPeriod && countMonthNewPeriod ? `e` : ''}
-                {countMonthNewPeriod
-                  ? countMonthNewPeriod > 1
-                    ? ` ${countMonthNewPeriod} meses`
-                    : ` ${countMonthNewPeriod} mês`
-                  : ''}
-                <br />
-                <br />
-                Taxa Mensal: 0,00 % Taxa Anual: 0,00 %
-              </p>
-            ) : (
-              <>
-                <p
-                  style={{
-                    marginTop: '2rem',
-                    fontWeight: 'bolder',
-                  }}
-                >
-                  O seu perfil é{' '}
-                  <span style={{ color: '#e2381a' }}>{riskProfile}</span>
-                </p>
-                <p>{resultRiskProfile.label1}</p>
-                <p style={{ marginTop: '2rem' }}>
-                  Taxa Mensal: {monthlyRate} % Taxa Anual: {annualRate} %
-                </p>
-              </>
-            )}
-
-            <ButtonContainer>
-              <Button onClick={() => setShowModal(true)} ripple glow>
-                Veja sua descrição
-              </Button>
-            </ButtonContainer>
-
-            <p style={{ marginTop: '2rem' }}>
-              Confira mais detalhes sobre a evolução do seu patrimônio e
-              composição de carteira ideal no relatório completo que enviamos
-              para o seu e-mail. <br />
-              <br /> Quer ajuda para tirar seu planejamento financeiro do papel?
+        <TextResult style={showGraphic ? { margin: '10px 0' } : {}}>
+          {achievedObjectiveCost ? (
+            <p style={{ marginBottom: '1px' }}>
+              Você conseguiria alcaçar este valor em
+              {countYearNewPeriod
+                ? countYearNewPeriod > 1
+                  ? ` ${countYearNewPeriod} anos`
+                  : ` ${countYearNewPeriod} ano`
+                : ''}
+              {countYearNewPeriod && countMonthNewPeriod ? `e` : ''}
+              {countMonthNewPeriod
+                ? countMonthNewPeriod > 1
+                  ? ` ${countMonthNewPeriod} meses`
+                  : ` ${countMonthNewPeriod} mês`
+                : ''}
+              <br />
+              <br />
             </p>
-          </TextResult>
+          ) : (
+            <>
+              <p
+                style={{
+                  fontWeight: 'bolder',
+                  marginBottom: '1px',
+                }}
+              >
+                O seu perfil é{' '}
+                <span style={{ color: '#e2381a' }}>{riskProfile}</span>
+              </p>
+              <p>{resultRiskProfile.label1}</p>
+            </>
+          )}
 
-          <ModalStyled
-            state={showModal}
-            setState={setShowModal}
-            contentClassName="custom-content"
-            dialogClassName="custom-dialog"
-          >
-            <HeaderStyled closeButton />
-            <BodyStyled>
-              {resultRiskProfile.label1}
-              <br />
-              <br />
-              {resultRiskProfile.label2}
-              <br />
-              <br />
-              {resultRiskProfile.label3}
-            </BodyStyled>
-          </ModalStyled>
-        </Container>
-      ) : (
-        <Loading />
-      )}
+          <ButtonContainer style={{ marginBottom: '15px' }}>
+            <Button onClick={() => {}} ripple glow style={{ margin: '0 10px' }}>
+              Ir ao Site
+            </Button>
+
+            <Button onClick={() => {}} ripple glow style={{ margin: '0 10px' }}>
+              Recalcule seu Sonho
+            </Button>
+          </ButtonContainer>
+
+          <p>
+            Confira mais detalhes sobre a{' '}
+            <strong>evolução do seu patrimônio</strong> e
+            <strong> composição de carteira ideal</strong> no relatório completo
+            que enviamos para o seu e-mail. <br />
+            <br /> Quer ajuda para tirar seu planejamento financeiro do papel?
+          </p>
+
+          <ButtonContainer>
+            <Button onClick={() => {}} ripple glow>
+              Baixar PDF
+            </Button>
+          </ButtonContainer>
+        </TextResult>
+      </Container>
     </Layout>
   );
 };
