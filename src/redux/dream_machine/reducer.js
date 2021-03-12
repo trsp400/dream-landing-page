@@ -69,8 +69,8 @@ export default (state = INITIAL_STATE, action) => {
     case actions.SEND_DREAM_MACHINE_RESULT_TO_API_FAILURE:
       return {
         ...state,
-        result: {},
-        resultSuccess: false,
+        result: null,
+        resultSuccess: null,
         comingFromLastStep: true,
       };
     default:

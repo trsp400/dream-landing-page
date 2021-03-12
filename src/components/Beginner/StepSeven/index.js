@@ -3,33 +3,42 @@ import { useSelector, useDispatch } from 'react-redux';
 
 import { navigate } from 'gatsby';
 
-import { sendDreamMachineResultToAPIRequest } from '../../../redux/dream_machine/actions';
+import {
+  sendDreamMachineResultToAPIRequest,
+  changeFormState,
+} from '../../../redux/dream_machine/actions';
 import { createResultObject } from '../../../utils/handleResultObject';
 import Input from '../../CustomComponents/Input';
 import Loading from '../../CustomComponents/Loading';
 import Button from '../../CustomComponents/Button';
 import MessageFeedback from '../../CustomComponents/MessageFeedback';
-import { Container, Body, Footer } from './styles';
+import { Footer as ModalFooter } from '../../CustomComponents/Modal';
+
+import {
+  Container,
+  Body,
+  Footer,
+  BodyStyled,
+  HeaderStyled,
+  ModalStyled,
+} from './styles';
+
 import { parseCurrencyFloat, parseStringInt } from '../../../utils/parseValues';
 
-const NotFound = () => <h1 style={{ color: '#fff' }}>Refaça o teste</h1>;
-
-const StepEight = () => {
+const StepSeven = () => {
   const dispatch = useDispatch();
   const store = useSelector(({ dreamMachine }) => dreamMachine);
   const { notify } = useSelector(({ settings }) => settings);
 
-  const {
-    investmentsPlacement,
-    desiredInvestmentsPlacement,
-    resultSuccess,
-    result: { email, yearlyAverageArray },
-  } = store;
+  const { investmentsPlacement, desiredInvestmentsPlacement, result } = store;
 
-  const [inputValue, setInputValue] = useState(email);
+  const yearlyAverageArray = result?.yearlyAverageArray || [];
+  const resultSuccess = result?.resultSuccess || false;
+
+  const [inputValue, setInputValue] = useState('');
   const [validEmail, setValidEmail] = useState(true);
   const [requestLoading, setRequestLoading] = useState(false);
-  const [resultFailure, setResultFailure] = useState(false);
+  const [resultModalFailure, setResultModalFailure] = useState(false);
 
   const period = parseStringInt(store.period);
   const yearOrMonth = store.yearOrMonth;
@@ -49,8 +58,6 @@ const StepEight = () => {
       desiredInvestmentsPlacement,
     );
 
-    if (!inputValue) return notify('Por favor, digite seu e-mail!');
-
     monthlySupport < objectiveCost && currentInvestments < objectiveCost
       ? dispatch(
           sendDreamMachineResultToAPIRequest({
@@ -64,7 +71,7 @@ const StepEight = () => {
             objectiveCost,
           }),
         )
-      : (setResultFailure(true), setRequestLoading(false));
+      : (setResultModalFailure(true), setRequestLoading(false));
   });
 
   function emailIsValid(dataEmail) {
@@ -72,6 +79,8 @@ const StepEight = () => {
   }
 
   const handleOnClink = email => {
+    if (!email || email === '') return notify('Por favor, digite seu e-mail!');
+
     const isValidEmail = emailIsValid(email);
 
     if (isValidEmail) {
@@ -94,16 +103,72 @@ const StepEight = () => {
     return valid;
   };
 
+  const resetStore = useCallback(() => {
+    dispatch(
+      changeFormState({
+        ...store,
+        currentStep: 0,
+        resultSuccess: null,
+        result: {
+          monthlyRate: 0,
+          annualRate: 0,
+          riskProfile: '',
+          email: '',
+          yearlyAverageArray: [],
+        },
+        path: '',
+        objective: null,
+        objectiveCost: null,
+        period: null,
+        yearOrMonth: 'anos',
+        monthlySupport: null,
+        currentInvestments: null,
+        decision: null,
+        monthlyLifeCost: null,
+        monthlyIncome: null,
+        investmentsPlacement: [],
+        desiredInvestmentsPlacement: [],
+        otherInvestments: null,
+        currentAssets: [],
+      }),
+    );
+  }, [dispatch, store]);
+
   useEffect(() => {
     if (yearlyAverageArray?.length) {
       navigate('/resultado');
     }
   }, [yearlyAverageArray]);
 
+  useEffect(() => {
+    if (resultSuccess === null) {
+      setResultModalFailure(true);
+      setRequestLoading(false);
+    }
+  }, [resultSuccess]);
+
   return requestLoading ? (
     <Loading />
-  ) : resultFailure ? (
-    <NotFound />
+  ) : resultModalFailure ? (
+    <ModalStyled
+      visible={resultModalFailure}
+      setVisible={setResultModalFailure}
+      contentClassName="custom-content"
+      dialogClassName="custom-dialog"
+    >
+      <HeaderStyled closeButton />
+
+      <BodyStyled>
+        O valor do seu sonho deve ser maior do que o valor a qual você já tem, e
+        maior do que o valor que você pode investir mensalmente. Por favor,
+        clique no botão abaixo para recomeçar a calcular seu sonho!
+      </BodyStyled>
+      <ModalFooter>
+        <Button style={{ width: '100%' }} onClick={() => resetStore()}>
+          RECOMEÇAR
+        </Button>
+      </ModalFooter>
+    </ModalStyled>
   ) : (
     <Container>
       <Body>
@@ -147,4 +212,4 @@ const StepEight = () => {
   );
 };
 
-export default StepEight;
+export default StepSeven;

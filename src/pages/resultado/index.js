@@ -89,8 +89,6 @@ const Result = () => {
     },
   ];
 
-  console.log(monthlySupport, currentInvestments, objectiveCost);
-
   return (
     <Layout>
       <SEO title="Resultado | Máquina dos Sonhos" />
