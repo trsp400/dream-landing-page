@@ -1,11 +1,15 @@
-import React, { useState, useEffect } from 'react';
-import { useSelector } from 'react-redux';
+import React, { useState, useEffect, useCallback } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import _ from 'lodash';
+import { navigate } from 'gatsby-link';
+
 
 import Layout from '../../Layout';
 import SEO from '../../components/CustomComponents/Seo';
 import resultProfile from '../../utils/resultProfile';
 import { parseCurrencyFloat } from '../../utils/parseValues';
+
+import { changeFormState } from '../../redux/dream_machine/actions';
 
 import { useSpring, animated } from 'react-spring';
 
@@ -23,9 +27,10 @@ import {
   LineChartContainer,
   LineChartStyled,
 } from './styles';
-import { navigate } from 'gatsby-link';
 
 const Result = () => {
+  const dispatch = useDispatch();
+
   const [showGraphic, setShowGraphic] = useState(false);
   const { isMobileView } = useSelector(({ settings }) => settings);
   const store = useSelector(({ dreamMachine }) => dreamMachine);
@@ -120,6 +125,37 @@ const Result = () => {
     ...springRateConfig,
   });
 
+
+  const resetStore = useCallback(() => {
+    dispatch(
+      changeFormState({
+        ...store,
+        currentStep: 0,
+        resultSuccess: null,
+        result: {
+          monthlyRate: 0,
+          annualRate: 0,
+          riskProfile: '',
+          email: '',
+          yearlyAverageArray: [],
+        },
+        path: '',
+        objective: null,
+        objectiveCost: null,
+        period: null,
+        yearOrMonth: 'anos',
+        monthlySupport: null,
+        currentInvestments: null,
+        decision: null,
+        monthlyLifeCost: null,
+        monthlyIncome: null,
+        investmentsPlacement: [],
+        desiredInvestmentsPlacement: [],
+        otherInvestments: null,
+        currentAssets: [],
+      }),
+    );
+  }, [dispatch, store]);
   return (
     <Layout>
       <SEO title="Resultado | Máquina dos Sonhos" />
@@ -233,16 +269,21 @@ const Result = () => {
                 O seu perfil é{' '}
                 <span style={{ color: '#e2381a' }}>{riskProfile}</span>
               </p>
-              <p>{resultRiskProfile.label1}</p>
+              <p>{resultRiskProfile?.label1 || ""}</p>
             </>
           )}
 
           <ButtonContainer style={{ marginBottom: '15px' }}>
-            <Button onClick={() => {}} ripple glow style={{ margin: '0 10px' }}>
+            <Button onClick={() => {
+              window.open('https://be.capital/')
+            }} ripple glow style={{ margin: '0 10px' }}>
               Ir ao Site
             </Button>
 
-            <Button onClick={() => {}} ripple glow style={{ margin: '0 10px' }}>
+            <Button onClick={() => {
+              resetStore()
+              navigate("/")
+            }} ripple glow style={{ margin: '0 10px' }}>
               Recalcule seu Sonho
             </Button>
           </ButtonContainer>
