@@ -5,6 +5,7 @@ const INITIAL_STATE = {
   currentStep: null,
   direction: null,
   resultSuccess: null,
+  comingFromLastStep: false,
   result: {
     monthlyRate: '',
     annualRate: '',
@@ -63,12 +64,14 @@ export default (state = INITIAL_STATE, action) => {
         ...state,
         result: action?.payload?.result,
         resultSuccess: true,
+        comingFromLastStep: true,
       };
     case actions.SEND_DREAM_MACHINE_RESULT_TO_API_FAILURE:
       return {
         ...state,
         result: {},
         resultSuccess: false,
+        comingFromLastStep: true,
       };
     default:
       return state;

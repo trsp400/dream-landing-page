@@ -5,7 +5,6 @@ import _ from 'lodash';
 import Layout from '../../Layout';
 import LineChart from '../../components/CustomComponents/LineChart';
 import SEO from '../../components/CustomComponents/Seo';
-import Loading from '../../components/CustomComponents/Loading';
 import resultProfile from '../../utils/resultProfile';
 import { parseCurrencyFloat } from '../../utils/parseValues';
 
@@ -21,6 +20,7 @@ import {
   ContainerRateBoxItems,
   ButtonShowGraphic,
 } from './styles';
+import { navigate } from 'gatsby-link';
 
 const NotFound = () => <h1 style={{ color: '#fff' }}>Refaça o teste</h1>;
 
@@ -31,25 +31,30 @@ const Result = () => {
 
   const {
     result: {
-      yearlyAverageArray,
       achievedObjectiveCost,
       newPeriod,
       monthlyRate,
       annualRate,
       riskProfile,
+      yearlyAverageArray,
     },
+    currentStep,
+    comingFromLastStep,
+    resultSuccess,
   } = store;
 
   const monthlySupport = parseCurrencyFloat(store.monthlySupport);
   const currentInvestments = parseCurrencyFloat(store.currentInvestments);
   const objectiveCost = parseCurrencyFloat(store.objectiveCost);
 
+  if (!comingFromLastStep) navigate('/');
+
   const resultRiskProfile = resultProfile(riskProfile);
 
   const arrayNewPeriod = [];
   let newPeriodChunk = [];
 
-  const yearlyAverageArrayModificad = yearlyAverageArray.map(y => ({
+  const yearlyAverageArrayModificad = yearlyAverageArray?.map(y => ({
     x: y.Ano,
     y: y.Media,
   }));
@@ -226,9 +231,7 @@ const Result = () => {
       ) : monthlySupport >= objectiveCost ||
         currentInvestments >= objectiveCost ? (
         <NotFound />
-      ) : (
-        <Loading />
-      )}
+      ) : null}
     </Layout>
   );
 };

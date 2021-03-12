@@ -93,4 +93,6 @@ export const TextResult = styled.div`
   text-align: center;
   font: normal normal 400 13px Trasandina;
   color: #fff;
+  z-index: 999;
+  position: relative;
 `;

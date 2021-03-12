@@ -5,7 +5,7 @@ import useWindowSize from '../utils/useWindowSizeHook';
 
 import { screenResize } from '../redux/settings/actions';
 
-import { Main, Container, ProgressBarContainer } from './styles';
+import { Main, Container, ProgressBarContainer, Background } from './styles';
 
 import ProgressBar from '../components/CustomComponents/ProgressBar';
 
@@ -40,7 +40,7 @@ const RenderProgressBar: React.FC<RenderProgressBarProps> = ({
         </ProgressBarContainer>
       );
     default:
-      break;
+      return null;
   }
 };
 
@@ -59,10 +59,13 @@ const Layout = props => {
 
   return (
     <Container>
-      {currentStep && isMobileView && (
+      {location?.pathname !== '/resultado' && isMobileView && (
         <RenderProgressBar path={path} currentStep={currentStep} />
       )}
-      <Main>{children}</Main>
+      <Main style={{ zIndex: 999 }}>
+        <Background />
+        {children}
+      </Main>
     </Container>
   );
 };

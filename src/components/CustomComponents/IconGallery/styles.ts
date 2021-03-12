@@ -16,7 +16,7 @@ export const CardContainer = styled(Card)`
   outline: 0;
   margin: 0 auto;
   padding: 2px;
-  background-color: ${props => props.theme.desktopTheme.colors.primary.blue};
+  background: none;
   cursor: pointer;
 `;
 
@@ -46,9 +46,9 @@ export const CardBody = styled(Card.Body)`
 `;
 
 export const CardFooter = styled(Card.Footer)`
-  border: none;
-  background-color: ${props => props.theme.desktopTheme.colors.primary.blue};
   color: ${props => props.color};
+  background: none;
+  border: none;
 
   font-size: ${props => props.labelsize}px;
   text-align: center;
