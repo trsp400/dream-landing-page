@@ -62,7 +62,7 @@ const Layout = props => {
       {currentStep && isMobileView && (
         <RenderProgressBar path={path} currentStep={currentStep} />
       )}
-      <Main style={{ zIndex: 999 }}>
+      <Main>
         <Background />
         {children}
       </Main>
