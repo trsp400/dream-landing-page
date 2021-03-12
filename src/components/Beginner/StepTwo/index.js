@@ -42,7 +42,6 @@ const StepTwo = () => {
     [dispatch, store, inputValue],
   );
 
-  console.log(store)
   return (
     <Container>
       <Body>

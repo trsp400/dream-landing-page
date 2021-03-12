@@ -25,6 +25,7 @@ const StepThree = () => {
 
   const [inputValue, setInputValue] = useState(period);
   const [inputYearOrMonth, setInputYearOrMonth] = useState(yearOrMonth);
+  const [placeholderInfo, setPlaceholderInfo] = useState(listPeriods[yearOrMonth])
 
   const handleDispatch = useCallback(
     (step, direction) => {
@@ -44,6 +45,13 @@ const StepThree = () => {
     [dispatch, store, inputValue, inputYearOrMonth],
   );
 
+  const setPlaceholderInformation = useCallback(item => {
+      const returnItemListPeriod = listPeriods[item];
+
+      setPlaceholderInfo(returnItemListPeriod);
+      setInputYearOrMonth(item)
+  })
+
   return (
     <Container>
       <Body>
@@ -60,7 +68,7 @@ const StepThree = () => {
               variant={item === inputYearOrMonth ? 'beorange' : 'beblue'}
               ripple
               glow
-              onClick={() => setInputYearOrMonth(item)}
+              onClick={() => setPlaceholderInformation(item)}
               key={item}
             >
               {listPeriods[item]}
@@ -72,7 +80,7 @@ const StepThree = () => {
             state={inputValue}
             setState={setInputValue}
             type="number"
-            placeholder="Tempo"
+            placeholder={placeholderInfo}
           />
         </BoxInput>
       </Body>

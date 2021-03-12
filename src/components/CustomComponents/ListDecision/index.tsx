@@ -20,7 +20,6 @@ interface ListDecisionProps {
 }
 const ListDecision: FC<ListDecisionProps> = ({ options, state, setState }) => {
 
-  console.log(options)
   return (
     <Container>
       <Row className="justify-content-md-center">
