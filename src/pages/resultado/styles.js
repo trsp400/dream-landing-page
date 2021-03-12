@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { Container as BootstrapContainer } from 'react-bootstrap';
 
 import LineChart from '../../components/CustomComponents/LineChart';
@@ -9,58 +9,6 @@ export const Container = styled(BootstrapContainer)`
   flex-direction: column;
   align-content: center;
   height: 100vh;
-
-  @keyframes animateContainerRateUp {
-    0% {
-      top: 30%;
-    }
-    100% {
-      top: 0;
-    }
-  }
-  @keyframes animateContainerRateDown {
-    0% {
-      transform: translateY(0);
-    }
-    100% {
-      transform: translateY(100%);
-    }
-  }
-
-  @keyframes animateLineChartVisible {
-    0% {
-      opacity: 0;
-    }
-
-    25% {
-      display: none;
-    }
-
-    75% {
-      display: block;
-    }
-
-    100% {
-      opacity: 1;
-    }
-  }
-  @keyframes animateLineChartInvisible {
-    0% {
-      opacity: 1;
-    }
-
-    25% {
-      display: block;
-    }
-
-    75% {
-      display: none;
-    }
-
-    100% {
-      opacity: 0;
-    }
-  }
 `;
 
 export const ContainerRate = styled.div`
@@ -110,12 +58,15 @@ export const ButtonShowGraphic = styled.button`
   padding: 2px 8px;
   bottom: -8%;
 
-  transform: rotate(180deg);
+  ${props =>
+    !props?.showGraphic &&
+    css`
+      transform: rotate(180deg);
+    `}
 `;
 
 export const LineChartContainer = styled.div`
   margin-bottom: 2rem;
-  transition: all 1.5s ease-in-out;
   opacity: 1;
   display: block;
 `;

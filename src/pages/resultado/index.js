@@ -7,6 +7,8 @@ import SEO from '../../components/CustomComponents/Seo';
 import resultProfile from '../../utils/resultProfile';
 import { parseCurrencyFloat } from '../../utils/parseValues';
 
+import { useSpring, animated } from 'react-spring';
+
 import {
   Container,
   Button,
@@ -24,8 +26,7 @@ import {
 import { navigate } from 'gatsby-link';
 
 const Result = () => {
-  const [showGraphic, setShowGraphic] = useState(null);
-  const [displayGhaphic, setDisplayGhaphic] = useState('none');
+  const [showGraphic, setShowGraphic] = useState(false);
   const { isMobileView } = useSelector(({ settings }) => settings);
   const store = useSelector(({ dreamMachine }) => dreamMachine);
 
@@ -38,13 +39,9 @@ const Result = () => {
       riskProfile,
       yearlyAverageArray,
     },
-    currentStep,
     comingFromLastStep,
-    resultSuccess,
   } = store;
 
-  const monthlySupport = parseCurrencyFloat(store.monthlySupport);
-  const currentInvestments = parseCurrencyFloat(store.currentInvestments);
   const objectiveCost = parseCurrencyFloat(store.objectiveCost);
 
   if (!comingFromLastStep) navigate('/');
@@ -91,99 +88,121 @@ const Result = () => {
     },
   ];
 
+  const springChartConfig = {
+    transform: 'translateY(0px)',
+    from: {
+      opacity: 0,
+      transform: 'translateY(-100px)',
+    },
+  };
+
+  const springChartProps = useSpring({
+    opacity: 1,
+    config: { tension: 150, friction: 10 },
+
+    reset: showGraphic,
+    ...springChartConfig,
+  });
+
+  const springRateConfig = {
+    transform: 'translateY(0px)',
+    from: {
+      opacity: 0,
+      transform: 'translateY(100px)',
+    },
+  };
+
+  const springRateProps = useSpring({
+    opacity: 1,
+    config: { tension: 150, friction: 10 },
+
+    reset: showGraphic,
+    ...springRateConfig,
+  });
+
   return (
     <Layout>
       <SEO title="Resultado | Máquina dos Sonhos" />
       <Container
         style={{
-          // justifyContent: showGraphic ? 'flex-start' : 'center',
           justifyContent: 'center',
         }}
       >
-        <ContainerRate
-          style={
-            showGraphic
-              ? {
-                  marginTop: '1rem',
-                  padding: '18px 35px',
-                  animation: 'animateContainerRateUp 1s ease-in-out',
-                }
-              : {
-                  padding: '30px 35px',
-                  animation: 'animateContainerRateDown 1s ease-in-out',
-                }
-          }
+        <animated.div
+          style={{
+            ...springRateProps,
+          }}
         >
-          <ContainerRateTitle>Crescimento da Carteira</ContainerRateTitle>
-          <ContainerRateSubTitle>
-            Para conseguir alcançar seu objetivo,
-            <br />o seu patrimônio precisa performar
-          </ContainerRateSubTitle>
-
-          <ContainerRateBox>
-            {achievedObjectiveCost ? (
-              <>
-                <ContainerRateBoxItems bg="#c5dee5">
-                  AO MÊS: <strong>0,00%</strong>
-                </ContainerRateBoxItems>
-                <ContainerRateBoxItems bg="#fecfc4">
-                  AO ANO: <strong>0,00%</strong>
-                </ContainerRateBoxItems>
-              </>
-            ) : (
-              <>
-                <ContainerRateBoxItems bg="#c5dee5">
-                  AO MÊS: <strong>{monthlyRate}%</strong>
-                </ContainerRateBoxItems>
-                <ContainerRateBoxItems bg="#fecfc4">
-                  AO ANO: <strong>{annualRate}%</strong>
-                </ContainerRateBoxItems>
-              </>
-            )}
-          </ContainerRateBox>
-
-          <ButtonShowGraphic
-            onClick={() => {
-              setShowGraphic(!showGraphic);
-
+          <ContainerRate
+            style={
               showGraphic
-                ? setDisplayGhaphic('block')
-                : // : setTimeout(() => setDisplayGhaphic('none'), 1200);
-                  setDisplayGhaphic('none');
+                ? {
+                    marginTop: '1rem',
+                    padding: '18px 35px',
+                  }
+                : {
+                    padding: '30px 35px',
+                  }
+            }
+          >
+            <ContainerRateTitle>Crescimento da Carteira</ContainerRateTitle>
+            <ContainerRateSubTitle>
+              Para conseguir alcançar seu objetivo,
+              <br />o seu patrimônio precisa performar
+            </ContainerRateSubTitle>
+
+            <ContainerRateBox>
+              {achievedObjectiveCost ? (
+                <>
+                  <ContainerRateBoxItems bg="#c5dee5">
+                    AO MÊS: <strong>0,00%</strong>
+                  </ContainerRateBoxItems>
+                  <ContainerRateBoxItems bg="#fecfc4">
+                    AO ANO: <strong>0,00%</strong>
+                  </ContainerRateBoxItems>
+                </>
+              ) : (
+                <>
+                  <ContainerRateBoxItems bg="#c5dee5">
+                    AO MÊS: <strong>{monthlyRate}%</strong>
+                  </ContainerRateBoxItems>
+                  <ContainerRateBoxItems bg="#fecfc4">
+                    AO ANO: <strong>{annualRate}%</strong>
+                  </ContainerRateBoxItems>
+                </>
+              )}
+            </ContainerRateBox>
+
+            <ButtonShowGraphic
+              showGraphic={showGraphic}
+              onClick={() => setShowGraphic(!showGraphic)}
+            >
+              V
+            </ButtonShowGraphic>
+          </ContainerRate>
+        </animated.div>
+
+        {showGraphic && (
+          <animated.div
+            style={{
+              ...springChartProps,
             }}
           >
-            V
-          </ButtonShowGraphic>
-        </ContainerRate>
-
-        <LineChartContainer
-          style={
-            showGraphic
-              ? {
-                  animation: 'animateLineChartVisible 1.2s ease-in-out',
-                  opacity: '1',
-                  display: 'block',
+            <LineChartContainer>
+              <LineChartStyled
+                slider
+                isMobileView={isMobileView}
+                theme="white"
+                height={300}
+                data={
+                  yearlyAverageArrayModificad?.length
+                    ? yearlyAverageArrayModificad
+                    : fakeData
                 }
-              : {
-                  animation: 'animateLineChartInvisible 1.2s ease-in-out',
-                  animationDelay: '2s',
-                  opacity: '0',
-                  display: displayGhaphic,
-                }
-          }
-        >
-          <LineChartStyled
-            slider
-            isMobileView={isMobileView}
-            theme="white"
-            height={300}
-            data={
-              yearlyAverageArrayModificad?.length
-                ? yearlyAverageArrayModificad
-                : fakeData
-            }
-          />
-        </LineChartContainer>
+              />
+            </LineChartContainer>
+          </animated.div>
+        )}
 
         <TextResult style={showGraphic ? { margin: '10px 0' } : {}}>
           {achievedObjectiveCost ? (
