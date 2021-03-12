@@ -275,7 +275,7 @@ const Result = () => {
 
           <ButtonContainer style={{ marginBottom: '15px' }}>
             <Button onClick={() => {
-              window.open('https://be.capital/')
+              // global.window.open('https://be.capital/')
             }} ripple glow style={{ margin: '0 10px' }}>
               Ir ao Site
             </Button>
