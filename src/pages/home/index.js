@@ -18,8 +18,11 @@ import { changeFormState } from '../../redux/dream_machine/actions';
 import RenderInvestorForm from '../../components/RenderInvestorSteps';
 import RenderBeginnerForm from '../../components/RenderBeginnerSteps';
 
+// import SpringerInterpolate from '../../components/CustomComponents/SpringerInterpolate';
+
 import Logo from '../../assets/logo/svg/bec_logo.svg';
 import MaquinaDosSonhos from '../../assets/logo/svg/maquinaDosSonhos.svg';
+import MaquinaDosSonhosDesktop from '../../assets/logo/svg/maquinaDosSonhosDesktop.svg';
 
 import ImageGallery from '../../components/CustomComponents/ImageGallery';
 
@@ -97,12 +100,13 @@ const Home = () => {
       />
     </animated.div>
   ) : (
-    <Container>
+    <Container isMobileView={isMobileView}>
       <Header>
         <Logo />
       </Header>
+
       <Background />
-      {isMobileView ? <ImageGallery /> : <MaquinaDosSonhos />}
+      {isMobileView ? <ImageGallery /> : <MaquinaDosSonhosDesktop />}
 
       <MainHome>
         <PresentationSection>
