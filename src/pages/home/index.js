@@ -8,6 +8,7 @@ import {
   PresentationSection,
   ButtonSection,
   Button,
+  Background,
 } from './styles';
 
 import { useSpring, animated } from 'react-spring';
@@ -22,6 +23,10 @@ import RenderBeginnerForm from '../../components/RenderBeginnerSteps';
 import Logo from '../../assets/logo/svg/bec_logo.svg';
 import MaquinaDosSonhos from '../../assets/logo/svg/maquinaDosSonhos.svg';
 import MaquinaDosSonhosDesktop from '../../assets/logo/svg/maquinaDosSonhosDesktop.svg';
+
+import ImageGallery from '../../components/CustomComponents/ImageGallery';
+
+import Pattern from '../../images/background-pattern.png';
 
 const RenderSelectedFormPath = ({ currentStep, store, path }) => {
   const paths = {
@@ -75,15 +80,19 @@ const Home = () => {
   const springProps = useSpring({
     opacity: 1,
     delay: 0,
-    config: {
-      duration: 700,
-    },
+    config: { tension: 300, friction: 70 },
+
     reset: currentStep,
     ...springConfig,
   });
 
   return currentStep > 0 ? (
-    <animated.div style={{ ...springProps }}>
+    <animated.div
+      style={{
+        ...springProps,
+        height: '100vh',
+      }}
+    >
       <RenderSelectedFormPath
         currentStep={currentStep}
         store={store}
@@ -95,14 +104,10 @@ const Home = () => {
       <Header>
         <Logo />
       </Header>
-      {isMobileView ? (
-        <MaquinaDosSonhos />
-      ) : (
-        // <SpringerInterpolate>
-        //   <MaquinaDosSonhosDesktop style={{ width: '500px' }} />
-        // </SpringerInterpolate>
-        <MaquinaDosSonhosDesktop />
-      )}
+
+      <Background />
+      {isMobileView ? <ImageGallery /> : <MaquinaDosSonhosDesktop />}
+
       <MainHome>
         <PresentationSection>
           <h1>Quer descobrir o investimento ideal para você?</h1>

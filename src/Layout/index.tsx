@@ -5,7 +5,7 @@ import useWindowSize from '../utils/useWindowSizeHook';
 
 import { screenResize } from '../redux/settings/actions';
 
-import { Main, Container, ProgressBarContainer } from './styles';
+import { Main, Container, ProgressBarContainer, Background } from './styles';
 
 import ProgressBar from '../components/CustomComponents/ProgressBar';
 
@@ -63,6 +63,7 @@ const Layout = props => {
         <RenderProgressBar path={path} currentStep={currentStep} />
       )}
       <Main>
+        <Background />
         {children}
       </Main>
     </Container>

@@ -1,6 +1,6 @@
-export function screenResize(size) {
+export function screenResize(screenSize) {
   return {
     type: 'settings/SCREEN_RESIZE',
-    payload: { size },
+    payload: { screenSize },
   };
 }
