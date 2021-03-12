@@ -3,6 +3,8 @@ import { Container as BootstrapContainer, ButtonGroup } from 'react-bootstrap';
 
 import RippleButton from '../../components/CustomComponents/Button';
 
+import Pattern from '../../images/background-pattern.png';
+
 export const Container = styled(BootstrapContainer)`
   height: 100vh;
   display: flex;
@@ -10,12 +12,19 @@ export const Container = styled(BootstrapContainer)`
   align-items: center;
   position: relative;
 
-  background: rgb(26, 74, 115);
+  max-width: 1024px;
+
+  background-color: #1a4a73;
   background: linear-gradient(
     180deg,
-    rgba(26, 74, 115, 1) 52%,
-    rgba(67, 106, 140, 1) 65%
+    rgba(26, 74, 115, 1) 30%,
+    rgba(67, 106, 140, 1) 45%
   );
+
+  width: 100vw;
+  background-size: cover;
+  object-fit: cover;
+  background-position: center;
 
   > svg {
     position: absolute;
@@ -33,17 +42,36 @@ export const Header = styled.header`
   justify-content: center;
   align-items: center;
 
+  background-size: cover;
+  object-fit: cover;
+  background-position: center;
+
   box-shadow: 0px 3px 0px 0px #ea5e45;
 
   position: absolute;
+  background-color: #1a4a73;
+  z-index: 999;
 
   svg {
     width: 50%;
     filter: drop-shadow(0px 0px 1px #ea5e45) drop-shadow(0px 0px 2px #ea5e45);
   }
 `;
+
+export const Background = styled.div`
+  background-image: url('${Pattern}');
+  position: absolute;
+
+  opacity: 0.4;
+  width: 100vw;
+  height: 100vh;
+  background-size: cover;
+  object-fit: cover;
+`;
+
 export const MainHome = styled.main`
   position: relative;
+  opacity: 1;
   flex: 1;
   display: flex;
   flex-direction: column;

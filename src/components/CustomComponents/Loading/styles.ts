@@ -6,6 +6,7 @@ export const ContainerLoading = styled.div`
   align-items: center;
   min-height: 70vh;
   background: transparent;
+  height: 100vh;
 
   .box-itens {
     position: relative;

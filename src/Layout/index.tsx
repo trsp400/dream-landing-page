@@ -5,7 +5,7 @@ import useWindowSize from '../utils/useWindowSizeHook';
 
 import { screenResize } from '../redux/settings/actions';
 
-import { Main, Container, ProgressBarContainer } from './styles';
+import { Main, Container, ProgressBarContainer, Background } from './styles';
 
 import ProgressBar from '../components/CustomComponents/ProgressBar';
 
@@ -62,7 +62,10 @@ const Layout = props => {
       {currentStep && isMobileView && (
         <RenderProgressBar path={path} currentStep={currentStep} />
       )}
-      <Main>{children}</Main>
+      <Main style={{ zIndex: 999 }}>
+        <Background />
+        {children}
+      </Main>
     </Container>
   );
 };

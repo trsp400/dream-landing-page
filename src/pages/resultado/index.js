@@ -17,10 +17,10 @@ import {
   ModalStyled,
   TextResult,
 } from './styles';
+import { navigate } from 'gatsby-link';
 
 const Result = ({ location }) => {
   const [showModal, setShowModal] = useState(false);
-  const { result } = useSelector(({ dreamMachine }) => dreamMachine);
   const { isMobileView } = useSelector(({ settings }) => settings);
   const store = useSelector(({ dreamMachine }) => dreamMachine);
 
@@ -33,6 +33,7 @@ const Result = ({ location }) => {
       annualRate,
       riskProfile,
     },
+    resultSuccess,
     objectiveCost,
   } = store;
 
@@ -77,6 +78,12 @@ const Result = ({ location }) => {
       y: objectiveCost || 1000,
     },
   ];
+
+  useEffect(() => {
+    setTimeout(() => {
+      if (!resultSuccess) navigate('/');
+    }, 15000);
+  }, []);
 
   return (
     <Layout>

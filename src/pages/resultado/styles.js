@@ -4,7 +4,9 @@ import { Container as BootstrapContainer } from 'react-bootstrap';
 import { Modal, Header, Body } from '../../components/CustomComponents/Modal';
 import RippleButton from '../../components/CustomComponents/Button';
 
-export const Container = styled(BootstrapContainer)``;
+export const Container = styled(BootstrapContainer)`
+  height: 100vh;
+`;
 
 export const ButtonContainer = styled.div`
   display: flex;
@@ -21,6 +23,8 @@ export const TextResult = styled.div`
   text-align: center;
   font: normal normal 400 13px Trasandina;
   color: #fff;
+  z-index: 999;
+  position: relative;
 `;
 
 export const ModalStyled = styled(Modal)`

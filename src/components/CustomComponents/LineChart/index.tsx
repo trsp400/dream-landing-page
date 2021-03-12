@@ -77,6 +77,8 @@ const LineChart: React.FC<LineChartProps> = ({
       style={{
         backgroundColor: colors[theme].backgroundColor,
         borderRadius: 6,
+        zIndex: 99999,
+        position: 'relative',
       }}
     >
       <Chart
