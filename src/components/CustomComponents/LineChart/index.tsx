@@ -133,11 +133,17 @@ const LineChart: React.FC<LineChartProps> = ({
         />
 
         <Geom
-          animate
           type="line"
           position="x*y"
           size={2}
           color={lineColor || '#EA5E45'}
+          animate={{
+            appear: {
+              animation: 'fadeIn',
+              easing: 'easeElasticOut',
+              delay: 100,
+            },
+          }}
           tooltip={[
             'x*y',
             (x, y) => {
@@ -157,6 +163,13 @@ const LineChart: React.FC<LineChartProps> = ({
           size={4}
           shape=""
           color={'#EA5E45'}
+          animate={{
+            appear: {
+              animation: 'fadeIn',
+              easing: 'easeElasticOut',
+              delay: 100,
+            },
+          }}
           style={{
             stroke: colors[theme].font,
             lineWidth: 1,
