@@ -59,7 +59,7 @@ const Layout = props => {
 
   return (
     <Container>
-      {location?.pathname !== '/resultado' && isMobileView && (
+      {!!currentStep && isMobileView && (
         <RenderProgressBar path={path} currentStep={currentStep} />
       )}
       <Main>
