@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { navigate } from 'gatsby';
@@ -19,7 +19,7 @@ const StepEight = () => {
   const {
     investmentsPlacement,
     desiredInvestmentsPlacement,
-    result: { email },
+    result: { email, yearlyAverageArray },
   } = store;
 
   const [inputValue, setInputValue] = useState(email);
@@ -57,7 +57,6 @@ const StepEight = () => {
     );
 
     if (!inputValue) return notify('Por favor, digite seu e-mail!');
-    setRequestLoading(true);
 
     dispatch(
       sendDreamMachineResultToAPIRequest({
@@ -81,12 +80,13 @@ const StepEight = () => {
     const isValidEmail = emailIsValid(email);
 
     if (isValidEmail) {
+      setRequestLoading(true);
       setValidEmail(true);
       handleDispatchResultState();
-      navigate('/resultado');
       return true;
     }
 
+    setRequestLoading(false);
     return setValidEmail(false);
   };
 
@@ -98,7 +98,15 @@ const StepEight = () => {
     return valid;
   };
 
-  return (
+  useEffect(() => {
+    if (yearlyAverageArray?.length) {
+      navigate('/resultado');
+    }
+  }, [yearlyAverageArray]);
+
+  return requestLoading ? (
+    <Loading />
+  ) : (
     <Container>
       <Body>
         <MessageFeedback strong="normal">

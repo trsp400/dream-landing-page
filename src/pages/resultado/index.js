@@ -26,23 +26,30 @@ const Result = ({ location }) => {
 
   const {
     result: {
-      yearlyAverageArray,
       achievedObjectiveCost,
       newPeriod,
       monthlyRate,
       annualRate,
       riskProfile,
     },
+    currentStep,
+    comingFromLastStep,
     resultSuccess,
     objectiveCost,
   } = store;
+
+  let {
+    result: { yearlyAverageArray },
+  } = store;
+
+  if (!comingFromLastStep) navigate('/');
 
   const resultRiskProfile = resultProfile(riskProfile);
 
   const arrayNewPeriod = [];
   let newPeriodChunk = [];
 
-  const yearlyAverageArrayModificad = yearlyAverageArray.map(y => ({
+  yearlyAverageArray = yearlyAverageArray?.map(y => ({
     x: y.Ano,
     y: y.Media,
   }));
@@ -79,16 +86,10 @@ const Result = ({ location }) => {
     },
   ];
 
-  useEffect(() => {
-    setTimeout(() => {
-      if (!resultSuccess) navigate('/');
-    }, 15000);
-  }, []);
-
   return (
     <Layout>
       <SEO title="Resultado | Máquina dos Sonhos" />
-      {yearlyAverageArray?.length ? (
+      {yearlyAverageArray?.length && (
         <Container>
           <h1>Resultado</h1>
           <LineChart
@@ -96,11 +97,7 @@ const Result = ({ location }) => {
             isMobileView={isMobileView}
             theme="white"
             height={400}
-            data={
-              yearlyAverageArrayModificad?.length
-                ? yearlyAverageArrayModificad
-                : fakeData
-            }
+            data={yearlyAverageArray}
           />
 
           <TextResult>
@@ -172,8 +169,6 @@ const Result = ({ location }) => {
             </BodyStyled>
           </ModalStyled>
         </Container>
-      ) : (
-        <Loading />
       )}
     </Layout>
   );
