@@ -10,6 +10,9 @@ import Loading from '../../CustomComponents/Loading';
 import Button from '../../CustomComponents/Button';
 import MessageFeedback from '../../CustomComponents/MessageFeedback';
 import { Container, Body, Footer } from './styles';
+import { parseCurrencyFloat, parseStringInt } from '../../../utils/parseValues';
+
+const NotFound = () => <h1 style={{ color: '#fff' }}>Refaça o teste</h1>;
 
 const StepEight = () => {
   const dispatch = useDispatch();
@@ -19,30 +22,20 @@ const StepEight = () => {
   const {
     investmentsPlacement,
     desiredInvestmentsPlacement,
+    resultSuccess,
     result: { email, yearlyAverageArray },
   } = store;
 
   const [inputValue, setInputValue] = useState(email);
   const [validEmail, setValidEmail] = useState(true);
   const [requestLoading, setRequestLoading] = useState(false);
+  const [resultFailure, setResultFailure] = useState(false);
 
-  const period = parseInt(store.period);
+  const period = parseStringInt(store.period);
   const yearOrMonth = store.yearOrMonth;
-  const monthlySupport = parseFloat(
-    store.monthlySupport
-      .replace('R$ ', '')
-      .replace(/\./g, '')
-      .replace(',', '.'),
-  );
-  const currentInvestments = parseFloat(
-    store.currentInvestments
-      .replace('R$ ', '')
-      .replace(/\./g, '')
-      .replace(',', '.'),
-  );
-  const objectiveCost = parseFloat(
-    store.objectiveCost.replace('R$ ', '').replace(/\./g, '').replace(',', '.'),
-  );
+  const monthlySupport = parseCurrencyFloat(store.monthlySupport);
+  const currentInvestments = parseCurrencyFloat(store.currentInvestments);
+  const objectiveCost = parseCurrencyFloat(store.objectiveCost);
 
   const handleDispatchResultState = useCallback(() => {
     const resultObject = createResultObject(
@@ -58,18 +51,20 @@ const StepEight = () => {
 
     if (!inputValue) return notify('Por favor, digite seu e-mail!');
 
-    dispatch(
-      sendDreamMachineResultToAPIRequest({
-        ...store,
-        result: {
-          ...resultObject,
-        },
-        period,
-        monthlySupport,
-        currentInvestments,
-        objectiveCost,
-      }),
-    );
+    monthlySupport < objectiveCost && currentInvestments < objectiveCost
+      ? dispatch(
+          sendDreamMachineResultToAPIRequest({
+            ...store,
+            result: {
+              ...resultObject,
+            },
+            period,
+            monthlySupport,
+            currentInvestments,
+            objectiveCost,
+          }),
+        )
+      : (setResultFailure(true), setRequestLoading(false));
   });
 
   function emailIsValid(dataEmail) {
@@ -107,6 +102,8 @@ const StepEight = () => {
 
   return requestLoading ? (
     <Loading />
+  ) : resultFailure ? (
+    <NotFound />
   ) : (
     <Container>
       <Body>
