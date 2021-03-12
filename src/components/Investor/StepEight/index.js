@@ -19,13 +19,14 @@ import { parseCurrencyFloat, parseStringInt } from '../../../utils/parseValues';
 import {
   Container,
   Body,
+  MessageFeedbackStyle,
+  ErrorInformation,
+  BoxInput,
   Footer,
   BodyStyled,
   HeaderStyled,
   ModalStyled,
 } from './styles';
-
-import { Container, MessageFeedbackStyle, BoxInput,ErrorInformation ,Body, Footer } from './styles';
 
 const StepSeven = () => {
   const dispatch = useDispatch();

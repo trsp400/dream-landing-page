@@ -11,10 +11,12 @@ import { createResultObject } from '../../../utils/handleResultObject';
 import Input from '../../CustomComponents/Input';
 import Loading from '../../CustomComponents/Loading';
 import Button from '../../CustomComponents/Button';
+import { Footer as ModalFooter } from '../../CustomComponents/Modal';
+
 
 import { parseCurrencyFloat, parseStringInt } from '../../../utils/parseValues';
 
-import { Container, MessageFeedbackStyle, BoxInput,ErrorInformation ,Body, Footer, BodyStyled, HeaderStyled, ModalStyled, } from './styles';
+import { Container, MessageFeedbackStyle, BoxInput,ErrorInformation ,Body, Footer, BodyStyled, HeaderStyled, ModalStyled } from './styles';
 
 
 
