@@ -15,7 +15,7 @@ image: node:14
 
 pipelines:
   branches:
-    homolog:
+    master:
       - parallel:
         - step:
             name: Build
