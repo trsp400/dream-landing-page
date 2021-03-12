@@ -3,7 +3,6 @@ import { useSelector } from 'react-redux';
 import _ from 'lodash';
 
 import Layout from '../../Layout';
-import LineChart from '../../components/CustomComponents/LineChart';
 import SEO from '../../components/CustomComponents/Seo';
 import resultProfile from '../../utils/resultProfile';
 import { parseCurrencyFloat } from '../../utils/parseValues';
@@ -19,11 +18,14 @@ import {
   ContainerRateBox,
   ContainerRateBoxItems,
   ButtonShowGraphic,
+  LineChartContainer,
+  LineChartStyled,
 } from './styles';
 import { navigate } from 'gatsby-link';
 
 const Result = () => {
-  const [showGraphic, setShowGraphic] = useState(false);
+  const [showGraphic, setShowGraphic] = useState(null);
+  const [displayGhaphic, setDisplayGhaphic] = useState('none');
   const { isMobileView } = useSelector(({ settings }) => settings);
   const store = useSelector(({ dreamMachine }) => dreamMachine);
 
@@ -104,9 +106,12 @@ const Result = () => {
               ? {
                   marginTop: '1rem',
                   padding: '18px 35px',
-                  animation: 'up 1s ease-in-out',
+                  animation: 'animateContainerRateUp 1s ease-in-out',
                 }
-              : { padding: '30px 35px', animation: 'down 1s ease-in-out' }
+              : {
+                  padding: '30px 35px',
+                  animation: 'animateContainerRateDown 1s ease-in-out',
+                }
           }
         >
           <ContainerRateTitle>Crescimento da Carteira</ContainerRateTitle>
@@ -137,25 +142,48 @@ const Result = () => {
             )}
           </ContainerRateBox>
 
-          <ButtonShowGraphic onClick={() => setShowGraphic(!showGraphic)}>
+          <ButtonShowGraphic
+            onClick={() => {
+              setShowGraphic(!showGraphic);
+
+              showGraphic
+                ? setDisplayGhaphic('block')
+                : // : setTimeout(() => setDisplayGhaphic('none'), 1200);
+                  setDisplayGhaphic('none');
+            }}
+          >
             V
           </ButtonShowGraphic>
         </ContainerRate>
 
-        {showGraphic && (
-          <LineChart
+        <LineChartContainer
+          style={
+            showGraphic
+              ? {
+                  animation: 'animateLineChartVisible 1.2s ease-in-out',
+                  opacity: '1',
+                  display: 'block',
+                }
+              : {
+                  animation: 'animateLineChartInvisible 1.2s ease-in-out',
+                  animationDelay: '2s',
+                  opacity: '0',
+                  display: displayGhaphic,
+                }
+          }
+        >
+          <LineChartStyled
             slider
             isMobileView={isMobileView}
             theme="white"
-            height={400}
+            height={300}
             data={
               yearlyAverageArrayModificad?.length
                 ? yearlyAverageArrayModificad
                 : fakeData
             }
-            style={{ marginBottom: '2rem' }}
           />
-        )}
+        </LineChartContainer>
 
         <TextResult style={showGraphic ? { margin: '10px 0' } : {}}>
           {achievedObjectiveCost ? (
