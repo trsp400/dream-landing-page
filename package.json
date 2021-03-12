@@ -14,6 +14,7 @@
     "gatsby-image": "^2.11.0",
     "gatsby-plugin-manifest": "^2.12.0",
     "gatsby-plugin-offline": "^3.10.0",
+    "gatsby-plugin-page-creator": "^2.10.1",
     "gatsby-plugin-react-helmet": "^3.10.0",
     "gatsby-plugin-react-svg": "^3.0.0",
     "gatsby-plugin-sharp": "^2.14.1",
@@ -22,6 +23,7 @@
     "gatsby-source-filesystem": "^2.11.0",
     "gatsby-transformer-sharp": "^2.12.0",
     "lodash": "^4.17.21",
+    "pngquant-bin": "^6.0.0",
     "polished": "^4.1.1",
     "prop-types": "^15.7.2",
     "react": "^16.12.0",
@@ -58,6 +60,7 @@
     "eslint-plugin-prettier": "^3.3.1",
     "eslint-plugin-react": "^7.22.0",
     "eslint-plugin-react-hooks": "^4.2.0",
+    "imagemin-pngquant": "^9.0.2",
     "prettier": "^2.2.1"
   },
   "keywords": [

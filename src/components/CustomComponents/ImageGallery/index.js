@@ -20,6 +20,11 @@ const Gallery = () => {
   const [index, setIndex] = useState(0);
   const { screenSize } = useSelector(({ settings }) => settings);
 
+  const isChrome =
+    !!window.chrome &&
+    (!!window.chrome.webstore ||
+      navigator.vendor.toLowerCase().indexOf('google inc.') !== -1);
+
   const transitions = useTransition(slides[index], item => item.id, {
     from: {
       opacity: 0,
@@ -46,12 +51,24 @@ const Gallery = () => {
 
   const returnScaleForEachImage = useCallback(imageIndex => {
     const scales = {
-      0: {
-        scale: '1.5',
-        top: screenSize <= 1024 && screenSize >= 860 ? '-3%' : '-10%',
+      0: isChrome
+        ? {
+            zoom: '1.5',
+            top: screenSize <= 1024 && screenSize >= 860 ? '-20%' : '-40%',
+          }
+        : {
+            scale: '1.5',
+            top: screenSize <= 1024 && screenSize >= 860 ? '-3%' : '-10%',
+          },
+      1: isChrome && {
+        top: screenSize <= 1024 && screenSize >= 860 ? '5%' : '-5%',
+        zoom: screenSize <= 1024 && screenSize >= 860 ? '1.3' : '1.5',
+      },
+      2: isChrome && {
+        top: '5%',
       },
       3: {
-        top: '5%',
+        top: isChrome ? '-20%' : '5%',
       },
     };
     return scales[imageIndex];
@@ -63,6 +80,8 @@ const Gallery = () => {
         className="bg"
         style={{
           ...props,
+          zoom: 1.5,
+          left: isChrome && '-25%',
           backgroundImage: `url(${item.url})`,
           ...returnScaleForEachImage(item.id),
         }}
