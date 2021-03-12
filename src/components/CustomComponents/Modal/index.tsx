@@ -1,4 +1,5 @@
 import React, { FC } from 'react';
+import { ModalProps as ModalPropsForCustom } from 'react-bootstrap';
 
 import {
   ModalStyled,
@@ -8,13 +9,13 @@ import {
   FooterStyled,
 } from './styles';
 
-interface ModalProps {
+interface ModalProps extends ModalPropsForCustom {
   children?: JSX.Element[] | JSX.Element | any;
   className?: string;
   contentClassName?: string;
   dialogClassName?: string;
-  state: boolean;
-  setState(value: any): void;
+  visible: boolean;
+  setVisible(value: any): void;
 }
 
 interface ChildrenProps {
@@ -36,17 +37,17 @@ export const Body: FC<ChildrenProps> = ({ children, ...props }) => (
 );
 
 export const Modal: FC<ModalProps> = ({
-  state,
+  visible,
   children,
   contentClassName,
   dialogClassName,
-  setState,
+  setVisible,
   ...props
-}) => (
+} : ModalProps) => (
   <ModalStyled
     size="sm"
-    show={state}
-    onHide={() => setState(false)}
+    show={visible}
+    onHide={() => setVisible(false)}
     animation
     centered
     contentClassName={contentClassName}

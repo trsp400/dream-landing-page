@@ -4,9 +4,10 @@ import { useSelector, useDispatch } from 'react-redux';
 import { changeFormState } from '../../../redux/dream_machine/actions';
 import Input from '../../CustomComponents/Input';
 import Button from '../../CustomComponents/Button';
-import MessageFeedback from '../../CustomComponents/MessageFeedback';
 
-import { Container, Body, Footer, ButtonContainer } from './styles';
+import Lefticon from '../../../assets/icons/left-icon.svg'
+
+import { Container, Body, MessageFeedbackStyle, BoxInput ,Footer, ButtonContainer } from './styles';
 
 import toastConfig from '../../../utils/toastConfig';
 
@@ -24,6 +25,7 @@ const StepThree = () => {
 
   const [inputValue, setInputValue] = useState(period);
   const [inputYearOrMonth, setInputYearOrMonth] = useState(yearOrMonth);
+  const [placeholderInfo, setPlaceholderInfo] = useState(listPeriods[yearOrMonth])
 
   const handleDispatch = useCallback(
     (step, direction) => {
@@ -43,11 +45,22 @@ const StepThree = () => {
     [dispatch, store, inputValue, inputYearOrMonth],
   );
 
+  const setPlaceholderInformation = useCallback(item => {
+      const returnItemListPeriod = listPeriods[item];
+
+      setPlaceholderInfo(returnItemListPeriod);
+      setInputYearOrMonth(item)
+  })
+
   return (
     <Container>
       <Body>
-        <MessageFeedback strong="lighter">OK!</MessageFeedback>
-        <MessageFeedback strong="bold">Em quanto tempo?</MessageFeedback>
+        <MessageFeedbackStyle placing="above" animationSpeed={2000} animationDelay={900}>
+          OK!
+        </MessageFeedbackStyle>
+        <MessageFeedbackStyle placing="bellow" animationSpeed={2000} animationDelay={1200}>
+          De quanto tempo você precisa?
+        </MessageFeedbackStyle>
 
         <ButtonContainer>
           {Object.keys(listPeriods).map(item => (
@@ -55,23 +68,21 @@ const StepThree = () => {
               variant={item === inputYearOrMonth ? 'beorange' : 'beblue'}
               ripple
               glow
-              style={{
-                width: '30%',
-              }}
-              onClick={() => setInputYearOrMonth(item)}
+              onClick={() => setPlaceholderInformation(item)}
               key={item}
             >
               {listPeriods[item]}
             </Button>
           ))}
         </ButtonContainer>
-
-        <Input
-          state={inputValue}
-          setState={setInputValue}
-          type="number"
-          placeholder="Tempo"
-        />
+        <BoxInput>
+          <Input
+            state={inputValue}
+            setState={setInputValue}
+            type="number"
+            placeholder={placeholderInfo}
+          />
+        </BoxInput>
       </Body>
 
       <Footer>
@@ -80,11 +91,8 @@ const StepThree = () => {
           variant="beblue"
           glow
           onClick={() => handleDispatch(2, 'previous')}
-          style={{
-            width: '30%',
-          }}
         >
-          {'<='}
+          <Lefticon />
         </Button>
 
         <Button
@@ -92,9 +100,6 @@ const StepThree = () => {
           variant="beorange"
           glow
           onClick={() => handleDispatch(4, 'next')}
-          style={{
-            width: '30%',
-          }}
         >
           OK
         </Button>

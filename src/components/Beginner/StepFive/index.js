@@ -6,7 +6,9 @@ import Input from '../../CustomComponents/Input';
 
 import Button from '../../CustomComponents/Button';
 import MessageFeedback from '../../CustomComponents/MessageFeedback';
-import { Container, ButtonContainer, Body, Footer } from './styles';
+import { Container, MessageFeedbackStyle, BoxInput, Body, Footer } from './styles';
+
+import Lefticon from '../../../assets/icons/left-icon.svg'
 
 import toastConfig from '../../../utils/toastConfig';
 
@@ -45,12 +47,15 @@ const StepFive = () => {
   return (
     <Container>
       <Body>
-        <MessageFeedback strong="lighter">OK!</MessageFeedback>
-        <MessageFeedback strong="bold">
+        <MessageFeedbackStyle placing="above" animationSpeed={2000} animationDelay={900}>
+          Beleza!
+        </MessageFeedbackStyle>
+        <MessageFeedbackStyle placing="bellow" animationSpeed={2000} animationDelay={1300}>
           Quanto você pode investir por mês?
-        </MessageFeedback>
-
-        <Input state={inputValue} setState={setInputValue} type="currency" />
+        </MessageFeedbackStyle>
+        <BoxInput>
+          <Input state={inputValue} setState={setInputValue} type="currency" />
+        </BoxInput>
       </Body>
 
       <Footer>
@@ -59,11 +64,8 @@ const StepFive = () => {
           variant="beblue"
           glow
           onClick={() => handleDispatch(4, 'previous')}
-          style={{
-            width: '30%',
-          }}
         >
-          {'<='}
+          <Lefticon />
         </Button>
 
         <Button
@@ -71,9 +73,6 @@ const StepFive = () => {
           variant="beorange"
           glow
           onClick={() => handleDispatch(6, 'next')}
-          style={{
-            width: '30%',
-          }}
         >
           OK
         </Button>

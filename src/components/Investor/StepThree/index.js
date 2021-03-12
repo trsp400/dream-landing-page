@@ -1,15 +1,16 @@
 import React, { useCallback, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
-import toastConfig from '../../../utils/toastConfig';
-
 import { changeFormState } from '../../../redux/dream_machine/actions';
 import Input from '../../CustomComponents/Input';
 import Button from '../../CustomComponents/Button';
 import MessageFeedback from '../../CustomComponents/MessageFeedback';
-import { Container, Body, Footer } from './styles';
 
-const StepThree = () => {
+import Lefticon from '../../../assets/icons/left-icon.svg'
+
+import { Container, Body, MessageFeedbackStyle,BoxInput, Footer } from './styles';
+
+const StepTwo = () => {
   const dispatch = useDispatch();
   const store = useSelector(({ dreamMachine }) => dreamMachine);
   const { notify } = useSelector(({ settings }) => settings);
@@ -22,12 +23,19 @@ const StepThree = () => {
     (step, direction) => {
       if (!inputValue && step > currentStep)
         return notify('Por favor, digite um valor!');
+
       dispatch(
         changeFormState({
           ...store,
           currentStep: step,
           direction,
-          objectiveCost: inputValue,
+          objectiveCost:
+            parseFloat(
+              inputValue
+                ?.replace(/R$/gi, '')
+                .replace(/\./gi, '')
+                .replace(/,/gi, '.'),
+            ) || inputValue,
         }),
       );
     },
@@ -37,10 +45,16 @@ const StepThree = () => {
   return (
     <Container>
       <Body>
-        <MessageFeedback strong="lighter">OK!</MessageFeedback>
-        <MessageFeedback strong="bold">De quanto você precisa?</MessageFeedback>
+       <MessageFeedbackStyle placing="above" animationSpeed={2000} animationDelay={900} largeLowSpace>
+          Que legal! Com a Máquina dos Sonhos da BeCapital você consegue com tranquilidade!
+        </MessageFeedbackStyle>
+        <MessageFeedbackStyle placing="bellow" animationSpeed={2000} animationDelay={2800}>
+          De quanto você precisa?
+        </MessageFeedbackStyle>
 
-        <Input state={inputValue} setState={setInputValue} type="currency" />
+        <BoxInput>
+          <Input state={inputValue} setState={setInputValue} type="currency" />
+        </BoxInput>
       </Body>
       <Footer>
         <Button
@@ -48,11 +62,8 @@ const StepThree = () => {
           variant="beblue"
           glow
           onClick={() => handleDispatch(2, 'previous')}
-          style={{
-            width: '30%',
-          }}
         >
-          {'<='}
+          <Lefticon />
         </Button>
 
         <Button
@@ -60,9 +71,7 @@ const StepThree = () => {
           variant="beorange"
           glow
           onClick={() => handleDispatch(4, 'next')}
-          style={{
-            width: '30%',
-          }}
+
         >
           OK
         </Button>
@@ -71,4 +80,4 @@ const StepThree = () => {
   );
 };
 
-export default StepThree;
+export default StepTwo;

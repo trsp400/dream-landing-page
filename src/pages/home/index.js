@@ -86,7 +86,7 @@ const Home = () => {
     ...springConfig,
   });
 
-  return currentStep > 0 ? (
+  return currentStep >= 1 ? (
     <animated.div
       style={{
         ...springProps,

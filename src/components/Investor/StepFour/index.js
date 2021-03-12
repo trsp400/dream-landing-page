@@ -1,20 +1,22 @@
 import React, { useCallback, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
-import toastConfig from '../../../utils/toastConfig';
-
 import { changeFormState } from '../../../redux/dream_machine/actions';
 import Input from '../../CustomComponents/Input';
 import Button from '../../CustomComponents/Button';
-import MessageFeedback from '../../CustomComponents/MessageFeedback';
-import { Container, ButtonContainer, Body, Footer } from './styles';
+
+import Lefticon from '../../../assets/icons/left-icon.svg'
+
+import { Container, Body, MessageFeedbackStyle, BoxInput ,Footer, ButtonContainer } from './styles';
+
+import toastConfig from '../../../utils/toastConfig';
 
 const listPeriods = {
   anos: 'Anos',
   meses: 'Meses',
 };
 
-const StepFour = () => {
+const StepThree = () => {
   const dispatch = useDispatch();
   const store = useSelector(({ dreamMachine }) => dreamMachine);
   const { notify } = useSelector(({ settings }) => settings);
@@ -28,6 +30,7 @@ const StepFour = () => {
     (step, direction) => {
       if (!inputValue && step > currentStep)
         return notify('Por favor, digite um valor!');
+
       dispatch(
         changeFormState({
           ...store,
@@ -38,14 +41,18 @@ const StepFour = () => {
         }),
       );
     },
-    [dispatch, store, inputValue],
+    [dispatch, store, inputValue, inputYearOrMonth],
   );
 
   return (
     <Container>
       <Body>
-        <MessageFeedback strong="lighter">OK!</MessageFeedback>
-        <MessageFeedback strong="bold">Em quanto tempo?</MessageFeedback>
+        <MessageFeedbackStyle placing="above" animationSpeed={2000} animationDelay={900}>
+          OK!
+        </MessageFeedbackStyle>
+        <MessageFeedbackStyle placing="bellow" animationSpeed={2000} animationDelay={1200}>
+          De quanto tempo você precisa?
+        </MessageFeedbackStyle>
 
         <ButtonContainer>
           {Object.keys(listPeriods).map(item => (
@@ -53,9 +60,6 @@ const StepFour = () => {
               variant={item === inputYearOrMonth ? 'beorange' : 'beblue'}
               ripple
               glow
-              style={{
-                width: '30%',
-              }}
               onClick={() => setInputYearOrMonth(item)}
               key={item}
             >
@@ -63,13 +67,14 @@ const StepFour = () => {
             </Button>
           ))}
         </ButtonContainer>
-
-        <Input
-          state={inputValue}
-          setState={setInputValue}
-          type="number"
-          placeholder="Tempo"
-        />
+        <BoxInput>
+          <Input
+            state={inputValue}
+            setState={setInputValue}
+            type="number"
+            placeholder="Tempo"
+          />
+        </BoxInput>
       </Body>
 
       <Footer>
@@ -78,11 +83,8 @@ const StepFour = () => {
           variant="beblue"
           glow
           onClick={() => handleDispatch(3, 'previous')}
-          style={{
-            width: '30%',
-          }}
         >
-          {'<='}
+          <Lefticon />
         </Button>
 
         <Button
@@ -90,9 +92,6 @@ const StepFour = () => {
           variant="beorange"
           glow
           onClick={() => handleDispatch(5, 'next')}
-          style={{
-            width: '30%',
-          }}
         >
           OK
         </Button>
@@ -101,4 +100,4 @@ const StepFour = () => {
   );
 };
 
-export default StepFour;
+export default StepThree;

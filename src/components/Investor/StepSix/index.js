@@ -1,16 +1,18 @@
 import React, { useCallback, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
-import toastConfig from '../../../utils/toastConfig';
-
 import { changeFormState } from '../../../redux/dream_machine/actions';
 import Input from '../../CustomComponents/Input';
 
 import Button from '../../CustomComponents/Button';
 import MessageFeedback from '../../CustomComponents/MessageFeedback';
-import { Container, ButtonContainer, Body, Footer } from './styles';
+import { Container, MessageFeedbackStyle, BoxInput, Body, Footer } from './styles';
 
-const StepSix = () => {
+import Lefticon from '../../../assets/icons/left-icon.svg'
+
+import toastConfig from '../../../utils/toastConfig';
+
+const StepFive = () => {
   const dispatch = useDispatch();
   const store = useSelector(({ dreamMachine }) => dreamMachine);
   const { notify } = useSelector(({ settings }) => settings);
@@ -23,12 +25,19 @@ const StepSix = () => {
     (step, direction) => {
       if (!inputValue && step > currentStep)
         return notify('Por favor, digite um valor!');
+
       dispatch(
         changeFormState({
           ...store,
           currentStep: step,
           direction,
-          monthlySupport: inputValue,
+          monthlySupport:
+            parseFloat(
+              inputValue
+                ?.replace(/R$/gi, '')
+                .replace(/\./gi, '')
+                .replace(/,/gi, '.'),
+            ) || inputValue,
         }),
       );
     },
@@ -38,12 +47,15 @@ const StepSix = () => {
   return (
     <Container>
       <Body>
-        <MessageFeedback strong="lighter">OK!</MessageFeedback>
-        <MessageFeedback strong="bold">
+        <MessageFeedbackStyle placing="above" animationSpeed={2000} animationDelay={900}>
+          Beleza!
+        </MessageFeedbackStyle>
+        <MessageFeedbackStyle placing="bellow" animationSpeed={2000} animationDelay={1300}>
           Quanto você pode investir por mês?
-        </MessageFeedback>
-
-        <Input state={inputValue} setState={setInputValue} type="currency" />
+        </MessageFeedbackStyle>
+        <BoxInput>
+          <Input state={inputValue} setState={setInputValue} type="currency" />
+        </BoxInput>
       </Body>
 
       <Footer>
@@ -52,21 +64,15 @@ const StepSix = () => {
           variant="beblue"
           glow
           onClick={() => handleDispatch(5, 'previous')}
-          style={{
-            width: '30%',
-          }}
         >
-          {'<='}
+          <Lefticon />
         </Button>
 
         <Button
           ripple
           variant="beorange"
           glow
-          onClick={() => handleDispatch(7)}
-          style={{
-            width: '30%',
-          }}
+          onClick={() => handleDispatch(7, 'next')}
         >
           OK
         </Button>
@@ -75,4 +81,4 @@ const StepSix = () => {
   );
 };
 
-export default StepSix;
+export default StepFive;

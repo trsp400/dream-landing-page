@@ -40,7 +40,7 @@ const RenderProgressBar: React.FC<RenderProgressBarProps> = ({
         </ProgressBarContainer>
       );
     default:
-      break;
+      return null;
   }
 };
 
@@ -59,10 +59,10 @@ const Layout = props => {
 
   return (
     <Container>
-      {currentStep && isMobileView && (
+      {location?.pathname !== '/resultado' && isMobileView && (
         <RenderProgressBar path={path} currentStep={currentStep} />
       )}
-      <Main style={{ zIndex: 999 }}>
+      <Main>
         <Background />
         {children}
       </Main>

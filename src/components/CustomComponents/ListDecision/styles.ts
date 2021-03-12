@@ -5,18 +5,24 @@ import {
   Col as ColBootstrap,
 } from 'react-bootstrap';
 
-export const Container = styled(ContainerBootstrap)``;
-export const Row = styled(RowBootstrap)``;
-export const Col = styled(ColBootstrap)``;
+export const Container = styled(ContainerBootstrap)`
+  padding: 0;
+`;
+export const Row = styled(RowBootstrap)`
+`;
+export const Col = styled(ColBootstrap)`
+`;
 
-export const ListDecisionContainerStyled = styled.div`
-  min-height: 85%;
-  height: 85%;
+export const ListDecisionContainerStyled = styled.section`
+  height: 60%;
+  width: 100%;
   display: flex;
   justify-content: center;
-  width: 100%;
-  margin: 20px 0;
-  padding: 10px;
+  align-items: center;
+  position: relative;
+  cursor: pointer;
+  margin: 16px 0;
+  padding: 10px 12px;
   position: relative;
   background-color: ${({ theme }) => theme.mobileTheme.colors.primary.orange};
   border-radius: 10px;
@@ -27,20 +33,25 @@ export const ListDecisionContainerStyled = styled.div`
 export const ListDecisionCheckStyled = styled.div`
   height: 14px;
   width: 14px;
-
-  margin: 0 auto;
-  position: absolute;
+  margin-right: 12px;
 
   background-color: var(--color);
   box-shadow: inset 0px 0px 4px rgba(0, 0, 0, 0.25),
     inset 0px 1px 2px 1px rgba(0, 0, 0, 0.25);
-  border-radius: 10px;
+  border-radius: 50%;
 `;
 
-export const ListDecisionTextStyled = styled.p`
+export const ListDecisionTextStyled = styled.div`
   width: 100%;
-  font: normal normal 400 16px Trasandina;
-  margin: auto 0;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font: 400 12px Trasandina;
+
   color: #fff;
-  height: max-content;
+  /* height: max-content; */
+  line-height: 16px;
+
 `;
