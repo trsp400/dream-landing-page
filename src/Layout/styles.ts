@@ -6,6 +6,8 @@ export const Container = styled.div`
   width: 100%;
   height: 100vh;
   overflow: hidden;
+  position: relative;
+
   background-color: ${({ theme }) => theme.mobileTheme.colors.primary.blue};
   background-size: cover;
   background-repeat: no-repeat;
@@ -16,10 +18,11 @@ export const Container = styled.div`
 export const Background = styled.div`
   background-image: url('${Pattern}');
   position: absolute;
+  width: 100%;
+  height: 100vh;
 
   opacity: 0.3;
-  width: 100vw;
-  height: 100vh;
+
   background-size: cover;
   object-fit: cover;
 `;
@@ -37,4 +40,5 @@ export const Main = styled.main`
   flex-direction: column;
   justify-content: center;
   max-width: 1024px;
+
 `;

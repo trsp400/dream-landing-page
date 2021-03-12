@@ -43,8 +43,8 @@ const Result = ({ location }) => {
   let newPeriodChunk = [];
 
   const yearlyAverageArrayModificad = yearlyAverageArray.map(y => ({
-    x: y.Ano,
-    y: y.Media,
+    x: y?.Ano,
+    y: y?.Media,
   }));
 
   if (newPeriod) {

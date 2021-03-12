@@ -28,7 +28,8 @@ export const TextStyled = styled.div<PropsTextStyled>`
 
   line-height: 5px;
 
-  &:nth-child(2) {
+  &:last-child {
+    background: blue;
     height: 12%;
   }
 
@@ -40,7 +41,7 @@ export const TextStyled = styled.div<PropsTextStyled>`
     width: 95%;
     padding: 0 8px 0 26px;
     line-height: 26px;
-    overflow: hidden;
+    display: inline-block;
 
     svg {
       position: absolute;

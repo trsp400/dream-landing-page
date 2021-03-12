@@ -8,10 +8,10 @@ import { createResultObject } from '../../../utils/handleResultObject';
 import Input from '../../CustomComponents/Input';
 import Loading from '../../CustomComponents/Loading';
 import Button from '../../CustomComponents/Button';
-import MessageFeedback from '../../CustomComponents/MessageFeedback';
-import { Container, Body, Footer } from './styles';
 
-const StepEight = () => {
+import { Container, MessageFeedbackStyle, BoxInput,ErrorInformation ,Body, Footer } from './styles';
+
+const StepSeven = () => {
   const dispatch = useDispatch();
   const store = useSelector(({ dreamMachine }) => dreamMachine);
   const { notify } = useSelector(({ settings }) => settings);
@@ -101,26 +101,23 @@ const StepEight = () => {
   return (
     <Container>
       <Body>
-        <MessageFeedback strong="normal">
-          Para receber o <strong>resultado completo</strong> do seu perfil,
-          deixei aqui o seu e-mail:
-        </MessageFeedback>
-
-        <Input
-          state={inputValue}
-          setState={checkValidEmailOnInputChange}
-          type="email"
-        />
-        {!validEmail ? (
-          <span style={{ color: 'red' }}>Digite um e-mail válido!</span>
-        ) : null}
-
-        <span style={{ color: 'white' }}>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam molestie
-          ac lorem et vulputate. Praesent dapibus, augue ut euismod mattis,
-          massa leo tempus erat, et aliquam nulla turpis sed nisi. Praesent id
-          ipsum est. Integer posuere interdum eros. Nam nec aliquet ipsum, at
-          sodales elit. Phasellus eget enim mi.
+        <MessageFeedbackStyle placing="bellow" animationSpeed={2000} animationDelay={900}>
+          Para receber o resultado completo do
+          seu perfil, deixe aqui o seu e-mail:
+        </MessageFeedbackStyle>
+        <BoxInput>
+          <Input
+            state={inputValue}
+            setState={checkValidEmailOnInputChange}
+            type="email"
+          />
+          {!validEmail && (
+            <ErrorInformation>Digite um e-mail válido!</ErrorInformation>
+          )}
+        </BoxInput>
+        <span>
+          Ao cadastrar o e-mail, você autoriza que a BeCapital faça envio de conteúdos que a nossa
+          equipe avalie como interessantes para o seu perfil.
         </span>
       </Body>
 
@@ -130,9 +127,6 @@ const StepEight = () => {
           variant="beorange"
           glow
           onClick={() => handleOnClink(inputValue)}
-          style={{
-            width: '100%',
-          }}
         >
           OK
         </Button>
@@ -142,4 +136,4 @@ const StepEight = () => {
   );
 };
 
-export default StepEight;
+export default StepSeven;

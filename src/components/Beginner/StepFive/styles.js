@@ -39,11 +39,13 @@ export const BoxInput = styled.div`
   padding: 50px;
 `;
 
+
+
 export const Footer = styled.div`
   position: fixed;
   bottom: 10%;
   width: 100%;
-  height: 10%;
+  height: 8%;
   display: flex;
 
   justify-content: space-between;

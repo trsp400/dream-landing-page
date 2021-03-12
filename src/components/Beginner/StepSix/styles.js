@@ -3,8 +3,6 @@ import { Container as BootstrapContainer } from 'react-bootstrap';
 
 import MessageFeedback from '../../CustomComponents/MessageFeedback';
 
-
-
 export const Container = styled(BootstrapContainer)`
   display: flex;
   width: 100%;
@@ -21,20 +19,19 @@ export const Body = styled.div`
   display: flex;
   height: 100%;
   flex-direction: column;
-
-  div:nth-of-type(3) {
-    padding: 16px;
-
-  }
-
 `;
+
+export const BoxListDecision = styled.div`
+  margin-top: 25px;
+  padding: 0 16px;
+`
 
 
 export const Footer = styled.div`
   position: fixed;
-  bottom: 8%;
+  bottom: 10%;
   width: 100%;
-  height: 10%;
+  height: 8%;
   display: flex;
 
   justify-content: space-between;

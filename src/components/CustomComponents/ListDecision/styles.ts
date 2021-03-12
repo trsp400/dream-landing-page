@@ -10,7 +10,8 @@ export const Container = styled(ContainerBootstrap)`
 `;
 export const Row = styled(RowBootstrap)`
 `;
-export const Col = styled(ColBootstrap)``;
+export const Col = styled(ColBootstrap)`
+`;
 
 export const ListDecisionContainerStyled = styled.section`
   height: 60%;

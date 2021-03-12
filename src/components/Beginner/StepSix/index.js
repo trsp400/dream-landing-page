@@ -5,7 +5,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import ListDecision from '../../CustomComponents/ListDecision';
 import Button from '../../CustomComponents/Button';
 import MessageFeedback from '../../CustomComponents/MessageFeedback';
-import { Container, Body, MessageFeedbackStyle,Footer } from './styles';
+import { Container, Body,BoxListDecision ,MessageFeedbackStyle,Footer } from './styles';
 
 import { changeFormState } from '../../../redux/dream_machine/actions';
 
@@ -52,13 +52,13 @@ const StepSeven = () => {
         <MessageFeedbackStyle placing="bellow" animationSpeed={2000} animationDelay={1800}>
           Se você investisse R$ 1.000, qual seria a sua preferência?
         </MessageFeedbackStyle>
-        <div>
+        <BoxListDecision>
           <ListDecision
             options={options}
             state={inputValue}
             setState={setInputvalue}
           />
-        </div>
+        </BoxListDecision>
       </Body>
 
       <Footer>

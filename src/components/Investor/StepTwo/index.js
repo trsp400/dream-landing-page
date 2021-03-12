@@ -7,14 +7,13 @@ import toastConfig from '../../../utils/toastConfig';
 import { changeFormState } from '../../../redux/dream_machine/actions';
 
 import SvgImg from '../../../assets/icons/checkbox-icon.svg';
+import Lefticon from '../../../assets/icons/left-icon.svg'
 
 import Input from '../../CustomComponents/Input';
 import CheckBox from '../../CustomComponents/CheckBox';
-import MessageFeedback from '../../CustomComponents/MessageFeedback';
-
 import Button from '../../CustomComponents/Button';
 
-import { Footer, Container } from './styles';
+import { Container, MessageFeedbackStyle,BoxCheck , BoxInput,Footer } from './styles';
 
 const options = [
   'Renda Fixa',
@@ -57,38 +56,37 @@ const StepTwo = () => {
 
   return (
     <Container>
-      <MessageFeedback strong="lighter">Incrível!</MessageFeedback>
+      <MessageFeedbackStyle placing="above" animationSpeed={2000} animationDelay={900}>
+          Olá, vamos começar?
+        </MessageFeedbackStyle>
+        <MessageFeedbackStyle placing="bellow" animationSpeed={2000} animationDelay={1300}>
+          Onde você já investe?
+        </MessageFeedbackStyle>
+      <BoxCheck>
+        <CheckBox
+          options={options}
+          state={arrayValues}
+          setState={setArrayValues}
+          image={<SvgImg />}
+        />
+      </BoxCheck>
 
-      <MessageFeedback strong="bold">
-        Onde você deseja investir?
-      </MessageFeedback>
-
-      <CheckBox
-        options={options}
-        state={arrayValues}
-        setState={setArrayValues}
-        image={<SvgImg />}
-      />
-
-      <br />
-      <span>Outro: </span>
-      <Input
-        state={otherInvestmentsInput}
-        setState={setOtherInvestmentsInput}
-        type="text"
-      />
-
+      <BoxInput>
+      <span>Outro:</span>
+        <Input
+          state={otherInvestmentsInput}
+          setState={setOtherInvestmentsInput}
+          type="text"
+        />
+      </BoxInput>
       <Footer>
         <Button
           ripple
           variant="beblue"
           glow
           onClick={() => handleDispatch(1, 'previous')}
-          style={{
-            width: '30%',
-          }}
         >
-          {'<='}
+          <Lefticon/>
         </Button>
 
         <Button
@@ -96,9 +94,6 @@ const StepTwo = () => {
           variant="beorange"
           glow
           onClick={() => handleDispatch(3, 'next')}
-          style={{
-            width: '30%',
-          }}
         >
           OK
         </Button>
