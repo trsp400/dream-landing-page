@@ -1,6 +1,7 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { Container as BootstrapContainer } from 'react-bootstrap';
 
+import LineChart from '../../components/CustomComponents/LineChart';
 import RippleButton from '../../components/CustomComponents/Button';
 
 export const Container = styled(BootstrapContainer)`
@@ -8,26 +9,6 @@ export const Container = styled(BootstrapContainer)`
   flex-direction: column;
   align-content: center;
   height: 100vh;
-
-  @keyframes up {
-    0% {
-      /* transform: translateY(100%); */
-      top: 0;
-    }
-    100% {
-      /* transform: translateY(0); */
-      top: 30%;
-    }
-  }
-
-  @keyframes down {
-    0% {
-      transform: translateY(0);
-    }
-    100% {
-      transform: translateY(100%);
-    }
-  }
 `;
 
 export const ContainerRate = styled.div`
@@ -76,7 +57,21 @@ export const ButtonShowGraphic = styled.button`
   border-radius: 50px;
   padding: 2px 8px;
   bottom: -8%;
+
+  ${props =>
+    !props?.showGraphic &&
+    css`
+      transform: rotate(180deg);
+    `}
 `;
+
+export const LineChartContainer = styled.div`
+  margin-bottom: 2rem;
+  opacity: 1;
+  display: block;
+`;
+
+export const LineChartStyled = styled(LineChart)``;
 
 export const ButtonContainer = styled.div`
   display: flex;
