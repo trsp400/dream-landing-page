@@ -12,7 +12,7 @@ phases:
       - 'npm run build-production'
   post_build:
     commands:
-      - 'aws s3 sync "public/" "s3://dream-machine-homolog" --delete --acl "public-read"'
+      - 'aws s3 sync "public/" "s3://dream-machine-production" --delete --acl "public-read"'
 artifacts:
   base-directory: public
   files:

@@ -15,17 +15,17 @@ image: node:14
 
 pipelines:
   branches:
-    master:
+    any-branch:
       - parallel:
-        - step:
-            name: Build
-            caches:
-              - node
-            script:
-              - npm install
-              - gatsby build
-            artifacts:
-              - public/**
+          - step:
+              name: Build
+              caches:
+                - node
+              script:
+                - npm install
+                - gatsby build
+              artifacts:
+                - public/**
       - step:
           name: Deploy to homolog
           deployment: Homolog
