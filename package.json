@@ -68,6 +68,7 @@
   ],
   "license": "0BSD",
   "scripts": {
+    "build-homolog": "NODE_ENV=homolog gatsby build",
     "build": "NODE_ENV=production gatsby build",
     "develop": "NODE_ENV=development gatsby clean && gatsby develop",
     "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,md}\"",
