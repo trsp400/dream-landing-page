@@ -9,7 +9,7 @@ phases:
       - 'npm install'
   build:
     commands:
-      - 'npm run build-homolog'
+      - 'npm run build-production'
   post_build:
     commands:
       - 'aws s3 sync "public/" "s3://dream-machine-homolog" --delete --acl "public-read"'
