@@ -13,20 +13,22 @@ import store from './src/redux/store';
 
 export const wrapPageElement = ({ element }) => {
   return (
-    <Provider store={store}>
-      <SEO lang="pt-BR" title="Máquina dos Sonhos BeCapital" />
-      <ToastContainer />
-      <ThemeProvider
-        theme={{
-          desktopTheme,
-          mobileTheme,
-        }}
-      >
-        <React.Fragment>
-          <GlobalStyle />
-          {element}
-        </React.Fragment>
-      </ThemeProvider>
-    </Provider>
+    typeof window !== `undefined` && (
+      <Provider store={store}>
+        <SEO lang="pt-BR" title="Máquina dos Sonhos BeCapital" />
+        <ToastContainer />
+        <ThemeProvider
+          theme={{
+            desktopTheme,
+            mobileTheme,
+          }}
+        >
+          <React.Fragment>
+            <GlobalStyle />
+            {element}
+          </React.Fragment>
+        </ThemeProvider>
+      </Provider>
+    )
   );
 };
