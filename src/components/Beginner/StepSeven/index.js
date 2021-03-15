@@ -11,14 +11,17 @@ import { createResultObject } from '../../../utils/handleResultObject';
 import Input from '../../CustomComponents/Input';
 import Loading from '../../CustomComponents/Loading';
 import Button from '../../CustomComponents/Button';
-import { Footer as ModalFooter } from '../../CustomComponents/Modal';
 
+import { parseStringInt } from '../../../utils/parseValues';
 
-import { parseCurrencyFloat, parseStringInt } from '../../../utils/parseValues';
-
-import { Container, MessageFeedbackStyle, BoxInput,ErrorInformation ,Body, Footer, BodyStyled, HeaderStyled, ModalStyled } from './styles';
-
-
+import {
+  Container,
+  MessageFeedbackStyle,
+  BoxInput,
+  ErrorInformation,
+  Body,
+  Footer,
+} from './styles';
 
 const StepSeven = () => {
   const dispatch = useDispatch();
@@ -37,9 +40,9 @@ const StepSeven = () => {
 
   const period = parseStringInt(store.period);
   const yearOrMonth = store.yearOrMonth;
-  const monthlySupport = parseCurrencyFloat(store.monthlySupport);
-  const currentInvestments = parseCurrencyFloat(store.currentInvestments);
-  const objectiveCost = parseCurrencyFloat(store.objectiveCost);
+  const monthlySupport = store.monthlySupport;
+  const currentInvestments = store.currentInvestments;
+  const objectiveCost = store.objectiveCost;
 
   const handleDispatchResultState = useCallback(() => {
     const resultObject = createResultObject(
@@ -144,32 +147,16 @@ const StepSeven = () => {
 
   return requestLoading ? (
     <Loading />
-  ) : resultModalFailure ? (
-    <ModalStyled
-      visible={resultModalFailure}
-      setVisible={setResultModalFailure}
-      contentClassName="custom-content"
-      dialogClassName="custom-dialog"
-    >
-      <HeaderStyled closeButton />
-
-      <BodyStyled>
-        O valor do seu sonho deve ser maior do que o valor a qual você já tem, e
-        maior do que o valor que você pode investir mensalmente. Por favor,
-        clique no botão abaixo para recomeçar a calcular seu sonho!
-      </BodyStyled>
-      <ModalFooter>
-        <Button style={{ width: '100%' }} onClick={() => resetStore()}>
-          RECOMEÇAR
-        </Button>
-      </ModalFooter>
-    </ModalStyled>
   ) : (
     <Container>
       <Body>
-        <MessageFeedbackStyle placing="bellow" animationSpeed={2000} animationDelay={900}>
-          Para receber o resultado completo do
-          seu perfil, deixe aqui o seu e-mail:
+        <MessageFeedbackStyle
+          placing="bellow"
+          animationSpeed={2000}
+          animationDelay={900}
+        >
+          Para receber o resultado completo do seu perfil, deixe aqui o seu
+          e-mail:
         </MessageFeedbackStyle>
         <BoxInput>
           <Input
@@ -182,8 +169,9 @@ const StepSeven = () => {
           )}
         </BoxInput>
         <span>
-          Ao cadastrar o e-mail, você autoriza que a BeCapital faça envio de conteúdos que a nossa
-          equipe avalie como interessantes para o seu perfil.
+          Ao cadastrar o e-mail, você autoriza que a BeCapital faça envio de
+          conteúdos que a nossa equipe avalie como interessantes para o seu
+          perfil.
         </span>
       </Body>
 

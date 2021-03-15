@@ -7,13 +7,19 @@ import toastConfig from '../../../utils/toastConfig';
 import { changeFormState } from '../../../redux/dream_machine/actions';
 
 import SvgImg from '../../../assets/icons/checkbox-icon.svg';
-import Lefticon from '../../../assets/icons/left-icon.svg'
+import Lefticon from '../../../assets/icons/left-icon.svg';
 
 import Input from '../../CustomComponents/Input';
 import CheckBox from '../../CustomComponents/CheckBox';
 import Button from '../../CustomComponents/Button';
 
-import { Container, MessageFeedbackStyle,BoxCheck , BoxInput,Footer } from './styles';
+import {
+  Container,
+  MessageFeedbackStyle,
+  BoxCheck,
+  BoxInput,
+  Footer,
+} from './styles';
 
 const options = [
   'Renda Fixa',
@@ -56,12 +62,20 @@ const StepTwo = () => {
 
   return (
     <Container>
-      <MessageFeedbackStyle placing="above" animationSpeed={2000} animationDelay={900}>
-          Olá, vamos começar?
-        </MessageFeedbackStyle>
-        <MessageFeedbackStyle placing="bellow" animationSpeed={2000} animationDelay={1300}>
-          Onde você já investe?
-        </MessageFeedbackStyle>
+      <MessageFeedbackStyle
+        placing="above"
+        animationSpeed={2000}
+        animationDelay={900}
+      >
+        OK!
+      </MessageFeedbackStyle>
+      <MessageFeedbackStyle
+        placing="bellow"
+        animationSpeed={2000}
+        animationDelay={1300}
+      >
+        Onde você deseja investir?
+      </MessageFeedbackStyle>
       <BoxCheck>
         <CheckBox
           options={options}
@@ -85,7 +99,7 @@ const StepTwo = () => {
           glow
           onClick={() => handleDispatch(1, 'previous')}
         >
-          <Lefticon/>
+          <Lefticon />
         </Button>
 
         <Button

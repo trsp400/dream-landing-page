@@ -9,7 +9,6 @@ import { changeFormState } from '../../redux/dream_machine/actions';
 import Layout from '../../Layout';
 import SEO from '../../components/CustomComponents/Seo';
 import resultProfile from '../../utils/resultProfile';
-import { parseCurrencyFloat } from '../../utils/parseValues';
 
 import {
   Container,
@@ -45,7 +44,7 @@ const Result = () => {
     comingFromLastStep,
   } = store;
 
-  const objectiveCost = parseCurrencyFloat(store.objectiveCost);
+  const objectiveCost = store.objectiveCost;
 
   if (!comingFromLastStep) navigate('/');
 
