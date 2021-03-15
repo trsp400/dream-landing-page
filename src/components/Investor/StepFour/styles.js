@@ -30,14 +30,12 @@ export const BoxInput = styled.div`
   position: relative;
 
   display: flex;
-  justify-content: flex-start;
+  justify-content: center;
   align-items: center;
 
   width: 100%;
   height: auto;
   padding: 20px;
-
-
 `;
 
 export const Footer = styled.div`
