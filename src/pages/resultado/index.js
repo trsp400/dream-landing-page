@@ -139,7 +139,6 @@ const Result = () => {
     ...springTextConfig,
   });
 
-
   const resetStore = useCallback(() => {
     dispatch(
       changeFormState({
@@ -288,21 +287,31 @@ const Result = () => {
                   O seu perfil é{' '}
                   <span style={{ color: '#e2381a' }}>{riskProfile}</span>
                 </p>
-                <p>{resultRiskProfile?.label1 || ""}</p>
+                <p>{resultRiskProfile?.label1 || ''}</p>
               </>
             )}
 
             <ButtonContainer style={{ marginBottom: '15px' }}>
-              <Button onClick={() => {
-                window.open('https://be.capital/')
-              }} ripple glow style={{ margin: '0 10px' }}>
+              <Button
+                onClick={() => {
+                  window.open('https://be.capital/');
+                }}
+                ripple
+                glow
+                style={{ margin: '0 10px' }}
+              >
                 Ir ao Site
               </Button>
 
-              <Button onClick={() => {
-                resetStore()
-                navigate("/")
-              }} ripple glow style={{ margin: '0 10px' }}>
+              <Button
+                onClick={() => {
+                  resetStore();
+                  navigate('/');
+                }}
+                ripple
+                glow
+                style={{ margin: '0 10px' }}
+              >
                 Recalcule seu Sonho
               </Button>
             </ButtonContainer>
@@ -310,19 +319,25 @@ const Result = () => {
             <p>
               Confira mais detalhes sobre a{' '}
               <strong>evolução do seu patrimônio</strong> e
-              <strong> composição de carteira ideal</strong> no relatório completo
-              que enviamos para o seu e-mail. <br />
+              <strong> composição de carteira ideal</strong> no relatório
+              completo que enviamos para o seu e-mail. <br />
               <br /> Quer ajuda para tirar seu planejamento financeiro do papel?
             </p>
 
             <ButtonContainer>
-              <Button onClick={() => {}} ripple glow>
-                Baixar PDF
+              <Button
+                onClick={() => {
+                  window.open('https://be.capital/');
+                }}
+                ripple
+                glow
+                style={{ margin: '0 10px' }}
+              >
+                Ir ao Site
               </Button>
             </ButtonContainer>
           </TextResult>
         </animated.div>
-
       </Container>
     </Layout>
   );

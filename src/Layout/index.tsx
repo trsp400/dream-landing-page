@@ -48,7 +48,11 @@ const Layout = props => {
   const [width] = useWindowSize();
   const dispatch = useDispatch();
 
-  const { currentStep, path } = useSelector(({ dreamMachine }) => dreamMachine);
+  const {
+    currentStep,
+    path,
+    result: { yearlyAverageArray },
+  } = useSelector(({ dreamMachine }) => dreamMachine);
   const { isMobileView } = useSelector(({ settings }) => settings);
 
   const children = props?.children;
@@ -59,7 +63,7 @@ const Layout = props => {
 
   return (
     <Container>
-      {!!currentStep && isMobileView && (
+      {!yearlyAverageArray?.length && isMobileView && (
         <RenderProgressBar path={path} currentStep={currentStep} />
       )}
       <Main>
