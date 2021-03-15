@@ -14,6 +14,14 @@ interface RenderProgressBarProps {
   currentStep: number;
 }
 
+interface ReduxStore {
+  isMobileView?: Boolean;
+  path?: 'investor' | 'beginner';
+  currentStep?: number;
+  dreamMachine?: Object;
+  settings?: Object;
+}
+
 const RenderProgressBar: React.FC<RenderProgressBarProps> = ({
   path,
   currentStep,
@@ -48,8 +56,12 @@ const Layout = props => {
   const [width] = useWindowSize();
   const dispatch = useDispatch();
 
-  const { currentStep, path } = useSelector(({ dreamMachine }) => dreamMachine);
-  const { isMobileView } = useSelector(({ settings }) => settings);
+  const { currentStep, path }: ReduxStore = useSelector(
+    ({ dreamMachine }: ReduxStore) => dreamMachine,
+  );
+  const { isMobileView }: ReduxStore = useSelector(
+    ({ settings }: ReduxStore) => settings,
+  );
 
   const children = props?.children;
 

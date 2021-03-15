@@ -4,11 +4,16 @@ import { useSelector, useDispatch } from 'react-redux';
 import { changeFormState } from '../../../redux/dream_machine/actions';
 import Input from '../../CustomComponents/Input';
 import Button from '../../CustomComponents/Button';
-import MessageFeedback from '../../CustomComponents/MessageFeedback';
 
-import Lefticon from '../../../assets/icons/left-icon.svg'
+import Lefticon from '../../../assets/icons/left-icon.svg';
 
-import { Container, Body, MessageFeedbackStyle,BoxInput, Footer } from './styles';
+import {
+  Container,
+  Body,
+  MessageFeedbackStyle,
+  BoxInput,
+  Footer,
+} from './styles';
 
 const StepTwo = () => {
   const dispatch = useDispatch();
@@ -24,18 +29,22 @@ const StepTwo = () => {
       if (!inputValue && step > currentStep)
         return notify('Por favor, digite um valor!');
 
+      const formattedInputValue =
+        typeof inputValue === 'string'
+          ? parseFloat(
+              inputValue
+                ?.replace('R$', '')
+                ?.replace(/\./gi, '')
+                ?.replace(/,/gi, '.') || inputValue,
+            )
+          : inputValue;
+
       dispatch(
         changeFormState({
           ...store,
           currentStep: step,
           direction,
-          objectiveCost:
-            parseFloat(
-              inputValue
-                ?.replace(/R$/gi, '')
-                .replace(/\./gi, '')
-                .replace(/,/gi, '.'),
-            ) || inputValue,
+          objectiveCost: formattedInputValue,
         }),
       );
     },
@@ -45,10 +54,19 @@ const StepTwo = () => {
   return (
     <Container>
       <Body>
-       <MessageFeedbackStyle placing="above" animationSpeed={2000} animationDelay={900} largeLowSpace>
-          Que legal! Com a Máquina dos Sonhos da BeCapital você consegue com tranquilidade!
+        <MessageFeedbackStyle
+          placing="above"
+          animationSpeed={2000}
+          animationDelay={900}
+          // largeLowSpace
+        >
+          OK!
         </MessageFeedbackStyle>
-        <MessageFeedbackStyle placing="bellow" animationSpeed={2000} animationDelay={2800}>
+        <MessageFeedbackStyle
+          placing="bellow"
+          animationSpeed={2000}
+          animationDelay={1000}
+        >
           De quanto você precisa?
         </MessageFeedbackStyle>
 
@@ -71,7 +89,6 @@ const StepTwo = () => {
           variant="beorange"
           glow
           onClick={() => handleDispatch(4, 'next')}
-
         >
           OK
         </Button>
