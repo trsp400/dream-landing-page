@@ -4,19 +4,22 @@ import { useSelector, useDispatch } from 'react-redux';
 import { changeFormState } from '../../../redux/dream_machine/actions';
 import Input from '../../CustomComponents/Input';
 import Button from '../../CustomComponents/Button';
-import { Container, Body, MessageFeedbackStyle, BoxInput,Footer } from './styles';
+import {
+  Container,
+  Body,
+  MessageFeedbackStyle,
+  BoxInput,
+  Footer,
+} from './styles';
 
-
-import Lefticon from '../../../assets/icons/left-icon.svg'
-
-import toastConfig from '../../../utils/toastConfig';
+import Lefticon from '../../../assets/icons/left-icon.svg';
 
 const StepFour = () => {
   const dispatch = useDispatch();
   const store = useSelector(({ dreamMachine }) => dreamMachine);
   const { notify } = useSelector(({ settings }) => settings);
 
-  const { currentStep, currentInvestments } = store;
+  const { currentStep, currentInvestments, objectiveCost } = store;
 
   const [inputValue, setInputValue] = useState(currentInvestments);
 
@@ -25,18 +28,27 @@ const StepFour = () => {
       if (!inputValue && step > currentStep)
         return notify('Por favor, digite um valor!');
 
+      const formattedInputValue =
+        typeof inputValue === 'string'
+          ? parseFloat(
+              inputValue
+                ?.replace('R$', '')
+                ?.replace(/\./gi, '')
+                ?.replace(/,/gi, '.'),
+            )
+          : inputValue;
+
+      if (objectiveCost <= formattedInputValue && step > currentStep)
+        return notify(
+          'O valor que você pode investir deve ser menor do que o valor do seu sonho!',
+        );
+
       dispatch(
         changeFormState({
           ...store,
           currentStep: step,
           direction,
-          currentInvestments:
-            parseFloat(
-              inputValue
-                ?.replace(/R$/gi, '')
-                .replace(/\./gi, '')
-                .replace(/,/gi, '.'),
-            ) || inputValue,
+          currentInvestments: formattedInputValue,
         }),
       );
     },
@@ -46,11 +58,19 @@ const StepFour = () => {
   return (
     <Container>
       <Body>
-      <MessageFeedbackStyle placing="above" animationSpeed={2000} animationDelay={900}>
+        <MessageFeedbackStyle
+          placing="above"
+          animationSpeed={2000}
+          animationDelay={900}
+        >
           Beleza!
         </MessageFeedbackStyle>
-        <MessageFeedbackStyle placing="bellow" animationSpeed={2000} animationDelay={1300}>
-        Quanto você pode investir hoje?
+        <MessageFeedbackStyle
+          placing="bellow"
+          animationSpeed={2000}
+          animationDelay={1300}
+        >
+          Quanto você pode investir hoje?
         </MessageFeedbackStyle>
         <BoxInput>
           <Input state={inputValue} setState={setInputValue} type="currency" />
