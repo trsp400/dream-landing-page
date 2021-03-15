@@ -1,15 +1,14 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useCallback } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import _ from 'lodash';
 import { navigate } from 'gatsby-link';
+import { useSpring, animated } from 'react-spring';
+
+import { changeFormState } from '../../redux/dream_machine/actions';
 
 import Layout from '../../Layout';
 import SEO from '../../components/CustomComponents/Seo';
 import resultProfile from '../../utils/resultProfile';
-
-import { changeFormState } from '../../redux/dream_machine/actions';
-
-import { useSpring, animated } from 'react-spring';
 
 import {
   Container,
@@ -91,6 +90,22 @@ const Result = () => {
     },
   ];
 
+  const springRateConfig = {
+    transform: 'translateY(0px)',
+    from: {
+      opacity: 1,
+      transform: 'translateY(100px)',
+    },
+  };
+
+  const springRateProps = useSpring({
+    opacity: 1,
+    config: { tension: 150, friction: 10 },
+
+    reset: showGraphic,
+    ...springRateConfig,
+  });
+
   const springChartConfig = {
     transform: 'translateY(0px)',
     from: {
@@ -107,20 +122,20 @@ const Result = () => {
     ...springChartConfig,
   });
 
-  const springRateConfig = {
+  const springTextConfig = {
     transform: 'translateY(0px)',
     from: {
-      opacity: 0,
-      transform: 'translateY(100px)',
+      opacity: 1,
+      transform: 'translateY(-100px)',
     },
   };
 
-  const springRateProps = useSpring({
+  const springTextProps = useSpring({
     opacity: 1,
     config: { tension: 150, friction: 10 },
 
     reset: showGraphic,
-    ...springRateConfig,
+    ...springTextConfig,
   });
 
   const resetStore = useCallback(() => {
@@ -237,78 +252,91 @@ const Result = () => {
           </animated.div>
         )}
 
-        <TextResult style={showGraphic ? { margin: '10px 0' } : {}}>
-          {achievedObjectiveCost ? (
-            <p style={{ marginBottom: '1px' }}>
-              Você conseguiria alcaçar este valor em
-              {countYearNewPeriod
-                ? countYearNewPeriod > 1
-                  ? ` ${countYearNewPeriod} anos`
-                  : ` ${countYearNewPeriod} ano`
-                : ''}
-              {countYearNewPeriod && countMonthNewPeriod ? `e` : ''}
-              {countMonthNewPeriod
-                ? countMonthNewPeriod > 1
-                  ? ` ${countMonthNewPeriod} meses`
-                  : ` ${countMonthNewPeriod} mês`
-                : ''}
-              <br />
-              <br />
-            </p>
-          ) : (
-            <>
-              <p
-                style={{
-                  fontWeight: 'bolder',
-                  marginBottom: '1px',
-                }}
-              >
-                O seu perfil é{' '}
-                <span style={{ color: '#e2381a' }}>{riskProfile}</span>
+        <animated.div
+          style={{
+            ...springTextProps,
+          }}
+        >
+          <TextResult style={showGraphic ? { margin: '10px 0' } : {}}>
+            {achievedObjectiveCost ? (
+              <p style={{ marginBottom: '1px' }}>
+                Você conseguiria alcaçar este valor em
+                {countYearNewPeriod
+                  ? countYearNewPeriod > 1
+                    ? ` ${countYearNewPeriod} anos`
+                    : ` ${countYearNewPeriod} ano`
+                  : ''}
+                {countYearNewPeriod && countMonthNewPeriod ? `e` : ''}
+                {countMonthNewPeriod
+                  ? countMonthNewPeriod > 1
+                    ? ` ${countMonthNewPeriod} meses`
+                    : ` ${countMonthNewPeriod} mês`
+                  : ''}
+                <br />
+                <br />
               </p>
-              <p>{resultRiskProfile?.label1 || ''}</p>
-            </>
-          )}
+            ) : (
+              <>
+                <p
+                  style={{
+                    fontWeight: 'bolder',
+                    marginBottom: '1px',
+                  }}
+                >
+                  O seu perfil é{' '}
+                  <span style={{ color: '#e2381a' }}>{riskProfile}</span>
+                </p>
+                <p>{resultRiskProfile?.label1 || ''}</p>
+              </>
+            )}
 
-          <ButtonContainer style={{ marginBottom: '15px' }}>
-            <Button
-              onClick={() => {
-                window.open('https://be.capital/');
-              }}
-              ripple
-              glow
-              style={{ margin: '0 10px' }}
-            >
-              Ir ao Site
-            </Button>
+            <ButtonContainer style={{ marginBottom: '15px' }}>
+              <Button
+                onClick={() => {
+                  window.open('https://be.capital/');
+                }}
+                ripple
+                glow
+                style={{ margin: '0 10px' }}
+              >
+                Ir ao Site
+              </Button>
 
-            <Button
-              onClick={() => {
-                resetStore();
-                navigate('/');
-              }}
-              ripple
-              glow
-              style={{ margin: '0 10px' }}
-            >
-              Recalcule seu Sonho
-            </Button>
-          </ButtonContainer>
+              <Button
+                onClick={() => {
+                  resetStore();
+                  navigate('/');
+                }}
+                ripple
+                glow
+                style={{ margin: '0 10px' }}
+              >
+                Recalcule seu Sonho
+              </Button>
+            </ButtonContainer>
 
-          <p>
-            Confira mais detalhes sobre a{' '}
-            <strong>evolução do seu patrimônio</strong> e
-            <strong> composição de carteira ideal</strong> no relatório completo
-            que enviamos para o seu e-mail. <br />
-            <br /> Quer ajuda para tirar seu planejamento financeiro do papel?
-          </p>
+            <p>
+              Confira mais detalhes sobre a{' '}
+              <strong>evolução do seu patrimônio</strong> e
+              <strong> composição de carteira ideal</strong> no relatório
+              completo que enviamos para o seu e-mail. <br />
+              <br /> Quer ajuda para tirar seu planejamento financeiro do papel?
+            </p>
 
-          <ButtonContainer>
-            <Button onClick={() => {}} ripple glow>
-              Baixar PDF
-            </Button>
-          </ButtonContainer>
-        </TextResult>
+            <ButtonContainer>
+              <Button
+                onClick={() => {
+                  window.open('https://be.capital/');
+                }}
+                ripple
+                glow
+                style={{ margin: '0 10px' }}
+              >
+                Ir ao Site
+              </Button>
+            </ButtonContainer>
+          </TextResult>
+        </animated.div>
       </Container>
     </Layout>
   );

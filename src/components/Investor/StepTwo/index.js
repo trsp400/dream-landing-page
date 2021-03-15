@@ -86,7 +86,6 @@ const StepTwo = () => {
       </BoxCheck>
 
       <BoxInput>
-        <span>Outro:</span>
         <Input
           state={otherInvestmentsInput}
           setState={setOtherInvestmentsInput}
