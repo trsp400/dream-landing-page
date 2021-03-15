@@ -46,8 +46,6 @@ const Result = () => {
     comingFromLastStep,
   } = store;
 
-  console.log(store);
-
   const objectiveCost = parseCurrencyFloat(store.objectiveCost);
 
   if (!comingFromLastStep) navigate('/');
