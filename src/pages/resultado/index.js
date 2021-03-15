@@ -3,7 +3,6 @@ import { useSelector, useDispatch } from 'react-redux';
 import _ from 'lodash';
 import { navigate } from 'gatsby-link';
 
-
 import Layout from '../../Layout';
 import SEO from '../../components/CustomComponents/Seo';
 import resultProfile from '../../utils/resultProfile';
@@ -43,9 +42,12 @@ const Result = () => {
       annualRate,
       riskProfile,
       yearlyAverageArray,
+      fileUrl,
     },
     comingFromLastStep,
   } = store;
+
+  const urls = fileUrl?.urls || '';
 
   const objectiveCost = parseCurrencyFloat(store.objectiveCost);
 
@@ -125,7 +127,6 @@ const Result = () => {
     ...springRateConfig,
   });
 
-
   const resetStore = useCallback(() => {
     dispatch(
       changeFormState({
@@ -156,6 +157,7 @@ const Result = () => {
       }),
     );
   }, [dispatch, store]);
+
   return (
     <Layout>
       <SEO title="Resultado | Máquina dos Sonhos" />
@@ -269,21 +271,31 @@ const Result = () => {
                 O seu perfil é{' '}
                 <span style={{ color: '#e2381a' }}>{riskProfile}</span>
               </p>
-              <p>{resultRiskProfile?.label1 || ""}</p>
+              <p>{resultRiskProfile?.label1 || ''}</p>
             </>
           )}
 
           <ButtonContainer style={{ marginBottom: '15px' }}>
-            <Button onClick={() => {
-              window.open('https://be.capital/')
-            }} ripple glow style={{ margin: '0 10px' }}>
+            <Button
+              onClick={() => {
+                window.open('https://be.capital/');
+              }}
+              ripple
+              glow
+              style={{ margin: '0 10px' }}
+            >
               Ir ao Site
             </Button>
 
-            <Button onClick={() => {
-              resetStore()
-              navigate("/")
-            }} ripple glow style={{ margin: '0 10px' }}>
+            <Button
+              onClick={() => {
+                resetStore();
+                navigate('/');
+              }}
+              ripple
+              glow
+              style={{ margin: '0 10px' }}
+            >
               Recalcule seu Sonho
             </Button>
           </ButtonContainer>
@@ -297,7 +309,7 @@ const Result = () => {
           </p>
 
           <ButtonContainer>
-            <Button onClick={() => {}} ripple glow>
+            <Button onClick={() => urls && window.open(urls[0])} ripple glow>
               Baixar PDF
             </Button>
           </ButtonContainer>
