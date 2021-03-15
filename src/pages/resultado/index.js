@@ -40,9 +40,12 @@ const Result = () => {
       annualRate,
       riskProfile,
       yearlyAverageArray,
+      fileUrl,
     },
     comingFromLastStep,
   } = store;
+
+  const urls = fileUrl?.urls || '';
 
   const objectiveCost = store.objectiveCost;
 
@@ -168,6 +171,7 @@ const Result = () => {
       }),
     );
   }, [dispatch, store]);
+
   return (
     <Layout>
       <SEO title="Resultado | Máquina dos Sonhos" />
@@ -324,15 +328,8 @@ const Result = () => {
             </p>
 
             <ButtonContainer>
-              <Button
-                onClick={() => {
-                  window.open('https://be.capital/');
-                }}
-                ripple
-                glow
-                style={{ margin: '0 10px' }}
-              >
-                Ir ao Site
+              <Button onClick={() => urls && window.open(urls[0])} ripple glow>
+                Baixar PDF
               </Button>
             </ButtonContainer>
           </TextResult>
