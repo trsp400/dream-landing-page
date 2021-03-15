@@ -9,7 +9,7 @@ phases:
       - 'npm install'
   build:
     commands:
-      - 'npm run build'
+      - 'npm run build-homolog'
   post_build:
     commands:
       - 'aws s3 sync "public/" "s3://dream-machine-homolog" --delete --acl "public-read"'
@@ -17,4 +17,8 @@ artifacts:
   base-directory: public
   files:
     - '**/*'
-  discard-paths: yes
+  discard-paths: no
+cache:
+  paths:
+    - '.cache/*'
+    - 'public/*'
