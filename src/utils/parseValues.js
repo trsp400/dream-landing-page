@@ -1,7 +1,7 @@
 const parseCurrencyFloat = (value = 0) =>
-  value
+  typeof value === 'string'
     ? parseFloat(value.replace('R$ ', '').replace(/\./g, '').replace(',', '.'))
-    : 0;
+    : value;
 
 const parseStringInt = (value = 0) => (value ? parseInt(value) : 0);
 

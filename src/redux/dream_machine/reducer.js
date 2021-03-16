@@ -14,6 +14,7 @@ const INITIAL_STATE = {
     yearlyAverageArray: [],
     achievedObjectiveCost: false,
     newPeriod: 0,
+    fileUrl: null,
   },
   path: '',
   objective: null,
@@ -62,7 +63,7 @@ export default (state = INITIAL_STATE, action) => {
     case actions.SEND_DREAM_MACHINE_RESULT_TO_API_SUCCESS:
       return {
         ...state,
-        result: action?.payload?.result,
+        result: { ...payload?.result, fileUrl: payload?.fileUrl },
         resultSuccess: true,
         comingFromLastStep: true,
       };
