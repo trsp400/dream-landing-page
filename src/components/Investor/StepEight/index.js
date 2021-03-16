@@ -3,10 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 
 import { navigate } from 'gatsby';
 
-import {
-  sendDreamMachineResultToAPIRequest,
-  changeFormState,
-} from '../../../redux/dream_machine/actions';
+import { sendDreamMachineResultToAPIRequest } from '../../../redux/dream_machine/actions';
 import { createResultObject } from '../../../utils/handleResultObject';
 import Input from '../../CustomComponents/Input';
 import Loading from '../../CustomComponents/Loading';
@@ -35,7 +32,6 @@ const StepSeven = () => {
   const [inputValue, setInputValue] = useState('');
   const [validEmail, setValidEmail] = useState(true);
   const [requestLoading, setRequestLoading] = useState(false);
-  const [resultModalFailure, setResultModalFailure] = useState(false);
 
   const period = parseStringInt(store.period);
   const yearOrMonth = store.yearOrMonth;
@@ -68,7 +64,7 @@ const StepSeven = () => {
             objectiveCost,
           }),
         )
-      : (setResultModalFailure(true), setRequestLoading(false));
+      : setRequestLoading(false);
   });
 
   function emailIsValid(dataEmail) {
@@ -108,10 +104,21 @@ const StepSeven = () => {
 
   useEffect(() => {
     if (resultSuccess === null) {
-      setResultModalFailure(true);
       setRequestLoading(false);
     }
   }, [resultSuccess]);
+
+  useEffect(() => {
+    const listener = event => {
+      if (event.code === 'Enter' || event.keyCode === 13) {
+        handleOnClink();
+      }
+    };
+    document.addEventListener('keydown', listener);
+    return () => {
+      document.removeEventListener('keydown', listener);
+    };
+  }, [inputValue]);
 
   return requestLoading ? (
     <Loading />

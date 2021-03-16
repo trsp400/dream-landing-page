@@ -1,15 +1,20 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { changeFormState } from '../../../redux/dream_machine/actions';
 import Input from '../../CustomComponents/Input';
 import Button from '../../CustomComponents/Button';
 
-import Lefticon from '../../../assets/icons/left-icon.svg'
+import Lefticon from '../../../assets/icons/left-icon.svg';
 
-import { Container, Body, MessageFeedbackStyle, BoxInput ,Footer, ButtonContainer } from './styles';
-
-import toastConfig from '../../../utils/toastConfig';
+import {
+  Container,
+  Body,
+  MessageFeedbackStyle,
+  BoxInput,
+  Footer,
+  ButtonContainer,
+} from './styles';
 
 const listPeriods = {
   anos: 'Anos',
@@ -23,9 +28,11 @@ const StepThree = () => {
 
   const { currentStep, period, yearOrMonth } = store;
 
-  const [inputValue, setInputValue] = useState(period);
+  const [inputValue, setInputValue] = useState(period || '');
   const [inputYearOrMonth, setInputYearOrMonth] = useState(yearOrMonth);
-  const [placeholderInfo, setPlaceholderInfo] = useState(listPeriods[yearOrMonth])
+  const [placeholderInfo, setPlaceholderInfo] = useState(
+    listPeriods[yearOrMonth],
+  );
 
   const handleDispatch = useCallback(
     (step, direction) => {
@@ -46,19 +53,39 @@ const StepThree = () => {
   );
 
   const setPlaceholderInformation = useCallback(item => {
-      const returnItemListPeriod = listPeriods[item];
+    const returnItemListPeriod = listPeriods[item];
 
-      setPlaceholderInfo(returnItemListPeriod);
-      setInputYearOrMonth(item)
-  })
+    setPlaceholderInfo(returnItemListPeriod);
+    setInputYearOrMonth(item);
+  });
+
+  useEffect(() => {
+    const listener = event => {
+      if (event.code === 'Enter' || event.keyCode === 13) {
+        handleDispatch(4, 'next');
+      }
+    };
+    document.addEventListener('keydown', listener);
+    return () => {
+      document.removeEventListener('keydown', listener);
+    };
+  }, [inputValue]);
 
   return (
     <Container>
       <Body>
-        <MessageFeedbackStyle placing="above" animationSpeed={2000} animationDelay={900}>
+        <MessageFeedbackStyle
+          placing="above"
+          animationSpeed={2000}
+          animationDelay={900}
+        >
           OK!
         </MessageFeedbackStyle>
-        <MessageFeedbackStyle placing="bellow" animationSpeed={2000} animationDelay={1200}>
+        <MessageFeedbackStyle
+          placing="bellow"
+          animationSpeed={2000}
+          animationDelay={1200}
+        >
           De quanto tempo você precisa?
         </MessageFeedbackStyle>
 
