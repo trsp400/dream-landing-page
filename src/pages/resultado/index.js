@@ -51,7 +51,7 @@ const Result = () => {
 
   if (!comingFromLastStep) navigate('/');
 
-  const resultRiskProfile = resultProfile(riskProfile);
+  const resultRiskProfile = resultProfile(riskProfile, monthlyRate);
 
   const arrayNewPeriod = [];
   let newPeriodChunk = [];
@@ -281,7 +281,7 @@ const Result = () => {
               </p>
             ) : (
               <>
-                <p
+                {/* <p
                   style={{
                     fontWeight: 'bolder',
                     marginBottom: '1px',
@@ -289,8 +289,8 @@ const Result = () => {
                 >
                   O seu perfil é{' '}
                   <span style={{ color: '#e2381a' }}>{riskProfile}</span>
-                </p>
-                <p>{resultRiskProfile?.label1 || ''}</p>
+                </p> */}
+                <p>{resultRiskProfile || ''}</p>
               </>
             )}
 
