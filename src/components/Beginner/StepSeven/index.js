@@ -36,7 +36,6 @@ const StepSeven = () => {
   const [inputValue, setInputValue] = useState('');
   const [validEmail, setValidEmail] = useState(true);
   const [requestLoading, setRequestLoading] = useState(false);
-  const [resultModalFailure, setResultModalFailure] = useState(false);
 
   const period = parseStringInt(store.period);
   const yearOrMonth = store.yearOrMonth;
@@ -69,7 +68,7 @@ const StepSeven = () => {
             objectiveCost,
           }),
         )
-      : (setResultModalFailure(true), setRequestLoading(false));
+      : setRequestLoading(false);
   });
 
   function emailIsValid(dataEmail) {
@@ -101,37 +100,6 @@ const StepSeven = () => {
     return valid;
   };
 
-  const resetStore = useCallback(() => {
-    dispatch(
-      changeFormState({
-        ...store,
-        currentStep: 0,
-        resultSuccess: null,
-        result: {
-          monthlyRate: 0,
-          annualRate: 0,
-          riskProfile: '',
-          email: '',
-          yearlyAverageArray: [],
-        },
-        path: '',
-        objective: null,
-        objectiveCost: null,
-        period: null,
-        yearOrMonth: 'anos',
-        monthlySupport: null,
-        currentInvestments: null,
-        decision: null,
-        monthlyLifeCost: null,
-        monthlyIncome: null,
-        investmentsPlacement: [],
-        desiredInvestmentsPlacement: [],
-        otherInvestments: null,
-        currentAssets: [],
-      }),
-    );
-  }, [dispatch, store]);
-
   useEffect(() => {
     if (yearlyAverageArray?.length) {
       navigate('/resultado');
@@ -140,10 +108,21 @@ const StepSeven = () => {
 
   useEffect(() => {
     if (resultSuccess === null) {
-      setResultModalFailure(true);
       setRequestLoading(false);
     }
   }, [resultSuccess]);
+
+  useEffect(() => {
+    const listener = event => {
+      if (event.code === 'Enter' || event.keyCode === 13) {
+        handleOnClink(inputValue);
+      }
+    };
+    document.addEventListener('keydown', listener);
+    return () => {
+      document.removeEventListener('keydown', listener);
+    };
+  }, [inputValue]);
 
   return requestLoading ? (
     <Loading />

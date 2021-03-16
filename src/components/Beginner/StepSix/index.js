@@ -49,6 +49,18 @@ const StepSeven = () => {
     [dispatch, store, inputValue],
   );
 
+  useEffect(() => {
+    const listener = event => {
+      if (event.code === 'Enter' || event.keyCode === 13) {
+        handleDispatch(7, 'next');
+      }
+    };
+    document.addEventListener('keydown', listener);
+    return () => {
+      document.removeEventListener('keydown', listener);
+    };
+  }, [inputValue]);
+
   return (
     <Container>
       <Body>

@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import useWindowSize from '../utils/useWindowSizeHook';
+import useWindowSize from '../hooks/useWindowSize';
 
 import { screenResize } from '../redux/settings/actions';
 

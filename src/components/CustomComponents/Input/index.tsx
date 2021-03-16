@@ -16,7 +16,10 @@ interface InputProps {
   placeholder?: string;
 }
 
-const Input: FC<InputProps> = ({ state, type, setState, placeholder }) => (
+const Input: FC<InputProps> = (
+  { state, type, setState, placeholder },
+  ...props
+) => (
   <>
     {type === 'currency' ? (
       <NumberFormat
@@ -31,6 +34,7 @@ const Input: FC<InputProps> = ({ state, type, setState, placeholder }) => (
         customInput={InputStyledNumber}
         value={state}
         onChange={event => setState(event?.target?.value)}
+        {...props}
       />
     ) : type === 'text' ? (
       <InputStyledTextContainer>
@@ -39,6 +43,7 @@ const Input: FC<InputProps> = ({ state, type, setState, placeholder }) => (
           value={state || ''}
           type={type}
           onChange={event => setState(event?.target?.value)}
+          {...props}
         />
       </InputStyledTextContainer>
     ) : type === 'email' ? (
@@ -51,6 +56,7 @@ const Input: FC<InputProps> = ({ state, type, setState, placeholder }) => (
             setState(event?.target?.value);
           }}
           required
+          {...props}
         />
       </InputStyledTextContainer>
     ) : type === 'number' ? (
@@ -64,6 +70,7 @@ const Input: FC<InputProps> = ({ state, type, setState, placeholder }) => (
         customInput={InputStyledNumber}
         value={state || ''}
         onChange={event => setState(event?.target?.value)}
+        {...props}
       />
     ) : (
       <div />

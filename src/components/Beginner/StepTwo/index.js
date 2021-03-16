@@ -1,10 +1,9 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { changeFormState } from '../../../redux/dream_machine/actions';
 import Input from '../../CustomComponents/Input';
 import Button from '../../CustomComponents/Button';
-import MessageFeedback from '../../CustomComponents/MessageFeedback';
 
 import Lefticon from '../../../assets/icons/left-icon.svg';
 
@@ -51,6 +50,18 @@ const StepTwo = () => {
     },
     [dispatch, store, inputValue],
   );
+
+  useEffect(() => {
+    const listener = event => {
+      if (event.code === 'Enter' || event.keyCode === 13) {
+        handleDispatch(3, 'next');
+      }
+    };
+    document.addEventListener('keydown', listener);
+    return () => {
+      document.removeEventListener('keydown', listener);
+    };
+  }, [inputValue]);
 
   return (
     <Container>

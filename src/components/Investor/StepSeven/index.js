@@ -1,10 +1,9 @@
 /* eslint-disable jsx-a11y/no-onchange */
-import React, { useCallback, useState, useEffect } from 'react';
+import React, { useCallback, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 import ListDecision from '../../CustomComponents/ListDecision';
 import Button from '../../CustomComponents/Button';
-import MessageFeedback from '../../CustomComponents/MessageFeedback';
 import {
   Container,
   Body,
