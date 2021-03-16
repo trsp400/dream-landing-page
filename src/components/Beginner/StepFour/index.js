@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { changeFormState } from '../../../redux/dream_machine/actions';
@@ -55,6 +55,18 @@ const StepFour = () => {
     },
     [dispatch, store, inputValue],
   );
+
+  useEffect(() => {
+    const listener = event => {
+      if (event.code === 'Enter' || event.keyCode === 13) {
+        handleDispatch(5, 'next');
+      }
+    };
+    document.addEventListener('keydown', listener);
+    return () => {
+      document.removeEventListener('keydown', listener);
+    };
+  }, [inputValue]);
 
   return (
     <Container>

@@ -17,7 +17,7 @@ interface InputProps {
   setIsActiveInput: (value: boolean) => void;
 }
 
-const Input: FC<InputProps> = ({ state, type, setState, placeholder, setIsActiveInput }) => (
+const Input: FC<InputProps> = ({ state, type, setState, placeholder, setIsActiveInput, ...props }) => (
   <>
     {type === 'currency' ? (
       <NumberFormat
@@ -34,6 +34,7 @@ const Input: FC<InputProps> = ({ state, type, setState, placeholder, setIsActive
         onChange={event => setState(event?.target?.value)}
         onBlur={() => setIsActiveInput(false)}
         onFocus={() => setIsActiveInput(true)}
+        {...props}
       />
     ) : type === 'text' ? (
       <InputStyledTextContainer>
@@ -44,6 +45,7 @@ const Input: FC<InputProps> = ({ state, type, setState, placeholder, setIsActive
           onChange={event => setState(event?.target?.value)}
           onBlur={() => setIsActiveInput(false)}
           onFocus={() => setIsActiveInput(true)}
+          {...props}
          />
       </InputStyledTextContainer>
     ) : type === 'email' ? (
@@ -58,6 +60,7 @@ const Input: FC<InputProps> = ({ state, type, setState, placeholder, setIsActive
           required
           onBlur={() => setIsActiveInput(false)}
           onFocus={() => setIsActiveInput(true)}
+          {...props}
         />
       </InputStyledTextContainer>
     ) : type === 'number' ? (
@@ -73,6 +76,7 @@ const Input: FC<InputProps> = ({ state, type, setState, placeholder, setIsActive
         onChange={event => setState(event?.target?.value)}
         onBlur={() => setIsActiveInput(false)}
         onFocus={() => setIsActiveInput(true)}
+        {...props}
       />
     ) : (
       <div />
