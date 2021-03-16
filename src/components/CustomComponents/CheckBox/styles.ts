@@ -24,7 +24,8 @@ export const LabelStyled = styled.label`
   grid-template-columns: min-content auto;
   grid-gap: 0.5em;
   font: normal normal 400 15px Trasandina;
-  margin-bottom: 3rem;
+  /* margin-bottom: 3rem; */
+
 `;
 
 export const SpanInputStyled = styled.span`
@@ -78,7 +79,7 @@ export const FormStyled = styled.div`
   display: grid;
   place-content: center;
   grid-gap: 2rem;
-  padding: 2rem 0;
+  /* padding: 2rem 0; */
   line-height: 1;
 `;
 

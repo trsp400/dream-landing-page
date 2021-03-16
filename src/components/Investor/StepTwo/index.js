@@ -35,6 +35,7 @@ const StepTwo = () => {
   const store = useSelector(({ dreamMachine }) => dreamMachine);
   const { currentStep, desiredInvestmentsPlacement, otherInvestments } = store;
 
+  const [isActiveInput, setIsActiveInput] = useState(false)
   const [arrayValues, setArrayValues] = useState(desiredInvestmentsPlacement);
 
   const { notify } = useSelector(({ settings }) => settings);
@@ -90,9 +91,10 @@ const StepTwo = () => {
           state={otherInvestmentsInput}
           setState={setOtherInvestmentsInput}
           type="text"
+          setIsActiveInput={setIsActiveInput}
         />
       </BoxInput>
-      <Footer>
+      <Footer isActiveInput={isActiveInput}>
         <Button
           ripple
           variant="beblue"
