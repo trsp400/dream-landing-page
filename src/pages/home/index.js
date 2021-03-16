@@ -126,12 +126,12 @@ const Home = () => {
           >
             COMEÇAR AGORA
           </Button>
-          <Button
+          {/* <Button
             variant="beblue"
             onClick={() => onChangeStep(1, 'investor', 'next')}
           >
             JÁ SEI ONDE INVESTIR
-          </Button>
+          </Button> */}
         </ButtonSection>
       </MainHome>
     </Container>

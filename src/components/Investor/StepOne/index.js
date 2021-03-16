@@ -125,7 +125,11 @@ const StepOne = () => {
         yearOrMonth: 'anos',
         monthlySupport: null,
         currentInvestments: null,
-        decision: null,
+        decision: {
+          first: '',
+          second: '',
+          third: '',
+        },
         monthlyLifeCost: null,
         monthlyIncome: null,
         investmentsPlacement: [],

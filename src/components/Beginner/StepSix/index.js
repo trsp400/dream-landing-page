@@ -2,9 +2,10 @@
 import React, { useCallback, useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
+import { changeFormState } from '../../../redux/dream_machine/actions';
+
 import ListDecision from '../../CustomComponents/ListDecision';
 import Button from '../../CustomComponents/Button';
-import MessageFeedback from '../../CustomComponents/MessageFeedback';
 import {
   Container,
   Body,
@@ -13,15 +14,9 @@ import {
   Footer,
 } from './styles';
 
-import { changeFormState } from '../../../redux/dream_machine/actions';
-
 import Lefticon from '../../../assets/icons/left-icon.svg';
 
-const options = [
-  '<span>Aumentar para <strong>R$ 1.200</strong> no fim do seu ciclo de investimento, <strong>sem eventuais riscos</strong>.</span>',
-  '<span>Ter a possibilidade de aumentar para <strong>R$ 1.500</strong> no fim do seu ciclo, com um <strong>risco moderado</strong>.</span>',
-  '<span>Aumentar para <strong>R$ 2.200</strong> no fim do seu ciclo de investimento, <strong>com risco elevado</strong>.</span>',
-];
+import { question1 } from '../../../utils/questionsToProfile';
 
 const StepSeven = () => {
   const dispatch = useDispatch();
@@ -30,7 +25,7 @@ const StepSeven = () => {
 
   const { currentStep, decision } = store;
 
-  const [inputValue, setInputvalue] = useState(decision);
+  const [inputValue, setInputvalue] = useState(decision?.first);
 
   const handleDispatch = useCallback(
     (step, direction) => {
@@ -42,7 +37,7 @@ const StepSeven = () => {
           ...store,
           currentStep: step,
           direction,
-          decision: inputValue,
+          decision: { ...store?.decision, first: inputValue },
         }),
       );
     },
@@ -64,11 +59,11 @@ const StepSeven = () => {
           animationSpeed={2000}
           animationDelay={1800}
         >
-          Se você investisse R$ 1.000, qual seria a sua preferência?
+          {question1.quest}
         </MessageFeedbackStyle>
         <BoxListDecision>
           <ListDecision
-            options={options}
+            options={question1.options}
             state={inputValue}
             setState={setInputvalue}
           />

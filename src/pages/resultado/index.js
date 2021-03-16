@@ -161,7 +161,11 @@ const Result = () => {
         yearOrMonth: 'anos',
         monthlySupport: null,
         currentInvestments: null,
-        decision: null,
+        decision: {
+          first: '',
+          second: '',
+          third: '',
+        },
         monthlyLifeCost: null,
         monthlyIncome: null,
         investmentsPlacement: [],
@@ -270,7 +274,7 @@ const Result = () => {
                     ? ` ${countYearNewPeriod} anos`
                     : ` ${countYearNewPeriod} ano`
                   : ''}
-                {countYearNewPeriod && countMonthNewPeriod ? `e` : ''}
+                {countYearNewPeriod && countMonthNewPeriod ? ` e` : ''}
                 {countMonthNewPeriod
                   ? countMonthNewPeriod > 1
                     ? ` ${countMonthNewPeriod} meses`
