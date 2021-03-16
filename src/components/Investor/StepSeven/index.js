@@ -5,16 +5,22 @@ import { useSelector, useDispatch } from 'react-redux';
 import ListDecision from '../../CustomComponents/ListDecision';
 import Button from '../../CustomComponents/Button';
 import MessageFeedback from '../../CustomComponents/MessageFeedback';
-import { Container, Body, MessageFeedbackStyle,BoxListDecision ,Footer } from './styles';
+import {
+  Container,
+  Body,
+  MessageFeedbackStyle,
+  BoxListDecision,
+  Footer,
+} from './styles';
 
 import { changeFormState } from '../../../redux/dream_machine/actions';
 
-import Lefticon from '../../../assets/icons/left-icon.svg'
+import Lefticon from '../../../assets/icons/left-icon.svg';
 
 const options = [
   '<span>Aumentar para <strong>R$ 1.200</strong> no fim do seu ciclo de investimento, <strong>sem eventuais riscos</strong>.</span>',
-  '<span>Ter a possibilidade de aumentar para <strong>R$ 1.500</strong> no fim do seu ciclo, com um <strong>pequeno risco</strong>.</span>',
-  '<span>Aumentar para <strong>R$ 1.200</strong> no fim do seu ciclo de investimento, <strong>sem eventuais riscos</strong>.</span>',
+  '<span>Ter a possibilidade de aumentar para <strong>R$ 1.500</strong> no fim do seu ciclo, com um <strong>risco moderado</strong>.</span>',
+  '<span>Aumentar para <strong>R$ 2.200</strong> no fim do seu ciclo de investimento, <strong>com risco elevado</strong>.</span>',
 ];
 
 const StepSeven = () => {
@@ -46,10 +52,18 @@ const StepSeven = () => {
   return (
     <Container>
       <Body>
-        <MessageFeedbackStyle placing="above" animationSpeed={2000} animationDelay={900}>
+        <MessageFeedbackStyle
+          placing="above"
+          animationSpeed={2000}
+          animationDelay={900}
+        >
           Vamos entender melhor os seus objetivos...
         </MessageFeedbackStyle>
-        <MessageFeedbackStyle placing="bellow" animationSpeed={2000} animationDelay={1800}>
+        <MessageFeedbackStyle
+          placing="bellow"
+          animationSpeed={2000}
+          animationDelay={1800}
+        >
           Se você investisse R$ 1.000, qual seria a sua preferência?
         </MessageFeedbackStyle>
         <BoxListDecision>
