@@ -14,7 +14,7 @@ import Lefticon from '../../../assets/icons/left-icon.svg'
 const options = [
   '<span>Aumentar para <strong>R$ 1.200</strong> no fim do seu ciclo de investimento, <strong>sem eventuais riscos</strong>.</span>',
   '<span>Ter a possibilidade de aumentar para <strong>R$ 1.500</strong> no fim do seu ciclo, com um <strong>pequeno risco</strong>.</span>',
-  '<span>Aumentar para <strong>R$ 1.200</strong> no fim do seu ciclo de investimento, <strong>sem eventuais riscos</strong>.</span>',
+  '<span>Aumentar para <strong>R$ 2.000</strong> no fim do seu ciclo, <strong>com risco elevado</strong>.</span>',
 ];
 
 const StepSeven = () => {

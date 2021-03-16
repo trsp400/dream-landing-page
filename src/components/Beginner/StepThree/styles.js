@@ -14,10 +14,6 @@ export const Container = styled(BootstrapContainer)`
 
 export const MessageFeedbackStyle = styled(MessageFeedback)`
 
-  &:nth-child(2){
-    margin-bottom: 16px;
-
-  }
 `;
 
 export const Body = styled.div`
@@ -30,21 +26,21 @@ export const BoxInput = styled.div`
   position: relative;
 
   display: flex;
-  justify-content: flex-start;
+  justify-content: center;
   align-items: center;
 
   width: 100%;
   height: auto;
-  padding: 20px;
-
-
 `;
+
+// bottom:  ${props => props.isActiveInput ? "25%" : "15%"};
+// height: ${props => props.isActiveInput ? "11%" : "8%"};
 
 export const Footer = styled.div`
   position: fixed;
-  bottom: 10%;
+  bottom:  ${props => props.isActiveInput ? "25%" : "15%"};
   width: 100%;
-  height: 8%;
+  height: ${props => props.isActiveInput ? "11%" : "8%"};
   display: flex;
 
   justify-content: space-between;
@@ -76,7 +72,7 @@ export const ButtonContainer = styled.div`
   width: 100%;
   height: auto;
   padding: 15px;
-  margin-top: 50px;
+  margin-top: ${props => props.isActiveInput ? "15px" : "60px"}   ;
 
   button {
     width: 5em;

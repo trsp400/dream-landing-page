@@ -18,6 +18,7 @@ const StepFour = () => {
 
   const { currentStep, currentInvestments } = store;
 
+  const [isActiveInput, setIsActiveInput] = useState(false)
   const [inputValue, setInputValue] = useState(currentInvestments);
 
   const handleDispatch = useCallback(
@@ -53,11 +54,11 @@ const StepFour = () => {
         Quanto você pode investir hoje?
         </MessageFeedbackStyle>
         <BoxInput>
-          <Input state={inputValue} setState={setInputValue} type="currency" />
+          <Input state={inputValue} setState={setInputValue} type="currency" setIsActiveInput={setIsActiveInput}/>
         </BoxInput>
       </Body>
 
-      <Footer>
+      <Footer isActiveInput={isActiveInput}>
         <Button
           ripple
           variant="beblue"

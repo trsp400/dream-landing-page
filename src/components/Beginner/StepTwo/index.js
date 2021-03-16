@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useState, useRef, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { changeFormState } from '../../../redux/dream_machine/actions';
@@ -11,6 +11,7 @@ import Lefticon from '../../../assets/icons/left-icon.svg'
 import { Container, Body, MessageFeedbackStyle,BoxInput, Footer } from './styles';
 
 const StepTwo = () => {
+  const [isActiveInput, setIsActiveInput] = useState(false)
   const dispatch = useDispatch();
   const store = useSelector(({ dreamMachine }) => dreamMachine);
   const { notify } = useSelector(({ settings }) => settings);
@@ -18,6 +19,12 @@ const StepTwo = () => {
   const { currentStep, objectiveCost } = store;
 
   const [inputValue, setInputValue] = useState(objectiveCost);
+
+  // useEffect(() => {
+  //   const input = document.querySelector("input")
+  //   setIsActiveInput(true)
+  //   input.autofocus = true
+  // },[])
 
   const handleDispatch = useCallback(
     (step, direction) => {
@@ -42,6 +49,10 @@ const StepTwo = () => {
     [dispatch, store, inputValue],
   );
 
+  const redirectButtonPositionInputFocus = () => {
+
+  }
+
   return (
     <Container>
       <Body>
@@ -52,11 +63,11 @@ const StepTwo = () => {
           De quanto você precisa?
         </MessageFeedbackStyle>
 
-        <BoxInput>
-          <Input state={inputValue} setState={setInputValue} type="currency" />
+        <BoxInput >
+          <Input state={inputValue} setState={setInputValue} type="currency" setIsActiveInput={setIsActiveInput}/>
         </BoxInput>
       </Body>
-      <Footer>
+      <Footer isActiveInput={isActiveInput}>
         <Button
           ripple
           variant="beblue"

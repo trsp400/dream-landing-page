@@ -14,14 +14,14 @@ export const Col = styled(ColBootstrap)`
 `;
 
 export const ListDecisionContainerStyled = styled.section`
-  height: 60%;
+  height: 80%;
   width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
   position: relative;
   cursor: pointer;
-  margin: 16px 0;
+  margin: 20px 0;
   padding: 10px 12px;
   position: relative;
   background-color: ${({ theme }) => theme.mobileTheme.colors.primary.orange};
@@ -31,8 +31,8 @@ export const ListDecisionContainerStyled = styled.section`
 `;
 
 export const ListDecisionCheckStyled = styled.div`
-  height: 14px;
-  width: 14px;
+  height: 16px;
+  width: 16px;
   margin-right: 12px;
 
   background-color: var(--color);
@@ -48,7 +48,7 @@ export const ListDecisionTextStyled = styled.div`
   align-items: center;
   justify-content: center;
 
-  font: 400 12px Trasandina;
+  font: 400 1em Trasandina;
 
   color: #fff;
   /* height: max-content; */

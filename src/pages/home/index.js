@@ -9,6 +9,7 @@ import {
   ButtonSection,
   Button,
   Background,
+  ContainerSteps
 } from './styles';
 
 import { useSpring, animated } from 'react-spring';
@@ -87,25 +88,28 @@ const Home = () => {
   });
 
   return currentStep >= 1 ? (
-    <animated.div
-      style={{
-        ...springProps,
-        height: '100vh',
-      }}
-    >
-      <RenderSelectedFormPath
-        currentStep={currentStep}
-        store={store}
-        path={path}
-      />
-    </animated.div>
+    <ContainerSteps>
+        <animated.div
+          style={{
+            ...springProps,
+            height: '100vh',
+          }}
+        >
+
+            <RenderSelectedFormPath
+              currentStep={currentStep}
+              store={store}
+              path={path}
+            />
+        </animated.div>
+      </ContainerSteps>
   ) : (
-    <Container isMobileView={isMobileView}>
+    <Container isMobileView={isMobileView} fluid>
       <Header>
         <Logo />
       </Header>
 
-      <Background />
+      {/* <Background /> */}
       {isMobileView ? <ImageGallery /> : <MaquinaDosSonhosDesktop />}
 
       <MainHome>
@@ -124,7 +128,7 @@ const Home = () => {
             glow
             onClick={() => onChangeStep(1, 'beginner')}
           >
-            COMEÇAR AGORA
+            COMEÇAR
           </Button>
           <Button
             variant="beblue"

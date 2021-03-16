@@ -19,7 +19,6 @@ const GlobalStyle = createGlobalStyle`
 
 
   html, body {
-    height: 100%;
     background: #fff;
     font-family: Trasandina;
     width: 100%;

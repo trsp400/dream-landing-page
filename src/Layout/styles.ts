@@ -8,18 +8,19 @@ export const Container = styled.div`
   overflow: hidden;
   position: relative;
 
-  background-color: ${({ theme }) => theme.mobileTheme.colors.primary.blue};
-  background-size: cover;
-  background-repeat: no-repeat;
-  object-fit: cover;
-  background-position: center;
+  /* background-color: ${({ theme }) => theme.mobileTheme.colors.primary.blue}; */
+  /* background-size: cover; */
+  /* background-repeat: no-repeat; */
+  /* object-fit: cover; */
+  /* background-position: center; */
 `;
+
 
 export const Background = styled.div`
   background-image: url('${Pattern}');
   position: absolute;
   width: 100%;
-  height: 100vh;
+  height: 90vh;
 
   opacity: 0.3;
 
@@ -36,9 +37,14 @@ export const ProgressBarContainer = styled.div`
 `;
 
 export const Main = styled.main`
+  position: relative;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  max-width: 1024px;
+  width: 100%;
+  height: 100%;
+  /* max-width: 1024px; */
 
 `;
+
+

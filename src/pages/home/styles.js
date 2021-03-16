@@ -5,14 +5,19 @@ import RippleButton from '../../components/CustomComponents/Button';
 
 import Pattern from '../../images/background-pattern.png';
 
+
 export const Container = styled(BootstrapContainer)`
-  height: 100vh;
+  height: 100%;
+  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
   position: relative;
 
-  max-width: 1024px;
+  padding-bottom: 12%;
+
+  /* max-width: 1024px; */
+  /* width: 100vw; */
 
   background-color: #1a4a73;
   background: linear-gradient(
@@ -21,10 +26,25 @@ export const Container = styled(BootstrapContainer)`
     rgba(67, 106, 140, 1) 45%
   );
 
-  width: 100vw;
-  background-size: cover;
+  /* background-size: cover;
   object-fit: cover;
-  background-position: center;
+  background-position: center; */
+
+  &::before {
+   content: "";
+   width: 100%;
+   height: 100%;
+   background: url('${Pattern}');
+   opacity: 0.05;
+   filter: invert(100%);
+   position: absolute;
+   background-repeat: no-repeat;
+   object-fit: cover;
+   background-size: cover;
+   background-position: center;
+   z-index: 0;
+ }
+
 
   > svg {
     position: absolute;
@@ -35,6 +55,28 @@ export const Container = styled(BootstrapContainer)`
     max-width: 20rem;
   }
 `;
+
+export const ContainerSteps = styled.div`
+  width: 100%;
+  height: 100%;
+  position: relative;
+
+  &::before {
+    content: "";
+    width: 100%;
+    height: 100%;
+    background: url('${Pattern}');
+    opacity: 0.05;
+    filter: invert(100%);
+    position: absolute;
+    background-repeat: no-repeat;
+    object-fit: cover;
+    background-size: cover;
+    background-position: center;
+    z-index: 0;
+  }
+
+`
 
 export const Header = styled.header`
   width: 100%;

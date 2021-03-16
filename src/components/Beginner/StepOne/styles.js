@@ -8,17 +8,13 @@ import MessageFeedback from '../../CustomComponents/MessageFeedback';
 export const Container = styled(BootstrapContainer)`
   display: flex;
   width: 100%;
-  height: 100vh;
+  height: 100%;
   flex-direction: column;
   padding: 0;
 `;
 
 export const MessageFeedbackStyle = styled(MessageFeedback)`
-  margin-bottom: 8px;
 
-  &:nth-child(2){
-    margin-bottom: 16px;
-  }
 `;
 
 export const ModalStyled = styled(Modal)`
