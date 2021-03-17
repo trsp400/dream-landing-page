@@ -1,35 +1,75 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 import { Container as BootstrapContainer } from 'react-bootstrap';
-import { Row as RowComponent } from '../../CustomComponents/IconGallery';
 import { Modal, Header, Body } from '../../CustomComponents/Modal';
 import MessageFeedback from '../../CustomComponents/MessageFeedback';
 
 export const Container = styled(BootstrapContainer)`
-  display: flex;
+  ${props =>
+    props?.ismobileview
+      ? css`
+          display: flex;
+          width: 100%;
+          height: 100vh;
+          flex-direction: column;
+          padding: 0;
+        `
+      : css`
+          width: 1024px;
+          height: 100vh;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          > div {
+            display: flex;
+            width: 100%;
+            align-content: center;
+            justify-content: center;
+            flex-direction: column;
+          }
+        `}
+`;
+
+export const DesktopGalleryContainer = styled.div`
+  position: absolute;
+  top: 45%;
   width: 100%;
-  height: 100vh;
-  flex-direction: column;
-  padding: 0;
 `;
 
 export const MessageFeedbackStyle = styled(MessageFeedback)`
-  margin-bottom: 8px;
+  ${props =>
+    props?.ismobileview
+      ? css`
+          margin-bottom: 8px;
+        `
+      : css`
+          font-size: 48px;
+          /* margin-bottom: 10%; */
+          position: absolute;
+          top: 15%;
+        `}
 
-  &:nth-child(2){
-    margin-bottom: 16px;
+  &:nth-child(2) {
+    ${props =>
+      props?.ismobileview
+        ? css`
+            margin-bottom: 16px;
+          `
+        : css`
+            position: absolute;
+            top: 30%;
+          `}
   }
 `;
 
 export const ModalStyled = styled(Modal)`
   .custom-content {
-
-
     background-color: ${({ theme }) => theme.mobileTheme.colors.primary.blue};
     border: 1px solid ${({ theme }) => theme.mobileTheme.colors.primary.orange};
   }
 
-  .custom-dialog {}
+  .custom-dialog {
+  }
 `;
 
 export const HeaderModalStyled = styled(Header)`
@@ -44,14 +84,12 @@ export const HeaderModalStyled = styled(Header)`
   }
 `;
 
-
 export const BodyModalStyled = styled(Body)`
-
-& .content-body {
-  margin-bottom: 40px;
-  font: normal normal normal 1.4rem Trasandina;
-  text-align: center;
-}
+  & .content-body {
+    margin-bottom: 40px;
+    font: normal normal normal 1.4rem Trasandina;
+    text-align: center;
+  }
   color: #fff;
   font: normal normal normal 1.2rem Trasandina;
 `;
@@ -62,7 +100,6 @@ export const Footer = styled.div`
   justify-content: space-between;
 
   margin-top: 20px;
-
 
   button {
     height: 60%;
@@ -79,5 +116,4 @@ export const ButtonContainer = styled.div`
   flex: 1;
   flex-direction: row;
   justify-content: space-between;
-
 `;
