@@ -200,6 +200,7 @@ export const ButtonSection = styled(ButtonGroup)`
   flex-direction: ${props => (props?.isMobileView ? 'column' : 'row')};
   width: 100%;
   margin-top: 10px;
+  padding-bottom: ${props => props?.isMobileView && "45px"};
 
   justify-content: space-between;
 `;

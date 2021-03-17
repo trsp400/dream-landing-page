@@ -43,7 +43,7 @@ export const Footer = styled.div`
   position: fixed;
   bottom:  ${props => props.isActiveInput ? "25%" : "15%"};
   width: 100%;
-  height: ${props => props.isActiveInput ? "11%" : "8%"};
+  height: ${props => props.isActiveInput ? "10%" : "7%"};
   display: flex;
 
   justify-content: space-between;
@@ -59,7 +59,7 @@ export const Footer = styled.div`
 
 
     svg {
-      height: 25px;
+      height: 25px ;
     }
 
   }
