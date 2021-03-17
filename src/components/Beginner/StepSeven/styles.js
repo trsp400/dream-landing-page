@@ -85,14 +85,26 @@ export const Body = styled.div`
   height: 100%;
   flex-direction: column;
 
-  > span {
-    margin-top: 25%;
-    padding: 0 10%;
-    text-align: center;
-    line-height: 40px;
-    font-size: 35px;
-    color: #fff;
-  }
+  ${props =>
+    props?.isMobileView
+      ? css`
+          > span {
+            padding: 0 30px;
+            text-align: center;
+            line-height: 18px;
+            color: #fff;
+          }
+        `
+      : css`
+          > span {
+            margin-top: 25%;
+            padding: 0 10%;
+            text-align: center;
+            line-height: 40px;
+            font-size: 35px;
+            color: #fff;
+          }
+        `}
 `;
 
 export const InputContainer = styled.div`
