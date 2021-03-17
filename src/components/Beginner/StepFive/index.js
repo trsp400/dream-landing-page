@@ -12,6 +12,7 @@ import {
   BoxInput,
   Body,
   Footer,
+  InputContainer,
 } from './styles';
 
 import Lefticon from '../../../assets/icons/left-icon.svg';
@@ -19,7 +20,7 @@ import Lefticon from '../../../assets/icons/left-icon.svg';
 const StepFive = () => {
   const dispatch = useDispatch();
   const store = useSelector(({ dreamMachine }) => dreamMachine);
-  const { notify } = useSelector(({ settings }) => settings);
+  const { notify, isMobileView } = useSelector(({ settings }) => settings);
 
   const { currentStep, monthlySupport, objectiveCost } = store;
 
@@ -69,13 +70,14 @@ const StepFive = () => {
     };
   }, [inputValue]);
 
-  return (
-    <Container>
+  return isMobileView ? (
+    <Container isMobileView={isMobileView}>
       <Body>
         <MessageFeedbackStyle
           placing="above"
           animationSpeed={2000}
           animationDelay={900}
+          isMobileView={isMobileView}
         >
           Beleza!
         </MessageFeedbackStyle>
@@ -83,10 +85,11 @@ const StepFive = () => {
           placing="bellow"
           animationSpeed={2000}
           animationDelay={1300}
+          isMobileView={isMobileView}
         >
           Quanto você pode investir por mês?
         </MessageFeedbackStyle>
-        <BoxInput>
+        <BoxInput isMobileView={isMobileView}>
           <Input state={inputValue} setState={setInputValue} type="currency" />
         </BoxInput>
       </Body>
@@ -110,6 +113,63 @@ const StepFive = () => {
           OK
         </Button>
       </Footer>
+    </Container>
+  ) : (
+    <Container isMobileView={isMobileView}>
+      <Body>
+        <MessageFeedbackStyle
+          placing="above"
+          animationSpeed={2000}
+          animationDelay={900}
+          isMobileView={isMobileView}
+        >
+          Beleza!
+        </MessageFeedbackStyle>
+        <MessageFeedbackStyle
+          placing="bellow"
+          animationSpeed={2000}
+          animationDelay={1300}
+          isMobileView={isMobileView}
+        >
+          Quanto você pode investir por mês?
+        </MessageFeedbackStyle>
+        <InputContainer>
+          <Button
+            ripple
+            variant="beblue"
+            glow
+            onClick={() => handleDispatch(4, 'previous')}
+            style={{
+              width: '10%',
+              padding: 0,
+            }}
+          >
+            <Lefticon width={20} />
+          </Button>
+
+          <BoxInput isMobileView={isMobileView}>
+            <Input
+              state={inputValue}
+              setState={setInputValue}
+              type="currency"
+            />
+          </BoxInput>
+
+          <Button
+            ripple
+            variant="beorange"
+            glow
+            onClick={() => handleDispatch(6, 'next')}
+            style={{
+              width: '20%',
+            }}
+          >
+            OK
+          </Button>
+        </InputContainer>
+      </Body>
+
+      <Footer></Footer>
     </Container>
   );
 };

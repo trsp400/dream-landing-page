@@ -166,7 +166,6 @@ export const ButtonSection = styled(ButtonGroup)`
 
 export const Button = styled(RippleButton)`
   position: relative;
-  border-radius: 10px;
   margin-top: 10px;
   padding: 10px;
 

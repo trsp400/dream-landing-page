@@ -4,13 +4,14 @@ import { useSelector, useDispatch } from 'react-redux';
 
 import ListDecision from '../../CustomComponents/ListDecision';
 import Button from '../../CustomComponents/Button';
-import MessageFeedback from '../../CustomComponents/MessageFeedback';
+
 import {
   Container,
   Body,
   BoxListDecision,
   MessageFeedbackStyle,
   Footer,
+  ListDecisionStyled,
 } from './styles';
 
 import { changeFormState } from '../../../redux/dream_machine/actions';
@@ -26,7 +27,7 @@ const options = [
 const StepSeven = () => {
   const dispatch = useDispatch();
   const store = useSelector(({ dreamMachine }) => dreamMachine);
-  const { notify } = useSelector(({ settings }) => settings);
+  const { notify, isMobileView } = useSelector(({ settings }) => settings);
 
   const { currentStep, decision } = store;
 
@@ -61,13 +62,14 @@ const StepSeven = () => {
     };
   }, [inputValue]);
 
-  return (
-    <Container>
+  return isMobileView ? (
+    <Container isMobileView={isMobileView}>
       <Body>
         <MessageFeedbackStyle
           placing="above"
           animationSpeed={2000}
           animationDelay={900}
+          isMobileView={isMobileView}
         >
           Vamos entender melhor os seus objetivos...
         </MessageFeedbackStyle>
@@ -75,10 +77,11 @@ const StepSeven = () => {
           placing="bellow"
           animationSpeed={2000}
           animationDelay={1800}
+          isMobileView={isMobileView}
         >
           Se você investisse R$ 1.000, qual seria a sua preferência?
         </MessageFeedbackStyle>
-        <BoxListDecision>
+        <BoxListDecision isMobileView={isMobileView}>
           <ListDecision
             options={options}
             state={inputValue}
@@ -86,8 +89,7 @@ const StepSeven = () => {
           />
         </BoxListDecision>
       </Body>
-
-      <Footer>
+      <Footer isMobileView={isMobileView}>
         <Button
           ripple
           variant="beblue"
@@ -104,6 +106,61 @@ const StepSeven = () => {
           onClick={() => {
             if (!inputValue) return notify('Por favor, selecione uma opção!');
             return handleDispatch(7);
+          }}
+        >
+          OK
+        </Button>
+      </Footer>
+    </Container>
+  ) : (
+    <Container isMobileView={isMobileView}>
+      <MessageFeedbackStyle
+        placing="above"
+        animationSpeed={2000}
+        animationDelay={900}
+        isMobileView={isMobileView}
+      >
+        Vamos entender melhor os seus objetivos...
+      </MessageFeedbackStyle>
+      <MessageFeedbackStyle
+        placing="bellow"
+        animationSpeed={2000}
+        animationDelay={1800}
+        isMobileView={isMobileView}
+      >
+        Se você investisse R$ 1.000, qual seria a sua preferência?
+      </MessageFeedbackStyle>
+      <BoxListDecision isMobileView={isMobileView}>
+        <ListDecisionStyled
+          options={options}
+          state={inputValue}
+          setState={setInputvalue}
+        />
+      </BoxListDecision>
+
+      <Footer isMobileView={isMobileView}>
+        <Button
+          ripple
+          variant="beblue"
+          glow
+          onClick={() => handleDispatch(5, 'previous')}
+          style={{
+            width: '20%',
+          }}
+        >
+          <Lefticon width={20} />
+        </Button>
+
+        <Button
+          ripple
+          variant="beorange"
+          glow
+          onClick={() => {
+            if (!inputValue) return notify('Por favor, selecione uma opção!');
+            return handleDispatch(7);
+          }}
+          style={{
+            width: '20%',
           }}
         >
           OK

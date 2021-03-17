@@ -6,7 +6,7 @@ import MessageFeedback from '../../CustomComponents/MessageFeedback';
 
 export const Container = styled(BootstrapContainer)`
   ${props =>
-    props?.ismobileview
+    props?.isMobileView
       ? css`
           display: flex;
           width: 100%;
@@ -38,20 +38,19 @@ export const DesktopGalleryContainer = styled.div`
 
 export const MessageFeedbackStyle = styled(MessageFeedback)`
   ${props =>
-    props?.ismobileview
+    props?.isMobileView
       ? css`
           margin-bottom: 8px;
         `
       : css`
           font-size: 48px;
-          /* margin-bottom: 10%; */
           position: absolute;
           top: 15%;
         `}
 
   &:nth-child(2) {
     ${props =>
-      props?.ismobileview
+      props?.isMobileView
         ? css`
             margin-bottom: 16px;
           `
