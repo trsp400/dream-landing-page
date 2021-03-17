@@ -73,7 +73,7 @@ const Layout = props => {
   }, [width, dispatch]);
 
   return (
-    <Container>
+    <Container isMobileView={isMobileView} currentStep={currentStep}>
       {!yearlyAverageArray?.length && isMobileView && (
         <RenderProgressBar path={path} currentStep={currentStep} />
       )}
