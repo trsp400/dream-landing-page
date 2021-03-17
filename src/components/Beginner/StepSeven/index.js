@@ -153,7 +153,7 @@ const StepSeven = () => {
           </span>
         </Body>
 
-        <Footer>
+        <Footer isActiveInput={isActiveInput}>
           <Button
             ripple
             variant="beorange"
@@ -177,12 +177,13 @@ const StepSeven = () => {
             e-mail:
           </MessageFeedbackStyle>
 
-          <InputContainer>
+          <InputContainer >
             <BoxInput isMobileView={isMobileView}>
               <Input
                 state={inputValue}
                 setState={checkValidEmailOnInputChange}
                 type="email"
+                setIsActiveInput={setIsActiveInput}
               />
               {!validEmail && (
                 <ErrorInformation>Digite um e-mail válido!</ErrorInformation>
