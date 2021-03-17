@@ -1,41 +1,44 @@
 import styled, { css, CSSProp } from 'styled-components';
 
 interface PropsTextStyled {
-  placing: 'above' | 'bellow',
-  largeLowSpace?: boolean,
+  placing: 'above' | 'bellow';
+  largeLowSpace?: boolean;
 }
 
 interface PropsObjFormatTextPerPlacing {
-  above: (props : PropsTextStyled)  => CSSProp<PropsTextStyled>,
-  bellow: (props : PropsTextStyled)  => CSSProp<PropsTextStyled>,
+  above: (props: PropsTextStyled) => CSSProp<PropsTextStyled>;
+  bellow: (props: PropsTextStyled) => CSSProp<PropsTextStyled>;
 }
 
-const formatTextPerPlacing:PropsObjFormatTextPerPlacing = {
-  above: props => props.placing === "above" && css`
-    font: normal normal lighter 19px Trasandina;
-  ` ,
+const formatTextPerPlacing: PropsObjFormatTextPerPlacing = {
+  above: props =>
+    props.placing === 'above' &&
+    css`
+      font: normal normal lighter 19px Trasandina;
+    `,
 
-  bellow: props => props.placing === "bellow" && css`
-    font: normal normal bold 22px Trasandina;
-  `
-}
+  bellow: props =>
+    props.placing === 'bellow' &&
+    css`
+      font: normal normal bold 22px Trasandina;
+    `,
+};
 
 export const TextStyled = styled.div<PropsTextStyled>`
   display: flex;
   width: 100%;
-  height: ${props => props.largeLowSpace ? "18%" : "10%"};
+  height: ${props => (props.largeLowSpace ? '18%' : '10%')};
   margin: 0 20px 0;
 
   line-height: 5px;
 
   &:last-child {
-    background: blue;
     height: 12%;
   }
 
   position: relative;
 
-  ${ props =>  formatTextPerPlacing[props.placing]}
+  ${props => formatTextPerPlacing[props.placing]}
 
   div {
     width: 95%;
@@ -53,7 +56,4 @@ export const TextStyled = styled.div<PropsTextStyled>`
       color: #fff;
     }
   }
-
-
 `;
-

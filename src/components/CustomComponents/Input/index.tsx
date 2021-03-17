@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, InputHTMLAttributes } from 'react';
 import NumberFormat from 'react-number-format';
 
 import {
@@ -7,7 +7,7 @@ import {
   InputStyledText,
 } from './styles';
 
-interface InputProps {
+interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   children: JSX.Element[] | JSX.Element | any;
   className?: string;
   type: 'currency' | 'email' | 'text' | 'number';
@@ -29,6 +29,7 @@ const Input: FC<InputProps> = (
         decimalSeparator=","
         fixedDecimalScale
         decimalScale={2}
+        maxLength={16}
         prefix="R$ "
         placeholder="R$ 0,00"
         customInput={InputStyledNumber}

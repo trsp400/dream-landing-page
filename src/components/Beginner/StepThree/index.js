@@ -24,7 +24,7 @@ const listPeriods = {
 const StepThree = () => {
   const dispatch = useDispatch();
   const store = useSelector(({ dreamMachine }) => dreamMachine);
-  const { notify } = useSelector(({ settings }) => settings);
+  const { notify, isMobileView } = useSelector(({ settings }) => settings);
 
   const { currentStep, period, yearOrMonth } = store;
 
@@ -71,22 +71,24 @@ const StepThree = () => {
     };
   }, [inputValue]);
 
-  return (
-    <Container>
+  return isMobileView ? (
+    <Container isMobileView={isMobileView}>
       <Body>
         <MessageFeedbackStyle
           placing="above"
           animationSpeed={2000}
           animationDelay={900}
+          isMobileView={isMobileView}
         >
-          OK!
+          Certo!
         </MessageFeedbackStyle>
         <MessageFeedbackStyle
           placing="bellow"
           animationSpeed={2000}
           animationDelay={1200}
+          isMobileView={isMobileView}
         >
-          De quanto tempo você precisa?
+          Em quanto tempo você deseja conquistar o seu sonho?
         </MessageFeedbackStyle>
 
         <ButtonContainer>
@@ -102,7 +104,7 @@ const StepThree = () => {
             </Button>
           ))}
         </ButtonContainer>
-        <BoxInput>
+        <BoxInput isMobileView={isMobileView}>
           <Input
             state={inputValue}
             setState={setInputValue}
@@ -131,6 +133,69 @@ const StepThree = () => {
           OK
         </Button>
       </Footer>
+    </Container>
+  ) : (
+    <Container isMobileView={isMobileView}>
+      <Body>
+        <MessageFeedbackStyle
+          placing="above"
+          animationSpeed={2000}
+          animationDelay={900}
+          isMobileView={isMobileView}
+        >
+          Certo!
+        </MessageFeedbackStyle>
+        <MessageFeedbackStyle
+          placing="bellow"
+          animationSpeed={2000}
+          animationDelay={1200}
+          isMobileView={isMobileView}
+        >
+          Em quanto tempo você deseja conquistar o seu sonho?
+        </MessageFeedbackStyle>
+
+        <BoxInput>
+          <Button
+            ripple
+            variant="beblue"
+            glow
+            onClick={() => handleDispatch(2, 'previous')}
+            style={{
+              width: '10%',
+              padding: 0,
+            }}
+          >
+            <Lefticon width={20} />
+          </Button>
+          <Input
+            state={inputValue}
+            setState={setInputValue}
+            type="number"
+            placeholder={placeholderInfo}
+          />
+          <select
+            onChange={event => setPlaceholderInformation(event?.target?.value)}
+          >
+            {Object.keys(listPeriods).map(item => (
+              <option key={item} value={item}>
+                {listPeriods[item]}
+              </option>
+            ))}
+          </select>
+
+          <Button
+            ripple
+            variant="beorange"
+            glow
+            onClick={() => handleDispatch(4, 'next')}
+            style={{
+              width: '10%',
+            }}
+          >
+            OK
+          </Button>
+        </BoxInput>
+      </Body>
     </Container>
   );
 };
