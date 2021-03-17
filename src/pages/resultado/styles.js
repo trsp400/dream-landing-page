@@ -66,7 +66,7 @@ export const ButtonShowGraphic = styled.button`
 `;
 
 export const LineChartContainer = styled.div`
-  margin-bottom: 2rem;
+  /* margin-bottom: 2rem; */
   opacity: 1;
   display: block;
 `;

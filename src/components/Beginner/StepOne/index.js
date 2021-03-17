@@ -2,6 +2,7 @@ import React, { useCallback, useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { changeFormState } from '../../../redux/dream_machine/actions';
+import Modal from '../../CustomComponents/Modal';
 
 import WeddingIcon from '../../../assets/icons/wedding-cake.svg';
 import HouseIcon from '../../../assets/icons/house-chimney-2.svg';
@@ -10,6 +11,7 @@ import WorldIcon from '../../../assets/icons/travel-luggage-1.svg';
 import CarIcon from '../../../assets/icons/vintage-car-6.svg';
 import MoneyIcon from '../../../assets/icons/accounting-bills.svg';
 import OtherIcon from '../../../assets/icons/other-icon.svg';
+import LeftIcon from '../../../assets/icons/left-icon.svg';
 
 import Input from '../../CustomComponents/Input';
 import Button from '../../CustomComponents/Button';
@@ -123,7 +125,11 @@ const StepOne = () => {
         yearOrMonth: 'anos',
         monthlySupport: null,
         currentInvestments: null,
-        decision: null,
+        decision: {
+          first: '',
+          second: '',
+          third: '',
+        },
         monthlyLifeCost: null,
         monthlyIncome: null,
         investmentsPlacement: [],

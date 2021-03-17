@@ -26,7 +26,7 @@ const StepSeven = () => {
   const store = useSelector(({ dreamMachine }) => dreamMachine);
   const { notify, isMobileView } = useSelector(({ settings }) => settings);
 
-  const { investmentsPlacement, desiredInvestmentsPlacement, result } = store;
+  const { result, decision } = store;
 
   const yearlyAverageArray = result?.yearlyAverageArray || [];
   const resultSuccess = result?.resultSuccess || false;
@@ -49,8 +49,7 @@ const StepSeven = () => {
       currentInvestments,
       objectiveCost,
       inputValue,
-      investmentsPlacement,
-      desiredInvestmentsPlacement,
+      decision,
     );
 
     monthlySupport < objectiveCost && currentInvestments < objectiveCost
