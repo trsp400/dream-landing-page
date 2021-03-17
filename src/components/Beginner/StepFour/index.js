@@ -10,6 +10,7 @@ import {
   MessageFeedbackStyle,
   BoxInput,
   Footer,
+  InputContainer,
 } from './styles';
 
 import Lefticon from '../../../assets/icons/left-icon.svg';
@@ -17,7 +18,7 @@ import Lefticon from '../../../assets/icons/left-icon.svg';
 const StepFour = () => {
   const dispatch = useDispatch();
   const store = useSelector(({ dreamMachine }) => dreamMachine);
-  const { notify } = useSelector(({ settings }) => settings);
+  const { notify, isMobileView } = useSelector(({ settings }) => settings);
 
   const { currentStep, currentInvestments, objectiveCost } = store;
 
@@ -68,25 +69,27 @@ const StepFour = () => {
     };
   }, [inputValue]);
 
-  return (
-    <Container>
+  return isMobileView ? (
+    <Container isMobileView={isMobileView}>
       <Body>
         <MessageFeedbackStyle
           placing="above"
           animationSpeed={2000}
           animationDelay={900}
+          isMobileView={isMobileView}
         >
-          Beleza!
+          Show de bola!
         </MessageFeedbackStyle>
         <MessageFeedbackStyle
           placing="bellow"
           animationSpeed={2000}
           animationDelay={1300}
+          isMobileView={isMobileView}
         >
           Quanto você pode investir hoje?
         </MessageFeedbackStyle>
-        <BoxInput>
-          <Input state={inputValue} setState={setInputValue} type="currency" setIsActiveInput={setIsActiveInput}/>
+        <BoxInput isMobileView={isMobileView}>
+          <Input state={inputValue} setState={setInputValue} type="currency" />
         </BoxInput>
       </Body>
 
@@ -109,6 +112,61 @@ const StepFour = () => {
           OK
         </Button>
       </Footer>
+    </Container>
+  ) : (
+    <Container isMobileView={isMobileView}>
+      <Body>
+        <MessageFeedbackStyle
+          placing="above"
+          animationSpeed={2000}
+          animationDelay={900}
+          isMobileView={isMobileView}
+        >
+          Show de bola!
+        </MessageFeedbackStyle>
+        <MessageFeedbackStyle
+          placing="bellow"
+          animationSpeed={2000}
+          animationDelay={1300}
+          isMobileView={isMobileView}
+        >
+          Quanto você pode investir hoje?
+        </MessageFeedbackStyle>
+        <InputContainer>
+          <Button
+            ripple
+            variant="beblue"
+            glow
+            onClick={() => handleDispatch(3, 'previous')}
+            style={{
+              width: '10%',
+              padding: 0,
+            }}
+          >
+            <Lefticon width={20} />
+          </Button>
+
+          <BoxInput isMobileView={isMobileView}>
+            <Input
+              state={inputValue}
+              setState={setInputValue}
+              type="currency"
+            />
+          </BoxInput>
+
+          <Button
+            ripple
+            variant="beorange"
+            glow
+            onClick={() => handleDispatch(5, 'next')}
+            style={{
+              width: '20%',
+            }}
+          >
+            OK
+          </Button>
+        </InputContainer>
+      </Body>
     </Container>
   );
 };

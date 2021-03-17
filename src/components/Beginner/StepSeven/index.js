@@ -18,12 +18,13 @@ import {
   ErrorInformation,
   Body,
   Footer,
+  InputContainer,
 } from './styles';
 
 const StepSeven = () => {
   const dispatch = useDispatch();
   const store = useSelector(({ dreamMachine }) => dreamMachine);
-  const { notify } = useSelector(({ settings }) => settings);
+  const { notify, isMobileView } = useSelector(({ settings }) => settings);
 
   const { result, decision } = store;
 
@@ -121,49 +122,91 @@ const StepSeven = () => {
     };
   }, [inputValue]);
 
-  return requestLoading ? (
-    <Loading />
-  ) : (
-    <Container>
-      <Body>
-        <MessageFeedbackStyle
-          placing="bellow"
-          animationSpeed={2000}
-          animationDelay={900}
-        >
-          Para receber o resultado completo do seu perfil, deixe aqui o seu
-          e-mail:
-        </MessageFeedbackStyle>
-        <BoxInput>
-          <Input
-            state={inputValue}
-            setState={checkValidEmailOnInputChange}
-            type="email"
-            setIsActiveInput={setIsActiveInput}
-          />
-          {!validEmail && (
-            <ErrorInformation>Digite um e-mail válido!</ErrorInformation>
-          )}
-        </BoxInput>
-        <span>
-          Ao cadastrar o e-mail, você autoriza que a BeCapital faça envio de
-          conteúdos que a nossa equipe avalie como interessantes para o seu
-          perfil.
-        </span>
-      </Body>
+  const renderMobileOrDesktop = () => {
+    return isMobileView ? (
+      <Container isMobileView={isMobileView}>
+        <Body>
+          <MessageFeedbackStyle
+            placing="bellow"
+            animationSpeed={2000}
+            animationDelay={900}
+            isMobileView={isMobileView}
+          >
+            Para receber o resultado completo do seu perfil, deixe aqui o seu
+            e-mail:
+          </MessageFeedbackStyle>
+          <BoxInput isMobileView={isMobileView}>
+            <Input
+              state={inputValue}
+              setState={checkValidEmailOnInputChange}
+              type="email"
+            />
+            {!validEmail && (
+              <ErrorInformation>Digite um e-mail válido!</ErrorInformation>
+            )}
+          </BoxInput>
+          <span>
+            Ao cadastrar o e-mail, você autoriza que a BeCapital faça envio de
+            conteúdos que a nossa equipe avalie como interessantes para o seu
+            perfil.
+          </span>
+        </Body>
 
-      <Footer isActiveInput={isActiveInput}>
-        <Button
-          ripple
-          variant="beorange"
-          glow
-          onClick={() => handleOnClink(inputValue)}
-        >
-          OK
-        </Button>
-      </Footer>
-    </Container>
-  );
+        <Footer>
+          <Button
+            ripple
+            variant="beorange"
+            glow
+            onClick={() => handleOnClink(inputValue)}
+          >
+            OK
+          </Button>
+        </Footer>
+      </Container>
+    ) : (
+      <Container isMobileView={isMobileView}>
+        <Body>
+          <MessageFeedbackStyle
+            placing="bellow"
+            animationSpeed={2000}
+            animationDelay={900}
+            isMobileView={isMobileView}
+          >
+            Para receber o resultado completo do seu perfil, deixe aqui o seu
+            e-mail:
+          </MessageFeedbackStyle>
+
+          <InputContainer>
+            <BoxInput isMobileView={isMobileView}>
+              <Input
+                state={inputValue}
+                setState={checkValidEmailOnInputChange}
+                type="email"
+              />
+              {!validEmail && (
+                <ErrorInformation>Digite um e-mail válido!</ErrorInformation>
+              )}
+            </BoxInput>
+            <Button
+              ripple
+              variant="beorange"
+              glow
+              onClick={() => handleOnClink(inputValue)}
+            >
+              OK
+            </Button>
+          </InputContainer>
+          <span>
+            Ao cadastrar o e-mail, você autoriza que a BeCapital faça envio de
+            conteúdos que a nossa equipe avalie como interessantes para o seu
+            perfil.
+          </span>
+        </Body>
+      </Container>
+    );
+  };
+
+  return requestLoading ? <Loading /> : renderMobileOrDesktop();
 };
 
 export default StepSeven;

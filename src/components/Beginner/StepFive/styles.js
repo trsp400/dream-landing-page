@@ -1,14 +1,32 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { Container as BootstrapContainer } from 'react-bootstrap';
 
 import MessageFeedback from '../../CustomComponents/MessageFeedback';
 
 export const Container = styled(BootstrapContainer)`
-  display: flex;
-  width: 100%;
-  height: 93vh;
-  flex-direction: column;
-  padding: 0;
+  ${props =>
+    props?.isMobileView
+      ? css`
+          display: flex;
+          width: 100%;
+          height: 100vh;
+          flex-direction: column;
+          padding: 0;
+        `
+      : css`
+          width: 1024px;
+          height: 100vh;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          > div {
+            display: flex;
+            width: 100%;
+            align-content: center;
+            justify-content: center;
+            flex-direction: column;
+          }
+        `}
 `;
 
 export const Body = styled.div`
@@ -17,33 +35,59 @@ export const Body = styled.div`
   flex-direction: column;
 `;
 
+export const InputContainer = styled.div`
+  position: absolute;
+  top: 55%;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  height: 50px;
+  justify-content: space-around;
+
+  > input {
+    width: 500px;
+  }
+`;
+
 export const MessageFeedbackStyle = styled(MessageFeedback)`
+  ${props =>
+    props?.isMobileView
+      ? css`
+          margin-bottom: 8px;
+        `
+      : css`
+          font-size: 48px;
 
-  &:nth-child(2){
-    margin-bottom: 16px;
+          position: absolute;
+          top: 25%;
+        `}
 
+  &:nth-child(2) {
+    ${props =>
+      props?.isMobileView
+        ? css`
+            margin-bottom: 16px;
+          `
+        : css`
+            position: absolute;
+            top: 40%;
+          `}
   }
 `;
 
 export const BoxInput = styled.div`
-  position: relative;
-
   display: flex;
   justify-content: center;
   align-items: center;
 
-  width: 100%;
-  height: auto;
-  margin-top: 25px;
-
-  padding: 50px;
+  ${props =>
+    !props?.isMobileView &&
+    css`
+      input {
+        width: 500px;
+      }
+    `}
 `;
-
-
-
-// bottom:  ${props => props.isActiveInput ? "25%" : "15%"};
-// height: ${props => props.isActiveInput ? "11%" : "8%"};
-
 
 export const Footer = styled.div`
   position: fixed;
@@ -63,13 +107,10 @@ export const Footer = styled.div`
       margin-left: 10px;
     }
 
-
     svg {
       height: 90%;
     }
-
   }
-
 `;
 
 export const ButtonContainer = styled.div`

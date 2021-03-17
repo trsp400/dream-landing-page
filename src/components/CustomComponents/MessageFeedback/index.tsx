@@ -8,10 +8,10 @@ interface TextProps {
   children?: string;
   className?: string;
   strong?: 'normal' | 'bold' | 'bolder' | 'italic' | 'lighter';
-  placing: 'above' | 'bellow',
-  largeLowSpace?: boolean,
-  animationSpeed?: number,
-  animationDelay?: number,
+  placing: 'above' | 'bellow';
+  largeLowSpace?: boolean;
+  animationSpeed?: number;
+  animationDelay?: number;
   icon?: JSX.Element[] | JSX.Element;
 }
 
@@ -20,49 +20,45 @@ const Text: FC<TextProps> = ({
   children,
   animationSpeed,
   animationDelay,
-  placing ,
+  placing,
   largeLowSpace = false,
-  ...props }) => {
-
-  const refText = useRef<HTMLElement>(null)
+  ...props
+}) => {
+  const refText = useRef<HTMLElement>(null);
 
   useEffect(() => {
     renderAnimationWritingEffect();
-  }, [])
+  }, []);
 
-  const performWritingEffect = (speed : number):void => {
-
+  const performWritingEffect = (speed: number): void => {
     // const highlightedWord = children.split(" "). ;
-    const dataEtructureText = children.split("");
+    const dataEtructureText = children.split('');
 
-    dataEtructureText.forEach((letter, index)=> {
+    dataEtructureText.forEach((letter, index) => {
       setTimeout(() => {
-        if(refText.current){
-
-          refText.current.innerHTML += letter
+        if (refText.current) {
+          refText.current.innerHTML += letter;
         }
-      }, speed/100 * index)
-    })
+      }, (speed / 100) * index);
+    });
+  };
 
-  }
-
-  const renderAnimationWritingEffect = ():void => {
-
-    if(animationSpeed) {
+  const renderAnimationWritingEffect = (): void => {
+    if (animationSpeed) {
       setTimeout(() => {
-        performWritingEffect(animationSpeed)
-      }, animationDelay)
+        performWritingEffect(animationSpeed);
+      }, animationDelay);
     }
- }
+  };
 
   return (
-    <TextStyled placing={placing} largeLowSpace={largeLowSpace}>
+    <TextStyled placing={placing} largeLowSpace={largeLowSpace} {...props}>
       <div>
         {icon}
-        <span className="text-specific" ref={refText}/>
+        <span className="text-specific" ref={refText} />
       </div>
     </TextStyled>
-  )
-}
+  );
+};
 
 export default Text;
