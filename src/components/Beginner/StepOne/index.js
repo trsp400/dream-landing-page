@@ -230,43 +230,113 @@ const StepOne = () => {
         </IconGallery>
       </Container>
       <ModalStyled
-        state={isVisibleModal}
-        setState={setIsVisibleModal}
+        visible={isVisibleModal}
+        setVisible={setIsVisibleModal}
         contentClassName="custom-content"
         dialogClassName="custom-dialog"
-      >
-        <HeaderModalStyled closeButton />
-        <BodyModalStyled>
-          <div className="content-body">
-            Descreva abaixo qual outro objetivo de vida.
-          </div>
-          <Input state={inputValue} setState={setInputValue} type="text" />
-          <Footer>
-            <Button
-              ripple
-              variant="beblue"
-              glow
-              onClick={() => setIsVisibleModal(!isVisibleModal)}
-              style={{
-                width: '30%',
-              }}
-            >
-              Voltar
-            </Button>
-            <Button
-              ripple
-              variant="beorange"
-              glow
-              onClick={() => insertValueInObjective('others', inputValue)}
-              style={{
-                width: '30%',
-              }}
-            >
-              OK
-            </Button>
-          </Footer>
+    >
+      <HeaderModalStyled closeButton/>
+      <BodyModalStyled>
+        <div className="content-body">Descreva abaixo qual outro objetivo de vida.</div>
+        <Input state={inputValue} setState={setInputValue} type="text" />
+        <Footer>
+          <Button
+            ripple
+            variant="beblue"
+            glow
+            onClick={() => setIsVisibleModal(!isVisibleModal)}
+          >
+            Voltar
+          </Button>
+          <Button
+            ripple
+            variant="beorange"
+            glow
+            onClick={() => insertValueInObjective("others", inputValue)}
+          >
+            OK
+          </Button>
+        </Footer>
         </BodyModalStyled>
-      </ModalStyled>
+    </ModalStyled>
+    <Container>
+      <MessageFeedbackStyle placing="above" animationSpeed={3000} animationDelay={900}>
+        Olá, vamos começar?
+      </MessageFeedbackStyle>
+
+      <MessageFeedbackStyle placing="bellow" animationSpeed={3000} animationDelay={1500}>
+        Qual o seu objetivo de vida?
+      </MessageFeedbackStyle>
+
+      <IconGallery onClick={handleCardClick} objectiveValue={objectiveValue}>
+        <Row>
+          <Card
+            backgroundColor="#EA5E45"
+            icon={<WeddingIcon />}
+            iconSize={iconSize}
+            label="CASAMENTO"
+            labelColor="#FFF"
+            labelSize={labelSize}
+          />
+          <Card
+            backgroundColor="#EA5E45"
+            icon={<HouseIcon />}
+            iconSize={iconSize}
+            label="CASA"
+            labelColor="#FFF"
+            labelSize={labelSize}
+          />
+        </Row>
+        <Row>
+          <Card
+            backgroundColor="#EA5E45"
+            icon={<BeachIcon />}
+            iconSize={iconSize}
+            label="APOSENTADORIA"
+            labelColor="#FFF"
+            labelSize={labelSize}
+          />
+          <Card
+            backgroundColor="#EA5E45"
+            icon={<WorldIcon />}
+            iconSize={iconSize}
+            label="INTERCÂMBIO"
+            labelColor="#FFF"
+            labelSize={labelSize}
+          />
+        </Row>
+
+        <Row>
+          <Card
+            backgroundColor="#EA5E45"
+            icon={<CarIcon />}
+            iconSize={iconSize}
+            label="AUTOMÓVEL"
+            labelColor="#FFF"
+            labelSize={labelSize}
+          />
+          <Card
+            backgroundColor="#EA5E45"
+            icon={<MoneyIcon />}
+            iconSize={iconSize}
+            label="INDEPENDÊNCIA FINANCEIRA"
+            labelColor="#FFF"
+            labelSize={labelSize}
+          />
+        </Row>
+        <Row>
+        <Card
+            backgroundColor="#EA5E45"
+            icon={<OtherIcon />}
+            iconSize={36}
+            label="OUTROS"
+            labelColor="#FFF"
+            labelSize={labelSize}
+          />
+        </Row>
+      </IconGallery>
+
+    </Container>
     </>
   ) : (
     <Container>

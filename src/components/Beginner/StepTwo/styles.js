@@ -94,11 +94,13 @@ export const BoxInput = styled.div`
     `}
 `;
 
+// bottom:  ${props => props.isActiveInput ? "25%" : "15%"};
+// height: ${props => props.isActiveInput ? "11%" : "8%"};
 export const Footer = styled.div`
   position: fixed;
-  bottom: 10%;
+  bottom:  ${props => props.isActiveInput ? "25%" : "15%"};
   width: 100%;
-  height: 8%;
+  height: ${props => props.isActiveInput ? "10%" : "7%"};
   display: flex;
 
   justify-content: space-between;
@@ -113,7 +115,7 @@ export const Footer = styled.div`
     }
 
     svg {
-      height: 90%;
+      height: 25px ;
     }
   }
 `;

@@ -17,6 +17,7 @@ import {
 } from './styles';
 
 const StepTwo = () => {
+  const [isActiveInput, setIsActiveInput] = useState(false)
   const dispatch = useDispatch();
   const store = useSelector(({ dreamMachine }) => dreamMachine);
   const { notify, isMobileView } = useSelector(({ settings }) => settings);
@@ -24,6 +25,12 @@ const StepTwo = () => {
   const { currentStep, objectiveCost } = store;
 
   const [inputValue, setInputValue] = useState(objectiveCost);
+
+  // useEffect(() => {
+  //   const input = document.querySelector("input")
+  //   setIsActiveInput(true)
+  //   input.autofocus = true
+  // },[])
 
   const handleDispatch = useCallback(
     (step, direction) => {
@@ -87,10 +94,10 @@ const StepTwo = () => {
         </MessageFeedbackStyle>
 
         <BoxInput isMobileView={isMobileView}>
-          <Input state={inputValue} setState={setInputValue} type="currency" />
+          <Input state={inputValue} setState={setInputValue} type="currency" setIsActiveInput={setIsActiveInput}/>
         </BoxInput>
       </Body>
-      <Footer>
+      <Footer isActiveInput={isActiveInput}>
         <Button
           ripple
           variant="beblue"

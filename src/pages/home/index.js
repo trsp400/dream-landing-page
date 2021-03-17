@@ -11,6 +11,7 @@ import {
   Background,
   DesktopContainer,
   DreamMachineContainer,
+  ContainerSteps
 } from './styles';
 
 import { useSpring, animated } from 'react-spring';
@@ -86,18 +87,21 @@ const Home = () => {
   });
 
   return currentStep >= 1 ? (
-    <animated.div
-      style={{
-        ...springProps,
-        height: '100vh',
-      }}
-    >
-      <RenderSelectedFormPath
-        currentStep={currentStep}
-        store={store}
-        path={path}
-      />
-    </animated.div>
+    <ContainerSteps>
+        <animated.div
+          style={{
+            ...springProps,
+            height: '100vh',
+          }}
+        >
+
+            <RenderSelectedFormPath
+              currentStep={currentStep}
+              store={store}
+              path={path}
+            />
+        </animated.div>
+      </ContainerSteps>
   ) : (
     <Container isMobileView={isMobileView} currentStep={currentStep}>
       <Header isMobileView={isMobileView}>

@@ -15,9 +15,14 @@ import {
   ListDecisionStyled,
 } from './styles';
 
+import { question1 } from '../../../utils/questionsToProfile';
 import Lefticon from '../../../assets/icons/left-icon.svg';
 
-import { question1 } from '../../../utils/questionsToProfile';
+const options = [
+  '<span>Aumentar para <strong>R$ 1.200</strong> no fim do seu ciclo de investimento, <strong>sem eventuais riscos</strong>.</span>',
+  '<span>Ter a possibilidade de aumentar para <strong>R$ 1.500</strong> no fim do seu ciclo, com um <strong>pequeno risco</strong>.</span>',
+  '<span>Aumentar para <strong>R$ 2.000</strong> no fim do seu ciclo, <strong>com risco elevado</strong>.</span>',
+];
 
 const StepSeven = () => {
   const dispatch = useDispatch();
@@ -74,11 +79,11 @@ const StepSeven = () => {
           animationDelay={1800}
           isMobileView={isMobileView}
         >
-          {question1.quest}
+          {question1?.quest}
         </MessageFeedbackStyle>
         <BoxListDecision isMobileView={isMobileView}>
           <ListDecision
-            options={question1.options}
+            options={question1?.options}
             state={inputValue}
             setState={setInputvalue}
           />

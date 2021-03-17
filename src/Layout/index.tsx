@@ -78,7 +78,7 @@ const Layout = props => {
         <RenderProgressBar path={path} currentStep={currentStep} />
       )}
       <Main>
-        <Background />
+        {/* <Background /> */}
         {children}
       </Main>
     </Container>

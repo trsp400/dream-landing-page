@@ -100,9 +100,8 @@ export const Background = styled.div<Props>`
   background-image: url('${Pattern}');
   filter: invert(100%);
   position: absolute;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
+  width: 100%;
+  height: 90vh;
 
   opacity: 0.1;
 
@@ -120,7 +119,14 @@ export const ProgressBarContainer = styled.div`
 `;
 
 export const Main = styled.main`
+  position: relative;
   display: flex;
   flex-direction: column;
   justify-content: center;
+  width: 100%;
+  height: 100%;
+  /* max-width: 1024px; */
+
 `;
+
+

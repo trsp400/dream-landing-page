@@ -14,12 +14,10 @@ interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   state: number;
   setState(value: any): void;
   placeholder?: string;
+  setIsActiveInput: (value: boolean) => void;
 }
 
-const Input: FC<InputProps> = (
-  { state, type, setState, placeholder },
-  ...props
-) => (
+const Input: FC<InputProps> = ({ state, type, setState, placeholder, setIsActiveInput, ...props }) => (
   <>
     {type === 'currency' ? (
       <NumberFormat
@@ -35,6 +33,8 @@ const Input: FC<InputProps> = (
         customInput={InputStyledNumber}
         value={state}
         onChange={event => setState(event?.target?.value)}
+        onBlur={() => setIsActiveInput(false)}
+        onFocus={() => setIsActiveInput(true)}
         {...props}
       />
     ) : type === 'text' ? (
@@ -44,8 +44,10 @@ const Input: FC<InputProps> = (
           value={state || ''}
           type={type}
           onChange={event => setState(event?.target?.value)}
+          onBlur={() => setIsActiveInput(false)}
+          onFocus={() => setIsActiveInput(true)}
           {...props}
-        />
+         />
       </InputStyledTextContainer>
     ) : type === 'email' ? (
       <InputStyledTextContainer>
@@ -57,6 +59,8 @@ const Input: FC<InputProps> = (
             setState(event?.target?.value);
           }}
           required
+          onBlur={() => setIsActiveInput(false)}
+          onFocus={() => setIsActiveInput(true)}
           {...props}
         />
       </InputStyledTextContainer>
@@ -71,6 +75,8 @@ const Input: FC<InputProps> = (
         customInput={InputStyledNumber}
         value={state || ''}
         onChange={event => setState(event?.target?.value)}
+        onBlur={() => setIsActiveInput(false)}
+        onFocus={() => setIsActiveInput(true)}
         {...props}
       />
     ) : (
