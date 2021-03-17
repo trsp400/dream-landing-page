@@ -123,11 +123,11 @@ const StepSeven = () => {
         animationDelay={1800}
         isMobileView={isMobileView}
       >
-        Se você investisse R$ 1.000, qual seria a sua preferência?
+        {question1.quest}
       </MessageFeedbackStyle>
       <BoxListDecision isMobileView={isMobileView}>
         <ListDecisionStyled
-          options={options}
+          options={question1.options}
           state={inputValue}
           setState={setInputvalue}
         />
