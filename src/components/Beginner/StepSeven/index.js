@@ -125,7 +125,7 @@ const StepSeven = () => {
   const renderMobileOrDesktop = () => {
     return isMobileView ? (
       <Container isMobileView={isMobileView}>
-        <Body>
+        <Body isMobileView={isMobileView}>
           <MessageFeedbackStyle
             placing="bellow"
             animationSpeed={2000}
@@ -166,7 +166,7 @@ const StepSeven = () => {
       </Container>
     ) : (
       <Container isMobileView={isMobileView}>
-        <Body>
+        <Body isMobileView={isMobileView}>
           <MessageFeedbackStyle
             placing="bellow"
             animationSpeed={2000}
