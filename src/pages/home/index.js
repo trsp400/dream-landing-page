@@ -9,6 +9,9 @@ import {
   ButtonSection,
   Button,
   Background,
+  DesktopContainer,
+  DreamMachineContainer,
+  ContainerSteps
 } from './styles';
 
 import { useSpring, animated } from 'react-spring';
@@ -18,15 +21,12 @@ import { changeFormState } from '../../redux/dream_machine/actions';
 import RenderInvestorForm from '../../components/RenderInvestorSteps';
 import RenderBeginnerForm from '../../components/RenderBeginnerSteps';
 
-// import SpringerInterpolate from '../../components/CustomComponents/SpringerInterpolate';
+import SpringerInterpolate from '../../components/CustomComponents/SpringerInterpolate';
 
 import Logo from '../../assets/logo/svg/bec_logo.svg';
-import MaquinaDosSonhos from '../../assets/logo/svg/maquinaDosSonhos.svg';
 import MaquinaDosSonhosDesktop from '../../assets/logo/svg/maquinaDosSonhosDesktop.svg';
 
 import ImageGallery from '../../components/CustomComponents/ImageGallery';
-
-import Pattern from '../../images/background-pattern.png';
 
 const RenderSelectedFormPath = ({ currentStep, store, path }) => {
   const paths = {
@@ -87,52 +87,91 @@ const Home = () => {
   });
 
   return currentStep >= 1 ? (
-    <animated.div
-      style={{
-        ...springProps,
-        height: '100vh',
-      }}
-    >
-      <RenderSelectedFormPath
-        currentStep={currentStep}
-        store={store}
-        path={path}
-      />
-    </animated.div>
+    <ContainerSteps>
+        <animated.div
+          style={{
+            ...springProps,
+            height: '100vh',
+          }}
+        >
+
+            <RenderSelectedFormPath
+              currentStep={currentStep}
+              store={store}
+              path={path}
+            />
+        </animated.div>
+      </ContainerSteps>
   ) : (
-    <Container isMobileView={isMobileView}>
-      <Header>
+    <Container isMobileView={isMobileView} currentStep={currentStep}>
+      <Header isMobileView={isMobileView}>
         <Logo />
       </Header>
 
-      <Background />
-      {isMobileView ? <ImageGallery /> : <MaquinaDosSonhosDesktop />}
+      <Background isMobileView={isMobileView} />
 
       <MainHome>
-        <PresentationSection>
-          <h1>Quer descobrir o investimento ideal para você?</h1>
-          <p>
-            Nosso orientador financeiro te ajudará a encontrar o título mais
-            adequado para você atingir seu objetivo.
-          </p>
-        </PresentationSection>
-
-        <ButtonSection>
-          <Button
-            ripple
-            variant="beorange"
-            glow
-            onClick={() => onChangeStep(1, 'beginner')}
-          >
-            COMEÇAR AGORA
-          </Button>
-          <Button
-            variant="beblue"
-            onClick={() => onChangeStep(1, 'investor', 'next')}
-          >
-            JÁ SEI ONDE INVESTIR
-          </Button>
-        </ButtonSection>
+        {isMobileView ? (
+          <>
+            <ImageGallery />
+            <PresentationSection isMobileView={isMobileView}>
+              <h1>Quer descobrir o investimento ideal para você?</h1>
+              <p>
+                Nosso orientador financeiro te ajudará a encontrar o título mais
+                adequado para você atingir seu objetivo.
+              </p>
+            </PresentationSection>
+            <ButtonSection isMobileView>
+              <Button
+                ripple
+                variant="beorange"
+                glow
+                onClick={() => onChangeStep(1, 'beginner', 'next')}
+              >
+                COMEÇAR AGORA
+              </Button>
+              {/* <Button
+                variant="beblue"
+                onClick={() => onChangeStep(1, 'investor', 'next')}
+              >
+                JÁ SEI ONDE INVESTIR
+              </Button> */}
+            </ButtonSection>
+          </>
+        ) : (
+          <DesktopContainer>
+            <PresentationSection>
+              <h1>Quer descobrir o investimento ideal para você?</h1>
+              <p>
+                Nosso orientador financeiro te ajudará a encontrar o título mais
+                adequado para você atingir seu objetivo.
+              </p>
+              <ButtonSection isMobileView={isMobileView}>
+                <Button
+                  ripple
+                  variant="beorange"
+                  glow
+                  onClick={() => onChangeStep(1, 'beginner', 'next')}
+                >
+                  COMEÇAR AGORA
+                </Button>
+                {/* <Button
+                  variant="beblue"
+                  ripple
+                  glow
+                  onClick={() => onChangeStep(1, 'investor', 'next')}
+                >
+                  JÁ SEI ONDE INVESTIR
+                </Button> */}
+              </ButtonSection>
+            </PresentationSection>
+            <DreamMachineContainer>
+              <SpringerInterpolate>
+                <MaquinaDosSonhosDesktop style={{ width: '800px' }} />
+              </SpringerInterpolate>
+            </DreamMachineContainer>
+          </DesktopContainer>
+        )}
       </MainHome>
     </Container>
   );

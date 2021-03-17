@@ -28,9 +28,9 @@ export const BoxListDecision = styled.div`
 
 export const Footer = styled.div`
   position: fixed;
-  bottom: 10%;
+  bottom: 15%;
   width: 100%;
-  height: 8%;
+  height: 7%;
   display: flex;
 
   justify-content: space-between;

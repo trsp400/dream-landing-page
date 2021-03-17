@@ -14,9 +14,18 @@ function* sendDreamMachineResultToAPIRequest(action) {
       ...action?.payload,
     };
 
-    yield call(api.post, 'website/dream_machine_result', dataObject);
+    const { data } = yield call(
+      api.post,
+      'website/dream_machine_result',
+      dataObject,
+    );
 
-    yield put(sendDreamMachineResultToAPISuccess(action?.payload));
+    yield put(
+      sendDreamMachineResultToAPISuccess({
+        ...action?.payload,
+        ...data,
+      }),
+    );
   } catch (error) {
     yield put(sendDreamMachineResultToAPIFailure());
   }

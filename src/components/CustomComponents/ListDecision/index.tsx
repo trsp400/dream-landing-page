@@ -14,35 +14,41 @@ import {
 interface ListDecisionProps {
   children?: JSX.Element[] | JSX.Element | any;
   className?: string;
-  options: string[];
-  state: number;
+  options: object | any;
+  state: string;
   setState(value: any): void;
 }
-const ListDecision: FC<ListDecisionProps> = ({ options, state, setState }) => {
-
+const ListDecision: FC<ListDecisionProps> = ({
+  options,
+  state,
+  setState,
+  ...props
+}) => {
   return (
     <Container>
       <Row className="justify-content-md-center">
-        {options.map((option, index) => {
+        {Object.keys(options).map((key, index) => {
           const color =
-            state === index + 1 ? colors.primary.blue : colors.primary.orange;
+            state === key ? colors.primary.blue : colors.primary.orange;
 
           return (
             <Col
               md={4}
               xl={4}
               className="d-flex justify-content-center"
-              onClick={() => setState(index + 1)}
-              key={index + 1}
+              onClick={() => setState(key)}
+              key={options[key]}
             >
-              <ListDecisionContainerStyled>
+              <ListDecisionContainerStyled {...props}>
                 <ListDecisionCheckStyled
-                    style={{ '--color': color } as CSSProperties}
-                    onClick={() => setState(index + 1)}
+                  style={{ '--color': color } as CSSProperties}
+                  onClick={() => setState(key)}
                 />
-                <ListDecisionTextStyled dangerouslySetInnerHTML={{
-                  __html: option,
-                }} />
+                <ListDecisionTextStyled
+                  dangerouslySetInnerHTML={{
+                    __html: options[key],
+                  }}
+                />
               </ListDecisionContainerStyled>
             </Col>
           );

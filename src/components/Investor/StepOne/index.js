@@ -2,7 +2,7 @@ import React, { useCallback, useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { changeFormState } from '../../../redux/dream_machine/actions';
-import  Modal from '../../CustomComponents/Modal'
+import Modal from '../../CustomComponents/Modal';
 
 import SavingBankIcon from '../../../assets/icons/saving-bank-1.svg';
 import SavingBagIcon from '../../../assets/icons/saving-bag-increase.svg';
@@ -10,16 +10,23 @@ import BrokerIcon from '../../../assets/icons/building-modern-2.svg';
 import AssetsIcon from '../../../assets/icons/money-bag-dollar.svg';
 import ExchangeIcon from '../../../assets/icons/accounting-coins-bill.svg';
 import OtherIcon from '../../../assets/icons/other-icon.svg';
-import LeftIcon from '../../../assets/icons/left-icon.svg'
+import LeftIcon from '../../../assets/icons/left-icon.svg';
 
 import Input from '../../CustomComponents/Input';
 import Button from '../../CustomComponents/Button';
 import IconGallery, { Card, Row } from '../../CustomComponents/IconGallery';
 
-import { Container,Footer, BodyModalStyled, HeaderModalStyled, ModalStyled, MessageFeedbackStyle } from './styles';
+import {
+  Container,
+  Footer,
+  BodyModalStyled,
+  HeaderModalStyled,
+  ModalStyled,
+  MessageFeedbackStyle,
+} from './styles';
 
 const labelSize = 8.8;
-const iconSize = 38
+const iconSize = 38;
 
 import toastConfig from '../../../utils/toastConfig';
 import { isNull } from 'lodash-es';
@@ -31,29 +38,34 @@ const StepOne = () => {
 
   const { currentStep, path, objective } = store;
 
-  const [inputValue, setInputValue] = useState("");
-  const [objectiveValue, setObjectiveValue] = useState("")
-  const [isVisibleModal, setIsVisibleModal] = useState(false)
+  const [inputValue, setInputValue] = useState('');
+  const [objectiveValue, setObjectiveValue] = useState('');
+  const [isVisibleModal, setIsVisibleModal] = useState(false);
 
   useEffect(() => {
-    (function() {
-      const mockObjectivesArrayDefault = ["CASAMENTO","CASA","APOSENTADORIA","INTERCÂMBIO","AUTOMÓVEL","INDEPENDÊNCIA FINANCEIRA"]
+    (function () {
+      const mockObjectivesArrayDefault = [
+        'CASAMENTO',
+        'CASA',
+        'APOSENTADORIA',
+        'INTERCÂMBIO',
+        'AUTOMÓVEL',
+        'INDEPENDÊNCIA FINANCEIRA',
+      ];
 
-      const indexStandardObjective = mockObjectivesArrayDefault.findIndex(defaultObjective => defaultObjective === objective)
+      const indexStandardObjective = mockObjectivesArrayDefault.findIndex(
+        defaultObjective => defaultObjective === objective,
+      );
 
-      if(indexStandardObjective < 0) {
-        setInputValue(objective)
+      if (indexStandardObjective < 0) {
+        setInputValue(objective);
       }
-
-    })()
-  }, [objective])
+    })();
+  }, [objective]);
 
   const handleDispatch = useCallback(
-
     (objectiveValue, step, direction) => {
-
-      if (!objectiveValue)
-        return notify('Por favor, selecione uma objetivo!');
+      if (!objectiveValue) return notify('Por favor, selecione uma objetivo!');
 
       dispatch(
         changeFormState({
@@ -67,36 +79,29 @@ const StepOne = () => {
     [dispatch, store, objectiveValue, inputValue],
   );
 
-
-
   const handleCardClick = async (event, label) => {
-
-    if(label.toLowerCase() !== "outros") {
-      insertValueInObjective("default", label)
+    if (label.toLowerCase() !== 'outros') {
+      insertValueInObjective('default', label);
       return;
     }
 
-    setObjectiveValue(label)
+    setObjectiveValue(label);
     setIsVisibleModal(!isVisibleModal);
   };
 
-
-
   const insertValueInObjective = async (argElement, value) => {
-
     const setValueInStateObjective = {
       default: () => {
-       setObjectiveValue(value);
-       handleDispatch(value, 2, "next")
-
+        setObjectiveValue(value);
+        handleDispatch(value, 2, 'next');
       },
       others: () => {
-        const valueUpperCase = value.toUpperCase()
-        handleDispatch(valueUpperCase, 2, "next")
-      }
-    }
+        const valueUpperCase = value.toUpperCase();
+        handleDispatch(valueUpperCase, 2, 'next');
+      },
+    };
 
-    const resolvValueInStateObjective = setValueInStateObjective[argElement]
+    const resolvValueInStateObjective = setValueInStateObjective[argElement];
     resolvValueInStateObjective();
   };
 
@@ -120,7 +125,11 @@ const StepOne = () => {
         yearOrMonth: 'anos',
         monthlySupport: null,
         currentInvestments: null,
-        decision: null,
+        decision: {
+          first: '',
+          second: '',
+          third: '',
+        },
         monthlyLifeCost: null,
         monthlyIncome: null,
         investmentsPlacement: [],
@@ -133,115 +142,123 @@ const StepOne = () => {
 
   return (
     <>
-    <Container>
-      <MessageFeedbackStyle placing="above" animationSpeed={3000} animationDelay={900}>
-        Olá, vamos começar?
-      </MessageFeedbackStyle>
+      <Container>
+        <MessageFeedbackStyle
+          placing="above"
+          animationSpeed={3000}
+          animationDelay={900}
+        >
+          Olá, vamos começar?
+        </MessageFeedbackStyle>
 
-      <MessageFeedbackStyle placing="bellow" animationSpeed={3000} animationDelay={1500}>
-        Qual o seu objetivo de vida?
-      </MessageFeedbackStyle>
+        <MessageFeedbackStyle
+          placing="bellow"
+          animationSpeed={3000}
+          animationDelay={1500}
+        >
+          Qual você já investe?
+        </MessageFeedbackStyle>
 
-      <IconGallery onClick={handleCardClick} objectiveValue={objectiveValue}>
-      <Row>
-         <Card
-            backgroundColor="#EA5E45"
-            icon={<SavingBankIcon />}
-            iconSize={iconSize}
-            label="BANCO COMERCIAL"
-            labelColor="#FFF"
-            labelSize={labelSize}
-          />
-          <Card
-            backgroundColor="#EA5E45"
-            icon={<SavingBagIcon />}
-            iconSize={iconSize}
-            label="BANCO DE INVESTIMENTOS"
-            labelColor="#FFF"
-            labelSize={labelSize}
-          />
-        </Row>
-        <Row>
-          <Card
-            backgroundColor="#EA5E45"
-            icon={<BrokerIcon />}
-            iconSize={iconSize}
-            label="Corretora"
-            labelColor="#FFF"
-            labelSize={labelSize}
-          />
-          <Card
-            backgroundColor="#EA5E45"
-            icon={<AssetsIcon />}
-            iconSize={iconSize}
-            label="ASSETS"
-            labelColor="#FFF"
-            labelSize={labelSize}
-          />
-        </Row>
-        <Row>
-          <Card
-            backgroundColor="#EA5E45"
-            icon={<ExchangeIcon />}
-            iconSize={iconSize}
-            label="EXCHANGE"
-            labelColor="#FFF"
-            labelSize={labelSize}
-          />
-        <Card
-            backgroundColor="#EA5E45"
-            icon={<OtherIcon />}
-            iconSize={36}
-            label="OUTROS"
-            labelColor="#FFF"
-            labelSize={labelSize}
-          />
-        </Row>
-      </IconGallery>
-
-    </Container>
-    <ModalStyled
-      state={isVisibleModal}
-      setState={setIsVisibleModal}
-      contentClassName="custom-content"
-      dialogClassName="custom-dialog"
-    >
-      <HeaderModalStyled closeButton/>
-      <BodyModalStyled>
-        <div className="content-body">Descreva abaixo qual outro objetivo de vida.</div>
-        <Input state={inputValue} setState={setInputValue} type="text" />
-        <Footer>
-          <Button
-            ripple
-            variant="beblue"
-            glow
-            onClick={() => setIsVisibleModal(!isVisibleModal)}
-            style={{
-              width: '30%',
-            }}
-          >
-            Voltar
-          </Button>
-          <Button
-            ripple
-            variant="beorange"
-            glow
-            onClick={() => insertValueInObjective("others", inputValue)}
-            style={{
-              width: '30%',
-            }}
-          >
-            OK
-          </Button>
-        </Footer>
+        <IconGallery onClick={handleCardClick} objectiveValue={objectiveValue}>
+          <Row>
+            <Card
+              backgroundColor="#EA5E45"
+              icon={<SavingBankIcon />}
+              iconSize={iconSize}
+              label="BANCO COMERCIAL"
+              labelColor="#FFF"
+              labelSize={labelSize}
+            />
+            <Card
+              backgroundColor="#EA5E45"
+              icon={<SavingBagIcon />}
+              iconSize={iconSize}
+              label="BANCO DE INVESTIMENTOS"
+              labelColor="#FFF"
+              labelSize={labelSize}
+            />
+          </Row>
+          <Row>
+            <Card
+              backgroundColor="#EA5E45"
+              icon={<BrokerIcon />}
+              iconSize={iconSize}
+              label="Corretora"
+              labelColor="#FFF"
+              labelSize={labelSize}
+            />
+            <Card
+              backgroundColor="#EA5E45"
+              icon={<AssetsIcon />}
+              iconSize={iconSize}
+              label="ASSETS"
+              labelColor="#FFF"
+              labelSize={labelSize}
+            />
+          </Row>
+          <Row>
+            <Card
+              backgroundColor="#EA5E45"
+              icon={<ExchangeIcon />}
+              iconSize={iconSize}
+              label="EXCHANGE"
+              labelColor="#FFF"
+              labelSize={labelSize}
+            />
+            <Card
+              backgroundColor="#EA5E45"
+              icon={<OtherIcon />}
+              iconSize={36}
+              label="OUTROS"
+              labelColor="#FFF"
+              labelSize={labelSize}
+            />
+          </Row>
+        </IconGallery>
+      </Container>
+      <ModalStyled
+        state={isVisibleModal}
+        setState={setIsVisibleModal}
+        contentClassName="custom-content"
+        dialogClassName="custom-dialog"
+      >
+        <HeaderModalStyled closeButton />
+        <BodyModalStyled>
+          <div className="content-body">
+            Descreva abaixo qual outro objetivo de vida.
+          </div>
+          <Input state={inputValue} setState={setInputValue} type="text" />
+          <Footer>
+            <Button
+              ripple
+              variant="beblue"
+              glow
+              onClick={() => setIsVisibleModal(!isVisibleModal)}
+              style={{
+                width: '30%',
+              }}
+            >
+              Voltar
+            </Button>
+            <Button
+              ripple
+              variant="beorange"
+              glow
+              onClick={() => insertValueInObjective('others', inputValue)}
+              style={{
+                width: '30%',
+              }}
+            >
+              OK
+            </Button>
+          </Footer>
         </BodyModalStyled>
-    </ModalStyled>
+      </ModalStyled>
     </>
   );
 };
 
 export default StepOne;
-
 
 // import React, { useCallback, useState } from 'react';
 // import { useSelector, useDispatch } from 'react-redux';

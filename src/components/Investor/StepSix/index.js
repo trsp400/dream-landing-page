@@ -1,23 +1,28 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { changeFormState } from '../../../redux/dream_machine/actions';
 import Input from '../../CustomComponents/Input';
 
 import Button from '../../CustomComponents/Button';
-import MessageFeedback from '../../CustomComponents/MessageFeedback';
-import { Container, MessageFeedbackStyle, BoxInput, Body, Footer } from './styles';
 
-import Lefticon from '../../../assets/icons/left-icon.svg'
+import {
+  Container,
+  MessageFeedbackStyle,
+  BoxInput,
+  Body,
+  Footer,
+} from './styles';
 
-import toastConfig from '../../../utils/toastConfig';
+import Lefticon from '../../../assets/icons/left-icon.svg';
 
 const StepFive = () => {
   const dispatch = useDispatch();
   const store = useSelector(({ dreamMachine }) => dreamMachine);
   const { notify } = useSelector(({ settings }) => settings);
 
-  const { currentStep, monthlySupport } = store;
+  const [isActiveInput, setIsActiveInput] = useState(false)
+  const { currentStep, monthlySupport, objectiveCost } = store;
 
   const [inputValue, setInputValue] = useState(monthlySupport);
 
@@ -26,39 +31,68 @@ const StepFive = () => {
       if (!inputValue && step > currentStep)
         return notify('Por favor, digite um valor!');
 
+      const formattedInputValue =
+        typeof inputValue === 'string'
+          ? parseFloat(
+              inputValue
+                ?.replace('R$', '')
+                ?.replace(/\./gi, '')
+                ?.replace(/,/gi, '.'),
+            )
+          : inputValue;
+
+      if (objectiveCost <= formattedInputValue && step > currentStep)
+        return notify(
+          'O valor que você pode aportar deve ser menor do que o valor do seu sonho!',
+        );
+
       dispatch(
         changeFormState({
           ...store,
           currentStep: step,
           direction,
-          monthlySupport:
-            parseFloat(
-              inputValue
-                ?.replace(/R$/gi, '')
-                .replace(/\./gi, '')
-                .replace(/,/gi, '.'),
-            ) || inputValue,
+          monthlySupport: formattedInputValue,
         }),
       );
     },
     [dispatch, store, inputValue],
   );
 
+  useEffect(() => {
+    const listener = event => {
+      if (event.code === 'Enter' || event.keyCode === 13) {
+        handleDispatch(7, 'next');
+      }
+    };
+    document.addEventListener('keydown', listener);
+    return () => {
+      document.removeEventListener('keydown', listener);
+    };
+  }, [inputValue]);
+
   return (
     <Container>
       <Body>
-        <MessageFeedbackStyle placing="above" animationSpeed={2000} animationDelay={900}>
+        <MessageFeedbackStyle
+          placing="above"
+          animationSpeed={2000}
+          animationDelay={900}
+        >
           Beleza!
         </MessageFeedbackStyle>
-        <MessageFeedbackStyle placing="bellow" animationSpeed={2000} animationDelay={1300}>
+        <MessageFeedbackStyle
+          placing="bellow"
+          animationSpeed={2000}
+          animationDelay={1300}
+        >
           Quanto você pode investir por mês?
         </MessageFeedbackStyle>
         <BoxInput>
-          <Input state={inputValue} setState={setInputValue} type="currency" />
+          <Input state={inputValue} setState={setInputValue} type="currency" setIsActiveInput={setIsActiveInput}/>
         </BoxInput>
       </Body>
 
-      <Footer>
+      <Footer isActiveInput={isActiveInput}>
         <Button
           ripple
           variant="beblue"

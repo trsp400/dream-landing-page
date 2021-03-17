@@ -1,15 +1,20 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { changeFormState } from '../../../redux/dream_machine/actions';
 import Input from '../../CustomComponents/Input';
 import Button from '../../CustomComponents/Button';
 
-import Lefticon from '../../../assets/icons/left-icon.svg'
+import Lefticon from '../../../assets/icons/left-icon.svg';
 
-import { Container, Body, MessageFeedbackStyle, BoxInput ,Footer, ButtonContainer } from './styles';
-
-import toastConfig from '../../../utils/toastConfig';
+import {
+  Container,
+  Body,
+  MessageFeedbackStyle,
+  BoxInput,
+  Footer,
+  ButtonContainer,
+} from './styles';
 
 const listPeriods = {
   anos: 'Anos',
@@ -19,13 +24,16 @@ const listPeriods = {
 const StepThree = () => {
   const dispatch = useDispatch();
   const store = useSelector(({ dreamMachine }) => dreamMachine);
-  const { notify } = useSelector(({ settings }) => settings);
+  const { notify, isMobileView } = useSelector(({ settings }) => settings);
 
   const { currentStep, period, yearOrMonth } = store;
 
-  const [inputValue, setInputValue] = useState(period);
+  const [isActiveInput, setIsActiveInput] = useState(false)
+  const [inputValue, setInputValue] = useState(period || '');
   const [inputYearOrMonth, setInputYearOrMonth] = useState(yearOrMonth);
-  const [placeholderInfo, setPlaceholderInfo] = useState(listPeriods[yearOrMonth])
+  const [placeholderInfo, setPlaceholderInfo] = useState(
+    listPeriods[yearOrMonth],
+  );
 
   const handleDispatch = useCallback(
     (step, direction) => {
@@ -46,23 +54,45 @@ const StepThree = () => {
   );
 
   const setPlaceholderInformation = useCallback(item => {
-      const returnItemListPeriod = listPeriods[item];
+    const returnItemListPeriod = listPeriods[item];
 
-      setPlaceholderInfo(returnItemListPeriod);
-      setInputYearOrMonth(item)
-  })
+    setPlaceholderInfo(returnItemListPeriod);
+    setInputYearOrMonth(item);
+  });
 
-  return (
-    <Container>
+  useEffect(() => {
+    const listener = event => {
+      if (event.code === 'Enter' || event.keyCode === 13) {
+        handleDispatch(4, 'next');
+      }
+    };
+    document.addEventListener('keydown', listener);
+    return () => {
+      document.removeEventListener('keydown', listener);
+    };
+  }, [inputValue]);
+
+  return isMobileView ? (
+    <Container isMobileView={isMobileView}>
       <Body>
-        <MessageFeedbackStyle placing="above" animationSpeed={2000} animationDelay={900}>
-          OK!
+        <MessageFeedbackStyle
+          placing="above"
+          animationSpeed={2000}
+          animationDelay={900}
+          isMobileView={isMobileView}
+        >
+          Certo!
         </MessageFeedbackStyle>
-        <MessageFeedbackStyle placing="bellow" animationSpeed={2000} animationDelay={1200}>
-          De quanto tempo você precisa?
+        <MessageFeedbackStyle
+          placing="bellow"
+          animationSpeed={2000}
+          animationDelay={1200}
+          isMobileView={isMobileView}
+        >
+          Em quanto tempo você deseja conquistar o seu sonho?
         </MessageFeedbackStyle>
 
-        <ButtonContainer>
+        <ButtonContainer  isActiveInput={isActiveInput}>
           {Object.keys(listPeriods).map(item => (
             <Button
               variant={item === inputYearOrMonth ? 'beorange' : 'beblue'}
@@ -75,17 +105,18 @@ const StepThree = () => {
             </Button>
           ))}
         </ButtonContainer>
-        <BoxInput>
+        <BoxInput isMobileView={isMobileView}>
           <Input
             state={inputValue}
             setState={setInputValue}
             type="number"
             placeholder={placeholderInfo}
+            setIsActiveInput={setIsActiveInput}
           />
         </BoxInput>
       </Body>
 
-      <Footer>
+      <Footer isActiveInput={isActiveInput}>
         <Button
           ripple
           variant="beblue"
@@ -104,6 +135,70 @@ const StepThree = () => {
           OK
         </Button>
       </Footer>
+    </Container>
+  ) : (
+    <Container isMobileView={isMobileView}>
+      <Body>
+        <MessageFeedbackStyle
+          placing="above"
+          animationSpeed={2000}
+          animationDelay={900}
+          isMobileView={isMobileView}
+        >
+          Certo!
+        </MessageFeedbackStyle>
+        <MessageFeedbackStyle
+          placing="bellow"
+          animationSpeed={2000}
+          animationDelay={1200}
+          isMobileView={isMobileView}
+        >
+          Em quanto tempo você deseja conquistar o seu sonho?
+        </MessageFeedbackStyle>
+
+        <BoxInput>
+          <Button
+            ripple
+            variant="beblue"
+            glow
+            onClick={() => handleDispatch(2, 'previous')}
+            style={{
+              width: '10%',
+              padding: 0,
+            }}
+          >
+            <Lefticon width={20} />
+          </Button>
+          <Input
+            state={inputValue}
+            setState={setInputValue}
+            type="number"
+            placeholder={placeholderInfo}
+            setIsActiveInput={setIsActiveInput}
+          />
+          <select
+            onChange={event => setPlaceholderInformation(event?.target?.value)}
+          >
+            {Object.keys(listPeriods).map(item => (
+              <option key={item} value={item}>
+                {listPeriods[item]}
+              </option>
+            ))}
+          </select>
+
+          <Button
+            ripple
+            variant="beorange"
+            glow
+            onClick={() => handleDispatch(4, 'next')}
+            style={{
+              width: '10%',
+            }}
+          >
+            OK
+          </Button>
+        </BoxInput>
+      </Body>
     </Container>
   );
 };

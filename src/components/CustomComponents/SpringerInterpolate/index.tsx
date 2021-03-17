@@ -1,18 +1,22 @@
-import React, { FC } from 'react';
+import React, { FC, StyleHTMLAttributes } from 'react';
 import { useSpring } from 'react-spring';
 
 import { ContainerCard, Card1 } from './styles';
 
 interface SpringInterpolateProps {
   children: JSX.Element[] | JSX.Element;
+  styles: StyleHTMLAttributes<any>;
 }
 
-const SpringInterpolate: FC<SpringInterpolateProps> = ({ children }) => {
+const SpringInterpolate: FC<SpringInterpolateProps> = ({
+  children,
+  styles,
+}) => {
   const calc = (x?: any, y?: any) => [
     x - window.innerWidth / 2,
     y - window.innerHeight / 2,
   ];
-  const trans1 = (x?: any, y?: any) => `translate3d(${x / 10}px,${y / 10}px,0)`;
+  const trans1 = (x?: any, y?: any) => `translate3d(${x / 11}px,${y / 11}px,0)`;
 
   const [props, set] = useSpring(() => ({
     xy: [0, 0],

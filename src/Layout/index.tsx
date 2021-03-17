@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import useWindowSize from '../utils/useWindowSizeHook';
+import useWindowSize from '../hooks/useWindowSize';
 
 import { screenResize } from '../redux/settings/actions';
 
@@ -12,6 +12,15 @@ import ProgressBar from '../components/CustomComponents/ProgressBar';
 interface RenderProgressBarProps {
   path: 'investor' | 'beginner';
   currentStep: number;
+}
+
+interface ReduxStore {
+  isMobileView?: Boolean;
+  path?: 'investor' | 'beginner';
+  result?: Array<any>;
+  currentStep?: number;
+  dreamMachine?: Object;
+  settings?: Object;
 }
 
 const RenderProgressBar: React.FC<RenderProgressBarProps> = ({
@@ -48,8 +57,14 @@ const Layout = props => {
   const [width] = useWindowSize();
   const dispatch = useDispatch();
 
-  const { currentStep, path } = useSelector(({ dreamMachine }) => dreamMachine);
-  const { isMobileView } = useSelector(({ settings }) => settings);
+  const { currentStep, path, result }: ReduxStore = useSelector(
+    ({ dreamMachine }: ReduxStore) => dreamMachine,
+  );
+  const { isMobileView }: ReduxStore = useSelector(
+    ({ settings }: ReduxStore) => settings,
+  );
+
+  const yearlyAverageArray = result?.yearlyAverageArray;
 
   const children = props?.children;
 
@@ -58,12 +73,12 @@ const Layout = props => {
   }, [width, dispatch]);
 
   return (
-    <Container>
-      {!!currentStep && isMobileView && (
+    <Container isMobileView={isMobileView} currentStep={currentStep}>
+      {!yearlyAverageArray?.length && isMobileView && (
         <RenderProgressBar path={path} currentStep={currentStep} />
       )}
       <Main>
-        <Background />
+        {/* <Background /> */}
         {children}
       </Main>
     </Container>

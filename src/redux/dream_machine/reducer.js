@@ -14,6 +14,7 @@ const INITIAL_STATE = {
     yearlyAverageArray: [],
     achievedObjectiveCost: false,
     newPeriod: 0,
+    fileUrl: null,
   },
   path: '',
   objective: null,
@@ -22,7 +23,11 @@ const INITIAL_STATE = {
   yearOrMonth: 'anos',
   monthlySupport: null,
   currentInvestments: null,
-  decision: null,
+  decision: {
+    first: '',
+    second: '',
+    third: '',
+  },
   monthlyLifeCost: null,
   monthlyIncome: null,
   investmentsPlacement: [],
@@ -50,7 +55,9 @@ export default (state = INITIAL_STATE, action) => {
         currentAssets: payload?.currentAssets,
         currentStep: payload?.currentStep,
         direction: payload?.direction,
-        decision: payload?.decision,
+        decision: {
+          ...payload?.decision,
+        },
         desiredInvestmentsPlacement: payload?.desiredInvestmentsPlacement,
         otherInvestments: payload?.otherInvestments,
         result: {
@@ -62,7 +69,7 @@ export default (state = INITIAL_STATE, action) => {
     case actions.SEND_DREAM_MACHINE_RESULT_TO_API_SUCCESS:
       return {
         ...state,
-        result: action?.payload?.result,
+        result: { ...payload?.result, fileUrl: payload?.fileUrl },
         resultSuccess: true,
         comingFromLastStep: true,
       };
