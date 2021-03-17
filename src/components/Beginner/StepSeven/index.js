@@ -3,10 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 
 import { navigate } from 'gatsby';
 
-import {
-  sendDreamMachineResultToAPIRequest,
-  changeFormState,
-} from '../../../redux/dream_machine/actions';
+import { sendDreamMachineResultToAPIRequest } from '../../../redux/dream_machine/actions';
 import { createResultObject } from '../../../utils/handleResultObject';
 import Input from '../../CustomComponents/Input';
 import Loading from '../../CustomComponents/Loading';
@@ -28,7 +25,7 @@ const StepSeven = () => {
   const store = useSelector(({ dreamMachine }) => dreamMachine);
   const { notify } = useSelector(({ settings }) => settings);
 
-  const { investmentsPlacement, desiredInvestmentsPlacement, result } = store;
+  const { result, decision } = store;
 
   const yearlyAverageArray = result?.yearlyAverageArray || [];
   const resultSuccess = result?.resultSuccess || false;
@@ -51,8 +48,7 @@ const StepSeven = () => {
       currentInvestments,
       objectiveCost,
       inputValue,
-      investmentsPlacement,
-      desiredInvestmentsPlacement,
+      decision,
     );
 
     monthlySupport < objectiveCost && currentInvestments < objectiveCost

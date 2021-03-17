@@ -51,7 +51,7 @@ const Result = () => {
 
   if (!comingFromLastStep) navigate('/');
 
-  const resultRiskProfile = resultProfile(riskProfile);
+  const resultRiskProfile = resultProfile(riskProfile, monthlyRate);
 
   const arrayNewPeriod = [];
   let newPeriodChunk = [];
@@ -161,7 +161,11 @@ const Result = () => {
         yearOrMonth: 'anos',
         monthlySupport: null,
         currentInvestments: null,
-        decision: null,
+        decision: {
+          first: '',
+          second: '',
+          third: '',
+        },
         monthlyLifeCost: null,
         monthlyIncome: null,
         investmentsPlacement: [],
@@ -270,7 +274,7 @@ const Result = () => {
                     ? ` ${countYearNewPeriod} anos`
                     : ` ${countYearNewPeriod} ano`
                   : ''}
-                {countYearNewPeriod && countMonthNewPeriod ? `e` : ''}
+                {countYearNewPeriod && countMonthNewPeriod ? ` e` : ''}
                 {countMonthNewPeriod
                   ? countMonthNewPeriod > 1
                     ? ` ${countMonthNewPeriod} meses`
@@ -281,7 +285,7 @@ const Result = () => {
               </p>
             ) : (
               <>
-                <p
+                {/* <p
                   style={{
                     fontWeight: 'bolder',
                     marginBottom: '1px',
@@ -289,8 +293,8 @@ const Result = () => {
                 >
                   O seu perfil é{' '}
                   <span style={{ color: '#e2381a' }}>{riskProfile}</span>
-                </p>
-                <p>{resultRiskProfile?.label1 || ''}</p>
+                </p> */}
+                <p>{resultRiskProfile || ''}</p>
               </>
             )}
 
