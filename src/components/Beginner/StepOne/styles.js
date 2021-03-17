@@ -42,14 +42,25 @@ export const HeaderModalStyled = styled(Header)`
 
 
 export const BodyModalStyled = styled(Body)`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 
-& .content-body {
-  margin-bottom: 40px;
-  font: normal normal normal 1.4rem Trasandina;
-  text-align: center;
-}
   color: #fff;
   font: normal normal normal 1.2rem Trasandina;
+
+  & .content-body {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 40px;
+    font: normal normal normal 1.4rem Trasandina;
+    text-align: center;
+  }
+
+  input {
+    width: 100%;
+  }
+
 `;
 
 export const Footer = styled.div`
@@ -62,6 +73,11 @@ export const Footer = styled.div`
 
   button {
     height: 60%;
+    width: 100%;
+
+    &:first-child {
+      margin-right: 10px;
+    }
 
     svg {
       fill: #fff;

@@ -134,6 +134,36 @@ const StepOne = () => {
 
   return (
     <>
+      <ModalStyled
+        visible={isVisibleModal}
+        setVisible={setIsVisibleModal}
+        contentClassName="custom-content"
+        dialogClassName="custom-dialog"
+    >
+      <HeaderModalStyled closeButton/>
+      <BodyModalStyled>
+        <div className="content-body">Descreva abaixo qual outro objetivo de vida.</div>
+        <Input state={inputValue} setState={setInputValue} type="text" />
+        <Footer>
+          <Button
+            ripple
+            variant="beblue"
+            glow
+            onClick={() => setIsVisibleModal(!isVisibleModal)}
+          >
+            Voltar
+          </Button>
+          <Button
+            ripple
+            variant="beorange"
+            glow
+            onClick={() => insertValueInObjective("others", inputValue)}
+          >
+            OK
+          </Button>
+        </Footer>
+        </BodyModalStyled>
+    </ModalStyled>
     <Container>
       <MessageFeedbackStyle placing="above" animationSpeed={3000} animationDelay={900}>
         Olá, vamos começar?
@@ -212,42 +242,6 @@ const StepOne = () => {
       </IconGallery>
 
     </Container>
-    <ModalStyled
-      state={isVisibleModal}
-      setState={setIsVisibleModal}
-      contentClassName="custom-content"
-      dialogClassName="custom-dialog"
-    >
-      <HeaderModalStyled closeButton/>
-      <BodyModalStyled>
-        <div className="content-body">Descreva abaixo qual outro objetivo de vida.</div>
-        <Input state={inputValue} setState={setInputValue} type="text" />
-        <Footer>
-          <Button
-            ripple
-            variant="beblue"
-            glow
-            onClick={() => setIsVisibleModal(!isVisibleModal)}
-            style={{
-              width: '30%',
-            }}
-          >
-            Voltar
-          </Button>
-          <Button
-            ripple
-            variant="beorange"
-            glow
-            onClick={() => insertValueInObjective("others", inputValue)}
-            style={{
-              width: '30%',
-            }}
-          >
-            OK
-          </Button>
-        </Footer>
-        </BodyModalStyled>
-    </ModalStyled>
     </>
   );
 };
