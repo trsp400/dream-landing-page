@@ -91,7 +91,7 @@ const StepFive = () => {
           Quanto você pode investir por mês?
         </MessageFeedbackStyle>
         <BoxInput isMobileView={isMobileView}>
-          <Input state={inputValue} setState={setInputValue} type="currency" />
+          <Input state={inputValue} setState={setInputValue} type="currency" setIsActiveInput={setIsActiveInput}/>
         </BoxInput>
       </Body>
 

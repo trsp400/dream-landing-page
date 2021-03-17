@@ -140,6 +140,7 @@ const StepSeven = () => {
               state={inputValue}
               setState={checkValidEmailOnInputChange}
               type="email"
+              setIsActiveInput={setIsActiveInput}
             />
             {!validEmail && (
               <ErrorInformation>Digite um e-mail válido!</ErrorInformation>

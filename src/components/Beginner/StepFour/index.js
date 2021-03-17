@@ -89,7 +89,7 @@ const StepFour = () => {
           Quanto você pode investir hoje?
         </MessageFeedbackStyle>
         <BoxInput isMobileView={isMobileView}>
-          <Input state={inputValue} setState={setInputValue} type="currency" />
+          <Input state={inputValue} setState={setInputValue} type="currency" setIsActiveInput={setIsActiveInput}/>
         </BoxInput>
       </Body>
 

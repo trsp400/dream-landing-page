@@ -15,6 +15,7 @@ import {
   ListDecisionStyled,
 } from './styles';
 
+import { question1 } from '../../../utils/questionsToProfile';
 import Lefticon from '../../../assets/icons/left-icon.svg';
 
 const options = [
@@ -78,11 +79,11 @@ const StepSeven = () => {
           animationDelay={1800}
           isMobileView={isMobileView}
         >
-          {question1.quest}
+          {question1?.quest}
         </MessageFeedbackStyle>
         <BoxListDecision isMobileView={isMobileView}>
           <ListDecision
-            options={question1.options}
+            options={question1?.options}
             state={inputValue}
             setState={setInputvalue}
           />

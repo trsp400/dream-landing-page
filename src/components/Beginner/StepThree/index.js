@@ -174,6 +174,7 @@ const StepThree = () => {
             setState={setInputValue}
             type="number"
             placeholder={placeholderInfo}
+            setIsActiveInput={setIsActiveInput}
           />
           <select
             onChange={event => setPlaceholderInformation(event?.target?.value)}

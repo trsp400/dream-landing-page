@@ -94,7 +94,7 @@ const StepTwo = () => {
         </MessageFeedbackStyle>
 
         <BoxInput isMobileView={isMobileView}>
-          <Input state={inputValue} setState={setInputValue} type="currency" />
+          <Input state={inputValue} setState={setInputValue} type="currency" setIsActiveInput={setIsActiveInput}/>
         </BoxInput>
       </Body>
       <Footer isActiveInput={isActiveInput}>
