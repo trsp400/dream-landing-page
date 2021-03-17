@@ -7,6 +7,36 @@ export default decision => {
 
   if (!second && !third) return first;
 
+  let conservador = 0,
+    moderado = 0,
+    arrojado = 0;
+
+  Object.keys(decision).forEach(d => {
+    conservador = decision[d] === 'Conservador' ? conservador + 1 : conservador;
+    moderado = decision[d] === 'Moderado' ? moderado + 1 : moderado;
+    arrojado = decision[d] === 'Arrojado' ? arrojado + 1 : arrojado;
+  });
+
+  if (conservador > moderado && conservador > arrojado) {
+    return 'Conservador';
+  }
+
+  if (moderado > conservador && moderado > arrojado) {
+    return 'Moderado';
+  }
+
+  if (arrojado > moderado && arrojado > conservador) {
+    return 'Arrojado';
+  }
+
+  if (
+    moderado === conservador &&
+    moderado === arrojado &&
+    conservador === arrojado
+  ) {
+    return 'Moderado';
+  }
+
   // if (!assets) return 'Conservador';
 
   // const contemAtivosArrojados = assets.some(i =>
