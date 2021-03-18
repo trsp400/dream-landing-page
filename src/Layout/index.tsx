@@ -42,7 +42,7 @@ const RenderProgressBar: React.FC<RenderProgressBarProps> = ({
       return (
         <ProgressBarContainer>
           <ProgressBar
-            length={7}
+            length={9}
             currentStep={currentStep}
             barColor="#EA5E45"
           />
