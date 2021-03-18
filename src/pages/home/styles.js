@@ -5,7 +5,6 @@ import RippleButton from '../../components/CustomComponents/Button';
 
 import Pattern from '../../images/background-pattern.png';
 
-
 export const Container = styled(BootstrapContainer)`
   height: 100%;
   width: 100%;
@@ -38,19 +37,19 @@ export const Container = styled(BootstrapContainer)`
   background-repeat: no-repeat;
 
   &::before {
-   content: "";
-   width: 100%;
-   height: 100%;
-   background: url('${Pattern}');
-   opacity: 0.05;
-   filter: invert(100%);
-   position: absolute;
-   background-repeat: no-repeat;
-   object-fit: cover;
-   background-size: cover;
-   background-position: center;
-   z-index: 0;
- }
+    content: '';
+    width: 100%;
+    height: 100%;
+    background: url('${Pattern}');
+    opacity: 0.05;
+    filter: invert(100%);
+    position: absolute;
+    background-repeat: no-repeat;
+    object-fit: cover;
+    background-size: cover;
+    background-position: center;
+    z-index: 0;
+  }
 
   > svg {
     position: absolute;
@@ -68,11 +67,11 @@ export const ContainerSteps = styled.div`
   position: relative;
 
   &::before {
-    content: "";
+    content: '';
     width: 100%;
     height: 100%;
     background: url('${Pattern}');
-    opacity: 0.05;
+    opacity: 0.01;
     filter: invert(100%);
     position: absolute;
     background-repeat: no-repeat;
@@ -81,8 +80,7 @@ export const ContainerSteps = styled.div`
     background-position: center;
     z-index: 0;
   }
-
-`
+`;
 
 export const Header = styled.header`
   width: 100vw;
@@ -122,7 +120,7 @@ export const Background = styled.div`
           background-color: #1a4a73;
         `}
 
-  opacity: 0.2;
+  opacity: 0.1;
   width: 100vw;
   height: 100vh;
   background-size: cover;
@@ -200,7 +198,7 @@ export const ButtonSection = styled(ButtonGroup)`
   flex-direction: ${props => (props?.isMobileView ? 'column' : 'row')};
   width: 100%;
   margin-top: 10px;
-  padding-bottom: ${props => props?.isMobileView && "45px"};
+  padding-bottom: ${props => props?.isMobileView && '45px'};
 
   justify-content: space-between;
 `;

@@ -69,7 +69,7 @@ export const createResultObject = (
     riskProfile,
     email,
     yearlyAverageArray,
-    achievedObjectiveCost,
+    achievedObjectiveCost: achievedObjectiveCost || false,
     newPeriod: newPeriodParsed,
   };
 };

@@ -24,7 +24,7 @@ const StepFive = () => {
 
   const { currentStep, monthlySupport, objectiveCost } = store;
 
-  const [isActiveInput, setIsActiveInput] = useState(false)
+  const [isActiveInput, setIsActiveInput] = useState(false);
   const [inputValue, setInputValue] = useState(monthlySupport);
 
   const handleDispatch = useCallback(
@@ -91,7 +91,12 @@ const StepFive = () => {
           Quanto você pode investir por mês?
         </MessageFeedbackStyle>
         <BoxInput isMobileView={isMobileView}>
-          <Input state={inputValue} setState={setInputValue} type="currency" setIsActiveInput={setIsActiveInput}/>
+          <Input
+            state={inputValue}
+            setState={setInputValue}
+            type="currency"
+            setIsActiveInput={setIsActiveInput}
+          />
         </BoxInput>
       </Body>
 
@@ -153,6 +158,7 @@ const StepFive = () => {
               state={inputValue}
               setState={setInputValue}
               type="currency"
+              setIsActiveInput={setIsActiveInput}
             />
           </BoxInput>
 

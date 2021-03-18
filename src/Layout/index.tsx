@@ -74,13 +74,14 @@ const Layout = props => {
 
   return (
     <Container isMobileView={isMobileView} currentStep={currentStep}>
+      <Background
+        currentStep={currentStep}
+        yearlyAverageArray={yearlyAverageArray}
+      />
       {!yearlyAverageArray?.length && isMobileView && (
         <RenderProgressBar path={path} currentStep={currentStep} />
       )}
-      <Main>
-        {/* <Background /> */}
-        {children}
-      </Main>
+      <Main yearlyAveradeArray={yearlyAverageArray}>{children}</Main>
     </Container>
   );
 };
