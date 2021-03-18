@@ -105,7 +105,7 @@ const StepSeven = () => {
           glow
           onClick={() => {
             if (!inputValue) return notify('Por favor, selecione uma opção!');
-            return handleDispatch(7);
+            return handleDispatch(7, 'next');
           }}
         >
           OK
@@ -157,7 +157,7 @@ const StepSeven = () => {
           glow
           onClick={() => {
             if (!inputValue) return notify('Por favor, selecione uma opção!');
-            return handleDispatch(7);
+            return handleDispatch(7, 'next');
           }}
           style={{
             width: '20%',

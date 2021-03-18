@@ -15,17 +15,17 @@ import {
   ListDecisionStyled,
 } from './styles';
 
-import { question2 } from '../../../utils/questionsToProfile';
+import { question3 } from '../../../utils/questionsToProfile';
 import Lefticon from '../../../assets/icons/left-icon.svg';
 
-const StepSeven = () => {
+const StepEight = () => {
   const dispatch = useDispatch();
   const store = useSelector(({ dreamMachine }) => dreamMachine);
   const { notify, isMobileView } = useSelector(({ settings }) => settings);
 
   const { currentStep, decision } = store;
 
-  const [inputValue, setInputvalue] = useState(decision?.second);
+  const [inputValue, setInputvalue] = useState(decision?.third);
 
   const handleDispatch = useCallback(
     (step, direction) => {
@@ -37,7 +37,7 @@ const StepSeven = () => {
           ...store,
           currentStep: step,
           direction,
-          decision: { ...store?.decision, second: inputValue },
+          decision: { ...store?.decision, third: inputValue },
         }),
       );
     },
@@ -47,7 +47,7 @@ const StepSeven = () => {
   useEffect(() => {
     const listener = event => {
       if (event.code === 'Enter' || event.keyCode === 13) {
-        handleDispatch(8, 'next');
+        handleDispatch(9, 'next');
       }
     };
     document.addEventListener('keydown', listener);
@@ -65,7 +65,7 @@ const StepSeven = () => {
           animationDelay={900}
           isMobileView={isMobileView}
         >
-          Ótimo, vamos em frente!
+          Legal, entendi!
         </MessageFeedbackStyle>
         <MessageFeedbackStyle
           placing="bellow"
@@ -73,11 +73,11 @@ const StepSeven = () => {
           animationDelay={1800}
           isMobileView={isMobileView}
         >
-          {question2?.quest}
+          {question3?.quest}
         </MessageFeedbackStyle>
         <BoxListDecision isMobileView={isMobileView}>
           <ListDecision
-            options={question2?.options}
+            options={question3?.options}
             state={inputValue}
             setState={setInputvalue}
           />
@@ -88,7 +88,7 @@ const StepSeven = () => {
           ripple
           variant="beblue"
           glow
-          onClick={() => handleDispatch(6, 'previous')}
+          onClick={() => handleDispatch(7, 'previous')}
         >
           <Lefticon />
         </Button>
@@ -99,7 +99,7 @@ const StepSeven = () => {
           glow
           onClick={() => {
             if (!inputValue) return notify('Por favor, selecione uma opção!');
-            return handleDispatch(8, 'next');
+            return handleDispatch(9, 'next');
           }}
         >
           OK
@@ -114,7 +114,7 @@ const StepSeven = () => {
         animationDelay={900}
         isMobileView={isMobileView}
       >
-        Ótimo, vamos em frente!
+        Legal, entendi!
       </MessageFeedbackStyle>
       <MessageFeedbackStyle
         placing="bellow"
@@ -122,11 +122,11 @@ const StepSeven = () => {
         animationDelay={1800}
         isMobileView={isMobileView}
       >
-        {question2.quest}
+        {question3.quest}
       </MessageFeedbackStyle>
       <BoxListDecision isMobileView={isMobileView}>
         <ListDecisionStyled
-          options={question2.options}
+          options={question3.options}
           state={inputValue}
           setState={setInputvalue}
         />
@@ -137,7 +137,7 @@ const StepSeven = () => {
           ripple
           variant="beblue"
           glow
-          onClick={() => handleDispatch(6, 'previous')}
+          onClick={() => handleDispatch(7, 'previous')}
           style={{
             width: '20%',
           }}
@@ -151,7 +151,7 @@ const StepSeven = () => {
           glow
           onClick={() => {
             if (!inputValue) return notify('Por favor, selecione uma opção!');
-            return handleDispatch(8, 'next');
+            return handleDispatch(9, 'next');
           }}
           style={{
             width: '20%',
@@ -164,4 +164,4 @@ const StepSeven = () => {
   );
 };
 
-export default StepSeven;
+export default StepEight;
