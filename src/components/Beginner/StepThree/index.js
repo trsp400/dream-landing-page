@@ -28,7 +28,7 @@ const StepThree = () => {
 
   const { currentStep, period, yearOrMonth } = store;
 
-  const [isActiveInput, setIsActiveInput] = useState(false)
+  const [isActiveInput, setIsActiveInput] = useState(false);
   const [inputValue, setInputValue] = useState(period || '');
   const [inputYearOrMonth, setInputYearOrMonth] = useState(yearOrMonth);
   const [placeholderInfo, setPlaceholderInfo] = useState(
@@ -92,7 +92,7 @@ const StepThree = () => {
           Em quanto tempo você deseja conquistar o seu sonho?
         </MessageFeedbackStyle>
 
-        <ButtonContainer  isActiveInput={isActiveInput}>
+        <ButtonContainer isActiveInput={isActiveInput}>
           {Object.keys(listPeriods).map(item => (
             <Button
               variant={item === inputYearOrMonth ? 'beorange' : 'beblue'}

@@ -22,7 +22,7 @@ const StepFour = () => {
 
   const { currentStep, currentInvestments, objectiveCost } = store;
 
-  const [isActiveInput, setIsActiveInput] = useState(false)
+  const [isActiveInput, setIsActiveInput] = useState(false);
   const [inputValue, setInputValue] = useState(currentInvestments);
 
   const handleDispatch = useCallback(
@@ -89,7 +89,12 @@ const StepFour = () => {
           Quanto você pode investir hoje?
         </MessageFeedbackStyle>
         <BoxInput isMobileView={isMobileView}>
-          <Input state={inputValue} setState={setInputValue} type="currency" setIsActiveInput={setIsActiveInput}/>
+          <Input
+            state={inputValue}
+            setState={setInputValue}
+            type="currency"
+            setIsActiveInput={setIsActiveInput}
+          />
         </BoxInput>
       </Body>
 
@@ -151,6 +156,7 @@ const StepFour = () => {
               state={inputValue}
               setState={setInputValue}
               type="currency"
+              setIsActiveInput={setIsActiveInput}
             />
           </BoxInput>
 

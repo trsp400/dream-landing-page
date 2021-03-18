@@ -56,7 +56,7 @@ const Input: FC<InputProps> = ({ state, type, setState, placeholder, setIsActive
           onBlur={() => checkFunction(setIsActiveInput,false)}
           onFocus={() => checkFunction(setIsActiveInput,true)}
           {...props}
-         />
+        />
       </InputStyledTextContainer>
     ) : type === 'email' ? (
       <InputStyledTextContainer>
