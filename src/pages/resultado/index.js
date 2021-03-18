@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import _ from 'lodash';
 import { navigate } from 'gatsby-link';
@@ -25,6 +25,7 @@ import {
   ButtonShowGraphic,
   LineChartContainer,
   LineChartStyled,
+  MessagePressChart
 } from './styles';
 
 const Result = () => {
@@ -36,6 +37,10 @@ const Result = () => {
 
   const { isMobileView } = useSelector(({ settings }) => settings);
   const store = useSelector(({ dreamMachine }) => dreamMachine);
+
+  useEffect(() =>{
+    detectBrowser()
+  }, [])
 
   const {
     result: {
@@ -206,6 +211,13 @@ const Result = () => {
     from: { transform: "translateY(0%)"},
   })
 
+  const detectBrowser = () => {
+
+  }
+
+  console.log(window.navigator.userAgent.indexOf("Chrome"))
+  console.log(window.navigator.userAgent)
+
   return (
     <Layout>
       <SEO title="Resultado | Máquina dos Sonhos" />
@@ -247,6 +259,7 @@ const Result = () => {
                onClick={() => toogleIsVisibleChart()}
              >
                <DownArrow/>
+               <MessagePressChart isVisibleChart={isVisibleChart}>Abrir gráfico</MessagePressChart>
              </ButtonShowGraphic>
            </ContainerRate>
          </animated.div>

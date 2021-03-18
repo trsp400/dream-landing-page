@@ -71,6 +71,7 @@ const StepTwo = () => {
     };
   }, [inputValue]);
 
+
   return isMobileView ? (
     <Container isMobileView={isMobileView}>
       <Body>

@@ -89,12 +89,15 @@ export const BoxInput = styled.div`
     `}
 `;
 
+// bottom:  ${props => props.isActiveInput ? "25%" : "15%"};
+// height: ${props => props.isActiveInput ? "10%" : "7%"};
+
 export const Footer = styled.div`
   position: fixed;
-  bottom:  ${props => props.isActiveInput ? "25%" : "15%"};
+  bottom:  15%;
   width: 100%;
-  height: ${props => props.isActiveInput ? "10%" : "7%"};
-  display: flex;
+  height: 7%;
+  display: ${props => props.isActiveInput ? "none" : "flex"};
 
   justify-content: space-between;
   padding: 0 10%;
