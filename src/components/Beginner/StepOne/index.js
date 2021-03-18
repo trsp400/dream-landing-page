@@ -41,6 +41,7 @@ const StepOne = () => {
   const [inputValue, setInputValue] = useState('');
   const [objectiveValue, setObjectiveValue] = useState('');
   const [isVisibleModal, setIsVisibleModal] = useState(false);
+  const [isActiveInput, setIsActiveInput] = useState(false);
 
   useEffect(() => {
     (function () {
@@ -349,8 +350,8 @@ const StepOne = () => {
         </DesktopGalleryContainer>
       </div>
       <ModalStyled
-        state={isVisibleModal}
-        setState={setIsVisibleModal}
+        visible={isVisibleModal}
+        setVisible={setIsVisibleModal}
         contentClassName="custom-content"
         dialogClassName="custom-dialog"
       >
@@ -359,16 +360,21 @@ const StepOne = () => {
           <div className="content-body">
             Descreva abaixo qual outro objetivo de vida.
           </div>
-          <Input state={inputValue} setState={setInputValue} type="text" />
+          <div style={{ width: '100%' }}>
+            <Input
+              state={inputValue}
+              setState={setInputValue}
+              type="text"
+              setIsActiveInput={setIsActiveInput}
+            />
+          </div>
+
           <Footer>
             <Button
               ripple
               variant="beblue"
               glow
               onClick={() => setIsVisibleModal(!isVisibleModal)}
-              style={{
-                width: '30%',
-              }}
             >
               Voltar
             </Button>
@@ -377,9 +383,6 @@ const StepOne = () => {
               variant="beorange"
               glow
               onClick={() => insertValueInObjective('others', inputValue)}
-              style={{
-                width: '30%',
-              }}
             >
               OK
             </Button>
