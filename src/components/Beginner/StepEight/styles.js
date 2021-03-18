@@ -33,7 +33,7 @@ export const MessageFeedbackStyle = styled(MessageFeedback)`
           font-size: 48px;
 
           position: absolute;
-          top: 15%;
+          top: 4%;
         `}
 
   &:nth-child(2) {
@@ -44,7 +44,7 @@ export const MessageFeedbackStyle = styled(MessageFeedback)`
           `
         : css`
             position: absolute;
-            top: 30%;
+            top: 15%;
 
             span {
               line-height: 50px;
@@ -88,9 +88,9 @@ export const Footer = styled.div`
     props?.isMobileView
       ? css`
           position: fixed;
-          bottom:  ${props => props.isActiveInput ? "25%" : "15%"};
+          bottom: ${props => (props.isActiveInput ? '25%' : '15%')};
           width: 100%;
-          height: ${props => props.isActiveInput ? "10%" : "7%"};
+          height: ${props => (props.isActiveInput ? '10%' : '7%')};
           display: flex;
 
           justify-content: space-between;
