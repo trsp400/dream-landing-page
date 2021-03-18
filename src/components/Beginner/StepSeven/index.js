@@ -31,10 +31,10 @@ const StepSeven = () => {
   const yearlyAverageArray = result?.yearlyAverageArray || [];
   const resultSuccess = result?.resultSuccess || false;
 
-  const [isActiveInput, setIsActiveInput] = useState(false)
+  const [isActiveInput, setIsActiveInput] = useState(false);
   const [inputValue, setInputValue] = useState('');
   const [validEmail, setValidEmail] = useState(true);
-  const [requestLoading, setRequestLoading] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const period = parseStringInt(store.period);
   const yearOrMonth = store.yearOrMonth;
@@ -66,7 +66,7 @@ const StepSeven = () => {
             objectiveCost,
           }),
         )
-      : setRequestLoading(false);
+      : setLoading(false);
   });
 
   function emailIsValid(dataEmail) {
@@ -79,14 +79,14 @@ const StepSeven = () => {
     const isValidEmail = emailIsValid(email);
 
     if (isValidEmail) {
-      setRequestLoading(true);
+      setLoading(true);
       handleDispatchResultState();
       setValidEmail(true);
 
       return true;
     }
 
-    setRequestLoading(false);
+    setLoading(false);
     return setValidEmail(false);
   };
 
@@ -106,7 +106,7 @@ const StepSeven = () => {
 
   useEffect(() => {
     if (resultSuccess === null) {
-      setRequestLoading(false);
+      setLoading(false);
     }
   }, [resultSuccess]);
 
@@ -177,7 +177,7 @@ const StepSeven = () => {
             e-mail:
           </MessageFeedbackStyle>
 
-          <InputContainer >
+          <InputContainer>
             <BoxInput isMobileView={isMobileView}>
               <Input
                 state={inputValue}
@@ -208,7 +208,7 @@ const StepSeven = () => {
     );
   };
 
-  return requestLoading ? <Loading /> : renderMobileOrDesktop();
+  return loading ? <Loading /> : renderMobileOrDesktop();
 };
 
 export default StepSeven;

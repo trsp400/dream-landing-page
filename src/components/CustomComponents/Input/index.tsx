@@ -17,7 +17,14 @@ interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   setIsActiveInput: (value: boolean) => void;
 }
 
-const Input: FC<InputProps> = ({ state, type, setState, placeholder, setIsActiveInput, ...props }) => (
+const Input: FC<InputProps> = ({
+  state,
+  type,
+  setState,
+  placeholder,
+  setIsActiveInput,
+  ...props
+}) => (
   <>
     {type === 'currency' ? (
       <NumberFormat
@@ -47,7 +54,7 @@ const Input: FC<InputProps> = ({ state, type, setState, placeholder, setIsActive
           onBlur={() => setIsActiveInput(false)}
           onFocus={() => setIsActiveInput(true)}
           {...props}
-         />
+        />
       </InputStyledTextContainer>
     ) : type === 'email' ? (
       <InputStyledTextContainer>

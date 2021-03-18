@@ -17,7 +17,6 @@ import {
 } from './styles';
 
 const StepTwo = () => {
-  const [isActiveInput, setIsActiveInput] = useState(false)
   const dispatch = useDispatch();
   const store = useSelector(({ dreamMachine }) => dreamMachine);
   const { notify, isMobileView } = useSelector(({ settings }) => settings);
@@ -25,12 +24,13 @@ const StepTwo = () => {
   const { currentStep, objectiveCost } = store;
 
   const [inputValue, setInputValue] = useState(objectiveCost);
+  const [isActiveInput, setIsActiveInput] = useState(false);
 
   // useEffect(() => {
-  //   const input = document.querySelector("input")
-  //   setIsActiveInput(true)
-  //   input.autofocus = true
-  // },[])
+  //   const input = document.querySelector('input');
+  //   setIsActiveInput(true);
+  //   input.autofocus = true;
+  // }, []);
 
   const handleDispatch = useCallback(
     (step, direction) => {
@@ -94,7 +94,12 @@ const StepTwo = () => {
         </MessageFeedbackStyle>
 
         <BoxInput isMobileView={isMobileView}>
-          <Input state={inputValue} setState={setInputValue} type="currency" setIsActiveInput={setIsActiveInput}/>
+          <Input
+            state={inputValue}
+            setState={setInputValue}
+            type="currency"
+            setIsActiveInput={setIsActiveInput}
+          />
         </BoxInput>
       </Body>
       <Footer isActiveInput={isActiveInput}>
@@ -156,6 +161,7 @@ const StepTwo = () => {
               state={inputValue}
               setState={setInputValue}
               type="currency"
+              setIsActiveInput={setIsActiveInput}
             />
           </BoxInput>
           <Button
