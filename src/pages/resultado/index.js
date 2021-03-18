@@ -38,10 +38,6 @@ const Result = () => {
   const { isMobileView } = useSelector(({ settings }) => settings);
   const store = useSelector(({ dreamMachine }) => dreamMachine);
 
-  useEffect(() =>{
-    detectBrowser()
-  }, [])
-
   const {
     result: {
       achievedObjectiveCost,
@@ -156,13 +152,6 @@ const Result = () => {
 
     from: { transform: 'translateY(0%)' },
   });
-
-  const detectBrowser = () => {
-
-  }
-
-  console.log(window.navigator.userAgent.indexOf("Chrome"))
-  console.log(window.navigator.userAgent)
 
   return (
     <Layout>
