@@ -7,6 +7,9 @@ import Button from '../../CustomComponents/Button';
 
 import Lefticon from '../../../assets/icons/left-icon.svg';
 
+import Select from 'react-select';
+import makeAnimated from 'react-select/animated';
+
 import {
   Container,
   Body,
@@ -16,10 +19,17 @@ import {
   ButtonContainer,
 } from './styles';
 
+import selectPeriodConfig from '../../../utils/selectPeriodConfig';
+
 const listPeriods = {
   anos: 'Anos',
   meses: 'Meses',
 };
+
+const options = Object.keys(listPeriods).map(item => ({
+  value: listPeriods[item],
+  label: listPeriods[item],
+}));
 
 const StepThree = () => {
   const dispatch = useDispatch();
@@ -164,7 +174,7 @@ const StepThree = () => {
             onClick={() => handleDispatch(2, 'previous')}
             style={{
               width: '10%',
-              padding: 0,
+              padding: 5,
             }}
           >
             <Lefticon width={20} />
@@ -176,15 +186,17 @@ const StepThree = () => {
             placeholder={placeholderInfo}
             setIsActiveInput={setIsActiveInput}
           />
-          <select
-            onChange={event => setPlaceholderInformation(event?.target?.value)}
-          >
-            {Object.keys(listPeriods).map(item => (
-              <option key={item} value={item}>
-                {listPeriods[item]}
-              </option>
-            ))}
-          </select>
+          <Select
+            options={options}
+            components={makeAnimated()}
+            placeholder="Selecione"
+            isSearchable={false}
+            clearable={false}
+            onChange={event =>
+              setPlaceholderInformation(event?.value?.toLowerCase())
+            }
+            styles={selectPeriodConfig}
+          />
 
           <Button
             ripple
