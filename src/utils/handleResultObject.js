@@ -35,7 +35,6 @@ export const createResultObject = (
     monthlySupport,
     currentInvestments,
     objectiveCost,
-    achievedObjectiveCost,
   );
 
   const annualRate = parseFloat(monthlyRate * 12).toFixed(2);

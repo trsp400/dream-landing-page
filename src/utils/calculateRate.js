@@ -1,10 +1,7 @@
-export default (
-  period,
-  monthlyPayment,
-  currentValue,
-  objectiveCost,
-  achievedObjectiveCost,
-) => {
+export default (period, monthlyPayment, currentValue, objectiveCost) => {
+  const achievedObjectiveCost =
+    monthlyPayment * period + currentValue >= objectiveCost;
+
   if (achievedObjectiveCost) return '0';
 
   for (let taxUnit = 0; taxUnit <= 1000000; taxUnit++) {
