@@ -1,51 +1,50 @@
-export default (period, monthlyPayment, currentValue, objectiveCost) => {
-  const achievedObjectiveCost =
-    monthlyPayment * period + currentValue >= objectiveCost;
+export default (periods, payment, present, future) => {
+  const achievedFuture = payment * periods + present >= future;
 
-  if (achievedObjectiveCost) return '0';
+  if (achievedFuture) return '0';
 
-  for (let taxUnit = 0; taxUnit <= 1000000; taxUnit++) {
+  for (let rateUnit = 0; rateUnit <= 1000000; rateUnit++) {
     let firstTime = true;
-    const arrUnidade = [];
+    const arrUnit = [];
     let monthlyYield;
-    let monthlyYieldSumMonthlyPayment;
-    for (let k = 1; k <= period; k++) {
-      const texJ = k - 2;
+    let monthlyYieldSumPayment;
+    for (let k = 1; k <= periods; k++) {
+      const j = k - 2;
       if (firstTime) {
-        monthlyYield = currentValue * (taxUnit / 100);
-        monthlyYieldSumMonthlyPayment = monthlyYield + monthlyPayment;
-        arrUnidade.push(currentValue + monthlyYieldSumMonthlyPayment);
+        monthlyYield = present * (rateUnit / 100);
+        monthlyYieldSumPayment = monthlyYield + payment;
+        arrUnit.push(present + monthlyYieldSumPayment);
         firstTime = false;
       } else {
-        monthlyYield = arrUnidade[texJ] * (taxUnit / 100);
-        monthlyYieldSumMonthlyPayment = monthlyYield + monthlyPayment;
-        arrUnidade.push(arrUnidade[texJ] + monthlyYieldSumMonthlyPayment);
+        monthlyYield = arrUnit[j] * (rateUnit / 100);
+        monthlyYieldSumPayment = monthlyYield + payment;
+        arrUnit.push(arrUnit[j] + monthlyYieldSumPayment);
       }
     }
 
-    if (arrUnidade[arrUnidade.length - 1] > objectiveCost) {
-      for (let taxDecimal = 0; taxDecimal <= 9; taxDecimal++) {
-        for (let taxCentesimal = 0; taxCentesimal <= 9; taxCentesimal++) {
-          const arrDecimal = [];
+    if (arrUnit[arrUnit.length - 1] > future) {
+      for (let rateDecimal = 0; rateDecimal <= 9; rateDecimal++) {
+        for (let rateCentesimal = 0; rateCentesimal <= 9; rateCentesimal++) {
+          const arr = [];
           let firstTime = true;
           let monthlyYield;
-          let monthlyYieldSumMonthlyPayment;
-          const taxTrusty = `${taxUnit - 1}.${taxDecimal}${taxCentesimal}`;
-          for (let g = 1; g <= period; g++) {
-            const texJ = g - 2;
+          let monthlyYieldSumPayment;
+          const rateTrusty = `${rateUnit - 1}.${rateDecimal}${rateCentesimal}`;
+          for (let g = 1; g <= periods; g++) {
+            const j = g - 2;
             if (firstTime) {
-              monthlyYield = currentValue * (taxTrusty / 100);
-              monthlyYieldSumMonthlyPayment = monthlyYield + monthlyPayment;
-              arrDecimal.push(currentValue + monthlyYieldSumMonthlyPayment);
+              monthlyYield = present * (rateTrusty / 100);
+              monthlyYieldSumPayment = monthlyYield + payment;
+              arr.push(present + monthlyYieldSumPayment);
               firstTime = false;
             } else {
-              monthlyYield = arrDecimal[texJ] * (taxTrusty / 100);
-              monthlyYieldSumMonthlyPayment = monthlyYield + monthlyPayment;
-              arrDecimal.push(arrDecimal[texJ] + monthlyYieldSumMonthlyPayment);
+              monthlyYield = arr[j] * (rateTrusty / 100);
+              monthlyYieldSumPayment = monthlyYield + payment;
+              arr.push(arr[j] + monthlyYieldSumPayment);
             }
 
-            if (arrDecimal[arrDecimal.length - 1] > objectiveCost) {
-              return taxTrusty;
+            if (arr[arr.length - 1] > future) {
+              return rateTrusty;
             }
           }
         }
