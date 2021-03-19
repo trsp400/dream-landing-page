@@ -28,15 +28,12 @@ export const MessageFeedbackStyle = styled(MessageFeedback)`
     props?.isMobileView
       ? css`
           /* margin-bottom: 8px; */
-          @media(max-height: 480px) and (max-width: 320px) {
-            margin-bottom: 8px;
-          }
         `
       : css`
           font-size: 48px;
 
           position: absolute;
-          top: 15%;
+          top: 4%;
         `}
 
   &:nth-child(2) {
@@ -47,7 +44,7 @@ export const MessageFeedbackStyle = styled(MessageFeedback)`
           `
         : css`
             position: absolute;
-            top: 30%;
+            top: 15%;
 
             span {
               line-height: 50px;
@@ -71,8 +68,7 @@ export const ListDecisionStyled = styled(ListDecision)`
     font-size: 20px;
     line-height: 30px;
   }
-
- `;
+`;
 
 export const BoxListDecision = styled.div`
   ${props =>
@@ -80,6 +76,12 @@ export const BoxListDecision = styled.div`
       ? css`
           margin-top: 25px;
           padding: 0 16px;
+
+          @media(max-height: 640px) and (max-width: 320px) {
+            margin-top: 45px;
+          }
+
+
         `
       : css`
           position: absolute;
@@ -87,16 +89,12 @@ export const BoxListDecision = styled.div`
         `}
 `;
 
-
-// bottom:  ${props => props.isActiveInput ? "25%" : "15%"};
-// height: ${props => props.isActiveInput ? "10%" : "7%"};
-
 export const Footer = styled.div`
   ${props =>
     props?.isMobileView
       ? css`
           position: fixed;
-          bottom:  8em;
+          bottom: 8em;
           width: 100%;
           height: 4em;
           display: flex;
@@ -116,9 +114,10 @@ export const Footer = styled.div`
               height: 90%;
             }
           }
+
           @media (max-height: 640px) and (max-width: 320px){
             height: 3em;
-            bottom: 6em;
+            bottom: 10em;
 
             button {
               svg {
@@ -126,6 +125,10 @@ export const Footer = styled.div`
               }
             }
 
+          }
+
+          @media(max-height: 480px) and (max-width: 320px) {
+            bottom: 4.5em;
           }
         `
       : css`

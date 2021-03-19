@@ -45,6 +45,7 @@ export const CardContainer = styled(Card)`
   background-color: transparent;
   cursor: pointer;
 
+
 `;
 
 export const CardBody = styled(Card.Body)<PropsCardBody>`
@@ -54,6 +55,11 @@ export const CardBody = styled(Card.Body)<PropsCardBody>`
   border-radius: 6px;
   padding: 15px;
   box-shadow: 1px 1px 5px 1px ${props => props?.backgroundcolor};
+
+  @media (max-height: 640px) {
+    padding: 8px;
+  }
+
 
   ${props =>
     props.checked &&
@@ -72,6 +78,10 @@ export const CardBody = styled(Card.Body)<PropsCardBody>`
   svg {
     height: ${props => props.iconsize}px;
     fill: #fff;
+
+    @media (max-height: 640px) {
+      height: 28px;
+    }
   }
 `;
 

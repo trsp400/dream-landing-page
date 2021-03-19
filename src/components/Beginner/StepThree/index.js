@@ -7,6 +7,9 @@ import Button from '../../CustomComponents/Button';
 
 import Lefticon from '../../../assets/icons/left-icon.svg';
 
+import Select from 'react-select';
+import makeAnimated from 'react-select/animated';
+
 import {
   Container,
   Body,
@@ -16,10 +19,17 @@ import {
   ButtonContainer,
 } from './styles';
 
+import selectPeriodConfig from '../../../utils/selectPeriodConfig';
+
 const listPeriods = {
   anos: 'Anos',
   meses: 'Meses',
 };
+
+const options = Object.keys(listPeriods).map(item => ({
+  value: listPeriods[item],
+  label: listPeriods[item],
+}));
 
 const StepThree = () => {
   const dispatch = useDispatch();
@@ -28,7 +38,7 @@ const StepThree = () => {
 
   const { currentStep, period, yearOrMonth } = store;
 
-  const [isActiveInput, setIsActiveInput] = useState(false)
+  const [isActiveInput, setIsActiveInput] = useState(false);
   const [inputValue, setInputValue] = useState(period || '');
   const [inputYearOrMonth, setInputYearOrMonth] = useState(yearOrMonth);
   const [placeholderInfo, setPlaceholderInfo] = useState(
@@ -92,7 +102,7 @@ const StepThree = () => {
           Em quanto tempo você deseja conquistar o seu sonho?
         </MessageFeedbackStyle>
 
-        <ButtonContainer  isActiveInput={isActiveInput}>
+        <ButtonContainer isActiveInput={isActiveInput}>
           {Object.keys(listPeriods).map(item => (
             <Button
               variant={item === inputYearOrMonth ? 'beorange' : 'beblue'}
@@ -105,7 +115,7 @@ const StepThree = () => {
             </Button>
           ))}
         </ButtonContainer>
-        <BoxInput isMobileView={isMobileView}>
+        <BoxInput isMobileView={isMobileView} isActiveInput={isActiveInput}>
           <Input
             state={inputValue}
             setState={setInputValue}
@@ -164,7 +174,7 @@ const StepThree = () => {
             onClick={() => handleDispatch(2, 'previous')}
             style={{
               width: '10%',
-              padding: 0,
+              padding: 5,
             }}
           >
             <Lefticon width={20} />
@@ -176,15 +186,17 @@ const StepThree = () => {
             placeholder={placeholderInfo}
             setIsActiveInput={setIsActiveInput}
           />
-          <select
-            onChange={event => setPlaceholderInformation(event?.target?.value)}
-          >
-            {Object.keys(listPeriods).map(item => (
-              <option key={item} value={item}>
-                {listPeriods[item]}
-              </option>
-            ))}
-          </select>
+          <Select
+            options={options}
+            components={makeAnimated()}
+            placeholder="Selecione"
+            isSearchable={false}
+            clearable={false}
+            onChange={event =>
+              setPlaceholderInformation(event?.value?.toLowerCase())
+            }
+            styles={selectPeriodConfig}
+          />
 
           <Button
             ripple
