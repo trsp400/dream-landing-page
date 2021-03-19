@@ -67,7 +67,7 @@ export default function handleGraphData(
   const period = months || 1;
 
   const achievedObjectiveCost =
-    monthlyPayment * period + currentValue > objectiveCost;
+    monthlyPayment * period + currentValue >= objectiveCost;
 
   if (!achievedObjectiveCost) {
     for (let i = 0; i <= period; i++) {

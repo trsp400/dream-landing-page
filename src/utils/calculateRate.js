@@ -1,57 +1,55 @@
-const error = require('./lib/error');
-const utils = require('./lib/common');
+export default (period, monthlyPayment, currentValue, objectiveCost) => {
+  const achievedObjectiveCost =
+    monthlyPayment * period + currentValue >= objectiveCost;
 
-export default (periods, payment, present, future, type, guess) => {
-  guess = guess === undefined ? 0.01 : guess;
-  future = future === undefined ? 0 : future;
-  type = type === undefined ? 0 : type;
+  if (achievedObjectiveCost) return '0';
 
-  periods = utils.parseNumber(periods);
-  payment = utils.parseNumber(payment);
-  present = utils.parseNumber(present);
-  future = utils.parseNumber(future);
-  type = utils.parseNumber(type);
-  guess = utils.parseNumber(guess);
-  if (utils.anyIsError(periods, payment, present, future, type, guess)) {
-    return error.value;
+  for (let taxUnit = 0; taxUnit <= 1000000; taxUnit++) {
+    let firstTime = true;
+    const arrUnidade = [];
+    let monthlyYield;
+    let monthlyYieldSumMonthlyPayment;
+    for (let k = 1; k <= period; k++) {
+      const texJ = k - 2;
+      if (firstTime) {
+        monthlyYield = currentValue * (taxUnit / 100);
+        monthlyYieldSumMonthlyPayment = monthlyYield + monthlyPayment;
+        arrUnidade.push(currentValue + monthlyYieldSumMonthlyPayment);
+        firstTime = false;
+      } else {
+        monthlyYield = arrUnidade[texJ] * (taxUnit / 100);
+        monthlyYieldSumMonthlyPayment = monthlyYield + monthlyPayment;
+        arrUnidade.push(arrUnidade[texJ] + monthlyYieldSumMonthlyPayment);
+      }
+    }
+
+    if (arrUnidade[arrUnidade.length - 1] > objectiveCost) {
+      for (let taxDecimal = 0; taxDecimal <= 9; taxDecimal++) {
+        for (let taxCentesimal = 0; taxCentesimal <= 9; taxCentesimal++) {
+          const arrDecimal = [];
+          let firstTime = true;
+          let monthlyYield;
+          let monthlyYieldSumMonthlyPayment;
+          const taxTrusty = `${taxUnit - 1}.${taxDecimal}${taxCentesimal}`;
+          for (let g = 1; g <= period; g++) {
+            const texJ = g - 2;
+            if (firstTime) {
+              monthlyYield = currentValue * (taxTrusty / 100);
+              monthlyYieldSumMonthlyPayment = monthlyYield + monthlyPayment;
+              arrDecimal.push(currentValue + monthlyYieldSumMonthlyPayment);
+              firstTime = false;
+            } else {
+              monthlyYield = arrDecimal[texJ] * (taxTrusty / 100);
+              monthlyYieldSumMonthlyPayment = monthlyYield + monthlyPayment;
+              arrDecimal.push(arrDecimal[texJ] + monthlyYieldSumMonthlyPayment);
+            }
+
+            if (arrDecimal[arrDecimal.length - 1] > objectiveCost) {
+              return taxTrusty;
+            }
+          }
+        }
+      }
+    }
   }
-
-  const epsMax = 1e-10;
-  const iterMax = 20;
-  let rate = guess;
-
-  type = type ? 1 : 0;
-  for (let i = 0; i < iterMax; i++) {
-    if (rate <= -1) {
-      return error.num;
-    }
-    let y;
-    let f;
-    if (Math.abs(rate) < epsMax) {
-      y =
-        present * (1 + periods * rate) +
-        payment * (1 + rate * type) * periods +
-        future;
-    } else {
-      f = Math.pow(1 + rate, periods);
-      y = present * f + payment * (1 / rate + type) * (f - 1) + future;
-    }
-    if (Math.abs(y) < epsMax) {
-      return rate;
-    }
-    let dy;
-    if (Math.abs(rate) < epsMax) {
-      dy = present * periods + payment * type * periods;
-    } else {
-      f = Math.pow(1 + rate, periods);
-      const df = periods * Math.pow(1 + rate, periods - 1);
-      dy =
-        present * df +
-        payment * (1 / rate + type) * df +
-        payment * (-1 / (rate * rate)) * (f - 1);
-    }
-    rate -= y / dy;
-  }
-
-  return rate;
 };
