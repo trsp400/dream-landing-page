@@ -71,8 +71,9 @@ const StepTwo = () => {
     };
   }, [inputValue]);
 
+
   return isMobileView ? (
-    <Container isMobileView={isMobileView}>
+    <Container isMobileView={isMobileView} isActiveInput={isActiveInput}>
       <Body>
         <MessageFeedbackStyle
           placing="above"

@@ -7,27 +7,43 @@ import RippleButton from '../../components/CustomComponents/Button';
 
 const introAnimateChart = keyframes`
   0% {
-    transform: scale(0) translateY(50%);
+    transform: scale(0) translateY(150%);
     /* transform: translate(100%, 50%); */
+    opacity: 0;
   }
 
   100% {
-    transform: scale(1) translateY(50%);
+    transform: scale(1) translateY(55%);
+    box-shadow: 0px 0px 5px 0px rgba(50, 50, 50, 0.74);
     /* transform: translate(0%, 50%); */
   }
 `
 
 const exitAnimateChart = keyframes`
   0% {
-    transform: scale(1) translateY(50%);
+    transform: scale(1) translateY(55%);
+    box-shadow: 0px 0px 5px 0px rgba(50, 50, 50, 0.74);
     /* transform: translate(0%, 50%); */
   }
 
   100% {
-    transform: scale(0) translateY(50%);
+    transform: scale(0) translateY(150%);
     /* transform: translate(100%, 50%); */
     opacity: 0;
   }
+`
+
+const messagePressButtonAnimate = keyframes`
+  0%, 20%, 35% {
+    opacity: 0;
+    bottom: -15px;
+  }
+
+  100% {
+    opacity: 1;
+    bottom: -24px;
+  }
+
 `
 
 export const Container = styled(BootstrapContainer)`
@@ -62,7 +78,7 @@ export const ContainerRate = styled.div`
     transform: translateY(10%);
   ` :
     css`
-      transform: translateY(90%);
+      transform: translateY(30%);
    `
   }
 `;
@@ -117,7 +133,7 @@ export const ButtonShowGraphic = styled.button`
   position: absolute;
   bottom: -12px;
   transition: transform .3s;
-  transform: scale(1);
+  transform: scale(1) rotate(0deg);
 
   svg {
     fill: #fff;
@@ -125,17 +141,34 @@ export const ButtonShowGraphic = styled.button`
   }
 
   ${props =>
-    !props?.isVisibleChart &&
+    props?.isVisibleChart &&
     css`
       transform: rotate(180deg) scale(0.9);
     `}
 `;
 
+export const MessagePressChart = styled.span`
+  width: 160px;
+  position: absolute;
+  opacity: 0;
+  bottom: -24px;
+
+  font: normal 14px Trasandina;
+  color: #fff;
+
+  transition: 1s;
+
+  ${props => !props.isVisibleChart && css`
+    animation: ${messagePressButtonAnimate} 2s infinite 1s alternate-reverse;
+  `}
+
+`
+
 export const LineChartContainer = styled.div`
   width: 94%;
   height: auto;
   position: absolute;
-  transform: scale(0) translateY(50%);
+  transform: scale(0) translateY(55%);
   /* transform: translate(100%, 50%); */
 
   transition: transform .3s;
@@ -143,7 +176,7 @@ export const LineChartContainer = styled.div`
 ${props => props.isVisibleChart ?
   css`
     animation: ${introAnimateChart} .4s cubic-bezier(.11,.9,.76,1.12);
-    transform: scale(1) translateY(50%);
+    transform: scale(1) translateY(55%);
     /* transform: translate(0%, 50%) ; */
   ` :
   css`
@@ -179,10 +212,10 @@ export const TextResult = styled.div`
 
   ${props => props.isVisibleChart ?
     css`
-      transform: translateY(160%);
+      transform: translateY(520px);
     `
     : css`
-      transform: translateY(90%);
+      transform: translateY(200px);
     `
 }
 

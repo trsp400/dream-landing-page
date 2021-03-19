@@ -150,6 +150,11 @@ const StepSeven = () => {
             e-mail:
           </MessageFeedbackStyle>
           <BoxInput isMobileView={isMobileView}>
+            <span className="box-input_warning">
+              Ao cadastrar o e-mail, você autoriza que a BeCapital faça envio de
+              conteúdos que a nossa equipe avalie como interessantes para o seu
+              perfil.
+            </span>
             <Input
               state={inputValue}
               setState={checkValidEmailOnInputChange}
@@ -160,11 +165,7 @@ const StepSeven = () => {
               <ErrorInformation>Digite um e-mail válido!</ErrorInformation>
             )}
           </BoxInput>
-          <span>
-            Ao cadastrar o e-mail, você autoriza que a BeCapital faça envio de
-            conteúdos que a nossa equipe avalie como interessantes para o seu
-            perfil.
-          </span>
+
         </Body>
 
         <Footer isActiveInput={isActiveInput}>

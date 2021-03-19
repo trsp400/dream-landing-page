@@ -27,7 +27,10 @@ export const MessageFeedbackStyle = styled(MessageFeedback)`
   ${props =>
     props?.isMobileView
       ? css`
-          margin-bottom: 8px;
+          /* margin-bottom: 8px; */
+          @media(max-height: 480px) and (max-width: 320px) {
+            margin-bottom: 8px;
+          }
         `
       : css`
           font-size: 48px;
@@ -68,7 +71,8 @@ export const ListDecisionStyled = styled(ListDecision)`
     font-size: 20px;
     line-height: 30px;
   }
-`;
+
+ `;
 
 export const BoxListDecision = styled.div`
   ${props =>
@@ -83,14 +87,18 @@ export const BoxListDecision = styled.div`
         `}
 `;
 
+
+// bottom:  ${props => props.isActiveInput ? "25%" : "15%"};
+// height: ${props => props.isActiveInput ? "10%" : "7%"};
+
 export const Footer = styled.div`
   ${props =>
     props?.isMobileView
       ? css`
           position: fixed;
-          bottom:  ${props => props.isActiveInput ? "25%" : "15%"};
+          bottom:  8em;
           width: 100%;
-          height: ${props => props.isActiveInput ? "10%" : "7%"};
+          height: 4em;
           display: flex;
 
           justify-content: space-between;
@@ -107,6 +115,17 @@ export const Footer = styled.div`
             svg {
               height: 90%;
             }
+          }
+          @media (max-height: 640px) and (max-width: 320px){
+            height: 3em;
+            bottom: 6em;
+
+            button {
+              svg {
+                height: 25px;
+              }
+            }
+
           }
         `
       : css`

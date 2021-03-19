@@ -28,6 +28,13 @@ export const ListDecisionContainerStyled = styled.section`
   border-radius: 10px;
   box-shadow: 0px 0px 6px 1px
     ${({ theme }) => theme.mobileTheme.colors.primary.orange};
+
+
+  @media (max-height: 640px) {
+    height: 70%;
+    margin-bottom: 10px;
+    margin-top: 10px;
+  }
 `;
 
 export const ListDecisionCheckStyled = styled.div`
@@ -39,6 +46,11 @@ export const ListDecisionCheckStyled = styled.div`
   box-shadow: inset 0px 0px 4px rgba(0, 0, 0, 0.25),
     inset 0px 1px 2px 1px rgba(0, 0, 0, 0.25);
   border-radius: 50%;
+
+  @media (max-height: 640px) {
+    height: 14px;
+    width: 14px;
+  }
 `;
 
 export const ListDecisionTextStyled = styled.div`
@@ -53,5 +65,10 @@ export const ListDecisionTextStyled = styled.div`
   color: #fff;
   /* height: max-content; */
   line-height: 16px;
+
+  @media (max-height: 640px) {
+    font-size: 12px;
+
+  }
 
 `;

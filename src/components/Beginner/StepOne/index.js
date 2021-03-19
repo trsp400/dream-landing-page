@@ -97,6 +97,9 @@ const StepOne = () => {
         handleDispatch(value, 2, 'next');
       },
       others: () => {
+        if(!value) return notify('Por favor, digite um objetivo!');
+
+
         const valueUpperCase = value.toUpperCase();
         handleDispatch(valueUpperCase, 2, 'next');
       },
@@ -241,7 +244,9 @@ const StepOne = () => {
           <div className="content-body">
             Descreva abaixo qual outro objetivo de vida.
           </div>
-          <Input state={inputValue} setState={setInputValue} type="text" />
+          <div className="boxInput">
+            <Input state={inputValue} setState={setInputValue} type="text" />
+          </div>
           <Footer>
             <Button
               ripple
