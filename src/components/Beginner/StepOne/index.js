@@ -97,6 +97,9 @@ const StepOne = () => {
         handleDispatch(value, 2, 'next');
       },
       others: () => {
+        if(!value) return notify('Por favor, digite um objetivo!');
+
+
         const valueUpperCase = value.toUpperCase();
         handleDispatch(valueUpperCase, 2, 'next');
       },
