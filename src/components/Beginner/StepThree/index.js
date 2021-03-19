@@ -105,7 +105,7 @@ const StepThree = () => {
             </Button>
           ))}
         </ButtonContainer>
-        <BoxInput isMobileView={isMobileView}>
+        <BoxInput isMobileView={isMobileView} isActiveInput={isActiveInput}>
           <Input
             state={inputValue}
             setState={setInputValue}

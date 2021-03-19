@@ -68,7 +68,8 @@ export const ListDecisionStyled = styled(ListDecision)`
     font-size: 20px;
     line-height: 30px;
   }
-`;
+
+ `;
 
 export const BoxListDecision = styled.div`
   ${props =>
@@ -111,6 +112,17 @@ export const Footer = styled.div`
             svg {
               height: 90%;
             }
+          }
+          @media (max-height: 640px) {
+            height: 9%;
+            bottom: 22%;
+
+            button {
+              svg {
+                height: 25px;
+              }
+            }
+
           }
         `
       : css`

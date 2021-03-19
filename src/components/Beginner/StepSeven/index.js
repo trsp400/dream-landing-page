@@ -135,7 +135,7 @@ const StepSeven = () => {
             Para receber o resultado completo do seu perfil, deixe aqui o seu
             e-mail:
           </MessageFeedbackStyle>
-          <BoxInput isMobileView={isMobileView}>
+          <BoxInput isMobileView={isMobileView} isActiveInput={isActiveInput}>
             <Input
               state={inputValue}
               setState={checkValidEmailOnInputChange}
@@ -178,7 +178,7 @@ const StepSeven = () => {
           </MessageFeedbackStyle>
 
           <InputContainer>
-            <BoxInput isMobileView={isMobileView}>
+            <BoxInput isMobileView={isMobileView} >
               <Input
                 state={inputValue}
                 setState={checkValidEmailOnInputChange}

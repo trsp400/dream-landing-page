@@ -77,7 +77,11 @@ export const BoxInput = styled.div`
 
           width: 100%;
           height: auto;
-          padding: 20px;
+          padding: 23px;
+
+          @media(max-height: 640px) {
+            padding: ${props => props.isActiveInput && "1px"};
+          }
         `
       : css`
           display: flex;
@@ -99,7 +103,7 @@ export const Footer = styled.div`
   bottom:  15%;
   width: 100%;
   height: 7%;
-  display: ${props => props.isActiveInput ? "none" : "flex"};
+  display: flex;
 
   justify-content: space-between;
   padding: 0 10%;
@@ -114,6 +118,18 @@ export const Footer = styled.div`
 
     svg {
       height: 90%;
+    }
+  }
+
+  @media (max-height: 640px) {
+    display: flex;
+    height: ${props => props.isActiveInput ? "14%" : "9%"};
+    bottom: ${props => props.isActiveInput ? "8%" : "22%"};
+
+    button {
+      svg {
+        height: 25px;
+      }
     }
   }
 `;
@@ -134,6 +150,13 @@ export const ButtonContainer = styled.div`
 
     &:last-child {
       margin-left: 14px;
+    }
+  }
+
+  @media(max-height: 640px) {
+    button {
+      padding: 4px 0;
+      font-size: 16px;
     }
   }
 `;

@@ -12,6 +12,11 @@ export const Container = styled(BootstrapContainer)`
           height: 100vh;
           flex-direction: column;
           padding: 0;
+
+          @media(max-height: 640px) and (max-width: 320px){
+            height: ${props => props.isActiveInput ? "150vh" : "100vh"};
+          }
+
         `
       : css`
           width: 1024px;
@@ -47,6 +52,8 @@ export const InputContainer = styled.div`
   > input {
     width: 500px;
   }
+
+
 `;
 
 export const MessageFeedbackStyle = styled(MessageFeedback)`
@@ -92,6 +99,10 @@ export const BoxInput = styled.div`
         width: 500px;
       }
     `}
+
+    @media(max-height: 640px) {
+
+    }
 `;
 
 // bottom:  ${props => props.isActiveInput ? "25%" : "15%"};
@@ -101,7 +112,7 @@ export const Footer = styled.div`
   bottom: 15%;
   width: 100%;
   height: 7%;
-  display: ${props => props.isActiveInput ? "none" : "flex"};
+  display: flex;
 
   justify-content: space-between;
   padding: 0 10%;
@@ -117,6 +128,13 @@ export const Footer = styled.div`
     svg {
       height: 25px ;
     }
+  }
+
+  @media (max-height: 640px) and (max-width: 320px) {
+    display: flex;
+
+    height: ${props => props.isActiveInput ? "14%" : "9%"};
+    bottom: ${props => props.isActiveInput ? "14%" : "22%"}
   }
 `;
 

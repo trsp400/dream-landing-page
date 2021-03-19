@@ -13,7 +13,8 @@ const introAnimateChart = keyframes`
   }
 
   100% {
-    transform: scale(1) translateY(55%) rotate(90deg);
+    transform: scale(1) translateY(55%);
+    box-shadow: 0px 0px 5px 0px rgba(50, 50, 50, 0.74);
     /* transform: translate(0%, 50%); */
   }
 `
@@ -21,6 +22,7 @@ const introAnimateChart = keyframes`
 const exitAnimateChart = keyframes`
   0% {
     transform: scale(1) translateY(55%);
+    box-shadow: 0px 0px 5px 0px rgba(50, 50, 50, 0.74);
     /* transform: translate(0%, 50%); */
   }
 
@@ -76,7 +78,7 @@ export const ContainerRate = styled.div`
     transform: translateY(10%);
   ` :
     css`
-      transform: translateY(90%);
+      transform: translateY(30%);
    `
   }
 `;
@@ -213,7 +215,7 @@ export const TextResult = styled.div`
       transform: translateY(520px);
     `
     : css`
-      transform: translateY(280px);
+      transform: translateY(200px);
     `
 }
 

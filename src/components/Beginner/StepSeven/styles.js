@@ -68,6 +68,10 @@ export const BoxInput = styled.div`
   margin-top: 25px;
 
   padding: 50px;
+
+
+  @media(max-height: 640px) {
+  }
 `;
 
 export const ErrorInformation = styled.span`
@@ -143,6 +147,12 @@ export const Footer = styled.div`
   button {
     width: 100%;
     position: relative;
+  }
+
+  @media (max-height: 640px) {
+    height: 9%;
+    bottom: 22%;
+
   }
 `;
 

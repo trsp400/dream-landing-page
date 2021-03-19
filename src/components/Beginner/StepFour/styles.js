@@ -115,6 +115,18 @@ export const Footer = styled.div`
       height: 90%;
     }
   }
+
+  @media (max-height: 640px) {
+    height: 9%;
+    bottom: 22%;
+
+    button {
+      svg {
+        height: 25px;
+      }
+    }
+
+  }
 `;
 export const ButtonContainer = styled.div`
   display: flex;

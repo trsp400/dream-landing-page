@@ -5,6 +5,7 @@ import { Modal, Header, Body } from '../../CustomComponents/Modal';
 import MessageFeedback from '../../CustomComponents/MessageFeedback';
 
 export const Container = styled(BootstrapContainer)`
+
   ${props =>
     props?.isMobileView
       ? css`

@@ -15,12 +15,22 @@ const formatTextPerPlacing: PropsObjFormatTextPerPlacing = {
     props.placing === 'above' &&
     css`
       font: normal normal lighter 19px Trasandina;
+
+      @media (max-height: 640px) and (max-width: 320px){
+        font: normal normal lighter 16px Trasandina;
+      }
+
     `,
 
   bellow: props =>
     props.placing === 'bellow' &&
     css`
       font: normal normal bold 22px Trasandina;
+
+      @media (max-height: 640px) and (max-width: 320px){
+        font: normal normal bold 19px Trasandina;
+      }
+
     `,
 };
 
@@ -32,8 +42,17 @@ export const TextStyled = styled.div<PropsTextStyled>`
 
   line-height: 5px;
 
+  @media (max-height: 640px) and (max-width: 320px){
+    height: ${props => props.largeLowSpace ? "14%" : "8%"};
+  }
+
+
   &:nth-child(2) {
     height: 12%;
+
+    @media(max-height: 640px) and (max-width: 320px){
+      height: 6%;
+    }
   }
 
   position: relative;
@@ -45,6 +64,11 @@ export const TextStyled = styled.div<PropsTextStyled>`
     padding: 0 8px 0 26px;
     line-height: 26px;
     display: inline-block;
+
+
+    @media(max-height: 640px) and (max-width: 320px){
+      line-height: 23px;
+    }
 
     svg {
       position: absolute;
