@@ -6,7 +6,8 @@ import Background1 from '../images/bg_1.png';
 interface Props {
   isMobileView?: Boolean;
   currentStep?: Number;
-  yearlyAverageArray?: Number;
+  yearlyAverageArray?: Number[];
+  finishSimulation?: Boolean;
 }
 
 interface ThemeProp extends ThemeProps<any> {
@@ -122,7 +123,11 @@ export const ProgressBarContainer = styled.div`
 
 export const Main = styled.main<Props>`
   position: relative;
-
+  ${props =>
+    props?.finishSimulation &&
+    css`
+      width: 100%;
+    `}
   flex-direction: column;
   justify-content: center;
 

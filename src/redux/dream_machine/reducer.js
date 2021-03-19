@@ -6,6 +6,7 @@ const INITIAL_STATE = {
   direction: null,
   resultSuccess: null,
   comingFromLastStep: false,
+  finishSimulation: false,
   result: {
     monthlyRate: '',
     annualRate: '',
@@ -65,6 +66,7 @@ export default (state = INITIAL_STATE, action) => {
         },
         resultSuccess: payload?.resultSuccess || null,
         path: payload?.path,
+        finishSimulation: payload?.finishSimulation,
       };
     case actions.SEND_DREAM_MACHINE_RESULT_TO_API_SUCCESS:
       return {

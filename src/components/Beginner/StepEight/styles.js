@@ -33,32 +33,8 @@ export const MessageFeedbackStyle = styled(MessageFeedback)`
           font-size: 48px;
 
           position: absolute;
-          top: 15%;
+          top: 4%;
         `}
-`;
-
-export const BoxInput = styled.div`
-  position: relative;
-  display: flex;
-  flex-direction: column;
-
-  justify-content: center;
-  align-items: center;
-
-  width: 100%;
-  height: auto;
-  margin-top: 25px;
-
-  padding: 50px;
-
-
-  @media(max-height: 640px) {
-  }
-`;
-
-export const ErrorInformation = styled.span`
-  position: absolute;
-  top: 65%;
 
   &:nth-child(2) {
     ${props =>
@@ -68,7 +44,7 @@ export const ErrorInformation = styled.span`
           `
         : css`
             position: absolute;
-            top: 30%;
+            top: 15%;
 
             span {
               line-height: 50px;
@@ -107,59 +83,14 @@ export const BoxListDecision = styled.div`
         `}
 `;
 
-export const InputContainer = styled.div`
-  position: absolute;
-  top: 35%;
-  width: 100%;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-
-  input {
-    width: 700px;
-  }
-
-  button {
-    width: 30%;
-    margin-top: 2.5%;
-  }
-`;
-
-
-// bottom:  ${props => props.isActiveInput ? "25%" : "15%"};
-// height: ${props => props.isActiveInput ? "10%" : "7%"};
-
-export const Footer = styled.div`
-  position: fixed;
-  bottom: 15%;
-  width: 100%;
-  height: 7%;
-  display: ${props => props.isActiveInput ? "none" : "flex"};
-
-  justify-content: space-between;
-  padding: 0 10%;
-
-  button {
-    width: 100%;
-    position: relative;
-  }
-
-  @media (max-height: 640px) {
-    height: 9%;
-    bottom: 22%;
-
-  }
-`;
-
 export const Footer = styled.div`
   ${props =>
     props?.isMobileView
       ? css`
           position: fixed;
-          bottom:  ${props => props.isActiveInput ? "25%" : "15%"};
+          bottom: ${props => (props.isActiveInput ? '25%' : '15%')};
           width: 100%;
-          height: ${props => props.isActiveInput ? "10%" : "7%"};
+          height: ${props => (props.isActiveInput ? '10%' : '7%')};
           display: flex;
 
           justify-content: space-between;

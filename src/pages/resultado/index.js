@@ -49,6 +49,7 @@ const Result = () => {
       fileUrl,
     },
     comingFromLastStep,
+    finishSimulation,
   } = store;
 
   const urls = fileUrl?.urls || '';
@@ -154,7 +155,7 @@ const Result = () => {
   });
 
   return (
-    <Layout>
+    <Layout finishSimulation={finishSimulation}>
       <SEO title="Resultado | Máquina dos Sonhos" />
       <Container isVisibleChart={isVisibleChart}>
         {transitionWallet.map(({ item, props, key }) => (
