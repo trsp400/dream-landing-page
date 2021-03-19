@@ -3,7 +3,10 @@ import { useSelector, useDispatch } from 'react-redux';
 
 import { navigate } from 'gatsby';
 
-import { sendDreamMachineResultToAPIRequest } from '../../../redux/dream_machine/actions';
+import {
+  sendDreamMachineResultToAPIRequest,
+  changeFormState,
+} from '../../../redux/dream_machine/actions';
 import { createResultObject } from '../../../utils/handleResultObject';
 import Input from '../../CustomComponents/Input';
 import Loading from '../../CustomComponents/Loading';
@@ -53,19 +56,30 @@ const StepSeven = () => {
       decision,
     );
 
+    const dispatchResult = () => {
+      dispatch(
+        changeFormState({
+          ...store,
+          finishSimulation: true,
+        }),
+      );
+
+      dispatch(
+        sendDreamMachineResultToAPIRequest({
+          ...store,
+          result: {
+            ...resultObject,
+          },
+          period,
+          monthlySupport,
+          currentInvestments,
+          objectiveCost,
+        }),
+      );
+    };
+
     monthlySupport < objectiveCost && currentInvestments < objectiveCost
-      ? dispatch(
-          sendDreamMachineResultToAPIRequest({
-            ...store,
-            result: {
-              ...resultObject,
-            },
-            period,
-            monthlySupport,
-            currentInvestments,
-            objectiveCost,
-          }),
-        )
+      ? dispatchResult()
       : setLoading(false);
   });
 

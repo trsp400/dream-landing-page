@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector, Provider } from 'react-redux';
 
+import store from '../redux/store';
 import useWindowSize from '../hooks/useWindowSize';
 
 import { screenResize } from '../redux/settings/actions';
@@ -21,6 +22,7 @@ interface ReduxStore {
   currentStep?: number;
   dreamMachine?: Object;
   settings?: Object;
+  finishSimulation?: Boolean;
 }
 
 const RenderProgressBar: React.FC<RenderProgressBarProps> = ({
@@ -64,25 +66,28 @@ const Layout = props => {
     ({ settings }: ReduxStore) => settings,
   );
 
-  const yearlyAverageArray = result?.yearlyAverageArray;
+  const yearlyAverageArray: Number[] = result?.yearlyAverageArray;
 
   const children = props?.children;
+  const finishSimulation = props?.finishSimulation;
 
   useEffect(() => {
     dispatch(screenResize(width));
   }, [width, dispatch]);
 
   return (
-    <Container isMobileView={isMobileView} currentStep={currentStep}>
-      <Background
-        currentStep={currentStep}
-        yearlyAverageArray={yearlyAverageArray}
-      />
-      {!yearlyAverageArray?.length && isMobileView && (
-        <RenderProgressBar path={path} currentStep={currentStep} />
-      )}
-      <Main yearlyAveradeArray={yearlyAverageArray}>{children}</Main>
-    </Container>
+    <Provider store={store}>
+      <Container isMobileView={isMobileView} currentStep={currentStep}>
+        <Background
+          currentStep={currentStep}
+          yearlyAverageArray={yearlyAverageArray}
+        />
+        {!yearlyAverageArray?.length && isMobileView && (
+          <RenderProgressBar path={path} currentStep={currentStep} />
+        )}
+        <Main finishSimulation={finishSimulation}>{children}</Main>
+      </Container>
+    </Provider>
   );
 };
 
