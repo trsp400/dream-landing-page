@@ -1,8 +1,8 @@
-import styled, { keyframes } from 'styled-components';
+import styled, { keyframes, css } from 'styled-components';
 import { Container as BootstrapContainer } from 'react-bootstrap';
+import { Modal, Header } from '../../CustomComponents/Modal';
 
 import MessageFeedback from '../../CustomComponents/MessageFeedback';
-import { Modal, Header } from '../../CustomComponents/Modal';
 
 const animateErrorinformation = keyframes`
   0% { bottom: 45%; opacity: 0; transform: scale(0.4)}
@@ -11,16 +11,48 @@ const animateErrorinformation = keyframes`
 
 `;
 
-
 export const Container = styled(BootstrapContainer)`
-  display: flex;
-  width: 100%;
-  height: 93vh;
-  flex-direction: column;
-  padding: 0;
+  ${props =>
+    props?.isMobileView
+      ? css`
+          display: flex;
+          width: 100%;
+          height: 100vh;
+          flex-direction: column;
+          padding: 0;
+        `
+      : css`
+          width: 1024px;
+          height: 100vh;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          > div {
+            display: flex;
+            width: 100%;
+            align-content: center;
+            justify-content: center;
+            flex-direction: column;
+          }
+        `}
 `;
 
 export const MessageFeedbackStyle = styled(MessageFeedback)`
+  ${props =>
+    props?.isMobileView
+      ? css`
+          margin-bottom: 8px;
+        `
+      : css`
+          font-size: 48px;
+
+          position: absolute;
+          top: 25%;
+
+          span {
+            line-height: 45px;
+          }
+        `}
 `;
 
 export const BoxInput = styled.div`
@@ -36,41 +68,69 @@ export const BoxInput = styled.div`
   margin-top: 25px;
 
   padding: 50px;
-
 `;
 
 export const ErrorInformation = styled.span`
   position: absolute;
-   bottom: 20%;
-  /* left: 0;  */
+  top: 65%;
 
   color: #fff200;
   font-weight: bold;
 
-  animation: ${animateErrorinformation} 1.3s cubic-bezier(.17,.89,1,1.27);
+  animation: ${animateErrorinformation} 1.3s cubic-bezier(0.17, 0.89, 1, 1.27);
 `;
-
 
 export const Body = styled.div`
   display: flex;
   height: 100%;
   flex-direction: column;
 
+  ${props =>
+    props?.isMobileView
+      ? css`
+          > span {
+            padding: 0 30px;
+            text-align: center;
+            line-height: 18px;
+            color: #fff;
+          }
+        `
+      : css`
+          > span {
+            margin-top: 25%;
+            padding: 0 10%;
+            text-align: center;
+            line-height: 40px;
+            font-size: 35px;
+            color: #fff;
+          }
+        `}
+`;
 
-  > span {
-    padding: 0 30px;
-    text-align: center;
-    line-height: 18px;
-    color: #fff;
+export const InputContainer = styled.div`
+  position: absolute;
+  top: 35%;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
 
+  input {
+    width: 700px;
+  }
+
+  button {
+    width: 30%;
+    margin-top: 2.5%;
   }
 `;
 
 export const Footer = styled.div`
   position: fixed;
-  bottom:  ${props => props.isActiveInput ? "25%" : "15%"};
+  bottom: ${props => (props.isActiveInput ? '25%' : '15%')};
   width: 100%;
-  height: ${props => props.isActiveInput ? "10%" : "7%"};
+  height: ${props => (props.isActiveInput ? '10%' : '7%')};
   display: flex;
 
   justify-content: space-between;
@@ -80,7 +140,6 @@ export const Footer = styled.div`
     width: 100%;
     position: relative;
   }
-
 `;
 
 export const ButtonContainer = styled.div`

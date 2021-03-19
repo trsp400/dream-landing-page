@@ -121,6 +121,8 @@ export const CustomButton = styled.button<RippleButtonProps>`
   align-items: center;
   /* ------------------------------- */
 
+  border-radius: 10px;
+
   position: relative;
   overflow: hidden;
   transition: background 400ms;
@@ -144,7 +146,7 @@ export const CustomButton = styled.button<RippleButtonProps>`
   padding: 10px 0;
   font-size: 1rem;
   line-height: 1.5;
-  border-radius: 0.25rem;
+
   transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
     border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 

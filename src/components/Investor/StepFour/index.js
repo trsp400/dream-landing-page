@@ -28,6 +28,7 @@ const StepThree = () => {
 
   const { currentStep, period, yearOrMonth } = store;
 
+  const [isActiveInput, setIsActiveInput] = useState(false)
   const [inputValue, setInputValue] = useState(period);
   const [inputYearOrMonth, setInputYearOrMonth] = useState(yearOrMonth);
 
@@ -79,7 +80,7 @@ const StepThree = () => {
           De quanto tempo você precisa?
         </MessageFeedbackStyle>
 
-        <ButtonContainer>
+        <ButtonContainer isActiveInput={isActiveInput}>
           {Object.keys(listPeriods).map(item => (
             <Button
               variant={item === inputYearOrMonth ? 'beorange' : 'beblue'}
@@ -98,11 +99,12 @@ const StepThree = () => {
             setState={setInputValue}
             type="number"
             placeholder="Tempo"
+            setIsActiveInput={setIsActiveInput}
           />
         </BoxInput>
       </Body>
 
-      <Footer>
+      <Footer isActiveInput={isActiveInput}>
         <Button
           ripple
           variant="beblue"

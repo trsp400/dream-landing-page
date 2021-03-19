@@ -21,6 +21,7 @@ const StepFive = () => {
   const store = useSelector(({ dreamMachine }) => dreamMachine);
   const { notify } = useSelector(({ settings }) => settings);
 
+  const [isActiveInput, setIsActiveInput] = useState(false)
   const { currentStep, monthlySupport, objectiveCost } = store;
 
   const [inputValue, setInputValue] = useState(monthlySupport);
@@ -87,11 +88,11 @@ const StepFive = () => {
           Quanto você pode investir por mês?
         </MessageFeedbackStyle>
         <BoxInput>
-          <Input state={inputValue} setState={setInputValue} type="currency" />
+          <Input state={inputValue} setState={setInputValue} type="currency" setIsActiveInput={setIsActiveInput}/>
         </BoxInput>
       </Body>
 
-      <Footer>
+      <Footer isActiveInput={isActiveInput}>
         <Button
           ripple
           variant="beblue"

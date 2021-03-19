@@ -2,13 +2,15 @@ import React, { useState, useCallback } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import _ from 'lodash';
 import { navigate } from 'gatsby-link';
-import { useSpring, animated } from 'react-spring';
+import { useSpring, animated, useTransition } from 'react-spring';
 
 import { changeFormState } from '../../redux/dream_machine/actions';
 
 import Layout from '../../Layout';
 import SEO from '../../components/CustomComponents/Seo';
 import resultProfile from '../../utils/resultProfile';
+
+import DownArrow from '../../assets/icons/down-arrow.svg';
 
 import {
   Container,
@@ -29,6 +31,9 @@ const Result = () => {
   const dispatch = useDispatch();
 
   const [showGraphic, setShowGraphic] = useState(false);
+
+  const [isVisibleChart, setIsVisibleChart] = useState(false);
+
   const { isMobileView } = useSelector(({ settings }) => settings);
   const store = useSelector(({ dreamMachine }) => dreamMachine);
 
@@ -43,6 +48,7 @@ const Result = () => {
       fileUrl,
     },
     comingFromLastStep,
+    finishSimulation,
   } = store;
 
   const urls = fileUrl?.urls || '';
@@ -93,54 +99,6 @@ const Result = () => {
     },
   ];
 
-  const springRateConfig = {
-    transform: 'translateY(0px)',
-    from: {
-      opacity: 1,
-      transform: 'translateY(100px)',
-    },
-  };
-
-  const springRateProps = useSpring({
-    opacity: 1,
-    config: { tension: 150, friction: 10 },
-
-    reset: showGraphic,
-    ...springRateConfig,
-  });
-
-  const springChartConfig = {
-    transform: 'translateY(0px)',
-    from: {
-      opacity: 0,
-      transform: 'translateY(-100px)',
-    },
-  };
-
-  const springChartProps = useSpring({
-    opacity: 1,
-    config: { tension: 150, friction: 10 },
-
-    reset: showGraphic,
-    ...springChartConfig,
-  });
-
-  const springTextConfig = {
-    transform: 'translateY(0px)',
-    from: {
-      opacity: 1,
-      transform: 'translateY(-100px)',
-    },
-  };
-
-  const springTextProps = useSpring({
-    opacity: 1,
-    config: { tension: 150, friction: 10 },
-
-    reset: showGraphic,
-    ...springTextConfig,
-  });
-
   const resetStore = useCallback(() => {
     dispatch(
       changeFormState({
@@ -176,116 +134,107 @@ const Result = () => {
     );
   }, [dispatch, store]);
 
-  return (
-    <Layout>
-      <SEO title="Resultado | Máquina dos Sonhos" />
-      <Container
-        style={{
-          justifyContent: 'center',
-        }}
-      >
-        <animated.div
-          style={{
-            ...springRateProps,
-          }}
-        >
-          <ContainerRate
-            style={
-              showGraphic
-                ? {
-                    marginTop: '1rem',
-                    padding: '18px 35px',
-                  }
-                : {
-                    padding: '30px 35px',
-                  }
-            }
-          >
-            <ContainerRateTitle>Crescimento da Carteira</ContainerRateTitle>
-            <ContainerRateSubTitle>
-              Para conseguir alcançar seu objetivo,
-              <br />o seu patrimônio precisa performar
-            </ContainerRateSubTitle>
+  const toogleIsVisibleChart = useCallback(
+    () => setIsVisibleChart(!isVisibleChart),
+    [isVisibleChart],
+  );
 
-            <ContainerRateBox>
+  const transitionWallet = useTransition(1, p => p, {
+    config: { mass: 5, tension: 2000, friction: 200 },
+    transform: isVisibleChart ? 'translateY(10%)' : 'translateY(0%)',
+
+    from: { transform: 'translateY(50%)' },
+  });
+
+  const transitionTextResult = useTransition(1, p => p, {
+    config: { mass: 5, tension: 2000, friction: 200 },
+    transform: isVisibleChart ? 'translateY(-50%)' : 'translateY(0%)',
+
+    from: { transform: 'translateY(0%)' },
+  });
+
+  return (
+    <Layout finishSimulation={finishSimulation}>
+      <SEO title="Resultado | Máquina dos Sonhos" />
+      <Container isVisibleChart={isVisibleChart}>
+        {transitionWallet.map(({ item, props, key }) => (
+          <animated.div style={props}>
+            <ContainerRate isVisibleChart={isVisibleChart}>
+              <ContainerRateTitle>Crescimento da Carteira</ContainerRateTitle>
+              <ContainerRateSubTitle>
+                Para conseguir alcançar seu objetivo,
+                <br />o seu patrimônio precisa performar
+              </ContainerRateSubTitle>
+
+              <ContainerRateBox>
+                {achievedObjectiveCost ? (
+                  <>
+                    <ContainerRateBoxItems>
+                      AO MÊS: <strong>0,00%</strong>
+                    </ContainerRateBoxItems>
+                    <ContainerRateBoxItems>
+                      AO ANO: <strong>0,00%</strong>
+                    </ContainerRateBoxItems>
+                  </>
+                ) : (
+                  <>
+                    <ContainerRateBoxItems>
+                      AO MÊS: <strong>{monthlyRate}%</strong>
+                    </ContainerRateBoxItems>
+                    <ContainerRateBoxItems>
+                      AO ANO: <strong>{annualRate}%</strong>
+                    </ContainerRateBoxItems>
+                  </>
+                )}
+              </ContainerRateBox>
+
+              <ButtonShowGraphic
+                isVisibleChart={isVisibleChart}
+                onClick={() => toogleIsVisibleChart()}
+              >
+                <DownArrow />
+              </ButtonShowGraphic>
+            </ContainerRate>
+          </animated.div>
+        ))}
+
+        <LineChartContainer isVisibleChart={isVisibleChart}>
+          <LineChartStyled
+            slider
+            isMobileView={isMobileView}
+            theme="white"
+            height={300}
+            data={
+              yearlyAverageArrayModificad?.length
+                ? yearlyAverageArrayModificad
+                : fakeData
+            }
+          />
+        </LineChartContainer>
+
+        {transitionTextResult.map(({ item, props }) => (
+          <animated.div style={props}>
+            <TextResult isVisibleChart={isVisibleChart}>
               {achievedObjectiveCost ? (
-                <>
-                  <ContainerRateBoxItems bg="#c5dee5">
-                    AO MÊS: <strong>0,00%</strong>
-                  </ContainerRateBoxItems>
-                  <ContainerRateBoxItems bg="#fecfc4">
-                    AO ANO: <strong>0,00%</strong>
-                  </ContainerRateBoxItems>
-                </>
+                <p style={{ marginBottom: '1px' }}>
+                  Você conseguiria alcaçar este valor em
+                  {countYearNewPeriod
+                    ? countYearNewPeriod > 1
+                      ? ` ${countYearNewPeriod} anos`
+                      : ` ${countYearNewPeriod} ano`
+                    : ''}
+                  {countYearNewPeriod && countMonthNewPeriod ? ` e` : ''}
+                  {countMonthNewPeriod
+                    ? countMonthNewPeriod > 1
+                      ? ` ${countMonthNewPeriod} meses`
+                      : ` ${countMonthNewPeriod} mês`
+                    : ''}
+                  <br />
+                  <br />
+                </p>
               ) : (
                 <>
-                  <ContainerRateBoxItems bg="#c5dee5">
-                    AO MÊS: <strong>{monthlyRate}%</strong>
-                  </ContainerRateBoxItems>
-                  <ContainerRateBoxItems bg="#fecfc4">
-                    AO ANO: <strong>{annualRate}%</strong>
-                  </ContainerRateBoxItems>
-                </>
-              )}
-            </ContainerRateBox>
-
-            <ButtonShowGraphic
-              showGraphic={showGraphic}
-              onClick={() => setShowGraphic(!showGraphic)}
-            >
-              V
-            </ButtonShowGraphic>
-          </ContainerRate>
-        </animated.div>
-
-        {showGraphic && (
-          <animated.div
-            style={{
-              ...springChartProps,
-            }}
-          >
-            <LineChartContainer>
-              <LineChartStyled
-                slider
-                isMobileView={isMobileView}
-                theme="white"
-                height={300}
-                data={
-                  yearlyAverageArrayModificad?.length
-                    ? yearlyAverageArrayModificad
-                    : fakeData
-                }
-              />
-            </LineChartContainer>
-          </animated.div>
-        )}
-
-        <animated.div
-          style={{
-            ...springTextProps,
-          }}
-        >
-          <TextResult style={showGraphic ? { margin: '10px 0' } : {}}>
-            {achievedObjectiveCost ? (
-              <p style={{ marginBottom: '1px' }}>
-                Você conseguiria alcaçar este valor em
-                {countYearNewPeriod
-                  ? countYearNewPeriod > 1
-                    ? ` ${countYearNewPeriod} anos`
-                    : ` ${countYearNewPeriod} ano`
-                  : ''}
-                {countYearNewPeriod && countMonthNewPeriod ? ` e` : ''}
-                {countMonthNewPeriod
-                  ? countMonthNewPeriod > 1
-                    ? ` ${countMonthNewPeriod} meses`
-                    : ` ${countMonthNewPeriod} mês`
-                  : ''}
-                <br />
-                <br />
-              </p>
-            ) : (
-              <>
-                {/* <p
+                  {/* <p
                   style={{
                     fontWeight: 'bolder',
                     marginBottom: '1px',
@@ -294,50 +243,56 @@ const Result = () => {
                   O seu perfil é{' '}
                   <span style={{ color: '#e2381a' }}>{riskProfile}</span>
                 </p> */}
-                <p>{resultRiskProfile || ''}</p>
-              </>
-            )}
+                  <p>{resultRiskProfile || ''}</p>
+                </>
+              )}
 
-            <ButtonContainer style={{ marginBottom: '15px' }}>
-              <Button
-                onClick={() => {
-                  window.open('https://be.capital/');
-                }}
-                ripple
-                glow
-                style={{ margin: '0 10px' }}
-              >
-                Ir ao Site
-              </Button>
+              <ButtonContainer style={{ marginBottom: '15px' }}>
+                <Button
+                  onClick={() => {
+                    window.open('https://be.capital/');
+                  }}
+                  ripple
+                  glow
+                  style={{ margin: '0 10px' }}
+                >
+                  Ir ao Site
+                </Button>
 
-              <Button
-                onClick={() => {
-                  resetStore();
-                  navigate('/');
-                }}
-                ripple
-                glow
-                style={{ margin: '0 10px' }}
-              >
-                Recalcule seu Sonho
-              </Button>
-            </ButtonContainer>
+                <Button
+                  onClick={() => {
+                    resetStore();
+                    navigate('/');
+                  }}
+                  ripple
+                  glow
+                  style={{ margin: '0 10px' }}
+                >
+                  Recalcule seu Sonho
+                </Button>
+              </ButtonContainer>
 
-            <p>
-              Confira mais detalhes sobre a{' '}
-              <strong>evolução do seu patrimônio</strong> e
-              <strong> composição de carteira ideal</strong> no relatório
-              completo que enviamos para o seu e-mail. <br />
-              <br /> Quer ajuda para tirar seu planejamento financeiro do papel?
-            </p>
+              <p>
+                Confira mais detalhes sobre a{' '}
+                <strong>evolução do seu patrimônio</strong> e
+                <strong> composição de carteira ideal</strong> no relatório
+                completo que enviamos para o seu e-mail. <br />
+                <br /> Quer ajuda para tirar seu planejamento financeiro do
+                papel?
+              </p>
 
-            <ButtonContainer>
-              <Button onClick={() => urls && window.open(urls[0])} ripple glow>
-                Baixar PDF
-              </Button>
-            </ButtonContainer>
-          </TextResult>
-        </animated.div>
+              <ButtonContainer>
+                <Button
+                  onClick={() => urls && window.open(urls[0])}
+                  ripple
+                  glow
+                >
+                  Baixar PDF
+                </Button>
+              </ButtonContainer>
+            </TextResult>
+          </animated.div>
+        ))}
       </Container>
     </Layout>
   );

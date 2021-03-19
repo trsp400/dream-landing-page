@@ -22,6 +22,7 @@ const StepTwo = () => {
 
   const { currentStep, objectiveCost } = store;
 
+  const [isActiveInput, setIsActiveInput] = useState(false)
   const [inputValue, setInputValue] = useState(objectiveCost);
 
   const handleDispatch = useCallback(
@@ -83,10 +84,10 @@ const StepTwo = () => {
         </MessageFeedbackStyle>
 
         <BoxInput>
-          <Input state={inputValue} setState={setInputValue} type="currency" />
+          <Input state={inputValue} setState={setInputValue} type="currency" setIsActiveInput={setIsActiveInput}/>
         </BoxInput>
       </Body>
-      <Footer>
+      <Footer isActiveInput={isActiveInput}>
         <Button
           ripple
           variant="beblue"

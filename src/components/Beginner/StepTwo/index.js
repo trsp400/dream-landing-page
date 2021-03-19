@@ -13,16 +13,24 @@ import {
   MessageFeedbackStyle,
   BoxInput,
   Footer,
+  InputContainer,
 } from './styles';
 
 const StepTwo = () => {
   const dispatch = useDispatch();
   const store = useSelector(({ dreamMachine }) => dreamMachine);
-  const { notify } = useSelector(({ settings }) => settings);
+  const { notify, isMobileView } = useSelector(({ settings }) => settings);
 
   const { currentStep, objectiveCost } = store;
 
   const [inputValue, setInputValue] = useState(objectiveCost);
+  const [isActiveInput, setIsActiveInput] = useState(false);
+
+  // useEffect(() => {
+  //   const input = document.querySelector('input');
+  //   setIsActiveInput(true);
+  //   input.autofocus = true;
+  // }, []);
 
   const handleDispatch = useCallback(
     (step, direction) => {
@@ -63,14 +71,15 @@ const StepTwo = () => {
     };
   }, [inputValue]);
 
-  return (
-    <Container>
+  return isMobileView ? (
+    <Container isMobileView={isMobileView}>
       <Body>
         <MessageFeedbackStyle
           placing="above"
           animationSpeed={2000}
           animationDelay={900}
           largeLowSpace
+          isMobileView={isMobileView}
         >
           Que legal! Com a Máquina dos Sonhos da BeCapital você consegue com
           tranquilidade!
@@ -79,15 +88,21 @@ const StepTwo = () => {
           placing="bellow"
           animationSpeed={2000}
           animationDelay={2800}
+          isMobileView={isMobileView}
         >
           De quanto você precisa?
         </MessageFeedbackStyle>
 
-        <BoxInput>
-          <Input state={inputValue} setState={setInputValue} type="currency" />
+        <BoxInput isMobileView={isMobileView}>
+          <Input
+            state={inputValue}
+            setState={setInputValue}
+            type="currency"
+            setIsActiveInput={setIsActiveInput}
+          />
         </BoxInput>
       </Body>
-      <Footer>
+      <Footer isActiveInput={isActiveInput}>
         <Button
           ripple
           variant="beblue"
@@ -106,6 +121,62 @@ const StepTwo = () => {
           OK
         </Button>
       </Footer>
+    </Container>
+  ) : (
+    <Container isMobileView={isMobileView}>
+      <Body>
+        <MessageFeedbackStyle
+          placing="above"
+          animationSpeed={2000}
+          animationDelay={900}
+          largeLowSpace
+          isMobileView={isMobileView}
+        >
+          Que legal! Com a Máquina dos Sonhos da BeCapital você consegue com
+          tranquilidade!
+        </MessageFeedbackStyle>
+        <MessageFeedbackStyle
+          placing="bellow"
+          animationSpeed={2000}
+          animationDelay={2800}
+          isMobileView={isMobileView}
+        >
+          De quanto você precisa?
+        </MessageFeedbackStyle>
+
+        <InputContainer>
+          <Button
+            ripple
+            variant="beblue"
+            glow
+            onClick={() => handleDispatch(1, 'previous')}
+            style={{
+              width: '10%',
+            }}
+          >
+            <Lefticon width={20} />
+          </Button>
+          <BoxInput>
+            <Input
+              state={inputValue}
+              setState={setInputValue}
+              type="currency"
+              setIsActiveInput={setIsActiveInput}
+            />
+          </BoxInput>
+          <Button
+            ripple
+            variant="beorange"
+            glow
+            onClick={() => handleDispatch(3, 'next')}
+            style={{
+              width: '10%',
+            }}
+          >
+            OK
+          </Button>
+        </InputContainer>
+      </Body>
     </Container>
   );
 };

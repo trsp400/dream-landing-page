@@ -29,6 +29,7 @@ const StepSeven = () => {
   const yearlyAverageArray = result?.yearlyAverageArray || [];
   const resultSuccess = result?.resultSuccess || false;
 
+  const [isActiveInput, setIsActiveInput] = useState(false)
   const [inputValue, setInputValue] = useState('');
   const [validEmail, setValidEmail] = useState(true);
   const [requestLoading, setRequestLoading] = useState(false);
@@ -138,6 +139,7 @@ const StepSeven = () => {
             state={inputValue}
             setState={checkValidEmailOnInputChange}
             type="email"
+            setIsActiveInput={setIsActiveInput}
           />
           {!validEmail && (
             <ErrorInformation>Digite um e-mail válido!</ErrorInformation>
@@ -150,7 +152,7 @@ const StepSeven = () => {
         </span>
       </Body>
 
-      <Footer>
+      <Footer isActiveInput={isActiveInput}>
         <Button
           ripple
           variant="beorange"

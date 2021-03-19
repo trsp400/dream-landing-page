@@ -18,7 +18,12 @@ interface ListDecisionProps {
   state: string;
   setState(value: any): void;
 }
-const ListDecision: FC<ListDecisionProps> = ({ options, state, setState }) => {
+const ListDecision: FC<ListDecisionProps> = ({
+  options,
+  state,
+  setState,
+  ...props
+}) => {
   return (
     <Container>
       <Row className="justify-content-md-center">
@@ -34,7 +39,7 @@ const ListDecision: FC<ListDecisionProps> = ({ options, state, setState }) => {
               onClick={() => setState(key)}
               key={options[key]}
             >
-              <ListDecisionContainerStyled>
+              <ListDecisionContainerStyled {...props}>
                 <ListDecisionCheckStyled
                   style={{ '--color': color } as CSSProperties}
                   onClick={() => setState(key)}

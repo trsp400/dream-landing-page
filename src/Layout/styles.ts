@@ -6,6 +6,8 @@ import Background1 from '../images/bg_1.png';
 interface Props {
   isMobileView?: Boolean;
   currentStep?: Number;
+  yearlyAverageArray?: Number[];
+  finishSimulation?: Boolean;
 }
 
 interface ThemeProp extends ThemeProps<any> {
@@ -100,10 +102,10 @@ export const Background = styled.div<Props>`
   background-image: url('${Pattern}');
   filter: invert(100%);
   position: absolute;
-  left: 0;
   width: 100vw;
   height: 100vh;
-
+  left: 0;
+  top: 0;
   opacity: 0.1;
 
   background-size: cover;
@@ -119,8 +121,15 @@ export const ProgressBarContainer = styled.div`
   margin-bottom: 18px;
 `;
 
-export const Main = styled.main`
-  display: flex;
+export const Main = styled.main<Props>`
+  position: relative;
+  ${props =>
+    props?.finishSimulation &&
+    css`
+      width: 100%;
+    `}
   flex-direction: column;
   justify-content: center;
+
+  height: 100%;
 `;
