@@ -34,7 +34,7 @@ export const MessageFeedbackStyle = styled(MessageFeedback)`
   ${props =>
     props?.isMobileView
       ? css`
-          margin-bottom: 8px;
+          /* margin-bottom: 8px; */
         `
       : css`
           font-size: 48px;
@@ -79,7 +79,7 @@ export const BoxInput = styled.div`
           height: auto;
           padding: 23px;
 
-          @media(max-height: 640px) {
+          @media(max-height: 640px) and (max-width: 320px) {
             padding: ${props => props.isActiveInput && "1px"};
           }
         `
@@ -100,9 +100,9 @@ export const BoxInput = styled.div`
 
 export const Footer = styled.div`
   position: fixed;
-  bottom:  15%;
+  bottom:  8em;
   width: 100%;
-  height: 7%;
+  height:  3.5em;
   display: flex;
 
   justify-content: space-between;
@@ -121,10 +121,9 @@ export const Footer = styled.div`
     }
   }
 
-  @media (max-height: 640px) {
-    display: flex;
-    height: ${props => props.isActiveInput ? "14%" : "9%"};
-    bottom: ${props => props.isActiveInput ? "8%" : "22%"};
+  @media (max-height: 640px) and (max-width: 320px){
+    height: 3em;
+    bottom: ${props => props.isActiveInput ? "1.8em" : "7em"};
 
     button {
       svg {
@@ -153,7 +152,7 @@ export const ButtonContainer = styled.div`
     }
   }
 
-  @media(max-height: 640px) {
+  @media(max-height: 640px) and (max-width: 320px){
     button {
       padding: 4px 0;
       font-size: 16px;

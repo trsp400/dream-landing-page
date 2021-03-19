@@ -44,7 +44,7 @@ export const MessageFeedbackStyle = styled(MessageFeedback)`
   ${props =>
     props?.isMobileView
       ? css`
-          margin-bottom: 8px;
+          /* margin-bottom: 8px; */
         `
       : css`
           font-size: 48px;
@@ -109,8 +109,10 @@ export const BodyModalStyled = styled(Body)`
     text-align: center;
   }
 
-  input {
+  .boxInput_input {
+    position: relative;
     width: 100%;
+    height: 100%;
   }
 
 `;

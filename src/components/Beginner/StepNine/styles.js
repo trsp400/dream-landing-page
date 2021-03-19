@@ -5,9 +5,9 @@ import { Modal, Header } from '../../CustomComponents/Modal';
 import MessageFeedback from '../../CustomComponents/MessageFeedback';
 
 const animateErrorinformation = keyframes`
-  0% { bottom: 45%; opacity: 0; transform: scale(0.4)}
+  0% { opacity: 0; transform: scale(0.4)}
   18% { opacity: 0; }
-  50%, 100% { bottom: 20%; opacity: 1; transform: scale(1);}
+  50%, 100% {opacity: 1; transform: scale(1);}
 
 `;
 
@@ -41,7 +41,7 @@ export const MessageFeedbackStyle = styled(MessageFeedback)`
   ${props =>
     props?.isMobileView
       ? css`
-          margin-bottom: 8px;
+          margin-bottom: 5px;
         `
       : css`
           font-size: 48px;
@@ -67,32 +67,23 @@ export const BoxInput = styled.div`
   height: auto;
   margin-top: 25px;
 
-  padding: 50px;
-`;
-
-export const ErrorInformation = styled.span`
-  position: absolute;
-  top: 65%;
-
-  color: #fff200;
-  font-weight: bold;
-
-  animation: ${animateErrorinformation} 1.3s cubic-bezier(0.17, 0.89, 1, 1.27);
-`;
-
-export const Body = styled.div`
-  display: flex;
-  height: 100%;
-  flex-direction: column;
+  padding: 25px;
 
   ${props =>
     props?.isMobileView
       ? css`
-          > span {
-            padding: 0 30px;
-            text-align: center;
-            line-height: 18px;
+          > span[class="box-input_warning"] {
+            line-height: 12px;
             color: #fff;
+            font-size: 13px;
+            text-align: center;
+            margin-bottom: 45px;
+            padding: 0 15px;
+
+            @media(max-height: 640px) and (max-width:320px) {
+              margin-bottom: 8px;
+            }
+
           }
         `
       : css`
@@ -105,6 +96,24 @@ export const Body = styled.div`
             color: #fff;
           }
         `}
+`;
+
+export const ErrorInformation = styled.span`
+  position: absolute;
+  top: 7.5em;
+
+  color: #fff200;
+  font-weight: bold;
+
+  animation: ${animateErrorinformation} 1.3s cubic-bezier(0.17, 0.89, 1, 1.27);
+`;
+
+export const Body = styled.div`
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+
+
 `;
 
 export const InputContainer = styled.div`
@@ -128,9 +137,9 @@ export const InputContainer = styled.div`
 
 export const Footer = styled.div`
   position: fixed;
-  bottom: ${props => (props.isActiveInput ? '25%' : '15%')};
+  bottom: 8em;
   width: 100%;
-  height: ${props => (props.isActiveInput ? '10%' : '7%')};
+  height: 4em;
   display: flex;
 
   justify-content: space-between;
@@ -139,6 +148,11 @@ export const Footer = styled.div`
   button {
     width: 100%;
     position: relative;
+  }
+
+  @media (max-height: 640px) and (max-width: 320px) {
+    height: 3em;
+    bottom: ${props => props.isActiveInput ? "1.7em" : "7em"};
   }
 `;
 

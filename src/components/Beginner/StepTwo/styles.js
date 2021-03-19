@@ -14,7 +14,8 @@ export const Container = styled(BootstrapContainer)`
           padding: 0;
 
           @media(max-height: 640px) and (max-width: 320px){
-            height: ${props => props.isActiveInput ? "150vh" : "100vh"};
+
+            /* height: ${props => props.isActiveInput ? "150vh" : "100vh"}; */
           }
 
         `
@@ -60,7 +61,15 @@ export const MessageFeedbackStyle = styled(MessageFeedback)`
   ${props =>
     props?.isMobileView
       ? css`
-          margin-bottom: 8px;
+          /* margin-bottom: 8px; */
+
+          @media(max-height: 480px) and (max-width: 320px){
+            &:nth-child(2) {
+              margin-top: 14px;
+              margin-bottom: 0;
+            }
+            margin-bottom: 8px;
+          }
         `
       : css`
           &:first-child {
@@ -74,6 +83,8 @@ export const MessageFeedbackStyle = styled(MessageFeedback)`
           top: 15%;
         `}
 
+
+
   &:nth-child(2) {
     ${props =>
       props?.isMobileView
@@ -83,7 +94,8 @@ export const MessageFeedbackStyle = styled(MessageFeedback)`
         : css`
             position: absolute;
             top: 40%;
-          `}
+          `
+    }
   }
 `;
 
@@ -101,7 +113,6 @@ export const BoxInput = styled.div`
     `}
 
     @media(max-height: 640px) {
-
     }
 `;
 
@@ -109,17 +120,21 @@ export const BoxInput = styled.div`
 // height: ${props => props.isActiveInput ? "10%" : "7%"};
 export const Footer = styled.div`
   position: fixed;
-  bottom: 15%;
-  width: 100%;
-  height: 7%;
   display: flex;
+  bottom:  8em;
+  width: 100%;
+  height:  3.5em;
+
 
   justify-content: space-between;
   padding: 0 10%;
 
   button {
+    display: flex;
+    /* align-items: flex-start; */
     width: 100%;
     position: relative;
+    font-size: 18px;
 
     &:last-child {
       margin-left: 10px;
@@ -131,11 +146,10 @@ export const Footer = styled.div`
   }
 
   @media (max-height: 640px) and (max-width: 320px) {
-    display: flex;
-
-    height: ${props => props.isActiveInput ? "14%" : "9%"};
-    bottom: ${props => props.isActiveInput ? "14%" : "22%"}
+    height: 3em;
+    bottom: ${props => props.isActiveInput ? "4.2em" : "7em"};
   }
+
 `;
 
 export const ButtonContainer = styled.div`

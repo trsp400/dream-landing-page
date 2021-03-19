@@ -37,10 +37,8 @@ const formatTextPerPlacing: PropsObjFormatTextPerPlacing = {
 export const TextStyled = styled.div<PropsTextStyled>`
   display: flex;
   width: 100%;
-  height: ${props => props.largeLowSpace ? "12%" : "8%"};
+  height: ${props => props.largeLowSpace ? "10%" : "8%"};
   margin: 0 20px 0;
-
-  line-height: 5px;
 
   @media (max-height: 640px) and (max-width: 320px){
     height: ${props => props.largeLowSpace ? "14%" : "8%"};

@@ -94,10 +94,10 @@ export const BoxInput = styled.div`
 
 export const Footer = styled.div`
   position: fixed;
-  bottom:  15%;
+  display: flex;
+  bottom:  8em;
   width: 100%;
-  height: 7%;
-  display: ${props => props.isActiveInput ? "none" : "flex"};
+  height:  4em;
 
   justify-content: space-between;
   padding: 0 10%;
@@ -115,9 +115,9 @@ export const Footer = styled.div`
     }
   }
 
-  @media (max-height: 640px) {
-    height: 9%;
-    bottom: 22%;
+  @media (max-height: 640px) and (max-width: 320px){
+    height: 3em;
+    bottom: ${props => props.isActiveInput ? "6em" : "7em"};
 
     button {
       svg {

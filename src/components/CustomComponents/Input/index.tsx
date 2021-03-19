@@ -19,10 +19,16 @@ interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
 
 const Input: FC<InputProps> = ({ state, type, setState, placeholder, setIsActiveInput, ...props }) => {
 
-  const checkFunction = (fn:Function, value:boolean):Function => {
+  function checkFunction (event:Event, fn:Function, value:boolean):Function  {
+    const { type } = event;
+
     if(!fn) return null
 
-    return fn(value)
+    if(type === "focus") return fn(value);
+
+    setTimeout(() => {
+      return fn(value)
+    }, 200)
   }
 
 
@@ -42,8 +48,8 @@ const Input: FC<InputProps> = ({ state, type, setState, placeholder, setIsActive
         customInput={InputStyledNumber}
         value={state}
         onChange={event => setState(event?.target?.value)}
-        onBlur={() => checkFunction(setIsActiveInput ,false)}
-        onFocus={() => checkFunction(setIsActiveInput, true)}
+        onBlur={event => checkFunction(event, setIsActiveInput ,false)}
+        onFocus={event => checkFunction(event, setIsActiveInput, true)}
         {...props}
       />
     ) : type === 'text' ? (
@@ -53,8 +59,8 @@ const Input: FC<InputProps> = ({ state, type, setState, placeholder, setIsActive
           value={state || ''}
           type={type}
           onChange={event => setState(event?.target?.value)}
-          onBlur={() => checkFunction(setIsActiveInput,false)}
-          onFocus={() => checkFunction(setIsActiveInput,true)}
+          onBlur={event => checkFunction(event, setIsActiveInput,false)}
+          onFocus={event => checkFunction(event, setIsActiveInput,true)}
           {...props}
         />
       </InputStyledTextContainer>
@@ -68,8 +74,8 @@ const Input: FC<InputProps> = ({ state, type, setState, placeholder, setIsActive
             setState(event?.target?.value);
           }}
           required
-          onBlur={() => checkFunction(setIsActiveInput,false)}
-          onFocus={() => checkFunction(setIsActiveInput,true)}
+          onBlur={event => checkFunction(event, setIsActiveInput,false)}
+          onFocus={event => checkFunction(event, setIsActiveInput,true)}
           {...props}
         />
       </InputStyledTextContainer>
@@ -84,8 +90,8 @@ const Input: FC<InputProps> = ({ state, type, setState, placeholder, setIsActive
         customInput={InputStyledNumber}
         value={state || ''}
         onChange={event => setState(event?.target?.value)}
-        onBlur={() => checkFunction(setIsActiveInput,false)}
-          onFocus={() => checkFunction(setIsActiveInput,true)}
+        onBlur={event => checkFunction(event, setIsActiveInput,false)}
+          onFocus={event => checkFunction(event, setIsActiveInput,true)}
         {...props}
       />
     ) : (

@@ -33,6 +33,7 @@ export const InputStyledTextContainer = styled.div`
   -webkit-box-shadow: 0px 0px 8px 2px rgba(0, 0, 0, 0.51);
   -moz-box-shadow: 0px 0px 8px 2px rgba(0, 0, 0, 0.51);
   background-color: ${({ theme }) => theme.mobileTheme.colors.primary.blue};
+
 `;
 
 export const InputStyledText = styled.input`
