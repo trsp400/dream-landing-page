@@ -30,19 +30,13 @@ export const createResultObject = (
     ? newPeriodParsed
     : isYearOrMonthPeriod;
 
-  // const guessValue = isYearOrMonthPeriod > 120 ? 0.02 : 0.01;
-  const guessValue = 0.02;
-
-  const monthlyRate = parseFloat(
-    calculateRate(
-      trulyPeriod,
-      -monthlySupport || -0,
-      -currentInvestments || -0,
-      objectiveCost || 0,
-      0,
-      guessValue,
-    ) * 100,
-  ).toFixed(2);
+  const monthlyRate = calculateRate(
+    trulyPeriod,
+    monthlySupport,
+    currentInvestments,
+    objectiveCost,
+    achievedObjectiveCost,
+  );
 
   const annualRate = parseFloat(monthlyRate * 12).toFixed(2);
 
