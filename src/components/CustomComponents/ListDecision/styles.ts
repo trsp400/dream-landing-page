@@ -30,7 +30,13 @@ export const ListDecisionContainerStyled = styled.section`
     ${({ theme }) => theme.mobileTheme.colors.primary.orange};
 
 
-  @media (max-height: 640px) {
+  @media(max-height: 737px) and (max-width: 415px){
+    height: 85%;
+    margin-bottom: 14px;
+    margin-top: 14px;
+  }
+
+  @media (max-height: 569px) and (max-width: 321px) {
     height: 70%;
     margin-bottom: 10px;
     margin-top: 10px;
@@ -66,8 +72,7 @@ export const ListDecisionTextStyled = styled.div`
   /* height: max-content; */
   line-height: 16px;
 
-  @media (max-height: 640px) {
-    font-size: 12px;
+  @media(max-height: 737px) and (max-width: 415px){
 
   }
 

@@ -53,11 +53,15 @@ export const CardBody = styled(Card.Body)<PropsCardBody>`
   border: none;
   background-color: ${props => props?.backgroundcolor};
   border-radius: 6px;
-  padding: 15px;
+  padding: 1.2em;
   box-shadow: 1px 1px 5px 1px ${props => props?.backgroundcolor};
 
-  @media (max-height: 640px) {
-    padding: 8px;
+  @media (max-height: 737px) and (max-width: 415px) {
+    padding: 15px;
+  }
+
+  @media (max-height: 569px) and (max-width: 321px) {
+    padding: .5em;
   }
 
 
@@ -76,27 +80,38 @@ export const CardBody = styled(Card.Body)<PropsCardBody>`
   `}
 
   svg {
-    height: ${props => props.iconsize}px;
+    height: 3em;
     fill: #fff;
 
-    @media (max-height: 640px) {
-      height: 28px;
+    @media (max-height: 737px) and (max-width: 415px) {
+      height: 2.3em;
     }
+
+    @media (max-height: 569px) and (max-width: 321px) {
+      height: 1.7em
+    }
+
   }
 `;
 
 export const CardFooter = styled(Card.Footer)`
   display: flex;
+  align-items: flex-start;
   border: none;
-
+  padding-top: 6px;
   padding-right: 0;
   padding-left: 0;
 
   color: ${props => props.color};
   background: transparent;
   font-weight: 600;
-  font-size: ${props => props.labelSize}px;
+  font-size: .8em;
   text-align: center;
+  line-height: 14px;
 
+  @media (max-height: 737px) and (max-width: 415px) {
+    font-size: .7em;
+    line-height: 12px;
+  }
 
 `;

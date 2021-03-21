@@ -116,7 +116,13 @@ export const Footer = styled.div`
     }
   }
 
-  @media (max-height: 640px) and (max-width: 320px) {
+  @media(max-height: 737px) and (max-width: 415px){
+    height: 3em;
+    bottom: 7em;
+    /* bottom: ${props => props.isActiveInput ? "6em" : "7em"}; */
+  }
+
+  @media (max-height: 569px) and (max-width: 321px) {
     height: 3em;
     bottom: ${props => props.isActiveInput ? "6em" : "7em"};
   }

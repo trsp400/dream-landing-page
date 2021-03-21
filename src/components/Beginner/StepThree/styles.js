@@ -79,7 +79,7 @@ export const BoxInput = styled.div`
           height: auto;
           padding: 23px;
 
-          @media(max-height: 640px) and (max-width: 320px) {
+          @media(max-height: 737px) and (max-width: 415px){
             padding: ${props => props.isActiveInput && "1px"};
           }
         `
@@ -117,19 +117,24 @@ export const Footer = styled.div`
     }
 
     svg {
-      height: 90%;
+      height: 25px;
     }
   }
 
-  @media (max-height: 640px) and (max-width: 320px){
+  @media(max-height: 737px) and (max-width: 415px){
     height: 3em;
-    bottom: ${props => props.isActiveInput ? "1.8em" : "7em"};
+    bottom: ${props => props.isActiveInput ? "5em" : "7em"};
 
     button {
       svg {
         height: 25px;
       }
     }
+  }
+
+  @media (max-height: 569px) and (max-width: 321px) {
+    height: 3em;
+    bottom: ${props => props.isActiveInput ? "1em" : "7em"};
   }
 `;
 export const ButtonContainer = styled.div`
@@ -152,7 +157,7 @@ export const ButtonContainer = styled.div`
     }
   }
 
-  @media(max-height: 640px) and (max-width: 320px){
+  @media(max-height: 737px) and (max-width: 415px){
     button {
       padding: 4px 0;
       font-size: 16px;

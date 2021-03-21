@@ -28,7 +28,7 @@ export const MessageFeedbackStyle = styled(MessageFeedback)`
     props?.isMobileView
       ? css`
           /* margin-bottom: 8px; */
-          @media(max-height: 480px) and (max-width: 320px) {
+          @media(max-height: 737px) and (max-width: 415px){
             margin-bottom: 8px;
           }
         `
@@ -162,7 +162,7 @@ export const Footer = styled.div`
           position: fixed;
           bottom: 8em;
           width: 100%;
-          height: 4em;
+          height: 3.5em;
           display: flex;
 
           justify-content: space-between;
@@ -177,20 +177,18 @@ export const Footer = styled.div`
             }
 
             svg {
-              height: 90%;
+              height: 25px;
             }
           }
 
-          @media (max-height: 640px) and (max-width: 320px){
+          @media(max-height: 737px) and (max-width: 415px){
             height: 3em;
-            bottom: 6em;
+            bottom: 7em;
 
-            button {
-              svg {
-                height: 25px;
-              }
-            }
+          }
 
+          @media (max-height: 569px) and (max-width: 321px) {
+            bottom: 7em;
           }
         `
       : css`
