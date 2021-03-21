@@ -14,7 +14,7 @@ const formatTextPerPlacing: PropsObjFormatTextPerPlacing = {
   above: props =>
     props.placing === 'above' &&
     css`
-      font: normal normal lighter 19px Trasandina;
+      font: normal normal lighter 1.4em Trasandina;
 
       @media (max-height: 640px) and (max-width: 320px){
         font: normal normal lighter 16px Trasandina;
@@ -25,7 +25,7 @@ const formatTextPerPlacing: PropsObjFormatTextPerPlacing = {
   bellow: props =>
     props.placing === 'bellow' &&
     css`
-      font: normal normal bold 22px Trasandina;
+      font: normal normal bold 1.7em Trasandina;
 
       @media (max-height: 640px) and (max-width: 320px){
         font: normal normal bold 19px Trasandina;
@@ -37,7 +37,7 @@ const formatTextPerPlacing: PropsObjFormatTextPerPlacing = {
 export const TextStyled = styled.div<PropsTextStyled>`
   display: flex;
   width: 100%;
-  height: ${props => props.largeLowSpace ? "10%" : "8%"};
+  height: ${props => props.largeLowSpace ? "16%" : "8%"};
   margin: 0 20px 0;
 
   @media (max-height: 640px) and (max-width: 320px){

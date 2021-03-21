@@ -73,15 +73,16 @@ export const BoxInput = styled.div`
     props?.isMobileView
       ? css`
           > span[class="box-input_warning"] {
-            line-height: 12px;
             color: #fff;
-            font-size: 13px;
+            font: lighter 1.1em/16px Trasandina;
             text-align: center;
             margin-bottom: 45px;
             padding: 0 15px;
 
-            @media(max-height: 640px) and (max-width:320px) {
+            @media(max-height: 737px) and (max-width: 415px){
               margin-bottom: 8px;
+              font-size: 13px;
+              line-height: 12px;
             }
 
           }
@@ -100,7 +101,7 @@ export const BoxInput = styled.div`
 
 export const ErrorInformation = styled.span`
   position: absolute;
-  top: 7.5em;
+  bottom: 4px;
 
   color: #fff200;
   font-weight: bold;
@@ -139,7 +140,7 @@ export const Footer = styled.div`
   position: fixed;
   bottom: 8em;
   width: 100%;
-  height: 4em;
+  height: 3.5em;
   display: flex;
 
   justify-content: space-between;
@@ -150,7 +151,12 @@ export const Footer = styled.div`
     position: relative;
   }
 
-  @media (max-height: 640px) and (max-width: 320px) {
+  @media(max-height: 737px) and (max-width: 415px){
+    height: 3em;
+    bottom: 7em;
+  }
+
+  @media (max-height: 569px) and (max-width: 321px) {
     height: 3em;
     bottom: ${props => props.isActiveInput ? "1.7em" : "7em"};
   }

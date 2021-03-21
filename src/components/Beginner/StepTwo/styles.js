@@ -13,7 +13,7 @@ export const Container = styled(BootstrapContainer)`
           flex-direction: column;
           padding: 0;
 
-          @media(max-height: 640px) and (max-width: 320px){
+          @media(max-height: 737px) and (max-width: 415px){
 
             /* height: ${props => props.isActiveInput ? "150vh" : "100vh"}; */
           }
@@ -63,7 +63,7 @@ export const MessageFeedbackStyle = styled(MessageFeedback)`
       ? css`
           /* margin-bottom: 8px; */
 
-          @media(max-height: 480px) and (max-width: 320px){
+          @media(max-height: 737px) and (max-width: 415px){
             &:nth-child(2) {
               margin-top: 14px;
               margin-bottom: 0;
@@ -145,11 +145,16 @@ export const Footer = styled.div`
     }
   }
 
-  @media (max-height: 640px) and (max-width: 320px) {
+  @media (max-height: 737px) and (max-width: 415px) {
     height: 3em;
-    bottom: ${props => props.isActiveInput ? "4.2em" : "7em"};
+    bottom: 7em;
+    /* bottom: ${props => props.isActiveInput ? "7em" : "7em"}; */
   }
 
+  @media (max-height: 569px) and (max-width: 321px) {
+    height: 3em;
+    bottom: ${props => props.isActiveInput ? "3.7em" : "7em"};
+  }
 `;
 
 export const ButtonContainer = styled.div`
