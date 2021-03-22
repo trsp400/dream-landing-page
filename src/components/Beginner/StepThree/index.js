@@ -189,13 +189,13 @@ const StepThree = () => {
           <Select
             options={options}
             components={makeAnimated()}
-            placeholder="Selecione"
             isSearchable={false}
             clearable={false}
             onChange={event =>
               setPlaceholderInformation(event?.value?.toLowerCase())
             }
             styles={selectPeriodConfig}
+            placeholder={placeholderInfo}
           />
 
           <Button
