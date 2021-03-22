@@ -1,9 +1,21 @@
-import styled, { css } from 'styled-components';
+import styled, { css, keyframes } from 'styled-components';
 import { Container as BootstrapContainer, ButtonGroup } from 'react-bootstrap';
 
 import RippleButton from '../../components/CustomComponents/Button';
 
 import Pattern from '../../images/background-pattern.png';
+
+const animateDreamMachine = keyframes`
+  0% {
+    transform: translateY(-12px);
+  }
+
+  100% {
+    transform: translateY(0px);
+  }
+
+`
+
 
 export const Container = styled(BootstrapContainer)`
   height: 100%;
@@ -158,10 +170,16 @@ export const DesktopContainer = styled.div`
   -webkit-flex-direction: row;
   -ms-flex-direction: row;
   flex-direction: row;
+
+  transform-style: preserve-3d;
+  perspective: 1000px;
 `;
 
 export const DreamMachineContainer = styled.div`
   width: 65%;
+  filter: drop-shadow(0px 150px 15px rgba(0,0,0,0.48));
+
+  animation: ${animateDreamMachine} 3s infinite alternate-reverse ease-in-out;
 `;
 
 export const PresentationSection = styled.section`

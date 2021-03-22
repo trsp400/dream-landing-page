@@ -10,12 +10,14 @@ import {
   Container,
   MessageFeedbackStyle,
   BoxInput,
+  BoxButton,
   Body,
   Footer,
   InputContainer,
 } from './styles';
 
 import Lefticon from '../../../assets/icons/left-icon.svg';
+import OkIcon from '../../../assets/icons/ok-icon.svg'
 
 const StepFive = () => {
   const dispatch = useDispatch();
@@ -139,41 +141,34 @@ const StepFive = () => {
         >
           Quanto você pode investir por mês?
         </MessageFeedbackStyle>
-        <InputContainer>
-          <Button
-            ripple
-            variant="beblue"
-            glow
-            onClick={() => handleDispatch(4, 'previous')}
-            style={{
-              width: '10%',
-              padding: 0,
-            }}
-          >
-            <Lefticon width={20} />
-          </Button>
 
-          <BoxInput isMobileView={isMobileView}>
+        <InputContainer>
             <Input
               state={inputValue}
               setState={setInputValue}
               type="currency"
               setIsActiveInput={setIsActiveInput}
             />
-          </BoxInput>
+          <BoxButton>
+            <Button
+              ripple
+              variant="beblue"
+              glow
+              onClick={() => handleDispatch(4, 'previous')}
+            >
+              <Lefticon width={20} />
+            </Button>
 
-          <Button
-            ripple
-            variant="beorange"
-            glow
-            onClick={() => handleDispatch(6, 'next')}
-            style={{
-              width: '20%',
-            }}
-          >
-            OK
-          </Button>
-        </InputContainer>
+            <Button
+              ripple
+              variant="beorange"
+              glow
+              onClick={() => handleDispatch(6, 'next')}
+            >
+              OK <OkIcon />
+            </Button>
+          </BoxButton>
+       </InputContainer>
       </Body>
 
       <Footer></Footer>

@@ -1,20 +1,25 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import {
   Container as ContainerBootstrap,
   Row as RowBootstrap,
   Col as ColBootstrap,
 } from 'react-bootstrap';
 
+interface PropsListDecision {
+  isMobileView: boolean
+}
+
 export const Container = styled(ContainerBootstrap)`
   padding: 0;
 `;
 export const Row = styled(RowBootstrap)`
+
 `;
 export const Col = styled(ColBootstrap)`
 `;
 
-export const ListDecisionContainerStyled = styled.section`
-  height: 80%;
+export const ListDecisionContainerStyled = styled.section<PropsListDecision>`
+  height: 70%;
   width: 100%;
   display: flex;
   justify-content: center;
@@ -28,6 +33,13 @@ export const ListDecisionContainerStyled = styled.section`
   border-radius: 10px;
   box-shadow: 0px 0px 6px 1px
     ${({ theme }) => theme.mobileTheme.colors.primary.orange};
+
+  ${props => !props.isMobileView && css`
+    width: 100% !important;
+    height: 90% !important;
+    margin-top: .7em;
+
+  `}
 
 
   @media(max-height: 737px) and (max-width: 415px){
@@ -59,7 +71,7 @@ export const ListDecisionCheckStyled = styled.div`
   }
 `;
 
-export const ListDecisionTextStyled = styled.div`
+export const ListDecisionTextStyled = styled.div<PropsListDecision>`
   width: 100%;
   height: 100%;
   display: flex;
@@ -70,7 +82,10 @@ export const ListDecisionTextStyled = styled.div`
 
   color: #fff;
   /* height: max-content; */
-  line-height: 16px;
+
+  ${props => !props.isMobileView && css`
+    font: 400 .8em/8px Trasandina !important;
+  `}
 
   @media(max-height: 737px) and (max-width: 415px){
 

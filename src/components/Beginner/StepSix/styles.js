@@ -67,6 +67,7 @@ export const ListDecisionStyled = styled(ListDecision)`
   width: 200px;
   height: 200px;
   flex-direction: column;
+
   span {
     font-size: 20px;
     line-height: 30px;
@@ -84,6 +85,7 @@ export const BoxListDecision = styled.div`
       : css`
           position: absolute;
           top: 50%;
+          width: 100%;
         `}
 `;
 
