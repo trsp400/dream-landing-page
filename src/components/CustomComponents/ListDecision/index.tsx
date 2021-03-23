@@ -60,6 +60,7 @@ const ListDecision: FC<ListDecisionProps> = ({
                 <ListDecisionCheckStyled
                   style={{ '--color': color } as CSSProperties}
                   onClick={() => setState(key)}
+                  isMobileView={settings.isMobileView}
                 />
                 <ListDecisionTextStyled
                   isMobileView={settings.isMobileView}

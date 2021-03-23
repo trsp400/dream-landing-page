@@ -88,14 +88,20 @@ export const BoxInput = styled.div`
           }
         `
       : css`
-          > span {
-            margin-top: 25%;
-            padding: 0 10%;
-            text-align: center;
-            line-height: 40px;
-            font-size: 35px;
-            color: #fff;
+          flex-direction: row;
+          justify-content: start;
+          padding: 0 0 25px 0;
+
+          div {
+            width: 50%;
+
           }
+
+
+          input {
+            width: 100%;
+          }
+
         `}
 `;
 
@@ -113,28 +119,49 @@ export const Body = styled.div`
   display: flex;
   height: 100%;
   flex-direction: column;
-
-
 `;
 
 export const InputContainer = styled.div`
   position: absolute;
-  top: 35%;
+  top: 50%;
   width: 100%;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
+  height: auto;
+  padding-left: 50px;
 
-  input {
-    width: 700px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+
+  > span {
+    width: 50%;
+    color: #fff;
+    font: lighter 1em/16px Trasandina;
+    text-align: left;
+
   }
+
+`;
+
+export const BoxButton = styled.div`
+  display: flex;
+  width: 100%;
+  margin-top: 25px;
 
   button {
-    width: 30%;
-    margin-top: 2.5%;
+    display: flex;
+    width: 5em;
+    align-items: baseline;
+
+    padding-left: 6px;
+
+
+    svg {
+      height: .7em;
+      fill: #fff;
+      margin-left: 4px;
+    }
   }
-`;
+`
 
 export const Footer = styled.div`
   position: fixed;

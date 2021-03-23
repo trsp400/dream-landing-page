@@ -62,13 +62,39 @@ export const Body = styled.div`
 
 export const ListDecisionStyled = styled(ListDecision)`
   width: 200px;
-  height: 200px;
+  height: 220px;
   flex-direction: column;
+
   span {
-    font-size: 20px;
-    line-height: 30px;
+    font-size: 1.5em;
+    line-height: 25px;
   }
 `;
+
+export const BoxButton = styled.div`
+  display: flex;
+  width: 100%;
+  margin-top: 25px;
+
+  button {
+    display: flex;
+    width: 5em;
+    justify-content: flex-end;
+
+    svg {
+      height: 1em;
+      fill: #fff;
+    }
+
+
+    &:first-of-type {
+      width: 3em;
+      margin-right: 20px;
+      justify-content: center;
+    }
+
+  }
+`
 
 export const BoxListDecision = styled.div`
   ${props =>
