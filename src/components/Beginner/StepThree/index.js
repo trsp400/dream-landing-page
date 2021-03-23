@@ -50,6 +50,14 @@ const StepThree = () => {
       if (!inputValue && step > currentStep)
         return notify('Por favor, digite um valor!');
 
+      if (typeof inputValue === 'string') {
+        if (
+          (inputValue?.includes('-') || inputValue <= 0) &&
+          step > currentStep
+        )
+          return notify('Por favor, digite um valor válido!');
+      }
+
       dispatch(
         changeFormState({
           ...store,
