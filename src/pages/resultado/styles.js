@@ -4,7 +4,6 @@ import { Container as BootstrapContainer } from 'react-bootstrap';
 import LineChart from '../../components/CustomComponents/LineChart';
 import RippleButton from '../../components/CustomComponents/Button';
 
-
 const introAnimateChart = keyframes`
   0% {
     transform: scale(0) translateY(150%);
@@ -17,7 +16,7 @@ const introAnimateChart = keyframes`
     box-shadow: 0px 0px 5px 0px rgba(50, 50, 50, 0.74);
     /* transform: translate(0%, 50%); */
   }
-`
+`;
 
 const exitAnimateChart = keyframes`
   0% {
@@ -31,7 +30,7 @@ const exitAnimateChart = keyframes`
     /* transform: translate(100%, 50%); */
     opacity: 0;
   }
-`
+`;
 
 const messagePressButtonAnimate = keyframes`
   0%, 20%, 35% {
@@ -44,7 +43,7 @@ const messagePressButtonAnimate = keyframes`
     bottom: -24px;
   }
 
-`
+`;
 
 export const Container = styled(BootstrapContainer)`
   display: flex;
@@ -56,6 +55,13 @@ export const Container = styled(BootstrapContainer)`
   width: 100%;
   overflow-y: auto;
   overflow-x: hidden;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
 `;
 
 export const ContainerRate = styled.div`
@@ -71,16 +77,16 @@ export const ContainerRate = styled.div`
   background-color: #fff;
   font-size: 13px;
   margin-bottom: 18px;
-  transition: transform .2s cubic-bezier(.26,.87,.87,1.15);
+  transition: transform 0.2s cubic-bezier(0.26, 0.87, 0.87, 1.15);
 
-
-  ${props => props.isVisibleChart ? css`
-    transform: translateY(10%);
-  ` :
-    css`
-      transform: translateY(30%);
-   `
-  }
+  ${props =>
+    props.isVisibleChart
+      ? css`
+          transform: translateY(10%);
+        `
+      : css`
+          transform: translateY(30%);
+        `}
 `;
 
 export const ContainerRateTitle = styled.p`
@@ -118,7 +124,6 @@ export const ContainerRateBoxItems = styled.div`
     background: #fecfc4;
     border-radius: 0 3px 3px 0;
   }
-
 `;
 
 export const ButtonShowGraphic = styled.button`
@@ -132,7 +137,7 @@ export const ButtonShowGraphic = styled.button`
 
   position: absolute;
   bottom: -12px;
-  transition: transform .3s;
+  transition: transform 0.3s;
   transform: scale(1) rotate(0deg);
 
   svg {
@@ -158,39 +163,40 @@ export const MessagePressChart = styled.span`
 
   transition: 1s;
 
-  ${props => !props.isVisibleChart && css`
-    animation: ${messagePressButtonAnimate} 2s infinite 1s alternate-reverse;
-  `}
-
-`
+  ${props =>
+    !props.isVisibleChart &&
+    css`
+      animation: ${messagePressButtonAnimate} 2s infinite 1s alternate-reverse;
+    `}
+`;
 
 export const LineChartContainer = styled.div`
-  width: 94%;
+  width: ${props => (props?.isMobileView ? '94%' : '98%')};
   height: auto;
   position: absolute;
   transform: scale(0) translateY(55%);
   /* transform: translate(100%, 50%); */
 
-  transition: transform .3s;
+  transition: transform 0.3s;
 
-${props => props.isVisibleChart ?
-  css`
-    animation: ${introAnimateChart} .4s cubic-bezier(.11,.9,.76,1.12);
-    transform: scale(1) translateY(55%);
-    /* transform: translate(0%, 50%) ; */
-  ` :
-  css`
-    animation: ${exitAnimateChart} .2s linear;
-  `
-}
+  &::-webkit-scrollbar {
+    display: none;
+  }
 
-
-
-`
-
-export const LineChartStyled = styled(LineChart)`
-
+  ${props =>
+    props.isVisibleChart
+      ? css`
+          animation: ${introAnimateChart} 0.4s
+            cubic-bezier(0.11, 0.9, 0.76, 1.12);
+          transform: scale(1) translateY(55%);
+          /* transform: translate(0%, 50%) ; */
+        `
+      : css`
+          animation: ${exitAnimateChart} 0.2s linear;
+        `}
 `;
+
+export const LineChartStyled = styled(LineChart)``;
 
 export const ButtonContainer = styled.div`
   display: flex;
@@ -210,14 +216,14 @@ export const TextResult = styled.div`
   position: absolute;
   padding-bottom: 12px;
 
-  ${props => props.isVisibleChart ?
-    css`
-      transform: translateY(520px);
-    `
-    : css`
-      transform: translateY(200px);
-    `
-}
+  ${props =>
+    props.isVisibleChart
+      ? css`
+          transform: translateY(520px);
+        `
+      : css`
+          transform: translateY(200px);
+        `}
 
   transition: .2s cubic-bezier(.26,.87,.87,1.15);
 `;
