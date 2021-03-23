@@ -26,6 +26,14 @@ import {
   LineChartContainer,
   LineChartStyled,
   MessagePressChart,
+
+  TitleDesktop,
+  BoxContentDesktop,
+  BoxContextChart,
+  BodyContextProfile,
+  TitleContextProfile,
+  BoxContextProfile,
+  FooterContextProfile
 } from './styles';
 
 const Result = () => {
@@ -154,13 +162,17 @@ const Result = () => {
     from: { transform: 'translateY(0%)' },
   });
 
+  console.log({store, resultRiskProfile})
+
   return (
     <Layout finishSimulation={finishSimulation}>
       <SEO title="Resultado | Máquina dos Sonhos" />
       <Container isVisibleChart={isVisibleChart}>
+        { isMobileView ? (
+          <>
         {transitionWallet.map(({ item, props, key }) => (
           <animated.div style={props}>
-            <ContainerRate isVisibleChart={isVisibleChart}>
+            <ContainerRate isVisibleChart={isVisibleChart} isMobileView={isMobileView}>
               <ContainerRateTitle>Crescimento da Carteira</ContainerRateTitle>
               <ContainerRateSubTitle>
                 Para conseguir alcançar seu objetivo,
@@ -300,6 +312,81 @@ const Result = () => {
             </TextResult>
           </animated.div>
         ))}
+          </>
+        ) : (
+          <>
+          <TitleDesktop>Invista ou invista</TitleDesktop>
+
+          <BoxContentDesktop>
+            <BoxContextChart>
+              <ContainerRate isVisibleChart={isVisibleChart} isMobileView={isMobileView}>
+                <ContainerRateTitle>Crescimento da Carteira</ContainerRateTitle>
+                <ContainerRateSubTitle>
+                  Para conseguir alcançar seu objetivo,
+                  <br />o seu patrimônio precisa performar
+                </ContainerRateSubTitle>
+
+                <ContainerRateBox>
+                  {achievedObjectiveCost ? (
+                    <>
+                      <ContainerRateBoxItems>
+                        AO MÊS: <strong>0,00%</strong>
+                      </ContainerRateBoxItems>
+                      <ContainerRateBoxItems>
+                        AO ANO: <strong>0,00%</strong>
+                      </ContainerRateBoxItems>
+                    </>
+                  ) : (
+                    <>
+                      <ContainerRateBoxItems>
+                        AO MÊS: <strong>{monthlyRate}%</strong>
+                      </ContainerRateBoxItems>
+                      <ContainerRateBoxItems>
+                        AO ANO: <strong>{annualRate}%</strong>
+                      </ContainerRateBoxItems>
+                    </>
+                  )}
+                </ContainerRateBox>
+
+                {isMobileView &&
+                  <ButtonShowGraphic
+                    isVisibleChart={isVisibleChart}
+                    onClick={() => toogleIsVisibleChart()}
+                  >
+                  <DownArrow />
+                  <MessagePressChart isVisibleChart={isVisibleChart}>
+                    Abrir gráfico
+                  </MessagePressChart>
+                </ButtonShowGraphic>
+                }
+              </ContainerRate>
+              <LineChartContainer
+                  isMobileView={isMobileView}
+                >
+                  <LineChartStyled
+                    slider
+                    isMobileView={isMobileView}
+                    theme="white"
+                    height={300}
+                    data={
+                      yearlyAverageArrayModificad?.length
+                        ? yearlyAverageArrayModificad
+                        : fakeData
+                    }
+                  />
+                </LineChartContainer>
+            </BoxContextChart>
+
+
+
+            <BoxContextProfile>
+              <h3>O seu perfil é {store?.decision?.first}</h3>
+            </BoxContextProfile>
+          </BoxContentDesktop>
+          </>
+        )}
+
+
       </Container>
     </Layout>
   );
