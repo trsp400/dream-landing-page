@@ -49,6 +49,17 @@ const StepTwo = () => {
             )
           : inputValue;
 
+      if (typeof inputValue === 'string') {
+        if (
+          (formattedInputValue <= 0 || inputValue?.includes('-')) &&
+          step > currentStep
+        )
+          return notify('Por favor, digite um valor válido!');
+      } else {
+        if ((formattedInputValue <= 0 || inputValue <= 0) && step > currentStep)
+          return notify('Por favor, digite um valor válido!');
+      }
+
       dispatch(
         changeFormState({
           ...store,
@@ -72,7 +83,6 @@ const StepTwo = () => {
       document.removeEventListener('keydown', listener);
     };
   }, [inputValue]);
-
 
   return isMobileView ? (
     <Container isMobileView={isMobileView} isActiveInput={isActiveInput}>

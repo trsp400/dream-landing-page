@@ -49,6 +49,17 @@ const StepFive = () => {
           'O valor que você pode investir deve ser menor do que o valor do seu sonho!',
         );
 
+      if (typeof inputValue === 'string') {
+        if (
+          (formattedInputValue <= 0 || inputValue?.includes('-')) &&
+          step > currentStep
+        )
+          return notify('Por favor, digite um valor válido!');
+      } else {
+        if ((formattedInputValue <= 0 || inputValue <= 0) && step > currentStep)
+          return notify('Por favor, digite um valor válido!');
+      }
+
       dispatch(
         changeFormState({
           ...store,

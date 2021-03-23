@@ -54,6 +54,14 @@ const StepThree = () => {
       if (!inputValue && step > currentStep)
         return notify('Por favor, digite um valor!');
 
+      if (typeof inputValue === 'string') {
+        if (
+          (inputValue?.includes('-') || inputValue <= 0) &&
+          step > currentStep
+        )
+          return notify('Por favor, digite um valor válido!');
+      }
+
       dispatch(
         changeFormState({
           ...store,
@@ -182,13 +190,13 @@ const StepThree = () => {
           <SelectTime
             options={options}
             components={makeAnimated()}
-            placeholder="Selecione"
             isSearchable={false}
             clearable={false}
             onChange={event =>
               setPlaceholderInformation(event?.value?.toLowerCase())
             }
             styles={selectPeriodConfig}
+            placeholder={placeholderInfo}
           />
           </BoxInput>
           <BoxButton>

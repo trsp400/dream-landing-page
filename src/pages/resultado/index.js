@@ -25,7 +25,7 @@ import {
   ButtonShowGraphic,
   LineChartContainer,
   LineChartStyled,
-  MessagePressChart
+  MessagePressChart,
 } from './styles';
 
 const Result = () => {
@@ -159,48 +159,53 @@ const Result = () => {
       <SEO title="Resultado | Máquina dos Sonhos" />
       <Container isVisibleChart={isVisibleChart}>
         {transitionWallet.map(({ item, props, key }) => (
-          <animated.div style={props} >
-           <ContainerRate isVisibleChart={isVisibleChart}>
-             <ContainerRateTitle>Crescimento da Carteira</ContainerRateTitle>
-             <ContainerRateSubTitle>
-               Para conseguir alcançar seu objetivo,
-               <br />o seu patrimônio precisa performar
-             </ContainerRateSubTitle>
+          <animated.div style={props}>
+            <ContainerRate isVisibleChart={isVisibleChart}>
+              <ContainerRateTitle>Crescimento da Carteira</ContainerRateTitle>
+              <ContainerRateSubTitle>
+                Para conseguir alcançar seu objetivo,
+                <br />o seu patrimônio precisa performar
+              </ContainerRateSubTitle>
 
-             <ContainerRateBox>
-               {achievedObjectiveCost ? (
-                 <>
-                   <ContainerRateBoxItems >
-                     AO MÊS: <strong>0,00%</strong>
-                   </ContainerRateBoxItems>
-                   <ContainerRateBoxItems >
-                     AO ANO: <strong>0,00%</strong>
-                   </ContainerRateBoxItems>
-                 </>
-               ) : (
-                 <>
-                   <ContainerRateBoxItems >
-                     AO MÊS: <strong>{monthlyRate}%</strong>
-                   </ContainerRateBoxItems>
-                   <ContainerRateBoxItems >
-                     AO ANO: <strong>{annualRate}%</strong>
-                   </ContainerRateBoxItems>
-                 </>
-               )}
-             </ContainerRateBox>
+              <ContainerRateBox>
+                {achievedObjectiveCost ? (
+                  <>
+                    <ContainerRateBoxItems>
+                      AO MÊS: <strong>0,00%</strong>
+                    </ContainerRateBoxItems>
+                    <ContainerRateBoxItems>
+                      AO ANO: <strong>0,00%</strong>
+                    </ContainerRateBoxItems>
+                  </>
+                ) : (
+                  <>
+                    <ContainerRateBoxItems>
+                      AO MÊS: <strong>{monthlyRate}%</strong>
+                    </ContainerRateBoxItems>
+                    <ContainerRateBoxItems>
+                      AO ANO: <strong>{annualRate}%</strong>
+                    </ContainerRateBoxItems>
+                  </>
+                )}
+              </ContainerRateBox>
 
-             <ButtonShowGraphic
-               isVisibleChart={isVisibleChart}
-               onClick={() => toogleIsVisibleChart()}
-             >
-               <DownArrow/>
-               <MessagePressChart isVisibleChart={isVisibleChart}>Abrir gráfico</MessagePressChart>
-             </ButtonShowGraphic>
-           </ContainerRate>
-         </animated.div>
+              <ButtonShowGraphic
+                isVisibleChart={isVisibleChart}
+                onClick={() => toogleIsVisibleChart()}
+              >
+                <DownArrow />
+                <MessagePressChart isVisibleChart={isVisibleChart}>
+                  Abrir gráfico
+                </MessagePressChart>
+              </ButtonShowGraphic>
+            </ContainerRate>
+          </animated.div>
         ))}
 
-        <LineChartContainer isVisibleChart={isVisibleChart}>
+        <LineChartContainer
+          isVisibleChart={isVisibleChart}
+          isMobileView={isMobileView}
+        >
           <LineChartStyled
             slider
             isMobileView={isMobileView}
