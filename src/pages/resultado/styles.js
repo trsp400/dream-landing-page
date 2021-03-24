@@ -13,8 +13,12 @@ export const TitleDesktop = styled.h1`
 export const BoxContentDesktop = styled.div`
   width: 100%;
   height: 100%;
+  max-height: 460px;
 
   display: flex;
+  padding-top: 40px;
+
+  color: #fff;
 `;
 
 export const BoxContextChart = styled.div`
@@ -22,22 +26,57 @@ export const BoxContextChart = styled.div`
   height: 100%;
   display: flex;
   flex-direction: column;
-  background: blue;
+
+  padding-right: 30px;
 `;
 
-export const BoxContextProfile = styled.div``;
+export const BoxContextProfile = styled.div`
+  width: 50%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 0 0 18px 30px;
 
-export const TitleContextProfile = styled.div``;
+`;
 
-export const BodyContextProfile = styled.div``;
+export const TitleContextProfile = styled.div`
 
-export const FooterContextProfile = styled.div``;
+  h3 {
+    line-height: 12px;
+
+    span {
+      color: #ea5e45;
+    }
+  }
+
+  > span {
+    font: italic 20px Trasandina;
+  }
+
+
+`;
+
+export const BoxContextProfileResult = styled.div`
+  flex: 1;
+  padding-top: 40px;
+  font: italic 18px/22px Trasandina;
+`;
+
+export const FooterContextProfile = styled.div`
+  span {
+    font: 200 16px Trasandina;
+
+    strong {
+      font-weight: bold;
+    }
+  }
+`;
 
 
 
 
 
-// --------------- MOBILE -------------------------
+// -------------------- MOBILE -------------------------
 
 const introAnimateChart = keyframes`
   0% {
@@ -97,6 +136,11 @@ export const Container = styled(BootstrapContainer)`
 
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none; /* Firefox */
+
+  @media (min-height: 720px) and (min-width: 1280px) {
+    margin-top: 70px;
+  }
+
 `;
 
 export const ContainerRate = styled.div`
@@ -234,17 +278,22 @@ export const LineChartContainer = styled.div`
   }
 
   ${props =>
-    props.isVisibleChart && props.isMobileView
-      ? css`
+    (props.isVisibleChart && props.isMobileView)
+      && css`
           animation: ${introAnimateChart} 0.4s
           cubic-bezier(0.11, 0.9, 0.76, 1.12);
           transform: scale(1) translateY(55%);
           /* transform: translate(0%, 50%) ; */
-        `
-      : css`
+  `}
+
+  ${props =>
+      (!props.isVisibleChart && props.isMobileView)
+        && css`
           animation: ${exitAnimateChart} 0.2s linear;
-        `}
+        `
+  }
 `;
+
 
 export const LineChartStyled = styled(LineChart)`
 `;
@@ -254,6 +303,17 @@ export const ButtonContainer = styled.div`
   flex: 1;
   justify-content: center;
 `;
+
+export const ButtonContainerDesktop = styled.div`
+  display: flex;
+  margin-top: 15px;
+
+  button:nth-child(even) {
+    margin: 0 30px;
+  }
+`;
+
+
 export const Button = styled(RippleButton)`
   width: 50%;
   font-size: 12px;

@@ -30,9 +30,10 @@ import {
   TitleDesktop,
   BoxContentDesktop,
   BoxContextChart,
-  BodyContextProfile,
   TitleContextProfile,
   BoxContextProfile,
+  BoxContextProfileResult,
+  ButtonContainerDesktop,
   FooterContextProfile
 } from './styles';
 
@@ -162,7 +163,18 @@ const Result = () => {
     from: { transform: 'translateY(0%)' },
   });
 
-  console.log({store, resultRiskProfile})
+  const footerTitleResultProfile = result => {
+
+    const lowerCaseResult = result.toLowerCase();
+
+    const resultPhraseStructure = {
+      conservador: "Prefiro ganhar pouco, mas ganhar sempre!",
+      moderado: "Quem não arrisca não petisca!",
+      arrojado: "Maior risco, maior retorno.",
+    }
+
+    return resultPhraseStructure[lowerCaseResult];
+  }
 
   return (
     <Layout finishSimulation={finishSimulation}>
@@ -380,7 +392,50 @@ const Result = () => {
 
 
             <BoxContextProfile>
-              <h3>O seu perfil é {store?.decision?.first}</h3>
+              <TitleContextProfile>
+                <h3>O seu perfil é <span>{store?.decision?.first}!</span></h3>
+                <span className="footer-title">{footerTitleResultProfile(store?.decision?.first)}</span>
+              </TitleContextProfile>
+              <BoxContextProfileResult>
+                <span>{resultRiskProfile}</span>
+              </BoxContextProfileResult>
+              <FooterContextProfile>
+                <span>Confira mais detalhes sobre a{' '}
+                <strong>evolução do seu patrimônio</strong> e
+                <strong> composição de carteira ideal</strong> no relatório
+                completo que enviamos para o seu e-mail. <br />
+                <br /> Quer ajuda para tirar seu planejamento financeiro do
+                papel?</span>
+                <ButtonContainerDesktop isMobileView={isMobileView}>
+                  <Button
+                    onClick={() => {
+                      window.open('https://be.capital/');
+                    }}
+                    ripple
+                    glow
+                  >
+                    Ir ao Site
+                  </Button>
+
+                  <Button
+                    onClick={() => {
+                      resetStore();
+                      navigate('/');
+                    }}
+                    ripple
+                    glow
+                  >
+                    Recalcule seu Sonho
+                  </Button>
+                  <Button
+                    onClick={() => urls && window.open(urls[0])}
+                    ripple
+                    glow
+                  >
+                    Baixar PDF
+                  </Button>
+              </ButtonContainerDesktop>
+              </FooterContextProfile>
             </BoxContextProfile>
           </BoxContentDesktop>
           </>
