@@ -4,9 +4,10 @@ export default {
     border: '1px solid #EA5E45',
     boxShadow: 'none',
     backgroundColor: '#1A4A73',
-    width: '150px',
+    width: '170px',
+    height: "60px",
     padding: 4,
-    fontSize: 15,
+    fontSize: 24,
     fontColor: '#FFF',
     color: '#FFF',
     '&:hover': {
@@ -15,15 +16,18 @@ export default {
     cursor: 'pointer',
   }),
 
-  option: styles => {
+  option: (styles, state) => {
     return {
       ...styles,
-      backgroundColor: '#1A4A73',
+      backgroundColor: state.isSelected ? '#EA5E45' : "#1A4A73",
       borderColor: '#1A4A73',
       fontColor: '#FFF',
       color: '#FFF',
-      fontSize: 20,
+      fontSize: 24,
       margin: 0,
+      "&:active": {
+        backgroundColor: "#1A4A73"
+      },
       cursor: 'pointer',
     };
   },
@@ -34,7 +38,7 @@ export default {
       borderColor: '#1A4A73',
       fontColor: '#FFF',
       color: '#FFF',
-      fontSize: 20,
+      fontSize: 24,
       margin: 0,
       cursor: 'pointer',
     };
@@ -43,7 +47,7 @@ export default {
     ...base,
     padding: 0,
   }),
-  indicatorsContainer: (styles, state) => ({
+   indicatorsContainer: (styles, state) => ({
     border: 0,
     '&:hover': {
       color: '#FFF',

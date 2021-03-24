@@ -26,6 +26,15 @@ import {
   LineChartContainer,
   LineChartStyled,
   MessagePressChart,
+
+  TitleDesktop,
+  BoxContentDesktop,
+  BoxContextChart,
+  TitleContextProfile,
+  BoxContextProfile,
+  BoxContextProfileResult,
+  ButtonContainerDesktop,
+  FooterContextProfile
 } from './styles';
 
 const Result = () => {
@@ -154,13 +163,40 @@ const Result = () => {
     from: { transform: 'translateY(0%)' },
   });
 
+  const footerTitleResultProfile = result => {
+
+    const lowerCaseResult = result.toLowerCase();
+
+    const resultPhraseStructure = {
+      conservador: "Prefiro ganhar pouco, mas ganhar sempre!",
+      moderado: "Quem não arrisca não petisca!",
+      arrojado: "Maior risco, maior retorno.",
+    }
+
+    return resultPhraseStructure[lowerCaseResult];
+  }
+
+  const formatProfileFemale = profile => {
+    const lowerCaseProfile = profile.toLowerCase();
+
+    const femaleProfileStructure = {
+      conservador: "Conservadora",
+      moderado: "Moderada",
+      arrojado: "Arrojada",
+    }
+
+    return femaleProfileStructure[lowerCaseProfile];
+  }
+
   return (
     <Layout finishSimulation={finishSimulation}>
       <SEO title="Resultado | Máquina dos Sonhos" />
       <Container isVisibleChart={isVisibleChart}>
+        { isMobileView ? (
+          <>
         {transitionWallet.map(({ item, props, key }) => (
           <animated.div style={props}>
-            <ContainerRate isVisibleChart={isVisibleChart}>
+            <ContainerRate isVisibleChart={isVisibleChart} isMobileView={isMobileView}>
               <ContainerRateTitle>Crescimento da Carteira</ContainerRateTitle>
               <ContainerRateSubTitle>
                 Para conseguir alcançar seu objetivo,
@@ -300,6 +336,124 @@ const Result = () => {
             </TextResult>
           </animated.div>
         ))}
+          </>
+        ) : (
+          <>
+          <TitleDesktop>Invista ou invista</TitleDesktop>
+
+          <BoxContentDesktop>
+            <BoxContextChart>
+              <ContainerRate isVisibleChart={isVisibleChart} isMobileView={isMobileView}>
+                <ContainerRateTitle>Crescimento da Carteira</ContainerRateTitle>
+                <ContainerRateSubTitle>
+                  Para conseguir alcançar seu objetivo,
+                  <br />o seu patrimônio precisa performar
+                </ContainerRateSubTitle>
+
+                <ContainerRateBox>
+                  {achievedObjectiveCost ? (
+                    <>
+                      <ContainerRateBoxItems>
+                        AO MÊS: <strong>0,00%</strong>
+                      </ContainerRateBoxItems>
+                      <ContainerRateBoxItems>
+                        AO ANO: <strong>0,00%</strong>
+                      </ContainerRateBoxItems>
+                    </>
+                  ) : (
+                    <>
+                      <ContainerRateBoxItems>
+                        AO MÊS: <strong>{monthlyRate}%</strong>
+                      </ContainerRateBoxItems>
+                      <ContainerRateBoxItems>
+                        AO ANO: <strong>{annualRate}%</strong>
+                      </ContainerRateBoxItems>
+                    </>
+                  )}
+                </ContainerRateBox>
+
+                {isMobileView &&
+                  <ButtonShowGraphic
+                    isVisibleChart={isVisibleChart}
+                    onClick={() => toogleIsVisibleChart()}
+                  >
+                  <DownArrow />
+                  <MessagePressChart isVisibleChart={isVisibleChart}>
+                    Abrir gráfico
+                  </MessagePressChart>
+                </ButtonShowGraphic>
+                }
+              </ContainerRate>
+              <LineChartContainer
+                  isMobileView={isMobileView}
+                >
+                  <LineChartStyled
+                    slider
+                    isMobileView={isMobileView}
+                    theme="white"
+                    height={300}
+                    data={
+                      yearlyAverageArrayModificad?.length
+                        ? yearlyAverageArrayModificad
+                        : fakeData
+                    }
+                  />
+                </LineChartContainer>
+            </BoxContextChart>
+
+
+
+            <BoxContextProfile>
+              <TitleContextProfile>
+                <h3>Sua carteira é <span>{formatProfileFemale(store?.decision?.first)}!</span></h3>
+                <span className="footer-title">{footerTitleResultProfile(store?.decision?.first)}</span>
+              </TitleContextProfile>
+              <BoxContextProfileResult>
+                <span>{resultRiskProfile}</span>
+              </BoxContextProfileResult>
+              <FooterContextProfile>
+                <span>Confira mais detalhes sobre a{' '}
+                <strong>evolução do seu patrimônio</strong> e
+                <strong> composição de carteira ideal</strong> no relatório
+                completo que enviamos para o seu e-mail. <br />
+                <br /> Quer ajuda para tirar seu planejamento financeiro do
+                papel?</span>
+                <ButtonContainerDesktop isMobileView={isMobileView}>
+                  <Button
+                    onClick={() => {
+                      window.open('https://be.capital/');
+                    }}
+                    ripple
+                    glow
+                  >
+                    Ir ao Site
+                  </Button>
+
+                  <Button
+                    onClick={() => {
+                      resetStore();
+                      navigate('/');
+                    }}
+                    ripple
+                    glow
+                  >
+                    Recalcule seu Sonho
+                  </Button>
+                  <Button
+                    onClick={() => urls && window.open(urls[0])}
+                    ripple
+                    glow
+                  >
+                    Baixar PDF
+                  </Button>
+              </ButtonContainerDesktop>
+              </FooterContextProfile>
+            </BoxContextProfile>
+          </BoxContentDesktop>
+          </>
+        )}
+
+
       </Container>
     </Layout>
   );

@@ -11,12 +11,16 @@ import {
   Body,
   BoxListDecision,
   MessageFeedbackStyle,
+  BoxButton,
   Footer,
   ListDecisionStyled,
 } from './styles';
 
 import { question1 } from '../../../utils/questionsToProfile';
+
 import Lefticon from '../../../assets/icons/left-icon.svg';
+import OkIcon from '../../../assets/icons/ok-icon.svg'
+
 
 const options = [
   '<span>Aumentar para <strong>R$ 1.200</strong> no fim do seu ciclo de investimento, <strong>sem eventuais riscos</strong>.</span>',
@@ -136,36 +140,27 @@ const StepSeven = () => {
           state={inputValue}
           setState={setInputvalue}
         />
-      </BoxListDecision>
 
-      <Footer isMobileView={isMobileView}>
+      <BoxButton>
         <Button
           ripple
           variant="beblue"
           glow
           onClick={() => handleDispatch(5, 'previous')}
-          style={{
-            width: '20%',
-          }}
         >
           <Lefticon width={20} />
         </Button>
-
         <Button
           ripple
           variant="beorange"
           glow
-          onClick={() => {
-            if (!inputValue) return notify('Por favor, selecione uma opção!');
-            return handleDispatch(7, 'next');
-          }}
-          style={{
-            width: '20%',
-          }}
+          onClick={() => handleDispatch(7, 'next')}
         >
-          OK
+          OK <OkIcon />
         </Button>
-      </Footer>
+      </BoxButton>
+    </BoxListDecision>
+
     </Container>
   );
 };

@@ -45,17 +45,44 @@ export const InputContainer = styled.div`
   position: absolute;
   top: 60%;
   width: 100%;
+  height: auto;
+  padding-left: 50px;
+
   display: flex;
-  flex-direction: row;
-  height: 50px;
-  justify-content: space-around;
+  flex-direction: column;
+  align-items: flex-start;
 
-  > input {
-    width: 500px;
+  input {
+    width: 50%;
+    text-align: left;
+
   }
-
-
 `;
+
+export const BoxButton = styled.div`
+  display: flex;
+  width: 100%;
+  margin-top: 25px;
+
+  button {
+    display: flex;
+    width: 5em;
+    justify-content: flex-end;
+
+    svg {
+      height: 1em;
+      fill: #fff;
+    }
+
+
+    &:first-of-type {
+      width: 3em;
+      margin-right: 20px;
+      justify-content: center;
+    }
+
+  }
+`
 
 export const MessageFeedbackStyle = styled(MessageFeedback)`
   ${props =>

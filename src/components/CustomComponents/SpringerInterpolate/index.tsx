@@ -16,7 +16,7 @@ const SpringInterpolate: FC<SpringInterpolateProps> = ({
     x - window.innerWidth / 2,
     y - window.innerHeight / 2,
   ];
-  const trans1 = (x?: any, y?: any) => `translate3d(${x / 11}px,${y / 11}px,0)`;
+  const trans1 = (x?: any, y?: any) => `translate3d(${x/70}px,${y/70}px,0)`;
 
   const [props, set] = useSpring(() => ({
     xy: [0, 0],

@@ -64,6 +64,15 @@ const StepOne = () => {
     })();
   }, [objective]);
 
+  useEffect(() => {
+
+    if(!isVisibleModal && objectiveValue === "OUTROS" || !isVisibleModal && inputValue) {
+      setInputValue("");
+      setObjectiveValue("");
+    }
+
+  }, [objectiveValue, inputValue, isVisibleModal])
+
   const handleDispatch = useCallback(
     (objectiveValue, step, direction) => {
       if (!objectiveValue) return notify('Por favor, selecione uma objetivo!');
@@ -252,7 +261,9 @@ const StepOne = () => {
               ripple
               variant="beblue"
               glow
-              onClick={() => setIsVisibleModal(!isVisibleModal)}
+              onClick={() => {
+                setIsVisibleModal(!isVisibleModal);
+              }}
             >
               Voltar
             </Button>
@@ -365,7 +376,7 @@ const StepOne = () => {
           <div className="content-body">
             Descreva abaixo qual outro objetivo de vida.
           </div>
-          <div style={{ width: '100%' }}>
+          <div className="body-modal__input_desktop">
             <Input
               state={inputValue}
               setState={setInputValue}
@@ -379,7 +390,9 @@ const StepOne = () => {
               ripple
               variant="beblue"
               glow
-              onClick={() => setIsVisibleModal(!isVisibleModal)}
+              onClick={() => {
+                setIsVisibleModal(!isVisibleModal);
+              }}
             >
               Voltar
             </Button>

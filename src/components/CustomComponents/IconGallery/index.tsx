@@ -86,7 +86,11 @@ export const Card: React.FC<CardProps> = ({
       >
         {icon}
       </CardBody>
-      <CardFooter labelSize={labelSize || 15} color={labelColor}>
+      <CardFooter
+        labelSize={labelSize || 15}
+        color={labelColor}
+        checked={objectiveValue === label}
+        >
         {label}
       </CardFooter>
     </CardContainer>

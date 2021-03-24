@@ -6,6 +6,7 @@ import Input from '../../CustomComponents/Input';
 import Button from '../../CustomComponents/Button';
 
 import Lefticon from '../../../assets/icons/left-icon.svg';
+import OkIcon from '../../../assets/icons/ok-icon.svg'
 
 import Select from 'react-select';
 import makeAnimated from 'react-select/animated';
@@ -14,7 +15,10 @@ import {
   Container,
   Body,
   MessageFeedbackStyle,
+  SelectTime,
   BoxInput,
+  InputContainer,
+  BoxButton,
   Footer,
   ButtonContainer,
 } from './styles';
@@ -174,19 +178,8 @@ const StepThree = () => {
           Em quanto tempo você deseja conquistar o seu sonho?
         </MessageFeedbackStyle>
 
-        <BoxInput>
-          <Button
-            ripple
-            variant="beblue"
-            glow
-            onClick={() => handleDispatch(2, 'previous')}
-            style={{
-              width: '10%',
-              padding: 5,
-            }}
-          >
-            <Lefticon width={20} />
-          </Button>
+        <InputContainer>
+          <BoxInput>
           <Input
             state={inputValue}
             setState={setInputValue}
@@ -194,7 +187,7 @@ const StepThree = () => {
             placeholder={placeholderInfo}
             setIsActiveInput={setIsActiveInput}
           />
-          <Select
+          <SelectTime
             options={options}
             components={makeAnimated()}
             isSearchable={false}
@@ -205,19 +198,27 @@ const StepThree = () => {
             styles={selectPeriodConfig}
             placeholder={placeholderInfo}
           />
+          </BoxInput>
+          <BoxButton>
+            <Button
+              ripple
+              variant="beblue"
+              glow
+              onClick={() => handleDispatch(2, 'previous')}
+            >
+              <Lefticon width={20} />
+            </Button>
 
-          <Button
-            ripple
-            variant="beorange"
-            glow
-            onClick={() => handleDispatch(4, 'next')}
-            style={{
-              width: '10%',
-            }}
-          >
-            OK
-          </Button>
-        </BoxInput>
+            <Button
+              ripple
+              variant="beorange"
+              glow
+              onClick={() => handleDispatch(4, 'next')}
+            >
+              OK <OkIcon />
+            </Button>
+          </BoxButton>
+        </InputContainer>
       </Body>
     </Container>
   );
