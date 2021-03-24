@@ -72,6 +72,20 @@ export const FooterContextProfile = styled.div`
   }
 `;
 
+export const ButtonContainerDesktop = styled.div`
+  display: flex;
+  margin-top: 20px;
+
+  button {
+    font-size: .8rem;
+
+    &:nth-child(even) {
+     margin: 0 30px;
+    }
+  }
+`;
+
+
 
 
 
@@ -137,8 +151,8 @@ export const Container = styled(BootstrapContainer)`
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none; /* Firefox */
 
-  @media (min-height: 720px) and (min-width: 1280px) {
-    margin-top: 70px;
+  @media (min-height: 780px) and (min-width: 1280px) {
+    margin-top: 100px;
   }
 
 `;
@@ -303,16 +317,6 @@ export const ButtonContainer = styled.div`
   flex: 1;
   justify-content: center;
 `;
-
-export const ButtonContainerDesktop = styled.div`
-  display: flex;
-  margin-top: 15px;
-
-  button:nth-child(even) {
-    margin: 0 30px;
-  }
-`;
-
 
 export const Button = styled(RippleButton)`
   width: 50%;

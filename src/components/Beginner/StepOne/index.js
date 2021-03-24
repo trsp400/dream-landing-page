@@ -365,7 +365,7 @@ const StepOne = () => {
           <div className="content-body">
             Descreva abaixo qual outro objetivo de vida.
           </div>
-          <div style={{ width: '100%' }}>
+          <div className="body-modal__input_desktop">
             <Input
               state={inputValue}
               setState={setInputValue}
@@ -379,7 +379,11 @@ const StepOne = () => {
               ripple
               variant="beblue"
               glow
-              onClick={() => setIsVisibleModal(!isVisibleModal)}
+              onClick={() => {
+                setIsVisibleModal(!isVisibleModal);
+                setObjectiveValue("");
+                setInputValue("");
+              }}
             >
               Voltar
             </Button>

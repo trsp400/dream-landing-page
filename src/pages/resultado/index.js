@@ -176,6 +176,18 @@ const Result = () => {
     return resultPhraseStructure[lowerCaseResult];
   }
 
+  const formatProfileFemale = profile => {
+    const lowerCaseProfile = profile.toLowerCase();
+
+    const femaleProfileStructure = {
+      conservador: "Conservadora",
+      moderado: "Moderada",
+      arrojado: "Arrojada",
+    }
+
+    return femaleProfileStructure[lowerCaseProfile];
+  }
+
   return (
     <Layout finishSimulation={finishSimulation}>
       <SEO title="Resultado | Máquina dos Sonhos" />
@@ -393,7 +405,7 @@ const Result = () => {
 
             <BoxContextProfile>
               <TitleContextProfile>
-                <h3>O seu perfil é <span>{store?.decision?.first}!</span></h3>
+                <h3>Sua carteira é <span>{formatProfileFemale(store?.decision?.first)}!</span></h3>
                 <span className="footer-title">{footerTitleResultProfile(store?.decision?.first)}</span>
               </TitleContextProfile>
               <BoxContextProfileResult>

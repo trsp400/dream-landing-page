@@ -13,6 +13,12 @@ interface PropsCardBody {
   backgroundcolor: string
 }
 
+interface PropsCardFooter {
+  labelSize: number,
+  color: string,
+  checked: boolean
+}
+
 interface PropsGrid {
   lonelySon?: boolean;
 }
@@ -94,7 +100,7 @@ export const CardBody = styled(Card.Body)<PropsCardBody>`
   }
 `;
 
-export const CardFooter = styled(Card.Footer)`
+export const CardFooter = styled(Card.Footer)<PropsCardFooter>`
   display: flex;
   align-items: flex-start;
   border: none;
@@ -108,6 +114,11 @@ export const CardFooter = styled(Card.Footer)`
   font-size: .8em;
   text-align: center;
   line-height: 14px;
+
+  ${props => props.checked && css`
+    line-height: 45px;
+    transform: scale(1.2);
+  `}
 
   @media (max-height: 737px) and (max-width: 415px) {
     font-size: .7em;
