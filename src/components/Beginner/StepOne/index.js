@@ -64,6 +64,15 @@ const StepOne = () => {
     })();
   }, [objective]);
 
+  useEffect(() => {
+
+    if(!isVisibleModal && objectiveValue === "OUTROS" || !isVisibleModal && inputValue) {
+      setInputValue("");
+      setObjectiveValue("");
+    }
+
+  }, [objectiveValue, inputValue, isVisibleModal])
+
   const handleDispatch = useCallback(
     (objectiveValue, step, direction) => {
       if (!objectiveValue) return notify('Por favor, selecione uma objetivo!');
@@ -252,7 +261,9 @@ const StepOne = () => {
               ripple
               variant="beblue"
               glow
-              onClick={() => setIsVisibleModal(!isVisibleModal)}
+              onClick={() => {
+                setIsVisibleModal(!isVisibleModal);
+              }}
             >
               Voltar
             </Button>
@@ -381,8 +392,6 @@ const StepOne = () => {
               glow
               onClick={() => {
                 setIsVisibleModal(!isVisibleModal);
-                setObjectiveValue("");
-                setInputValue("");
               }}
             >
               Voltar
