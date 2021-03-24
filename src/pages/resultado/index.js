@@ -25,7 +25,15 @@ import {
   ButtonShowGraphic,
   LineChartContainer,
   LineChartStyled,
-  MessagePressChart
+  MessagePressChart,
+  TitleDesktop,
+  BoxContentDesktop,
+  BoxContextChart,
+  TitleContextProfile,
+  BoxContextProfile,
+  BoxContextProfileResult,
+  ButtonContainerDesktop,
+  FooterContextProfile,
 } from './styles';
 
 const Result = () => {
@@ -154,89 +162,125 @@ const Result = () => {
     from: { transform: 'translateY(0%)' },
   });
 
+  const footerTitleResultProfile = result => {
+    const lowerCaseResult = result.toLowerCase();
+
+    const resultPhraseStructure = {
+      conservador: 'Prefiro ganhar pouco, mas ganhar sempre!',
+      moderado: 'Quem não arrisca não petisca!',
+      arrojado: 'Maior risco, maior retorno.',
+    };
+
+    return resultPhraseStructure[lowerCaseResult];
+  };
+
+  const formatProfileFemale = profile => {
+    const lowerCaseProfile = profile.toLowerCase();
+
+    const femaleProfileStructure = {
+      conservador: 'Conservadora',
+      moderado: 'Moderada',
+      arrojado: 'Arrojada',
+    };
+
+    return femaleProfileStructure[lowerCaseProfile];
+  };
+
   return (
     <Layout finishSimulation={finishSimulation}>
       <SEO title="Resultado | Máquina dos Sonhos" />
       <Container isVisibleChart={isVisibleChart}>
-        {transitionWallet.map(({ item, props, key }) => (
-          <animated.div style={props} >
-           <ContainerRate isVisibleChart={isVisibleChart}>
-             <ContainerRateTitle>Crescimento da Carteira</ContainerRateTitle>
-             <ContainerRateSubTitle>
-               Para conseguir alcançar seu objetivo,
-               <br />o seu patrimônio precisa performar
-             </ContainerRateSubTitle>
+        {isMobileView ? (
+          <>
+            {transitionWallet.map(({ item, props, key }) => (
+              <animated.div style={props}>
+                <ContainerRate
+                  isVisibleChart={isVisibleChart}
+                  isMobileView={isMobileView}
+                >
+                  <ContainerRateTitle>
+                    Crescimento da Carteira
+                  </ContainerRateTitle>
+                  <ContainerRateSubTitle>
+                    Para conseguir alcançar seu objetivo,
+                    <br />o seu patrimônio precisa performar
+                  </ContainerRateSubTitle>
 
-             <ContainerRateBox>
-               {achievedObjectiveCost ? (
-                 <>
-                   <ContainerRateBoxItems >
-                     AO MÊS: <strong>0,00%</strong>
-                   </ContainerRateBoxItems>
-                   <ContainerRateBoxItems >
-                     AO ANO: <strong>0,00%</strong>
-                   </ContainerRateBoxItems>
-                 </>
-               ) : (
-                 <>
-                   <ContainerRateBoxItems >
-                     AO MÊS: <strong>{monthlyRate}%</strong>
-                   </ContainerRateBoxItems>
-                   <ContainerRateBoxItems >
-                     AO ANO: <strong>{annualRate}%</strong>
-                   </ContainerRateBoxItems>
-                 </>
-               )}
-             </ContainerRateBox>
+                  <ContainerRateBox>
+                    {achievedObjectiveCost ? (
+                      <>
+                        <ContainerRateBoxItems>
+                          AO MÊS: <strong>0,00%</strong>
+                        </ContainerRateBoxItems>
+                        <ContainerRateBoxItems>
+                          AO ANO: <strong>0,00%</strong>
+                        </ContainerRateBoxItems>
+                      </>
+                    ) : (
+                      <>
+                        <ContainerRateBoxItems>
+                          AO MÊS: <strong>{monthlyRate}%</strong>
+                        </ContainerRateBoxItems>
+                        <ContainerRateBoxItems>
+                          AO ANO: <strong>{annualRate}%</strong>
+                        </ContainerRateBoxItems>
+                      </>
+                    )}
+                  </ContainerRateBox>
 
-             <ButtonShowGraphic
-               isVisibleChart={isVisibleChart}
-               onClick={() => toogleIsVisibleChart()}
-             >
-               <DownArrow/>
-               <MessagePressChart isVisibleChart={isVisibleChart}>Abrir gráfico</MessagePressChart>
-             </ButtonShowGraphic>
-           </ContainerRate>
-         </animated.div>
-        ))}
+                  <ButtonShowGraphic
+                    isVisibleChart={isVisibleChart}
+                    onClick={() => toogleIsVisibleChart()}
+                  >
+                    <DownArrow />
+                    <MessagePressChart isVisibleChart={isVisibleChart}>
+                      Abrir gráfico
+                    </MessagePressChart>
+                  </ButtonShowGraphic>
+                </ContainerRate>
+              </animated.div>
+            ))}
 
-        <LineChartContainer isVisibleChart={isVisibleChart}>
-          <LineChartStyled
-            slider
-            isMobileView={isMobileView}
-            theme="white"
-            height={300}
-            data={
-              yearlyAverageArrayModificad?.length
-                ? yearlyAverageArrayModificad
-                : fakeData
-            }
-          />
-        </LineChartContainer>
+            <LineChartContainer
+              isVisibleChart={isVisibleChart}
+              isMobileView={isMobileView}
+            >
+              <LineChartStyled
+                slider
+                isMobileView={isMobileView}
+                theme="white"
+                height={300}
+                data={
+                  yearlyAverageArrayModificad?.length
+                    ? yearlyAverageArrayModificad
+                    : fakeData
+                }
+              />
+            </LineChartContainer>
 
-        {transitionTextResult.map(({ item, props }) => (
-          <animated.div style={props}>
-            <TextResult isVisibleChart={isVisibleChart}>
-              {achievedObjectiveCost ? (
-                <p style={{ marginBottom: '1px' }}>
-                  Você conseguiria alcaçar este valor em
-                  {countYearNewPeriod
-                    ? countYearNewPeriod > 1
-                      ? ` ${countYearNewPeriod} anos`
-                      : ` ${countYearNewPeriod} ano`
-                    : ''}
-                  {countYearNewPeriod && countMonthNewPeriod ? ` e` : ''}
-                  {countMonthNewPeriod
-                    ? countMonthNewPeriod > 1
-                      ? ` ${countMonthNewPeriod} meses`
-                      : ` ${countMonthNewPeriod} mês`
-                    : ''}
-                  <br />
-                  <br />
-                </p>
-              ) : (
-                <>
-                  {/* <p
+            {transitionTextResult.map(({ item, props }) => (
+              <animated.div style={props}>
+                <TextResult isVisibleChart={isVisibleChart}>
+                  {achievedObjectiveCost ? (
+                    <p style={{ marginBottom: '1px' }}>
+                      Você conseguiria alcaçar este valor em
+                      {countYearNewPeriod
+                        ? countYearNewPeriod > 1
+                          ? ` ${countYearNewPeriod} anos`
+                          : ` ${countYearNewPeriod} ano`
+                        : ''}
+                      {countYearNewPeriod && countMonthNewPeriod ? ` e` : ''}
+                      {countMonthNewPeriod
+                        ? countMonthNewPeriod > 1
+                          ? ` ${countMonthNewPeriod} meses`
+                          : ` ${countMonthNewPeriod} mês`
+                        : ''}
+                      <br />
+                      <br />
+                    </p>
+                  ) : (
+                    <>
+                      {/* <p
                   style={{
                     fontWeight: 'bolder',
                     marginBottom: '1px',
@@ -245,56 +289,199 @@ const Result = () => {
                   O seu perfil é{' '}
                   <span style={{ color: '#e2381a' }}>{riskProfile}</span>
                 </p> */}
-                  <p>{resultRiskProfile || ''}</p>
-                </>
-              )}
+                      <p>{resultRiskProfile || ''}</p>
+                    </>
+                  )}
 
-              <ButtonContainer style={{ marginBottom: '15px' }}>
-                <Button
-                  onClick={() => {
-                    window.open('https://be.capital/');
-                  }}
-                  ripple
-                  glow
-                  style={{ margin: '0 10px' }}
+                  <ButtonContainer style={{ marginBottom: '15px' }}>
+                    <Button
+                      onClick={() => {
+                        window.open('https://be.capital/');
+                      }}
+                      ripple
+                      glow
+                      style={{ margin: '0 10px' }}
+                    >
+                      Ir ao Site
+                    </Button>
+
+                    <Button
+                      onClick={() => {
+                        resetStore();
+                        navigate('/');
+                      }}
+                      ripple
+                      glow
+                      style={{ margin: '0 10px' }}
+                    >
+                      Recalcule seu Sonho
+                    </Button>
+                  </ButtonContainer>
+
+                  <p>
+                    Confira mais detalhes sobre a{' '}
+                    <strong>evolução do seu patrimônio</strong> e
+                    <strong> composição de carteira ideal</strong> no relatório
+                    completo que enviamos para o seu e-mail. <br />
+                    <br /> Quer ajuda para tirar seu planejamento financeiro do
+                    papel?
+                  </p>
+
+                  <ButtonContainer>
+                    <Button
+                      onClick={() => urls && window.open(urls[0])}
+                      ripple
+                      glow
+                    >
+                      Baixar PDF
+                    </Button>
+                  </ButtonContainer>
+                </TextResult>
+              </animated.div>
+            ))}
+          </>
+        ) : (
+          <>
+            <TitleDesktop>Invista ou invista</TitleDesktop>
+
+            <BoxContentDesktop>
+              <BoxContextChart>
+                <ContainerRate
+                  isVisibleChart={isVisibleChart}
+                  isMobileView={isMobileView}
                 >
-                  Ir ao Site
-                </Button>
+                  <ContainerRateTitle>
+                    Crescimento da Carteira
+                  </ContainerRateTitle>
+                  <ContainerRateSubTitle>
+                    Para conseguir alcançar seu objetivo,
+                    <br />o seu patrimônio precisa performar
+                  </ContainerRateSubTitle>
 
-                <Button
-                  onClick={() => {
-                    resetStore();
-                    navigate('/');
-                  }}
-                  ripple
-                  glow
-                  style={{ margin: '0 10px' }}
-                >
-                  Recalcule seu Sonho
-                </Button>
-              </ButtonContainer>
+                  <ContainerRateBox>
+                    {achievedObjectiveCost ? (
+                      <>
+                        <ContainerRateBoxItems>
+                          AO MÊS: <strong>0,00%</strong>
+                        </ContainerRateBoxItems>
+                        <ContainerRateBoxItems>
+                          AO ANO: <strong>0,00%</strong>
+                        </ContainerRateBoxItems>
+                      </>
+                    ) : (
+                      <>
+                        <ContainerRateBoxItems>
+                          AO MÊS: <strong>{monthlyRate}%</strong>
+                        </ContainerRateBoxItems>
+                        <ContainerRateBoxItems>
+                          AO ANO: <strong>{annualRate}%</strong>
+                        </ContainerRateBoxItems>
+                      </>
+                    )}
+                  </ContainerRateBox>
 
-              <p>
-                Confira mais detalhes sobre a{' '}
-                <strong>evolução do seu patrimônio</strong> e
-                <strong> composição de carteira ideal</strong> no relatório
-                completo que enviamos para o seu e-mail. <br />
-                <br /> Quer ajuda para tirar seu planejamento financeiro do
-                papel?
-              </p>
+                  {isMobileView && (
+                    <ButtonShowGraphic
+                      isVisibleChart={isVisibleChart}
+                      onClick={() => toogleIsVisibleChart()}
+                    >
+                      <DownArrow />
+                      <MessagePressChart isVisibleChart={isVisibleChart}>
+                        Abrir gráfico
+                      </MessagePressChart>
+                    </ButtonShowGraphic>
+                  )}
+                </ContainerRate>
+                <LineChartContainer isMobileView={isMobileView}>
+                  <LineChartStyled
+                    slider
+                    isMobileView={isMobileView}
+                    theme="white"
+                    height={300}
+                    data={
+                      yearlyAverageArrayModificad?.length
+                        ? yearlyAverageArrayModificad
+                        : fakeData
+                    }
+                  />
+                </LineChartContainer>
+              </BoxContextChart>
 
-              <ButtonContainer>
-                <Button
-                  onClick={() => urls && window.open(urls[0])}
-                  ripple
-                  glow
-                >
-                  Baixar PDF
-                </Button>
-              </ButtonContainer>
-            </TextResult>
-          </animated.div>
-        ))}
+              <BoxContextProfile>
+                <TitleContextProfile>
+                  <h3>
+                    Sua carteira é{' '}
+                    <span>{formatProfileFemale(riskProfile)}!</span>
+                  </h3>
+                  <span className="footer-title">
+                    {footerTitleResultProfile(riskProfile)}
+                  </span>
+                </TitleContextProfile>
+                <BoxContextProfileResult>
+                  {achievedObjectiveCost ? (
+                    <p style={{ marginBottom: '1px' }}>
+                      Você conseguiria alcaçar este valor em
+                      {countYearNewPeriod
+                        ? countYearNewPeriod > 1
+                          ? ` ${countYearNewPeriod} anos`
+                          : ` ${countYearNewPeriod} ano`
+                        : ''}
+                      {countYearNewPeriod && countMonthNewPeriod ? ` e` : ''}
+                      {countMonthNewPeriod
+                        ? countMonthNewPeriod > 1
+                          ? ` ${countMonthNewPeriod} meses`
+                          : ` ${countMonthNewPeriod} mês`
+                        : ''}
+                      <br />
+                      <br />
+                    </p>
+                  ) : (
+                    <span>{resultRiskProfile}</span>
+                  )}
+                </BoxContextProfileResult>
+                <FooterContextProfile>
+                  <span>
+                    Confira mais detalhes sobre a{' '}
+                    <strong>evolução do seu patrimônio</strong> e
+                    <strong> composição de carteira ideal</strong> no relatório
+                    completo que enviamos para o seu e-mail. <br />
+                    <br /> Quer ajuda para tirar seu planejamento financeiro do
+                    papel?
+                  </span>
+                  <ButtonContainerDesktop isMobileView={isMobileView}>
+                    <Button
+                      onClick={() => {
+                        window.open('https://be.capital/');
+                      }}
+                      ripple
+                      glow
+                    >
+                      Ir ao Site
+                    </Button>
+
+                    <Button
+                      onClick={() => {
+                        resetStore();
+                        navigate('/');
+                      }}
+                      ripple
+                      glow
+                    >
+                      Recalcule seu Sonho
+                    </Button>
+                    <Button
+                      onClick={() => urls && window.open(urls[0])}
+                      ripple
+                      glow
+                    >
+                      Baixar PDF
+                    </Button>
+                  </ButtonContainerDesktop>
+                </FooterContextProfile>
+              </BoxContextProfile>
+            </BoxContentDesktop>
+          </>
+        )}
       </Container>
     </Layout>
   );

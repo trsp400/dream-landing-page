@@ -34,10 +34,25 @@ export const MessageFeedbackStyle = styled(MessageFeedback)`
         `
       : css`
           font-size: 48px;
-
           position: absolute;
           top: 15%;
         `}
+
+  &:nth-child(2) {
+    ${props =>
+      props?.isMobileView
+        ? css`
+            margin-bottom: 16px;
+          `
+        : css`
+            position: absolute;
+            top: 25%;
+
+            span {
+              line-height: 50px;
+            }
+          `}
+  }
 `;
 
 export const BoxInput = styled.div`
@@ -89,13 +104,15 @@ export const Body = styled.div`
 
 export const ListDecisionStyled = styled(ListDecision)`
   width: 200px;
-  height: 200px;
+  height: 220px;
   flex-direction: column;
+
   span {
-    font-size: 20px;
-    line-height: 30px;
+    font-size: 1.5em;
+    line-height: 25px;
   }
 `;
+
 
 export const BoxListDecision = styled.div`
   ${props =>
@@ -107,8 +124,34 @@ export const BoxListDecision = styled.div`
       : css`
           position: absolute;
           top: 50%;
+          width: 100%;
         `}
 `;
+
+export const BoxButton = styled.div`
+  display: flex;
+  width: 100%;
+  margin-top: 25px;
+
+  button {
+    display: flex;
+    width: 5em;
+    justify-content: flex-end;
+
+    svg {
+      height: 1em;
+      fill: #fff;
+    }
+
+
+    &:first-of-type {
+      width: 3em;
+      margin-right: 20px;
+      justify-content: center;
+    }
+
+  }
+`
 
 export const InputContainer = styled.div`
   position: absolute;

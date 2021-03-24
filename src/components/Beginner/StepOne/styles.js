@@ -66,6 +66,7 @@ export const MessageFeedbackStyle = styled(MessageFeedback)`
 `;
 
 export const ModalStyled = styled(Modal)`
+
   .custom-content {
     background-color: ${({ theme }) => theme.mobileTheme.colors.primary.blue};
     border: 1px solid ${({ theme }) => theme.mobileTheme.colors.primary.orange};
@@ -88,6 +89,7 @@ export const HeaderModalStyled = styled(Header)`
 `;
 
 export const BodyModalStyled = styled(Body)`
+
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -107,6 +109,11 @@ export const BodyModalStyled = styled(Body)`
     margin-bottom: 40px;
     font: normal normal normal 1.4rem Trasandina;
     text-align: center;
+  }
+
+  .body-modal__input_desktop {
+    display: flex;
+    justify-content: center;
   }
 
   .boxInput_input {

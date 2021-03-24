@@ -1,4 +1,5 @@
 import styled, { css } from 'styled-components';
+import Select from 'react-select';
 
 import MessageFeedback from '../../CustomComponents/MessageFeedback';
 
@@ -65,6 +66,9 @@ export const Body = styled.div`
   flex: 1;
 `;
 
+export const SelectTime = styled(Select)`
+`;
+
 export const BoxInput = styled.div`
   ${props =>
     props?.isMobileView
@@ -85,15 +89,55 @@ export const BoxInput = styled.div`
         `
       : css`
           display: flex;
-          justify-content: space-between;
           align-items: center;
-          margin-top: 20%;
+          width: 100%;
 
           input {
-            width: 500px;
-          }
+            width: 50%;
+            text-align: left;
+            margin-right: 35px;
+           }
         `}
 `;
+
+
+export const InputContainer = styled.div`
+  position: absolute;
+  width: 100%;
+  top: 60%;
+  height: auto;
+  padding-left: 50px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+
+`;
+
+export const BoxButton = styled.div`
+  display: flex;
+  width: 100%;
+  margin-top: 25px;
+
+  button {
+    display: flex;
+    width: 5em;
+    justify-content: flex-end;;
+
+    svg {
+      height: 1em;
+      fill: #fff;
+    }
+
+
+    &:first-of-type {
+      width: 3em;
+      margin-right: 20px;
+      justify-content: center;
+    }
+
+  }
+`
 
 // bottom:  ${props => props.isActiveInput ? "25%" : "15%"};
 // height: ${props => props.isActiveInput ? "10%" : "7%"};

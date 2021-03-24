@@ -1,9 +1,33 @@
-import styled, { css } from 'styled-components';
+import styled, { css, keyframes } from 'styled-components';
 import { Container as BootstrapContainer, ButtonGroup } from 'react-bootstrap';
 
 import RippleButton from '../../components/CustomComponents/Button';
 
 import Pattern from '../../images/background-pattern.png';
+
+const animateDreamMachine = keyframes`
+  0% {
+    transform: translateY(-13px);
+    filter: drop-shadow(0px 150px 30px rgba(0,0,0,0.48));
+  }
+
+  100% {
+    transform: translateY(0px);
+    filter: drop-shadow(0px 95px 12px rgba(0,0,0,0.48));
+  }
+
+`
+
+const animateBackground = keyframes`
+  0%{
+    filter: hue-rotate(0deg);
+  }
+
+  100%{
+    filter: hue-rotate(360deg);
+  }
+`
+
 
 export const Container = styled(BootstrapContainer)`
   height: 100%;
@@ -17,11 +41,6 @@ export const Container = styled(BootstrapContainer)`
     props?.isMobileView &&
     css`
       max-width: 1024px;
-    `}
-
-  ${props =>
-    props?.isMobileView &&
-    css`
       background: linear-gradient(
         180deg,
         rgba(26, 74, 115, 1) 30%,
@@ -33,8 +52,6 @@ export const Container = styled(BootstrapContainer)`
   object-fit: cover;
   background-position: center; */
 
-  background-position: center;
-  background-repeat: no-repeat;
 
   &::before {
     content: '';
@@ -158,10 +175,17 @@ export const DesktopContainer = styled.div`
   -webkit-flex-direction: row;
   -ms-flex-direction: row;
   flex-direction: row;
+
+  transform-style: preserve-3d;
+  perspective: 1000px;
 `;
 
 export const DreamMachineContainer = styled.div`
   width: 65%;
+  filter: drop-shadow(0px 150px 15px rgba(0,0,0,0.48));
+
+  animation: ${animateDreamMachine} 3s infinite alternate-reverse;
+
 `;
 
 export const PresentationSection = styled.section`

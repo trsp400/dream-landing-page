@@ -6,12 +6,14 @@ import Input from '../../CustomComponents/Input';
 import Button from '../../CustomComponents/Button';
 
 import Lefticon from '../../../assets/icons/left-icon.svg';
+import OkIcon from '../../../assets/icons/ok-icon.svg'
 
 import {
   Container,
   Body,
   MessageFeedbackStyle,
   BoxInput,
+  BoxButton,
   Footer,
   InputContainer,
 } from './styles';
@@ -47,6 +49,17 @@ const StepTwo = () => {
             )
           : inputValue;
 
+      if (typeof inputValue === 'string') {
+        if (
+          (formattedInputValue <= 0 || inputValue?.includes('-')) &&
+          step > currentStep
+        )
+          return notify('Por favor, digite um valor válido!');
+      } else {
+        if ((formattedInputValue <= 0 || inputValue <= 0) && step > currentStep)
+          return notify('Por favor, digite um valor válido!');
+      }
+
       dispatch(
         changeFormState({
           ...store,
@@ -70,7 +83,6 @@ const StepTwo = () => {
       document.removeEventListener('keydown', listener);
     };
   }, [inputValue]);
-
 
   return isMobileView ? (
     <Container isMobileView={isMobileView} isActiveInput={isActiveInput}>
@@ -146,36 +158,31 @@ const StepTwo = () => {
         </MessageFeedbackStyle>
 
         <InputContainer>
-          <Button
-            ripple
-            variant="beblue"
-            glow
-            onClick={() => handleDispatch(1, 'previous')}
-            style={{
-              width: '10%',
-            }}
-          >
-            <Lefticon width={20} />
-          </Button>
-          <BoxInput>
-            <Input
+          <Input
               state={inputValue}
               setState={setInputValue}
               type="currency"
               setIsActiveInput={setIsActiveInput}
-            />
-          </BoxInput>
-          <Button
-            ripple
-            variant="beorange"
-            glow
-            onClick={() => handleDispatch(3, 'next')}
-            style={{
-              width: '10%',
-            }}
-          >
-            OK
-          </Button>
+          />
+          <BoxButton>
+            <Button
+              ripple
+              variant="beblue"
+              glow
+              onClick={() => handleDispatch(1, 'previous')}
+            >
+              <Lefticon width={20} />
+            </Button>
+
+            <Button
+              ripple
+              variant="beorange"
+              glow
+              onClick={() => handleDispatch(3, 'next')}
+            >
+              OK <OkIcon />
+            </Button>
+          </BoxButton>
         </InputContainer>
       </Body>
     </Container>

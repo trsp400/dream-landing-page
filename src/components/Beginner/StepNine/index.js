@@ -14,11 +14,14 @@ import Button from '../../CustomComponents/Button';
 
 import { parseStringInt } from '../../../utils/parseValues';
 
+import EmailIcon from '../../../assets/icons/email-icon.svg'
+
 import {
   Container,
   MessageFeedbackStyle,
   BoxInput,
   ErrorInformation,
+  BoxButton,
   Body,
   Footer,
   InputContainer,
@@ -193,6 +196,11 @@ const StepSeven = () => {
           </MessageFeedbackStyle>
 
           <InputContainer>
+            <span>
+              Ao cadastrar o e-mail, você autoriza que a BeCapital faça envio de
+              conteúdos que a nossa equipe avalie como interessantes para o seu
+              perfil.
+            </span>
             <BoxInput isMobileView={isMobileView}>
               <Input
                 state={inputValue}
@@ -204,21 +212,18 @@ const StepSeven = () => {
                 <ErrorInformation>Digite um e-mail válido!</ErrorInformation>
               )}
             </BoxInput>
+            <BoxButton>
             <Button
               ripple
               variant="beorange"
               glow
               onClick={() => handleOnClink(inputValue)}
             >
-              OK
+              Enviar <EmailIcon />
             </Button>
-          </InputContainer>
-          <span>
-            Ao cadastrar o e-mail, você autoriza que a BeCapital faça envio de
-            conteúdos que a nossa equipe avalie como interessantes para o seu
-            perfil.
-          </span>
-        </Body>
+          </BoxButton>
+       </InputContainer>
+       </Body>
       </Container>
     );
   };

@@ -10,12 +10,14 @@ import {
   Container,
   MessageFeedbackStyle,
   BoxInput,
+  BoxButton,
   Body,
   Footer,
   InputContainer,
 } from './styles';
 
 import Lefticon from '../../../assets/icons/left-icon.svg';
+import OkIcon from '../../../assets/icons/ok-icon.svg'
 
 const StepFive = () => {
   const dispatch = useDispatch();
@@ -46,6 +48,17 @@ const StepFive = () => {
         return notify(
           'O valor que você pode investir deve ser menor do que o valor do seu sonho!',
         );
+
+      if (typeof inputValue === 'string') {
+        if (
+          (formattedInputValue <= 0 || inputValue?.includes('-')) &&
+          step > currentStep
+        )
+          return notify('Por favor, digite um valor válido!');
+      } else {
+        if ((formattedInputValue <= 0 || inputValue <= 0) && step > currentStep)
+          return notify('Por favor, digite um valor válido!');
+      }
 
       dispatch(
         changeFormState({
@@ -139,41 +152,34 @@ const StepFive = () => {
         >
           Quanto você pode investir por mês?
         </MessageFeedbackStyle>
-        <InputContainer>
-          <Button
-            ripple
-            variant="beblue"
-            glow
-            onClick={() => handleDispatch(4, 'previous')}
-            style={{
-              width: '10%',
-              padding: 0,
-            }}
-          >
-            <Lefticon width={20} />
-          </Button>
 
-          <BoxInput isMobileView={isMobileView}>
+        <InputContainer>
             <Input
               state={inputValue}
               setState={setInputValue}
               type="currency"
               setIsActiveInput={setIsActiveInput}
             />
-          </BoxInput>
+          <BoxButton>
+            <Button
+              ripple
+              variant="beblue"
+              glow
+              onClick={() => handleDispatch(4, 'previous')}
+            >
+              <Lefticon width={20} />
+            </Button>
 
-          <Button
-            ripple
-            variant="beorange"
-            glow
-            onClick={() => handleDispatch(6, 'next')}
-            style={{
-              width: '20%',
-            }}
-          >
-            OK
-          </Button>
-        </InputContainer>
+            <Button
+              ripple
+              variant="beorange"
+              glow
+              onClick={() => handleDispatch(6, 'next')}
+            >
+              OK <OkIcon />
+            </Button>
+          </BoxButton>
+       </InputContainer>
       </Body>
 
       <Footer></Footer>
