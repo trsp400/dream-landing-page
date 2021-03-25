@@ -2,7 +2,7 @@ version: 0.1
 phases:
   install:
     commands:
-      - touch .npmignore
+      - 'touch .npmignore'
       - 'npm install -g gatsby'
   pre_build:
     commands:
