@@ -2,7 +2,7 @@ version: 0.1
 phases:
   install:
     commands:
-      - 'touch .npmignore'
+      - touch .npmignore
       - 'npm install -g gatsby'
   pre_build:
     commands:
@@ -13,6 +13,7 @@ phases:
   post_build:
     commands:
       - 'aws s3 sync "public/" "s3://dream-machine-homolog" --delete --acl "public-read"'
+      - 'aws cloudfront create-invalidation --distribution-id E1EFVF3YAEZ3YD --paths "/*"'
 artifacts:
   base-directory: public
   files:
