@@ -189,8 +189,7 @@ export const DreamMachineContainer = styled.div`
 `;
 
 export const PresentationSection = styled.section`
-  /* width: 40%; */
-
+  z-index: 999;
   ${props =>
     props?.isMobileView
       ? css`
