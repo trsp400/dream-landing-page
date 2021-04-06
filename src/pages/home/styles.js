@@ -16,7 +16,7 @@ const animateDreamMachine = keyframes`
     filter: drop-shadow(0px 95px 12px rgba(0,0,0,0.48));
   }
 
-`
+`;
 
 const animateBackground = keyframes`
   0%{
@@ -26,8 +26,7 @@ const animateBackground = keyframes`
   100%{
     filter: hue-rotate(360deg);
   }
-`
-
+`;
 
 export const Container = styled(BootstrapContainer)`
   height: 100%;
@@ -182,10 +181,9 @@ export const DesktopContainer = styled.div`
 
 export const DreamMachineContainer = styled.div`
   width: 65%;
-  filter: drop-shadow(0px 150px 15px rgba(0,0,0,0.48));
+  filter: drop-shadow(0px 150px 15px rgba(0, 0, 0, 0.48));
 
   animation: ${animateDreamMachine} 3s infinite alternate-reverse;
-
 `;
 
 export const PresentationSection = styled.section`

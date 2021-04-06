@@ -14,7 +14,7 @@ import Button from '../../CustomComponents/Button';
 
 import { parseStringInt } from '../../../utils/parseValues';
 
-import EmailIcon from '../../../assets/icons/email-icon.svg'
+import EmailIcon from '../../../assets/icons/email-icon.svg';
 
 import {
   Container,
@@ -163,12 +163,14 @@ const StepSeven = () => {
               setState={checkValidEmailOnInputChange}
               type="email"
               setIsActiveInput={setIsActiveInput}
+              style={{
+                paddingBottom: 10,
+              }}
             />
             {!validEmail && (
               <ErrorInformation>Digite um e-mail válido!</ErrorInformation>
             )}
           </BoxInput>
-
         </Body>
 
         <Footer isActiveInput={isActiveInput}>
@@ -213,17 +215,17 @@ const StepSeven = () => {
               )}
             </BoxInput>
             <BoxButton>
-            <Button
-              ripple
-              variant="beorange"
-              glow
-              onClick={() => handleOnClink(inputValue)}
-            >
-              Enviar <EmailIcon />
-            </Button>
-          </BoxButton>
-       </InputContainer>
-       </Body>
+              <Button
+                ripple
+                variant="beorange"
+                glow
+                onClick={() => handleOnClink(inputValue)}
+              >
+                Enviar <EmailIcon />
+              </Button>
+            </BoxButton>
+          </InputContainer>
+        </Body>
       </Container>
     );
   };
