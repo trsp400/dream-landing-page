@@ -19,7 +19,7 @@ import {
 import { question3 } from '../../../utils/questionsToProfile';
 
 import Lefticon from '../../../assets/icons/left-icon.svg';
-import OkIcon from '../../../assets/icons/ok-icon.svg'
+import OkIcon from '../../../assets/icons/ok-icon.svg';
 
 const StepEight = () => {
   const dispatch = useDispatch();
@@ -134,25 +134,24 @@ const StepEight = () => {
           setState={setInputvalue}
         />
 
-      <BoxButton>
-        <Button
-          ripple
-          variant="beblue"
-          glow
-          onClick={() => handleDispatch(7, 'previous')}
-        >
-          <Lefticon width={20} />
-        </Button>
-        <Button
-          ripple
-          variant="beorange"
-          glow
-          onClick={() => handleDispatch(9, 'next')}
-        >
-          OK <OkIcon />
-        </Button>
-      </BoxButton>
-
+        <BoxButton>
+          <Button
+            ripple
+            variant="beblue"
+            glow
+            onClick={() => handleDispatch(7, 'previous')}
+          >
+            <Lefticon width={20} />
+          </Button>
+          <Button
+            ripple
+            variant="beorange"
+            glow
+            onClick={() => handleDispatch(9, 'next')}
+          >
+            OK <OkIcon />
+          </Button>
+        </BoxButton>
       </BoxListDecision>
     </Container>
   );

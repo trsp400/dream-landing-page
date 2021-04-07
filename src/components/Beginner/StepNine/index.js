@@ -14,7 +14,7 @@ import Button from '../../CustomComponents/Button';
 
 import { parseStringInt } from '../../../utils/parseValues';
 
-import EmailIcon from '../../../assets/icons/email-icon.svg'
+import EmailIcon from '../../../assets/icons/email-icon.svg';
 
 import {
   Container,
@@ -154,8 +154,8 @@ const StepSeven = () => {
           </MessageFeedbackStyle>
           <BoxInput isMobileView={isMobileView}>
             <span className="box-input_warning">
-              Ao cadastrar o e-mail, você autoriza que a BeCapital faça envio de
-              conteúdos que a nossa equipe avalie como interessantes para o seu
+              Ao cadastrar seu e-mail, você autoriza a BeCapital a enviar
+              conteúdos que a nossa equipe considere relevantes para o seu
               perfil.
             </span>
             <Input
@@ -163,12 +163,14 @@ const StepSeven = () => {
               setState={checkValidEmailOnInputChange}
               type="email"
               setIsActiveInput={setIsActiveInput}
+              style={{
+                paddingBottom: 10,
+              }}
             />
             {!validEmail && (
               <ErrorInformation>Digite um e-mail válido!</ErrorInformation>
             )}
           </BoxInput>
-
         </Body>
 
         <Footer isActiveInput={isActiveInput}>
@@ -191,8 +193,8 @@ const StepSeven = () => {
             animationDelay={900}
             isMobileView={isMobileView}
           >
-            Para receber o resultado completo do seu perfil, deixe aqui o seu
-            e-mail:
+            Para receber o resultado completo da sua carteira, deixe aqui seu
+            e-mail e whatsapp:
           </MessageFeedbackStyle>
 
           <InputContainer>
@@ -213,17 +215,17 @@ const StepSeven = () => {
               )}
             </BoxInput>
             <BoxButton>
-            <Button
-              ripple
-              variant="beorange"
-              glow
-              onClick={() => handleOnClink(inputValue)}
-            >
-              Enviar <EmailIcon />
-            </Button>
-          </BoxButton>
-       </InputContainer>
-       </Body>
+              <Button
+                ripple
+                variant="beorange"
+                glow
+                onClick={() => handleOnClink(inputValue)}
+              >
+                Enviar <EmailIcon />
+              </Button>
+            </BoxButton>
+          </InputContainer>
+        </Body>
       </Container>
     );
   };

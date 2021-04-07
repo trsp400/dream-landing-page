@@ -50,7 +50,6 @@ export const InputContainer = styled.div`
   input {
     width: 50%;
     text-align: left;
-
   }
 `;
 
@@ -69,15 +68,13 @@ export const BoxButton = styled.div`
       fill: #fff;
     }
 
-
     &:first-of-type {
       width: 3em;
       margin-right: 20px;
       justify-content: center;
     }
-
   }
-`
+`;
 
 export const MessageFeedbackStyle = styled(MessageFeedback)`
   ${props =>
@@ -101,6 +98,10 @@ export const MessageFeedbackStyle = styled(MessageFeedback)`
         : css`
             position: absolute;
             top: 40%;
+
+            span {
+              line-height: 50px;
+            }
           `}
   }
 `;
@@ -125,9 +126,9 @@ export const BoxInput = styled.div`
 export const Footer = styled.div`
   position: fixed;
   display: flex;
-  bottom:  8em;
+  bottom: 8em;
   width: 100%;
-  height:  3.5em;
+  height: 3.5em;
 
   justify-content: space-between;
   padding: 0 10%;
@@ -145,22 +146,22 @@ export const Footer = styled.div`
     }
   }
 
-  @media(max-height: 737px) and (max-width: 415px){
+  @media (max-height: 737px) and (max-width: 415px) {
     height: 3em;
     bottom: 7em;
-    /* bottom: ${props => props.isActiveInput ? "6em" : "7em"}; */
+    /* bottom: ${props => (props.isActiveInput ? '6em' : '7em')}; */
   }
 
   @media (max-height: 569px) and (max-width: 321px) {
     height: 3em;
-    bottom: ${props => props.isActiveInput ? "6em" : "7em"};
+    bottom: ${props => (props.isActiveInput ? '6em' : '7em')};
   }
 
-    button {
-      svg {
-        height: 25px;
-      }
+  button {
+    svg {
+      height: 25px;
     }
+  }
 `;
 
 export const ButtonContainer = styled.div`
