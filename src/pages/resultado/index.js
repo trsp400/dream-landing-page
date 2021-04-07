@@ -1,8 +1,8 @@
 import React, { useState, useCallback, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import _ from 'lodash';
+import _, { result } from 'lodash';
 import { navigate } from 'gatsby-link';
-import { useSpring, animated, useTransition } from 'react-spring';
+import { animated, useTransition } from 'react-spring';
 
 import { changeFormState } from '../../redux/dream_machine/actions';
 
@@ -11,6 +11,7 @@ import SEO from '../../components/CustomComponents/Seo';
 import resultProfile from '../../utils/resultProfile';
 
 import DownArrow from '../../assets/icons/down-arrow.svg';
+import Loading from '../../components/CustomComponents/Loading';
 
 import {
   Container,
@@ -36,6 +37,18 @@ import {
   FooterContextProfile,
 } from './styles';
 
+const RenderLoading = ({ resultSuccess }) => {
+  const [visible, setVisible] = useState(true);
+
+  useEffect(() => {
+    if (resultSuccess) {
+      setVisible(false);
+    }
+  }, [resultSuccess]);
+
+  return visible && <Loading />;
+};
+
 const Result = () => {
   const dispatch = useDispatch();
 
@@ -58,6 +71,7 @@ const Result = () => {
     },
     comingFromLastStep,
     finishSimulation,
+    resultSuccess,
   } = store;
 
   const urls = fileUrl?.urls || '';
@@ -186,7 +200,11 @@ const Result = () => {
     return femaleProfileStructure[lowerCaseProfile];
   };
 
-  return (
+  return !resultSuccess ? (
+    <Layout finishSimulation={finishSimulation}>
+      <RenderLoading resultSuccess={resultSuccess} />
+    </Layout>
+  ) : (
     <Layout finishSimulation={finishSimulation}>
       <SEO title="Resultado | Máquina dos Sonhos" />
       <Container isVisibleChart={isVisibleChart}>
