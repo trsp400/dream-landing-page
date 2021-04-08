@@ -65,7 +65,6 @@ export const InputContainer = styled.div`
   input {
     width: 50%;
     text-align: left;
-
   }
 `;
 
@@ -84,15 +83,13 @@ export const BoxButton = styled.div`
       fill: #fff;
     }
 
-
     &:first-of-type {
       width: 3em;
       margin-right: 20px;
       justify-content: center;
     }
-
   }
-`
+`;
 
 export const MessageFeedbackStyle = styled(MessageFeedback)`
   ${props =>
@@ -116,6 +113,10 @@ export const MessageFeedbackStyle = styled(MessageFeedback)`
         : css`
             position: absolute;
             top: 40%;
+
+            span {
+              line-height: 50px;
+            }
           `}
   }
 `;
@@ -168,7 +169,7 @@ export const Footer = styled.div`
 
   @media (max-height: 569px) and (max-width: 321px) {
     height: 3em;
-    bottom: ${props => props.isActiveInput ? "6em" : "7em"};
+    bottom: ${props => (props.isActiveInput ? '6em' : '7em')};
   }
 
     button {
