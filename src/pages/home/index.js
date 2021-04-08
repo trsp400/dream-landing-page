@@ -56,26 +56,57 @@ const Home = () => {
     );
   };
 
-  const springConfig =
-    direction === 'previous'
-      ? {
-          transform: isMobileView ? 'translateX(0px)' : 'translateY(0px)',
-          from: {
-            opacity: 0,
-            transform: isMobileView
-              ? 'translateX(-1000px)'
-              : 'translateY(-1000px)',
-          },
-        }
-      : {
-          transform: isMobileView ? 'translateX(0px)' : 'translateY(0px)',
-          from: {
-            opacity: 0,
-            transform: isMobileView
-              ? 'translateX(1000px)'
-              : 'translateY(1000px)',
-          },
-        };
+  const springConfig = {
+    previous: {
+      transform: isMobileView ? 'translateX(0px)' : 'translateY(0px)',
+      from: {
+        opacity: 0,
+        transform: isMobileView
+          ? 'translateX(-1000px)'
+          : 'translateY(-1000px)',
+      },
+    },
+    next: {
+      transform: isMobileView ? 'translateX(0px)' : 'translateY(0px)',
+      from: {
+        opacity: 0,
+        transform: isMobileView
+          ? 'translateX(1000px)'
+          : 'translateY(1000px)',
+      },
+    },
+    loading: {
+      transform: isMobileView ? 'translateX(0px)' : 'translateY(0px)',
+      from: {
+        opacity: 0,
+        transform: isMobileView
+          ? 'translateX(0px)'
+          : 'translateY(0px)',
+      },
+    }
+  }
+
+
+
+    // direction === 'previous'
+    //   ? {
+    //       transform: isMobileView ? 'translateX(0px)' : 'translateY(0px)',
+    //       from: {
+    //         opacity: 0,
+    //         transform: isMobileView
+    //           ? 'translateX(-1000px)'
+    //           : 'translateY(-1000px)',
+    //       },
+    //     }
+    //   : {
+    //       transform: isMobileView ? 'translateX(0px)' : 'translateY(0px)',
+    //       from: {
+    //         opacity: 0,
+    //         transform: isMobileView
+    //           ? 'translateX(1000px)'
+    //           : 'translateY(1000px)',
+    //       },
+    //     };
 
   const springProps = useSpring({
     opacity: 1,
@@ -83,7 +114,7 @@ const Home = () => {
     config: { tension: 300, friction: 70 },
 
     reset: currentStep,
-    ...springConfig,
+    ...springConfig[direction],
   });
 
   return currentStep >= 1 ? (

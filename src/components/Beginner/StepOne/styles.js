@@ -43,9 +43,9 @@ export const BoxMessageFeedback = styled.div`
   width: 100%;
   height: 5rem;
   padding-left: 20px;
-  margin-bottom: 74px;
+  margin-bottom: 36px;
 
-  @media(max-width: 320px) {
+  @media(max-width: 375px) {
    height: 4rem;
    margin-bottom: 44px;
   }

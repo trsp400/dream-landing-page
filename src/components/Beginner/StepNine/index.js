@@ -64,6 +64,7 @@ const StepSeven = () => {
       dispatch(
         changeFormState({
           ...store,
+          direction: "loading",
           finishSimulation: true,
         }),
       );

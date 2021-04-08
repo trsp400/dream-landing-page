@@ -95,16 +95,19 @@ export const BoxInput = styled.div`
 
             input {
               width: 100%;
-              padding: 22px 0;
+              height: 50px;
+              padding-top: 14px;
+
             }
 
 
-            @media(max-width: 375px) {
+            /* @media(max-width: 375px) {
               input {
-                padding: 20px 10px;
+                padding-top: 10px;
+                height: 60px;
               }
 
-            }
+            } */
           }
         `
       : css`
