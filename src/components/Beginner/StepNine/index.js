@@ -25,6 +25,7 @@ import {
   Body,
   Footer,
   InputContainer,
+  BoxMessageFeedback
 } from './styles';
 
 const StepSeven = () => {
@@ -143,15 +144,17 @@ const StepSeven = () => {
     return isMobileView ? (
       <Container isMobileView={isMobileView}>
         <Body isMobileView={isMobileView}>
-          <MessageFeedbackStyle
-            placing="bellow"
-            animationSpeed={2000}
-            animationDelay={900}
-            isMobileView={isMobileView}
-          >
-            Para receber o resultado completo do seu perfil, deixe aqui o seu
-            e-mail:
-          </MessageFeedbackStyle>
+          <BoxMessageFeedback>
+            <MessageFeedbackStyle
+              placing="bellow"
+              animationSpeed={2000}
+              animationDelay={900}
+              isMobileView={isMobileView}
+            >
+              Para receber o resultado completo do seu perfil, deixe aqui o seu
+              e-mail:
+            </MessageFeedbackStyle>
+          </BoxMessageFeedback>
           <BoxInput isMobileView={isMobileView}>
             <span className="box-input_warning">
               Ao cadastrar o e-mail, você autoriza que a BeCapital faça envio de

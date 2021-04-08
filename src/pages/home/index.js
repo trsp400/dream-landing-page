@@ -91,7 +91,7 @@ const Home = () => {
       <animated.div
         style={{
           ...springProps,
-          height: '100vh',
+          height: '100%',
         }}
       >
         <RenderSelectedFormPath

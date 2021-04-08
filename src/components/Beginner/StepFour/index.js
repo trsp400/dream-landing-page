@@ -12,6 +12,7 @@ import {
   BoxInput,
   Footer,
   InputContainer,
+  BoxMessageFeedback
 } from './styles';
 
 import Lefticon from '../../../assets/icons/left-icon.svg';
@@ -85,6 +86,7 @@ const StepFour = () => {
   return isMobileView ? (
     <Container isMobileView={isMobileView}>
       <Body>
+      <BoxMessageFeedback>
         <MessageFeedbackStyle
           placing="above"
           animationSpeed={2000}
@@ -101,6 +103,7 @@ const StepFour = () => {
         >
           Quanto você pode investir hoje?
         </MessageFeedbackStyle>
+      </BoxMessageFeedback>
         <BoxInput isMobileView={isMobileView}>
           <Input
             state={inputValue}

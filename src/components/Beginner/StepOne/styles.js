@@ -11,13 +11,13 @@ export const Container = styled(BootstrapContainer)`
       ? css`
           display: flex;
           width: 100%;
-          height: 100vh;
+          height: 100%;
           flex-direction: column;
           padding: 0;
         `
       : css`
           width: 1024px;
-          height: 100vh;
+          height: 100%;
           display: flex;
           justify-content: center;
           align-items: center;
@@ -31,20 +31,44 @@ export const Container = styled(BootstrapContainer)`
         `}
 `;
 
+export const BoxIconGallery = styled.div`
+  height: auto;
+  flex: 1;
+`
+
+export const BoxMessageFeedback = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 100%;
+  height: 5rem;
+  padding-left: 20px;
+  margin-bottom: 74px;
+
+  @media(max-width: 320px) {
+   height: 4rem;
+   margin-bottom: 44px;
+  }
+`
+
 export const DesktopGalleryContainer = styled.div`
   position: absolute;
   top: 45%;
   width: 100%;
-  height: 100%;
+  height: auto;
   flex-direction: column;
   padding: 0;
+
+
+
+
 `;
 
 export const MessageFeedbackStyle = styled(MessageFeedback)`
   ${props =>
     props?.isMobileView
       ? css`
-          /* margin-bottom: 8px; */
+          /* margin-bottom: 28px; */
         `
       : css`
           font-size: 48px;
@@ -56,7 +80,7 @@ export const MessageFeedbackStyle = styled(MessageFeedback)`
     ${props =>
       props?.isMobileView
         ? css`
-            margin-bottom: 16px;
+            margin-bottom: 20px;
           `
         : css`
             position: absolute;

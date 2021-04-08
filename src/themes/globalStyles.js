@@ -19,14 +19,36 @@ const GlobalStyle = createGlobalStyle`
 
 
   html, body {
-    background: #fff;
+    height: 100%;
     font-family: Trasandina;
-    width: 100%;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+
+    /* @media(max-height: 569px) {
+      min-height: 569px;
+    }
+
+    @media(max-height: 640px) {
+      min-height: 640px;
+    }
+
+    @media(max-height: 854px) {
+      min-height: 854px;
+    } */
   }
 
-  body {
+  #___gatsby {
+    height: 100vh;
     background-color: ${({ theme }) => theme.mobileTheme.colors.primary.blue};
     -webkit-font-smoothing: antialiased;
+  }
+
+  #gatsby-focus-wrapper {
+    height: 100%;
   }
 
   body, button, input, p, footer, div, li {

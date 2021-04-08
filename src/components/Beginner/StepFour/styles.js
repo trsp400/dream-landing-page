@@ -9,13 +9,13 @@ export const Container = styled(BootstrapContainer)`
       ? css`
           display: flex;
           width: 100%;
-          height: 100vh;
+          height: 100%;
           flex-direction: column;
           padding: 0;
         `
       : css`
           width: 1024px;
-          height: 100vh;
+          height: 100%;
           display: flex;
           justify-content: center;
           align-items: center;
@@ -35,6 +35,21 @@ export const Body = styled.div`
   flex: 1;
   flex-direction: column;
 `;
+
+export const BoxMessageFeedback = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 100%;
+  height: 5rem;
+  padding-left: 20px;
+  margin-bottom: 74px;
+
+  @media(max-width: 320px) {
+   height: 4rem;
+   margin-bottom: 44px;
+  }
+`
 
 export const InputContainer = styled.div`
   position: absolute;
@@ -124,10 +139,10 @@ export const BoxInput = styled.div`
 
 export const Footer = styled.div`
   position: fixed;
-  display: flex;
-  bottom:  8em;
+  bottom:  5em;
   width: 100%;
   height:  3.5em;
+  display: flex;
 
   justify-content: space-between;
   padding: 0 10%;
@@ -141,14 +156,14 @@ export const Footer = styled.div`
     }
 
     svg {
-      height: 90%;
+      height: 25px;
     }
   }
 
-  @media(max-height: 737px) and (max-width: 415px){
+  /* @media(max-height: 737px) and (max-width: 415px){
     height: 3em;
     bottom: 7em;
-    /* bottom: ${props => props.isActiveInput ? "6em" : "7em"}; */
+    bottom: ${props => props.isActiveInput ? "6em" : "7em"};
   }
 
   @media (max-height: 569px) and (max-width: 321px) {
@@ -160,7 +175,7 @@ export const Footer = styled.div`
       svg {
         height: 25px;
       }
-    }
+    } */
 `;
 
 export const ButtonContainer = styled.div`

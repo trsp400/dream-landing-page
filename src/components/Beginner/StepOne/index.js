@@ -26,6 +26,8 @@ import {
   MessageFeedbackStyle,
   DesktopBody,
   DesktopGalleryContainer,
+  BoxIconGallery,
+  BoxMessageFeedback
 } from './styles';
 
 const labelSize = 8.8;
@@ -156,92 +158,95 @@ const StepOne = () => {
   return isMobileView ? (
     <>
       <Container isMobileView={isMobileView}>
-        <MessageFeedbackStyle
-          placing="above"
-          animationSpeed={3000}
-          animationDelay={900}
-          isMobileView={isMobileView}
-        >
-          Olá, vamos começar?
-        </MessageFeedbackStyle>
+        <BoxMessageFeedback>
+          <MessageFeedbackStyle
+            placing="above"
+            animationSpeed={3000}
+            animationDelay={900}
+            isMobileView={isMobileView}
+          >
+            Olá, vamos começar?
+          </MessageFeedbackStyle>
 
-        <MessageFeedbackStyle
-          placing="bellow"
-          animationSpeed={3000}
-          animationDelay={1500}
-          isMobileView={isMobileView}
-        >
-          Qual o seu objetivo de vida?
-        </MessageFeedbackStyle>
+          <MessageFeedbackStyle
+            placing="bellow"
+            animationSpeed={3000}
+            animationDelay={1500}
+            isMobileView={isMobileView}
+          >
+            Qual o seu objetivo de vida?
+          </MessageFeedbackStyle>
+        </BoxMessageFeedback>
+        <BoxIconGallery>
+          <IconGallery onClick={handleCardClick} objectiveValue={objectiveValue}>
+            <Row>
+              <Card
+                backgroundColor="#EA5E45"
+                icon={<WeddingIcon />}
+                iconSize={iconSize}
+                label="CASAMENTO"
+                labelColor="#FFF"
+                labelSize={labelSize}
+              />
+              <Card
+                backgroundColor="#EA5E45"
+                icon={<HouseIcon />}
+                iconSize={iconSize}
+                label="CASA"
+                labelColor="#FFF"
+                labelSize={labelSize}
+              />
+            </Row>
+            <Row>
+              <Card
+                backgroundColor="#EA5E45"
+                icon={<BeachIcon />}
+                iconSize={iconSize}
+                label="APOSENTADORIA"
+                labelColor="#FFF"
+                labelSize={labelSize}
+              />
+              <Card
+                backgroundColor="#EA5E45"
+                icon={<WorldIcon />}
+                iconSize={iconSize}
+                label="INTERCÂMBIO"
+                labelColor="#FFF"
+                labelSize={labelSize}
+              />
+            </Row>
 
-        <IconGallery onClick={handleCardClick} objectiveValue={objectiveValue}>
-          <Row>
-            <Card
-              backgroundColor="#EA5E45"
-              icon={<WeddingIcon />}
-              iconSize={iconSize}
-              label="CASAMENTO"
-              labelColor="#FFF"
-              labelSize={labelSize}
-            />
-            <Card
-              backgroundColor="#EA5E45"
-              icon={<HouseIcon />}
-              iconSize={iconSize}
-              label="CASA"
-              labelColor="#FFF"
-              labelSize={labelSize}
-            />
-          </Row>
-          <Row>
-            <Card
-              backgroundColor="#EA5E45"
-              icon={<BeachIcon />}
-              iconSize={iconSize}
-              label="APOSENTADORIA"
-              labelColor="#FFF"
-              labelSize={labelSize}
-            />
-            <Card
-              backgroundColor="#EA5E45"
-              icon={<WorldIcon />}
-              iconSize={iconSize}
-              label="INTERCÂMBIO"
-              labelColor="#FFF"
-              labelSize={labelSize}
-            />
-          </Row>
-
-          <Row>
-            <Card
-              backgroundColor="#EA5E45"
-              icon={<CarIcon />}
-              iconSize={iconSize}
-              label="AUTOMÓVEL"
-              labelColor="#FFF"
-              labelSize={labelSize}
-            />
-            <Card
-              backgroundColor="#EA5E45"
-              icon={<MoneyIcon />}
-              iconSize={iconSize}
-              label="INDEPENDÊNCIA FINANCEIRA"
-              labelColor="#FFF"
-              labelSize={labelSize}
-            />
-          </Row>
-          <Row>
-            <Card
-              backgroundColor="#EA5E45"
-              icon={<OtherIcon />}
-              iconSize={36}
-              label="OUTROS"
-              labelColor="#FFF"
-              labelSize={labelSize}
-            />
-          </Row>
-        </IconGallery>
-      </Container>
+            <Row>
+              <Card
+                backgroundColor="#EA5E45"
+                icon={<CarIcon />}
+                iconSize={iconSize}
+                label="AUTOMÓVEL"
+                labelColor="#FFF"
+                labelSize={labelSize}
+              />
+              <Card
+                backgroundColor="#EA5E45"
+                icon={<MoneyIcon />}
+                iconSize={iconSize}
+                label="INDEPENDÊNCIA FINANCEIRA"
+                labelColor="#FFF"
+                labelSize={labelSize}
+              />
+            </Row>
+            <Row>
+              <Card
+                backgroundColor="#EA5E45"
+                icon={<OtherIcon />}
+                iconSize={36}
+                label="OUTROS"
+                labelColor="#FFF"
+                labelSize={labelSize}
+              />
+            </Row>
+          </IconGallery>
+        </BoxIconGallery>
+        </Container>
       <ModalStyled
         visible={isVisibleModal}
         setVisible={setIsVisibleModal}
@@ -281,7 +286,7 @@ const StepOne = () => {
     </>
   ) : (
     <Container>
-      <div>
+
         <MessageFeedbackStyle
           placing="above"
           animationSpeed={3000}
@@ -364,7 +369,7 @@ const StepOne = () => {
             </Row>
           </IconGallery>
         </DesktopGalleryContainer>
-      </div>
+
       <ModalStyled
         visible={isVisibleModal}
         setVisible={setIsVisibleModal}

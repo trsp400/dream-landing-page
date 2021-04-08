@@ -15,6 +15,17 @@ interface TextProps {
   icon?: JSX.Element[] | JSX.Element;
 }
 
+interface DataSettingsStore {
+  isMobileView: boolean,
+  screenSize: number,
+}
+
+interface RootState {
+  dreamMachine: Object,
+  settings: DataSettingsStore,
+  theme: Object
+}
+
 const Text: FC<TextProps> = ({
   icon = <SvgDefault />,
   children,
@@ -25,6 +36,7 @@ const Text: FC<TextProps> = ({
   ...props
 }) => {
   const refText = useRef<HTMLElement>(null);
+  const isMobileView = useSelector((store: RootState) => store.settings.isMobileView)
 
   useEffect(() => {
     renderAnimationWritingEffect();
@@ -52,7 +64,12 @@ const Text: FC<TextProps> = ({
   };
 
   return (
-    <TextStyled placing={placing} largeLowSpace={largeLowSpace} {...props}>
+    <TextStyled
+      placing={placing}
+      largeLowSpace={largeLowSpace}
+      isMobileView={isMobileView}
+      {...props}
+    >
       <div>
         {icon}
         <span className="text-specific" ref={refText} />

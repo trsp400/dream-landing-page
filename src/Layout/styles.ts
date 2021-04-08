@@ -16,9 +16,15 @@ interface ThemeProp extends ThemeProps<any> {
 
 export const Container = styled.div<Props>`
   width: 100vw;
-  height: 100vh;
-  overflow: hidden;
+  height: 100%;
+
+  /* overflow-x: hidden; */
   position: relative;
+
+  ${props => props.isMobileView && css`
+    overflow: auto;
+  `}
+
 
   ${props =>
     !props?.isMobileView &&
@@ -114,22 +120,27 @@ export const Background = styled.div<Props>`
 `;
 
 export const ProgressBarContainer = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  height: 25px;
+  top: 0;
+  right: 0;
+  left: 0;
+  position: absolute;
 
-  margin-bottom: 18px;
+  display: flex;
+
 `;
 
 export const Main = styled.main<Props>`
   position: relative;
+  padding-top: 60px;
+
   ${props =>
     props?.finishSimulation &&
     css`
       width: 100%;
+      padding-top: 0;
     `}
   flex-direction: column;
   justify-content: center;
-
   height: 100%;
 `;
