@@ -184,8 +184,6 @@ const StepFive = () => {
           </BoxButton>
        </InputContainer>
       </Body>
-
-      <Footer></Footer>
     </Container>
   );
 };

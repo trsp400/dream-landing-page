@@ -47,7 +47,7 @@ export const MessageFeedbackStyle = styled(MessageFeedback)`
           font-size: 48px;
 
           position: absolute;
-          top: 25%;
+          top: 15%;
 
           span {
             line-height: 45px;
@@ -117,12 +117,13 @@ export const BoxInput = styled.div`
 
           div {
             width: 50%;
-
           }
 
 
           input {
             width: 100%;
+            height: 2em;
+            padding-top: 14px;
           }
 
         `}

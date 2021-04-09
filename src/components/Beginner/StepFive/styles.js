@@ -102,7 +102,7 @@ export const MessageFeedbackStyle = styled(MessageFeedback)`
           font-size: 48px;
 
           position: absolute;
-          top: 25%;
+          top: 15%;
         `}
 
   &:nth-child(2) {
@@ -113,7 +113,7 @@ export const MessageFeedbackStyle = styled(MessageFeedback)`
           `
         : css`
             position: absolute;
-            top: 40%;
+            top: 30%;
           `}
   }
 `;
@@ -142,12 +142,15 @@ export const Footer = styled.div`
   height:  3.5em;
   display: flex;
 
+
+
   justify-content: space-between;
-  padding: 0 10%;
+  /* padding: 0 10%; */
 
   button {
     width: 100%;
     position: relative;
+    background: blue;
 
     &:last-child {
       margin-left: 10px;

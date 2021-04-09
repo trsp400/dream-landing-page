@@ -31,7 +31,7 @@ export const Container = styled(BootstrapContainer)`
 
 export const Body = styled.div`
   display: flex;
-  height: 100%;
+  /* height: 100%; */
   flex: 1;
   flex-direction: column;
 `;
@@ -101,7 +101,7 @@ export const MessageFeedbackStyle = styled(MessageFeedback)`
           font-size: 48px;
 
           position: absolute;
-          top: 25%;
+          top: 15%;
         `}
 
   &:nth-child(2) {
@@ -112,7 +112,7 @@ export const MessageFeedbackStyle = styled(MessageFeedback)`
           `
         : css`
             position: absolute;
-            top: 40%;
+            top: 30%;
 
             span {
               line-height: 50px;

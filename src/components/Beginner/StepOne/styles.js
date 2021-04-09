@@ -21,6 +21,7 @@ export const Container = styled(BootstrapContainer)`
           display: flex;
           justify-content: center;
           align-items: center;
+
           > div {
             display: flex;
             width: 100%;
@@ -53,13 +54,23 @@ export const BoxMessageFeedback = styled.div`
 
 export const DesktopGalleryContainer = styled.div`
   position: absolute;
-  top: 45%;
+  top: 55%;
   width: 100%;
   height: auto;
   flex-direction: column;
   padding: 0;
 
 
+  div{
+    transition: transform .3s cubic-bezier(.15,1.01,1,1.09);
+    section {
+      > div{
+        &:hover {
+            transform: translateY(-6px);
+        }
+      }
+    }
+}
 
 
 `;

@@ -100,6 +100,7 @@ export const ContainerSteps = styled.div`
 
 export const Header = styled.header`
   position: fixed;
+  max-height: 75px;
   width: 100vw;
   display: flex;
   justify-content: center;
@@ -119,6 +120,7 @@ export const Header = styled.header`
   svg {
     width: ${props => (props?.isMobileView ? '50%' : '20%')};
     filter: drop-shadow(0px 0px 1px #ea5e45) drop-shadow(0px 0px 2px #ea5e45);
+    max-width: 292px;
   }
 `;
 
