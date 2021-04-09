@@ -28,6 +28,8 @@ import MaquinaDosSonhosDesktop from '../../assets/logo/svg/maquinaDosSonhosDeskt
 
 import ImageGallery from '../../components/CustomComponents/ImageGallery';
 
+import SEO from '../../components/CustomComponents/Seo';
+
 const RenderSelectedFormPath = ({ currentStep, store, path }) => {
   const paths = {
     investor: <RenderInvestorForm currentStep={currentStep} store={store} />,
@@ -103,6 +105,10 @@ const Home = () => {
     </ContainerSteps>
   ) : (
     <Container isMobileView={isMobileView} currentStep={currentStep}>
+      <SEO
+        title="Máquina dos sonhos BeCapital"
+        description="Máquina dos sonhos BeCapital"
+      />
       <Header isMobileView={isMobileView}>
         <Logo />
       </Header>

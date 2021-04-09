@@ -25,7 +25,7 @@ function SEO({ description, lang, meta, title }) {
   return (
     <Helmet
       htmlAttributes={{
-        lang,
+        lang: 'pt-BR',
       }}
       title={title || defaultTitle}
       meta={[
@@ -74,8 +74,14 @@ function SEO({ description, lang, meta, title }) {
           name: `twitter:description`,
           content: metaDescription,
         },
+        {
+          name: 'canonical',
+          href: `${site.siteMetadata.siteUrl}`,
+        },
       ].concat(meta)}
-    />
+    >
+      <title>{defaultTitle}</title>
+    </Helmet>
   );
 }
 
