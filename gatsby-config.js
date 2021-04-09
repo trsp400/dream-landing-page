@@ -6,11 +6,17 @@ module.exports = {
   siteMetadata: {
     title: `Máquina dos Sonhos BeCapital`,
     author: `@BeCapitaltech`,
-    description: `Quer descobrir o investimento ideal para você?`,
+    description: `Máquina dos Sonhos BeCapital`,
     siteUrl: `https://maquinadossonhos.be.capital/`,
   },
   plugins: [
     `gatsby-plugin-react-helmet`,
+    {
+      resolve: 'gatsby-plugin-robots-txt',
+      options: {
+        policy: [{ userAgent: '*', allow: '/' }],
+      },
+    },
     {
       resolve: `gatsby-source-filesystem`,
       options: {
