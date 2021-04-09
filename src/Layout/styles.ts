@@ -53,7 +53,10 @@ export const Container = styled.div<Props>`
             props?.currentStep > 0
               ? css``
               : css`
-                  background-image: url('${Background1}');
+
+                  background: rgb(128,121,121);
+                  background: linear-gradient(28deg, rgba(128,121,121,1) 4%, rgba(244,154,138,1) 27%, rgba(180,174,173,1) 36%, rgba(150,165,179,1) 41%, rgba(113,150,182,1) 45%, rgba(86,126,161,1) 50%, rgba(70,112,149,1) 56%, rgba(26,74,115,1) 96%);
+
                 `}
           background-repeat: no-repeat;
           background-size: cover;

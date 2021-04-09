@@ -37,11 +37,11 @@ export const Container = styled(BootstrapContainer)`
   background-size: cover;
   object-fit: cover;
   background-position: center;
-  overflow: hidden;
 
   ${props =>
     props?.isMobileView &&
     css`
+      overflow: hidden;
       max-width: 1024px;
       background: linear-gradient(
         180deg,
