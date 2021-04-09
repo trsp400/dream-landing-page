@@ -9,7 +9,6 @@ import {
 } from '../../../redux/dream_machine/actions';
 import { createResultObject } from '../../../utils/handleResultObject';
 import Input from '../../CustomComponents/Input';
-import Loading from '../../CustomComponents/Loading';
 import Button from '../../CustomComponents/Button';
 
 import { parseStringInt } from '../../../utils/parseValues';
@@ -36,12 +35,10 @@ const StepSeven = () => {
   const { result, decision } = store;
 
   const yearlyAverageArray = result?.yearlyAverageArray || [];
-  const resultSuccess = result?.resultSuccess || false;
 
   const [isActiveInput, setIsActiveInput] = useState(false);
   const [inputValue, setInputValue] = useState('');
   const [validEmail, setValidEmail] = useState(true);
-  const [loading, setLoading] = useState(false);
 
   const period = parseStringInt(store.period);
   const yearOrMonth = store.yearOrMonth;
@@ -81,11 +78,13 @@ const StepSeven = () => {
           objectiveCost,
         }),
       );
+
+      navigate('/resultado');
     };
 
-    monthlySupport < objectiveCost && currentInvestments < objectiveCost
-      ? dispatchResult()
-      : setLoading(false);
+    monthlySupport < objectiveCost &&
+      currentInvestments < objectiveCost &&
+      dispatchResult();
   });
 
   function emailIsValid(dataEmail) {
@@ -98,14 +97,12 @@ const StepSeven = () => {
     const isValidEmail = emailIsValid(email);
 
     if (isValidEmail) {
-      setLoading(true);
       handleDispatchResultState();
       setValidEmail(true);
 
       return true;
     }
 
-    setLoading(false);
     return setValidEmail(false);
   };
 
@@ -122,12 +119,6 @@ const StepSeven = () => {
       navigate('/resultado');
     }
   }, [yearlyAverageArray]);
-
-  useEffect(() => {
-    if (resultSuccess === null) {
-      setLoading(false);
-    }
-  }, [resultSuccess]);
 
   useEffect(() => {
     const listener = event => {
@@ -213,6 +204,9 @@ const StepSeven = () => {
                 setState={checkValidEmailOnInputChange}
                 type="email"
                 setIsActiveInput={setIsActiveInput}
+                style={{
+                  paddingBottom: 10,
+                }}
               />
               {!validEmail && (
                 <ErrorInformation>Digite um e-mail válido!</ErrorInformation>
@@ -234,7 +228,7 @@ const StepSeven = () => {
     );
   };
 
-  return loading ? <Loading /> : renderMobileOrDesktop();
+  return renderMobileOrDesktop();
 };
 
 export default StepSeven;
