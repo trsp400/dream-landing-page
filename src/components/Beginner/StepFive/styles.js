@@ -145,12 +145,11 @@ export const Footer = styled.div`
 
 
   justify-content: space-between;
-  /* padding: 0 10%; */
+  padding: 0 10%;
 
   button {
     width: 100%;
     position: relative;
-    background: blue;
 
     &:last-child {
       margin-left: 10px;
