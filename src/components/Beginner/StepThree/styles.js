@@ -11,13 +11,13 @@ export const Container = styled(BootstrapContainer)`
       ? css`
           display: flex;
           width: 100%;
-          height: 100vh;
+          height: 100%;
           flex-direction: column;
           padding: 0;
         `
       : css`
           width: 1024px;
-          height: 100vh;
+          height: 100%;
           display: flex;
           justify-content: center;
           align-items: center;
@@ -69,6 +69,22 @@ export const Body = styled.div`
 export const SelectTime = styled(Select)`
 `;
 
+export const BoxMessageFeedback = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 100%;
+  height: 5rem;
+  padding-left: 20px;
+  margin-bottom: 74px;
+
+  @media(max-width: 320px) {
+   height: 4rem;
+   margin-bottom: 44px;
+  }
+
+`
+
 export const BoxInput = styled.div`
   ${props =>
     props?.isMobileView
@@ -83,9 +99,9 @@ export const BoxInput = styled.div`
           height: auto;
           padding: 23px;
 
-          @media(max-height: 737px) and (max-width: 415px){
+          /* @media(max-height: 737px) and (max-width: 415px){
             padding: ${props => props.isActiveInput && "1px"};
-          }
+          } */
         `
       : css`
           display: flex;
@@ -144,7 +160,7 @@ export const BoxButton = styled.div`
 
 export const Footer = styled.div`
   position: fixed;
-  bottom:  8em;
+  bottom:  5em;
   width: 100%;
   height:  3.5em;
   display: flex;
@@ -165,7 +181,7 @@ export const Footer = styled.div`
     }
   }
 
-  @media(max-height: 737px) and (max-width: 415px){
+  /* @media(max-height: 737px) and (max-width: 415px){
     height: 3em;
     bottom: ${props => props.isActiveInput ? "5em" : "7em"};
 
@@ -179,7 +195,7 @@ export const Footer = styled.div`
   @media (max-height: 569px) and (max-width: 321px) {
     height: 3em;
     bottom: ${props => props.isActiveInput ? "1em" : "7em"};
-  }
+  } */
 `;
 export const ButtonContainer = styled.div`
   position: relative;
@@ -191,7 +207,8 @@ export const ButtonContainer = styled.div`
   width: 100%;
   height: auto;
   padding: 15px;
-  margin-top: ${props => props.isActiveInput ? "15px" : "60px"}   ;
+  /* margin-top: ${props => props.isActiveInput ? "15px" : "60px"}; */
+  /* margin-top: 60px; */
 
   button {
     width: 5em;
@@ -201,10 +218,10 @@ export const ButtonContainer = styled.div`
     }
   }
 
-  @media(max-height: 737px) and (max-width: 415px){
+  /* @media(max-height: 737px) and (max-width: 415px){
     button {
       padding: 4px 0;
       font-size: 16px;
     }
-  }
+  } */
 `;

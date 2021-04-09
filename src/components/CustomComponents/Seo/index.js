@@ -1,9 +1,20 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { Helmet } from 'react-helmet';
 import { useStaticQuery, graphql } from 'gatsby';
 
 function SEO({ description, lang, meta, title }) {
+
+  useEffect(() => {
+    setTimeout(function () {
+      let viewheight = window.innerHeight
+      let viewwidth = window.innerWidth
+      let viewport = document.querySelector("meta[name=viewport]");
+      viewport.setAttribute("content", "height=" + viewheight + "px, width=" + viewwidth + "px, initial-scale=1.0");
+    }, 300);
+
+  },[])
+
   const { site } = useStaticQuery(
     graphql`
       query {
@@ -29,6 +40,10 @@ function SEO({ description, lang, meta, title }) {
       }}
       title={title || defaultTitle}
       meta={[
+        // {
+        //   name: `viewport`,
+        //   content: `width=device-width, height=device-height, initial-scale=1`
+        // },
         {
           name: `description`,
           content: metaDescription,

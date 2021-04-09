@@ -10,7 +10,7 @@ import {
 import { createResultObject } from '../../../utils/handleResultObject';
 import Input from '../../CustomComponents/Input';
 import Button from '../../CustomComponents/Button';
-
+import Loading from '../../CustomComponents/Loading';
 import { parseStringInt } from '../../../utils/parseValues';
 
 import EmailIcon from '../../../assets/icons/email-icon.svg';
@@ -24,6 +24,7 @@ import {
   Body,
   Footer,
   InputContainer,
+  BoxMessageFeedback
 } from './styles';
 
 const StepSeven = () => {
@@ -34,10 +35,12 @@ const StepSeven = () => {
   const { result, decision } = store;
 
   const yearlyAverageArray = result?.yearlyAverageArray || [];
+  const resultSuccess = result?.resultSuccess || false;
 
   const [isActiveInput, setIsActiveInput] = useState(false);
   const [inputValue, setInputValue] = useState('');
   const [validEmail, setValidEmail] = useState(true);
+  const [loading, setLoading] = useState(false);
 
   const period = parseStringInt(store.period);
   const yearOrMonth = store.yearOrMonth;
@@ -60,6 +63,7 @@ const StepSeven = () => {
       dispatch(
         changeFormState({
           ...store,
+          direction: "loading",
           finishSimulation: true,
         }),
       );
@@ -80,9 +84,9 @@ const StepSeven = () => {
       navigate('/resultado');
     };
 
-    monthlySupport < objectiveCost &&
-      currentInvestments < objectiveCost &&
-      dispatchResult();
+    monthlySupport < objectiveCost && currentInvestments < objectiveCost
+      ? dispatchResult()
+      : setLoading(false);
   });
 
   function emailIsValid(dataEmail) {
@@ -95,12 +99,14 @@ const StepSeven = () => {
     const isValidEmail = emailIsValid(email);
 
     if (isValidEmail) {
+      setLoading(true);
       handleDispatchResultState();
       setValidEmail(true);
 
       return true;
     }
 
+    setLoading(false)
     return setValidEmail(false);
   };
 
@@ -119,6 +125,12 @@ const StepSeven = () => {
   }, [yearlyAverageArray]);
 
   useEffect(() => {
+      if (resultSuccess === null) {
+        setLoading(false);
+      }
+  }, [resultSuccess]);
+
+  useEffect(() => {
     const listener = event => {
       if (event.code === 'Enter' || event.keyCode === 13) {
         handleOnClink(inputValue);
@@ -134,15 +146,17 @@ const StepSeven = () => {
     return isMobileView ? (
       <Container isMobileView={isMobileView}>
         <Body isMobileView={isMobileView}>
-          <MessageFeedbackStyle
-            placing="bellow"
-            animationSpeed={2000}
-            animationDelay={900}
-            isMobileView={isMobileView}
-          >
-            Para receber o resultado completo do seu perfil, deixe aqui o seu
-            e-mail:
-          </MessageFeedbackStyle>
+          <BoxMessageFeedback>
+            <MessageFeedbackStyle
+              placing="bellow"
+              animationSpeed={2000}
+              animationDelay={900}
+              isMobileView={isMobileView}
+            >
+              Para receber o resultado completo do seu perfil, deixe aqui o seu
+              e-mail:
+            </MessageFeedbackStyle>
+          </BoxMessageFeedback>
           <BoxInput isMobileView={isMobileView}>
             <span className="box-input_warning">
               Ao cadastrar seu e-mail, você autoriza a BeCapital a enviar
@@ -185,7 +199,7 @@ const StepSeven = () => {
             isMobileView={isMobileView}
           >
             Para receber o resultado completo da sua carteira, deixe aqui seu
-            e-mail e whatsapp:
+            e-mail:
           </MessageFeedbackStyle>
 
           <InputContainer>
@@ -224,7 +238,7 @@ const StepSeven = () => {
     );
   };
 
-  return renderMobileOrDesktop();
+  return loading ? <Loading /> : renderMobileOrDesktop();
 };
 
 export default StepSeven;
