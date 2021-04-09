@@ -10,13 +10,15 @@ export const Container = styled(BootstrapContainer)`
       ? css`
           display: flex;
           width: 100%;
-          height: 100vh;
+          height: auto;
           flex-direction: column;
           padding: 0;
+
+          overflow-y: scroll;
         `
       : css`
           width: 1024px;
-          height: 100vh;
+          height: 100%;
           display: flex;
           justify-content: center;
           align-items: center;
@@ -54,6 +56,21 @@ export const MessageFeedbackStyle = styled(MessageFeedback)`
           `}
   }
 `;
+
+export const BoxMessageFeedback = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 100%;
+  height: 5rem;
+  padding-left: 20px;
+  margin-bottom: 74px;
+
+  @media(max-width: 320px) {
+   height: 4rem;
+   margin-bottom: 16px;
+  }
+`
 
 export const BoxInput = styled.div`
   position: relative;
@@ -98,7 +115,7 @@ export const ErrorInformation = styled.span`
 export const Body = styled.div`
   display: flex;
   flex: 1;
-  height: 100%;
+  /* height: 100%; */
   flex-direction: column;
 `;
 
@@ -109,7 +126,9 @@ export const ListDecisionStyled = styled(ListDecision)`
 
   span {
     font-size: 1.5em;
-    line-height: 25px;
+    ${props => !props.isMobileView && css`
+      line-height: 25px !important;
+    `}
   }
 `;
 
@@ -202,18 +221,17 @@ export const Footer = styled.div`
   ${props =>
     props?.isMobileView
       ? css`
-          position: fixed;
-          bottom: 8em;
-          width: 100%;
-          height: 3.5em;
           display: flex;
-
+          position: fixed;
+          bottom:  5em;
+          width: 100%;
+          height:  3.5em;
           justify-content: space-between;
           padding: 0 10%;
 
+
           button {
             width: 100%;
-            position: relative;
 
             &:last-child {
               margin-left: 10px;
@@ -224,7 +242,21 @@ export const Footer = styled.div`
             }
           }
 
-          @media(max-height: 737px) and (max-width: 415px){
+          @media(max-width: 375px) {
+            position: relative;
+            width: 100%;
+            height: 3.5em;
+            bottom: 0;
+            display: flex;
+            /* position: absolute; */
+            justify-content: space-between;
+            padding: 0 10%;
+            margin: 30px 0 10px 0;
+
+          }
+
+
+          /* @media(max-height: 737px) and (max-width: 415px){
             height: 3em;
             bottom: 7em;
 
@@ -232,7 +264,9 @@ export const Footer = styled.div`
 
           @media (max-height: 569px) and (max-width: 321px) {
             bottom: 7em;
-          }
+          } */
+        }
+
         `
       : css`
           position: absolute;
@@ -247,5 +281,5 @@ export const Footer = styled.div`
           button {
             height: 50px;
           }
-        `}
+    `}
 `;

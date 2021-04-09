@@ -14,12 +14,13 @@ import {
   BoxButton,
   Footer,
   ListDecisionStyled,
+  BoxMessageFeedback
 } from './styles';
 
 import { question3 } from '../../../utils/questionsToProfile';
 
 import Lefticon from '../../../assets/icons/left-icon.svg';
-import OkIcon from '../../../assets/icons/ok-icon.svg'
+import OkIcon from '../../../assets/icons/ok-icon.svg';
 
 const StepEight = () => {
   const dispatch = useDispatch();
@@ -62,22 +63,24 @@ const StepEight = () => {
   return isMobileView ? (
     <Container isMobileView={isMobileView}>
       <Body>
+        <BoxMessageFeedback>
         <MessageFeedbackStyle
-          placing="above"
-          animationSpeed={2000}
-          animationDelay={900}
-          isMobileView={isMobileView}
-        >
-          Legal, entendi!
-        </MessageFeedbackStyle>
-        <MessageFeedbackStyle
-          placing="bellow"
-          animationSpeed={2000}
-          animationDelay={1800}
-          isMobileView={isMobileView}
-        >
-          {question3?.quest}
-        </MessageFeedbackStyle>
+            placing="above"
+            animationSpeed={2000}
+            animationDelay={900}
+            isMobileView={isMobileView}
+          >
+            Legal, entendi!
+          </MessageFeedbackStyle>
+          <MessageFeedbackStyle
+            placing="bellow"
+            animationSpeed={2000}
+            animationDelay={1800}
+            isMobileView={isMobileView}
+          >
+            {question3?.quest}
+          </MessageFeedbackStyle>
+        </BoxMessageFeedback>
         <BoxListDecision isMobileView={isMobileView}>
           <ListDecision
             options={question3?.options}
@@ -134,25 +137,24 @@ const StepEight = () => {
           setState={setInputvalue}
         />
 
-      <BoxButton>
-        <Button
-          ripple
-          variant="beblue"
-          glow
-          onClick={() => handleDispatch(7, 'previous')}
-        >
-          <Lefticon width={20} />
-        </Button>
-        <Button
-          ripple
-          variant="beorange"
-          glow
-          onClick={() => handleDispatch(9, 'next')}
-        >
-          OK <OkIcon />
-        </Button>
-      </BoxButton>
-
+        <BoxButton>
+          <Button
+            ripple
+            variant="beblue"
+            glow
+            onClick={() => handleDispatch(7, 'previous')}
+          >
+            <Lefticon width={20} />
+          </Button>
+          <Button
+            ripple
+            variant="beorange"
+            glow
+            onClick={() => handleDispatch(9, 'next')}
+          >
+            OK <OkIcon />
+          </Button>
+        </BoxButton>
       </BoxListDecision>
     </Container>
   );

@@ -21,6 +21,7 @@ import {
   BoxButton,
   Footer,
   ButtonContainer,
+  BoxMessageFeedback
 } from './styles';
 
 import selectPeriodConfig from '../../../utils/selectPeriodConfig';
@@ -97,6 +98,7 @@ const StepThree = () => {
   return isMobileView ? (
     <Container isMobileView={isMobileView}>
       <Body>
+      <BoxMessageFeedback>
         <MessageFeedbackStyle
           placing="above"
           animationSpeed={2000}
@@ -113,7 +115,7 @@ const StepThree = () => {
         >
           Em quanto tempo você deseja conquistar o seu sonho?
         </MessageFeedbackStyle>
-
+      </BoxMessageFeedback>
         <ButtonContainer isActiveInput={isActiveInput}>
           {Object.keys(listPeriods).map(item => (
             <Button

@@ -11,7 +11,7 @@ const question1 = {
 };
 
 const question2 = {
-  quest: 'Qual é o seu principal objetivo ao investir seu dinheiro?',
+  quest: 'O que você busca ao investir o seu dinheiro?',
   options: {
     Conservador:
       '<span><strong>Preservar</strong> meu patrimônio assumindo um <strong>menor</strong> risco.</span>',
@@ -24,14 +24,14 @@ const question2 = {
 
 const question3 = {
   quest:
-    'As oscilações do mercado depreciam seus investimentos consideravelmente. O que você faria?',
+    'As oscilações do mercado podem depreciar seus investimentos consideravelmente. O que você faria?',
   options: {
     Conservador:
-      '<span>Retiraria todo o seu dinheiro, a fim de preservar seu patrimonio e evitar novas perdas.</span>',
+      '<span>Retiraria todo o seu dinheiro, a fim de preservar seu patrimônio e evitar novas perdas.</span>',
     Moderado:
-      '<span>Manteria o meu dinheiro e faria uma <strong>revisão</strong> dos ativos que compõe a sua carteira.</span>',
+      '<span>Manteria o meu dinheiro e faria uma <strong>revisão</strong> dos ativos que compõem a sua carteira.</span>',
     Arrojado:
-      '<span>Entenderia que <strong>oscilações</strong> são comuns no mercado e buscaria uma forma de <strong>recuperar</strong> esse prejuizo.</span>',
+      '<span>Entenderia que <strong>oscilações</strong> são comuns no mercado e buscaria uma forma de <strong>recuperar</strong> esse prejuízo.</span>',
   },
 };
 export { question1, question2, question3 };

@@ -13,6 +13,6 @@ const store = createStore(rootReducer, applyMiddleware(...middlewares));
 
 sagaMiddleware.run(rootSaga);
 
-// export const useSelector = createSelectorHook(rootReducer)
+// export const useSelector = createSelectorHook<rootReducer>(rootReducer);
 
 export default store;

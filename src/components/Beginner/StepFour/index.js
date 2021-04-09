@@ -12,10 +12,11 @@ import {
   BoxInput,
   Footer,
   InputContainer,
+  BoxMessageFeedback
 } from './styles';
 
 import Lefticon from '../../../assets/icons/left-icon.svg';
-import OkIcon from '../../../assets/icons/ok-icon.svg'
+import OkIcon from '../../../assets/icons/ok-icon.svg';
 
 const StepFour = () => {
   const dispatch = useDispatch();
@@ -85,6 +86,7 @@ const StepFour = () => {
   return isMobileView ? (
     <Container isMobileView={isMobileView}>
       <Body>
+      <BoxMessageFeedback>
         <MessageFeedbackStyle
           placing="above"
           animationSpeed={2000}
@@ -99,8 +101,9 @@ const StepFour = () => {
           animationDelay={1300}
           isMobileView={isMobileView}
         >
-          Quanto você pode investir hoje?
+          Quanto você tem guardado hoje para investir no total?
         </MessageFeedbackStyle>
+      </BoxMessageFeedback>
         <BoxInput isMobileView={isMobileView}>
           <Input
             state={inputValue}
@@ -148,16 +151,16 @@ const StepFour = () => {
           animationDelay={1300}
           isMobileView={isMobileView}
         >
-          Quanto você pode investir hoje?
+          Quanto você tem guardado hoje para investir no total?
         </MessageFeedbackStyle>
 
         <InputContainer>
-            <Input
-              state={inputValue}
-              setState={setInputValue}
-              type="currency"
-              setIsActiveInput={setIsActiveInput}
-            />
+          <Input
+            state={inputValue}
+            setState={setInputValue}
+            type="currency"
+            setIsActiveInput={setIsActiveInput}
+          />
           <BoxButton>
             <Button
               ripple
@@ -177,7 +180,7 @@ const StepFour = () => {
               OK <OkIcon />
             </Button>
           </BoxButton>
-       </InputContainer>
+        </InputContainer>
       </Body>
     </Container>
   );

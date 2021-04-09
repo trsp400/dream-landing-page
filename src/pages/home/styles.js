@@ -16,7 +16,7 @@ const animateDreamMachine = keyframes`
     filter: drop-shadow(0px 95px 12px rgba(0,0,0,0.48));
   }
 
-`
+`;
 
 const animateBackground = keyframes`
   0%{
@@ -26,20 +26,22 @@ const animateBackground = keyframes`
   100%{
     filter: hue-rotate(360deg);
   }
-`
-
+`;
 
 export const Container = styled(BootstrapContainer)`
   height: 100%;
-  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
   position: relative;
+  background-size: cover;
+  object-fit: cover;
+  background-position: center;
 
   ${props =>
     props?.isMobileView &&
     css`
+      overflow: hidden;
       max-width: 1024px;
       background: linear-gradient(
         180deg,
@@ -48,9 +50,6 @@ export const Container = styled(BootstrapContainer)`
       );
     `}
 
-  /* background-size: cover;
-  object-fit: cover;
-  background-position: center; */
 
 
   &::before {
@@ -100,11 +99,14 @@ export const ContainerSteps = styled.div`
 `;
 
 export const Header = styled.header`
+  position: fixed;
+  max-height: 75px;
   width: 100vw;
   display: flex;
   justify-content: center;
   align-items: center;
   align-content: center;
+  top: 0;
 
   background-size: contain;
   object-fit: contain;
@@ -118,6 +120,7 @@ export const Header = styled.header`
   svg {
     width: ${props => (props?.isMobileView ? '50%' : '20%')};
     filter: drop-shadow(0px 0px 1px #ea5e45) drop-shadow(0px 0px 2px #ea5e45);
+    max-width: 292px;
   }
 `;
 
@@ -139,7 +142,7 @@ export const Background = styled.div`
 
   opacity: 0.1;
   width: 100vw;
-  height: 100vh;
+  height: 100%;
   background-size: cover;
   object-fit: cover;
 `;
@@ -155,6 +158,7 @@ export const MainHome = styled.main`
 `;
 
 export const DesktopContainer = styled.div`
+  width: 100%;
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -176,21 +180,17 @@ export const DesktopContainer = styled.div`
   -ms-flex-direction: row;
   flex-direction: row;
 
-  transform-style: preserve-3d;
-  perspective: 1000px;
 `;
 
 export const DreamMachineContainer = styled.div`
   width: 65%;
-  filter: drop-shadow(0px 150px 15px rgba(0,0,0,0.48));
+  filter: drop-shadow(0px 150px 15px rgba(0, 0, 0, 0.48));
 
   animation: ${animateDreamMachine} 3s infinite alternate-reverse;
-
 `;
 
 export const PresentationSection = styled.section`
-  /* width: 40%; */
-
+  z-index: 999;
   ${props =>
     props?.isMobileView
       ? css`
@@ -228,6 +228,10 @@ export const ButtonSection = styled(ButtonGroup)`
 `;
 
 export const Button = styled(RippleButton)`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
   position: relative;
   margin-top: 10px;
   padding: 10px;

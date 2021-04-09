@@ -17,13 +17,13 @@ export const Container = styled(BootstrapContainer)`
       ? css`
           display: flex;
           width: 100%;
-          height: 100vh;
+          height: 100%;
           flex-direction: column;
           padding: 0;
         `
       : css`
           width: 1024px;
-          height: 100vh;
+          height: 100%;
           display: flex;
           justify-content: center;
           align-items: center;
@@ -47,7 +47,7 @@ export const MessageFeedbackStyle = styled(MessageFeedback)`
           font-size: 48px;
 
           position: absolute;
-          top: 25%;
+          top: 15%;
 
           span {
             line-height: 45px;
@@ -74,17 +74,40 @@ export const BoxInput = styled.div`
       ? css`
           > span[class="box-input_warning"] {
             color: #fff;
-            font: lighter 1.1em/16px Trasandina;
+            font: lighter 1.1em/18px Trasandina;
             text-align: center;
             margin-bottom: 45px;
-            padding: 0 15px;
+            padding: 0 8px;
 
-            @media(max-height: 737px) and (max-width: 415px){
+
+
+            /* @media(max-height: 737px) and (max-width: 415px){
               margin-bottom: 8px;
               font-size: 13px;
               line-height: 12px;
+            } */
+
+          }
+
+          div {
+            width: 100%;
+            height: 100%;
+
+            input {
+              width: 100%;
+              height: 50px;
+              padding-top: 14px;
+
             }
 
+
+            /* @media(max-width: 375px) {
+              input {
+                padding-top: 10px;
+                height: 60px;
+              }
+
+            } */
           }
         `
       : css`
@@ -94,23 +117,29 @@ export const BoxInput = styled.div`
 
           div {
             width: 50%;
-
           }
 
 
           input {
             width: 100%;
+            height: 2em;
+            padding-top: 14px;
           }
 
         `}
+
+  @media(max-width: 375px) {
+    margin-top: 0px;
+    padding-top: 0px;
+  }
+
 `;
 
 export const ErrorInformation = styled.span`
   position: absolute;
   bottom: 4px;
-
-  color: #fff200;
   font-weight: bold;
+  color: #fed330;
 
   animation: ${animateErrorinformation} 1.3s cubic-bezier(0.17, 0.89, 1, 1.27);
 `;
@@ -120,6 +149,16 @@ export const Body = styled.div`
   height: 100%;
   flex-direction: column;
 `;
+
+export const BoxMessageFeedback = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 100%;
+  height: 3rem;
+  padding-left: 20px;
+  margin-bottom: 74px;
+`
 
 export const InputContainer = styled.div`
   position: absolute;
@@ -139,6 +178,7 @@ export const InputContainer = styled.div`
     text-align: left;
 
   }
+
 
 `;
 
@@ -165,7 +205,7 @@ export const BoxButton = styled.div`
 
 export const Footer = styled.div`
   position: fixed;
-  bottom: 8em;
+  bottom: 5em;
   width: 100%;
   height: 3.5em;
   display: flex;
@@ -178,7 +218,12 @@ export const Footer = styled.div`
     position: relative;
   }
 
-  @media(max-height: 737px) and (max-width: 415px){
+
+  @media(max-width: 375px) {
+    bottom: 1.5em;
+  }
+
+  /* @media(max-height: 737px) and (max-width: 415px){
     height: 3em;
     bottom: 7em;
   }
@@ -186,7 +231,7 @@ export const Footer = styled.div`
   @media (max-height: 569px) and (max-width: 321px) {
     height: 3em;
     bottom: ${props => props.isActiveInput ? "1.7em" : "7em"};
-  }
+  } */
 `;
 
 export const ButtonContainer = styled.div`

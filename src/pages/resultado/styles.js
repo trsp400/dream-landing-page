@@ -94,13 +94,15 @@ export const ButtonContainerDesktop = styled.div`
 
 const introAnimateChart = keyframes`
   0% {
-    transform: scale(0) translateY(150%);
+    transform: scale(0) translateY(10em);
+    display:none;
     /* transform: translate(100%, 50%); */
-    opacity: 0;
+
   }
 
   100% {
-    transform: scale(1) translateY(55%);
+    display: flex;
+    transform: scale(1) translateY(10.5em);
     box-shadow: 0px 0px 5px 0px rgba(50, 50, 50, 0.74);
     /* transform: translate(0%, 50%); */
   }
@@ -108,15 +110,18 @@ const introAnimateChart = keyframes`
 
 const exitAnimateChart = keyframes`
   0% {
-    transform: scale(1) translateY(55%);
+    transform: scale(1) translateY(10.5em);
     box-shadow: 0px 0px 5px 0px rgba(50, 50, 50, 0.74);
     /* transform: translate(0%, 50%); */
   }
 
-  100% {
-    transform: scale(0) translateY(150%);
-    /* transform: translate(100%, 50%); */
+  75% {
     opacity: 0;
+  }
+
+  100% {
+    transform: scale(0) translateY(10em);
+    /* transform: translate(100%, 50%); */
   }
 `;
 
@@ -270,6 +275,7 @@ export const MessagePressChart = styled.span`
 export const LineChartContainer = styled.div`
   width: ${props => (props?.isMobileView ? '94%' : '100%')};
   height: auto;
+  transition: all 0.4s cubic-bezier(1,.01,.78,.89);
 
   div {
     border-radius: 0 0 14px 14px !important;
@@ -277,33 +283,28 @@ export const LineChartContainer = styled.div`
 
   ${props => props.isMobileView && css`
     position: absolute;
-    transform: scale(0) translateY(55%);
-    transition: transform 0.3s;
 
     div {
       border-radius: 6px !important;
     }
   `}
 
-  /* transform: translate(100%, 50%); */
-
-  &::-webkit-scrollbar {
-    display: none;
-  }
 
   ${props =>
     (props.isVisibleChart && props.isMobileView)
       && css`
-          animation: ${introAnimateChart} 0.4s
-          cubic-bezier(0.11, 0.9, 0.76, 1.12);
-          transform: scale(1) translateY(55%);
-          /* transform: translate(0%, 50%) ; */
+          opacity: 1;
+          transform:  scale(1) translateY(10.5em);
+          filter: drop-shadow(0px 8px 6px rgba(0,0,0,0.38));
+
   `}
 
   ${props =>
       (!props.isVisibleChart && props.isMobileView)
         && css`
-          animation: ${exitAnimateChart} 0.2s linear;
+          transition: all 0.2s;
+          opacity: 0;
+          transform:  scale(0) translateY(20em);
         `
   }
 `;
@@ -330,6 +331,8 @@ export const TextResult = styled.div`
   color: #fff;
   position: absolute;
   padding-bottom: 12px;
+  transition: .6s cubic-bezier(.26,.87,.87,1.15);
+
 
   ${props =>
     props.isVisibleChart
@@ -340,5 +343,4 @@ export const TextResult = styled.div`
           transform: translateY(200px);
         `}
 
-  transition: .2s cubic-bezier(.26,.87,.87,1.15);
 `;

@@ -9,12 +9,11 @@ import {
 } from '../../../redux/dream_machine/actions';
 import { createResultObject } from '../../../utils/handleResultObject';
 import Input from '../../CustomComponents/Input';
-import Loading from '../../CustomComponents/Loading';
 import Button from '../../CustomComponents/Button';
-
+import Loading from '../../CustomComponents/Loading';
 import { parseStringInt } from '../../../utils/parseValues';
 
-import EmailIcon from '../../../assets/icons/email-icon.svg'
+import EmailIcon from '../../../assets/icons/email-icon.svg';
 
 import {
   Container,
@@ -25,6 +24,7 @@ import {
   Body,
   Footer,
   InputContainer,
+  BoxMessageFeedback
 } from './styles';
 
 const StepSeven = () => {
@@ -63,6 +63,7 @@ const StepSeven = () => {
       dispatch(
         changeFormState({
           ...store,
+          direction: "loading",
           finishSimulation: true,
         }),
       );
@@ -79,6 +80,8 @@ const StepSeven = () => {
           objectiveCost,
         }),
       );
+
+      navigate('/resultado');
     };
 
     monthlySupport < objectiveCost && currentInvestments < objectiveCost
@@ -103,7 +106,7 @@ const StepSeven = () => {
       return true;
     }
 
-    setLoading(false);
+    setLoading(false)
     return setValidEmail(false);
   };
 
@@ -122,9 +125,9 @@ const StepSeven = () => {
   }, [yearlyAverageArray]);
 
   useEffect(() => {
-    if (resultSuccess === null) {
-      setLoading(false);
-    }
+      if (resultSuccess === null) {
+        setLoading(false);
+      }
   }, [resultSuccess]);
 
   useEffect(() => {
@@ -143,19 +146,21 @@ const StepSeven = () => {
     return isMobileView ? (
       <Container isMobileView={isMobileView}>
         <Body isMobileView={isMobileView}>
-          <MessageFeedbackStyle
-            placing="bellow"
-            animationSpeed={2000}
-            animationDelay={900}
-            isMobileView={isMobileView}
-          >
-            Para receber o resultado completo do seu perfil, deixe aqui o seu
-            e-mail:
-          </MessageFeedbackStyle>
+          <BoxMessageFeedback>
+            <MessageFeedbackStyle
+              placing="bellow"
+              animationSpeed={2000}
+              animationDelay={900}
+              isMobileView={isMobileView}
+            >
+              Para receber o resultado completo do seu perfil, deixe aqui o seu
+              e-mail:
+            </MessageFeedbackStyle>
+          </BoxMessageFeedback>
           <BoxInput isMobileView={isMobileView}>
             <span className="box-input_warning">
-              Ao cadastrar o e-mail, você autoriza que a BeCapital faça envio de
-              conteúdos que a nossa equipe avalie como interessantes para o seu
+              Ao cadastrar seu e-mail, você autoriza a BeCapital a enviar
+              conteúdos que a nossa equipe considere relevantes para o seu
               perfil.
             </span>
             <Input
@@ -163,12 +168,14 @@ const StepSeven = () => {
               setState={checkValidEmailOnInputChange}
               type="email"
               setIsActiveInput={setIsActiveInput}
+              style={{
+                paddingBottom: 10,
+              }}
             />
             {!validEmail && (
               <ErrorInformation>Digite um e-mail válido!</ErrorInformation>
             )}
           </BoxInput>
-
         </Body>
 
         <Footer isActiveInput={isActiveInput}>
@@ -191,7 +198,7 @@ const StepSeven = () => {
             animationDelay={900}
             isMobileView={isMobileView}
           >
-            Para receber o resultado completo do seu perfil, deixe aqui o seu
+            Para receber o resultado completo da sua carteira, deixe aqui seu
             e-mail:
           </MessageFeedbackStyle>
 
@@ -207,23 +214,26 @@ const StepSeven = () => {
                 setState={checkValidEmailOnInputChange}
                 type="email"
                 setIsActiveInput={setIsActiveInput}
+                style={{
+                  paddingBottom: 10,
+                }}
               />
               {!validEmail && (
                 <ErrorInformation>Digite um e-mail válido!</ErrorInformation>
               )}
             </BoxInput>
             <BoxButton>
-            <Button
-              ripple
-              variant="beorange"
-              glow
-              onClick={() => handleOnClink(inputValue)}
-            >
-              Enviar <EmailIcon />
-            </Button>
-          </BoxButton>
-       </InputContainer>
-       </Body>
+              <Button
+                ripple
+                variant="beorange"
+                glow
+                onClick={() => handleOnClink(inputValue)}
+              >
+                Enviar <EmailIcon />
+              </Button>
+            </BoxButton>
+          </InputContainer>
+        </Body>
       </Container>
     );
   };

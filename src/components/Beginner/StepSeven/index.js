@@ -14,6 +14,7 @@ import {
   BoxButton,
   Footer,
   ListDecisionStyled,
+  BoxMessageFeedback
 } from './styles';
 
 import { question2 } from '../../../utils/questionsToProfile';
@@ -61,22 +62,24 @@ const StepSeven = () => {
   return isMobileView ? (
     <Container isMobileView={isMobileView}>
       <Body>
-        <MessageFeedbackStyle
-          placing="above"
-          animationSpeed={2000}
-          animationDelay={900}
-          isMobileView={isMobileView}
-        >
-          Ótimo, vamos em frente!
-        </MessageFeedbackStyle>
-        <MessageFeedbackStyle
-          placing="bellow"
-          animationSpeed={2000}
-          animationDelay={1800}
-          isMobileView={isMobileView}
-        >
-          {question2?.quest}
-        </MessageFeedbackStyle>
+        <BoxMessageFeedback>
+          <MessageFeedbackStyle
+            placing="above"
+            animationSpeed={2000}
+            animationDelay={900}
+            isMobileView={isMobileView}
+          >
+            Ótimo, vamos em frente!
+          </MessageFeedbackStyle>
+          <MessageFeedbackStyle
+            placing="bellow"
+            animationSpeed={2000}
+            animationDelay={1800}
+            isMobileView={isMobileView}
+          >
+            {question2?.quest}
+          </MessageFeedbackStyle>
+        </BoxMessageFeedback>
         <BoxListDecision isMobileView={isMobileView}>
           <ListDecision
             options={question2?.options}
@@ -128,6 +131,7 @@ const StepSeven = () => {
       </MessageFeedbackStyle>
       <BoxListDecision isMobileView={isMobileView}>
         <ListDecisionStyled
+          isMobileView={isMobileView}
           options={question2.options}
           state={inputValue}
           setState={setInputvalue}
