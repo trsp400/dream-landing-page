@@ -15,6 +15,8 @@ interface RenderProgressBarProps {
   currentStep: number;
 }
 
+import SEO from '../components/CustomComponents/Seo';
+
 interface ReduxStore {
   isMobileView?: Boolean;
   path?: 'investor' | 'beginner';
@@ -77,6 +79,10 @@ const Layout = props => {
 
   return (
     <Provider store={store}>
+      <SEO
+        title="Máquina dos sonhos BeCapital"
+        description="Máquina dos sonhos BeCapital"
+      />
       <Container isMobileView={isMobileView} currentStep={currentStep}>
         <Background
           currentStep={currentStep}
