@@ -100,9 +100,7 @@ const StepSeven = () => {
   }
 
   const handleOnClink = ({ name, email, phone }) => {
-    console.log({ name, email, phone })
-
-
+  
     if (!name || name === '') return notify('Por favor, digite seu nome!');
     if (!email || email === '') return notify('Por favor, digite seu e-mail!');
     if (!phone || phone === '') return notify('Por favor, digite seu telefone!');
