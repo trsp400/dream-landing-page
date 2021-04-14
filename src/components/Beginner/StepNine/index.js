@@ -8,7 +8,6 @@ import {
   changeFormState,
 } from '../../../redux/dream_machine/actions';
 import { createResultObject } from '../../../utils/handleResultObject';
-import Input from '../../CustomComponents/Input';
 import Button from '../../CustomComponents/Button';
 import Loading from '../../CustomComponents/Loading';
 import { parseStringInt } from '../../../utils/parseValues';
@@ -24,6 +23,7 @@ import {
   Body,
   Footer,
   InputContainer,
+  StylesInput,
   BoxMessageFeedback
 } from './styles';
 
@@ -38,7 +38,11 @@ const StepSeven = () => {
   const resultSuccess = result?.resultSuccess || false;
 
   const [isActiveInput, setIsActiveInput] = useState(false);
-  const [inputValue, setInputValue] = useState('');
+
+  const [inputValueName, setInputValueName] = useState('');
+  const [inputValueEmail, setInputValueEmail] = useState('');
+  const [inputValuePhone, setInputValuePhone] = useState('');
+
   const [validEmail, setValidEmail] = useState(true);
   const [loading, setLoading] = useState(false);
 
@@ -55,7 +59,9 @@ const StepSeven = () => {
       monthlySupport,
       currentInvestments,
       objectiveCost,
-      inputValue,
+      inputValueName,
+      inputValueEmail,
+      inputValuePhone,
       decision,
     );
 
@@ -93,8 +99,13 @@ const StepSeven = () => {
     return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(dataEmail);
   }
 
-  const handleOnClink = email => {
+  const handleOnClink = ({ name, email, phone }) => {
+    console.log({ name, email, phone })
+
+
+    if (!name || name === '') return notify('Por favor, digite seu nome!');
     if (!email || email === '') return notify('Por favor, digite seu e-mail!');
+    if (!phone || phone === '') return notify('Por favor, digite seu telefone!');
 
     const isValidEmail = emailIsValid(email);
 
@@ -114,7 +125,7 @@ const StepSeven = () => {
     const valid = emailIsValid(value);
     setValidEmail(valid);
 
-    setInputValue(value);
+    setInputValueEmail(value);
     return valid;
   };
 
@@ -130,17 +141,20 @@ const StepSeven = () => {
       }
   }, [resultSuccess]);
 
+
+
   useEffect(() => {
     const listener = event => {
       if (event.code === 'Enter' || event.keyCode === 13) {
-        handleOnClink(inputValue);
+
+        handleOnClink({name: inputValueName, email: inputValueEmail, phone: inputValuePhone});
       }
     };
     document.addEventListener('keydown', listener);
     return () => {
       document.removeEventListener('keydown', listener);
     };
-  }, [inputValue]);
+  }, [inputValueEmail]);
 
   const renderMobileOrDesktop = () => {
     return isMobileView ? (
@@ -153,8 +167,7 @@ const StepSeven = () => {
               animationDelay={900}
               isMobileView={isMobileView}
             >
-              Para receber o resultado completo do seu perfil, deixe aqui o seu
-              e-mail:
+            Para receber o resultado completo da sua carteira, deixe aqui seus dados:
             </MessageFeedbackStyle>
           </BoxMessageFeedback>
           <BoxInput isMobileView={isMobileView}>
@@ -163,18 +176,46 @@ const StepSeven = () => {
               conteúdos que a nossa equipe considere relevantes para o seu
               perfil.
             </span>
-            <Input
-              state={inputValue}
-              setState={checkValidEmailOnInputChange}
-              type="email"
-              setIsActiveInput={setIsActiveInput}
-              style={{
-                paddingBottom: 10,
-              }}
-            />
-            {!validEmail && (
-              <ErrorInformation>Digite um e-mail válido!</ErrorInformation>
-            )}
+            <StylesInput
+                state={inputValueName}
+                setState={setInputValueName}
+                type="text"
+                placeholder="Nome"
+                autoCapitalize={false}
+                autoComplete={false}
+                autoCorrect={false}
+                setIsActiveInput={setIsActiveInput}
+                style={{
+                  paddingBottom: 10,
+                }}
+              />
+               <StylesInput
+                state={inputValuePhone}
+                setState={setInputValuePhone}
+                type="phone"
+                autoCapitalize={false}
+                autoComplete={false}
+                autoCorrect={false}
+                setIsActiveInput={setIsActiveInput}
+                style={{
+                  paddingBottom: 10,
+                }}
+              />
+                <StylesInput
+                state={inputValueEmail}
+                setState={checkValidEmailOnInputChange}
+                type="email"
+                autoCapitalize={false}
+                autoComplete={false}
+                autoCorrect={false}
+                setIsActiveInput={setIsActiveInput}
+                style={{
+                  paddingBottom: 10,
+                }}
+              />
+              {!validEmail && (
+                <ErrorInformation>Digite um e-mail válido!</ErrorInformation>
+              )}
           </BoxInput>
         </Body>
 
@@ -183,7 +224,7 @@ const StepSeven = () => {
             ripple
             variant="beorange"
             glow
-            onClick={() => handleOnClink(inputValue)}
+            onClick={() => handleOnClink({name: inputValueName, email: inputValueEmail, phone: inputValuePhone})}
           >
             OK
           </Button>
@@ -198,8 +239,7 @@ const StepSeven = () => {
             animationDelay={900}
             isMobileView={isMobileView}
           >
-            Para receber o resultado completo da sua carteira, deixe aqui seu
-            e-mail:
+            Para receber o resultado completo da sua carteira, deixe aqui seus dados:
           </MessageFeedbackStyle>
 
           <InputContainer>
@@ -209,10 +249,38 @@ const StepSeven = () => {
               perfil.
             </span>
             <BoxInput isMobileView={isMobileView}>
-              <Input
-                state={inputValue}
+              <StylesInput
+                state={inputValueName}
+                setState={setInputValueName}
+                type="text"
+                autoCapitalize={false}
+                autoComplete={false}
+                autoCorrect={false}
+                placeholder="Nome"
+                setIsActiveInput={setIsActiveInput}
+                style={{
+                  paddingBottom: 10,
+                }}
+              />
+               <StylesInput
+                state={inputValuePhone}
+                setState={setInputValuePhone}
+                type="phone"
+                autoCapitalize={false}
+                autoComplete={false}
+                autoCorrect={false}
+                setIsActiveInput={setIsActiveInput}
+                style={{
+                  paddingBottom: 10,
+                }}
+              />
+                <StylesInput
+                state={inputValueEmail}
                 setState={checkValidEmailOnInputChange}
                 type="email"
+                autoCapitalize={false}
+                autoComplete={false}
+                autoCorrect={false}
                 setIsActiveInput={setIsActiveInput}
                 style={{
                   paddingBottom: 10,
@@ -227,9 +295,9 @@ const StepSeven = () => {
                 ripple
                 variant="beorange"
                 glow
-                onClick={() => handleOnClink(inputValue)}
+                onClick={() => handleOnClink({name: inputValueName, email: inputValueEmail, phone: inputValuePhone})}
               >
-                Enviar <EmailIcon />
+                Enviar
               </Button>
             </BoxButton>
           </InputContainer>

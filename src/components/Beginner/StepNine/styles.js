@@ -1,6 +1,8 @@
 import styled, { keyframes, css } from 'styled-components';
 import { Container as BootstrapContainer } from 'react-bootstrap';
 import { Modal, Header } from '../../CustomComponents/Modal';
+import Input from '../../CustomComponents/Input';
+
 
 import MessageFeedback from '../../CustomComponents/MessageFeedback';
 
@@ -60,8 +62,8 @@ export const BoxInput = styled.div`
   display: flex;
   flex-direction: column;
 
-  justify-content: center;
-  align-items: center;
+  /* justify-content: center; */
+
 
   width: 100%;
   height: auto;
@@ -72,6 +74,8 @@ export const BoxInput = styled.div`
   ${props =>
     props?.isMobileView
       ? css`
+          align-items: center;
+
           > span[class="box-input_warning"] {
             color: #fff;
             font: lighter 1.1em/18px Trasandina;
@@ -111,9 +115,9 @@ export const BoxInput = styled.div`
           }
         `
       : css`
-          flex-direction: row;
+          flex-direction: column;
           justify-content: start;
-          padding: 0 0 25px 0;
+          padding: 0 0 20px 0;
 
           div {
             width: 50%;
@@ -122,7 +126,7 @@ export const BoxInput = styled.div`
 
           input {
             width: 100%;
-            height: 2em;
+            height: 1.5em;
             padding-top: 14px;
           }
 
@@ -139,7 +143,7 @@ export const ErrorInformation = styled.span`
   position: absolute;
   bottom: 4px;
   font-weight: bold;
-  color: #fed330;
+  color: ${props => props.theme.mobileTheme.colors.primary.orange};
 
   animation: ${animateErrorinformation} 1.3s cubic-bezier(0.17, 0.89, 1, 1.27);
 `;
@@ -162,7 +166,7 @@ export const BoxMessageFeedback = styled.div`
 
 export const InputContainer = styled.div`
   position: absolute;
-  top: 50%;
+  top: 12rem;
   width: 100%;
   height: auto;
   padding-left: 50px;
@@ -182,6 +186,10 @@ export const InputContainer = styled.div`
 
 `;
 
+export const StylesInput = styled(Input)`
+
+`
+
 export const BoxButton = styled.div`
   display: flex;
   width: 100%;
@@ -190,16 +198,16 @@ export const BoxButton = styled.div`
   button {
     display: flex;
     width: 5em;
-    align-items: baseline;
+    align-items: center;
 
-    padding-left: 6px;
+    /* padding-left: 6px; */
 
 
-    svg {
+    /* svg {
       height: .7em;
       fill: #fff;
       margin-left: 4px;
-    }
+    } */
   }
 `
 
