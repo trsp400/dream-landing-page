@@ -2,11 +2,6 @@ require('dotenv').config({
   path: `.env.${process.env.GATSBY_ENV}`,
 });
 
-console.log(process.env.GATSBY_ENV);
-console.log(process.env.GATSBY_ENV);
-console.log(process.env.GATSBY_ENV);
-console.log(process.env.GATSBY_ENV);
-
 module.exports = {
   siteMetadata: {
     title: `Máquina dos Sonhos BeCapital`,
