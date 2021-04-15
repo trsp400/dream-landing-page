@@ -2,8 +2,8 @@ version: 0.1
 
 env:
   variables:
-    GATSBY_API_URL: 'https://homolog-api.be.capital/core/api/v1/'
-    GATSBY_ENV: 'homolog'
+    GATSBY_API_URL: 'https://api.be.capital/core/api/v1/'
+    GATSBY_ENV: 'production'
 
 phases:
   install:
@@ -15,11 +15,11 @@ phases:
       - 'npm install'
   build:
     commands:
-      - 'npm run build-homolog'
+      - 'npm run build-production'
   post_build:
     commands:
-      - 'aws s3 sync "public/" "s3://dream-machine-homolog" --delete --acl "public-read"'
-      - 'aws cloudfront create-invalidation --distribution-id E1EFVF3YAEZ3YD --paths "/*"'
+      - 'aws s3 sync "public/" "s3://dream-machine-production" --delete --acl "public-read"'
+      - 'aws cloudfront create-invalidation --distribution-id E3O0TWLR7G6LNE --paths "/*"'
 artifacts:
   base-directory: public
   files:
