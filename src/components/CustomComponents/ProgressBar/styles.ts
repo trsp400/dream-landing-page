@@ -15,7 +15,7 @@ export const Container = styled.div`
 
 export const Bar = styled.span<BarProps>`
   width: 70%;
-  max-width: 10vh;
+  /* max-width: 10vw; */
   height: 5px;
   z-index: 999;
   transition: background-color 0.3s ease-in-out;

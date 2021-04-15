@@ -2,7 +2,7 @@ import React, { useState, useCallback, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import _ from 'lodash';
 import { navigate } from 'gatsby-link';
-import { useSpring, animated, useTransition } from 'react-spring';
+import { animated, useTransition } from 'react-spring';
 
 import { changeFormState } from '../../redux/dream_machine/actions';
 

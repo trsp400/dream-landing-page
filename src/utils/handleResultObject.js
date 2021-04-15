@@ -12,7 +12,9 @@ export const createResultObject = (
   monthlySupport,
   currentInvestments,
   objectiveCost,
+  name,
   email,
+  phone,
   decision,
 ) => {
   const isYearOrMonthPeriod = yearOrMonth === 'anos' ? period * 12 : period;
@@ -60,7 +62,9 @@ export const createResultObject = (
     monthlyRate,
     annualRate,
     riskProfile,
+    name,
     email,
+    phone,
     yearlyAverageArray,
     achievedObjectiveCost: achievedObjectiveCost || false,
     newPeriod: newPeriodParsed,

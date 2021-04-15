@@ -19,7 +19,7 @@ export const Col = styled(ColBootstrap)`
 `;
 
 export const ListDecisionContainerStyled = styled.section<PropsListDecision>`
-  height: auto;
+  height: 75%;
   /* width: 100%; */
   display: flex;
   justify-content: center;
@@ -50,18 +50,23 @@ export const ListDecisionContainerStyled = styled.section<PropsListDecision>`
     }
   `}
 
+  @media(max-width: 375px) {
+    height: 80%;
+    margin: 15px 0;
+  }
 
-  @media(max-height: 737px) and (max-width: 415px){
+  /* @media(max-height: 737px) and (max-width: 415px){
     height: 85%;
     margin-bottom: 14px;
     margin-top: 14px;
+
   }
 
   @media (max-height: 569px) and (max-width: 321px) {
     height: 70%;
     margin-bottom: 10px;
     margin-top: 10px;
-  }
+  } */
 `;
 
 export const ListDecisionCheckStyled = styled.div<PropsListDecision>`
@@ -92,7 +97,7 @@ export const ListDecisionTextStyled = styled.div<PropsListDecision>`
   display: flex;
   align-items: center;
 
-  font: 400 1em Trasandina;
+  font: 400 1em/16px Trasandina;
 
   color: #fff;
   /* height: max-content; */

@@ -28,6 +28,8 @@ import MaquinaDosSonhosDesktop from '../../assets/logo/svg/maquinaDosSonhosDeskt
 
 import ImageGallery from '../../components/CustomComponents/ImageGallery';
 
+import SEO from '../../components/CustomComponents/Seo';
+
 const RenderSelectedFormPath = ({ currentStep, store, path }) => {
   const paths = {
     investor: <RenderInvestorForm currentStep={currentStep} store={store} />,
@@ -56,26 +58,57 @@ const Home = () => {
     );
   };
 
-  const springConfig =
-    direction === 'previous'
-      ? {
-          transform: isMobileView ? 'translateX(0px)' : 'translateY(0px)',
-          from: {
-            opacity: 0,
-            transform: isMobileView
-              ? 'translateX(-1000px)'
-              : 'translateY(-1000px)',
-          },
-        }
-      : {
-          transform: isMobileView ? 'translateX(0px)' : 'translateY(0px)',
-          from: {
-            opacity: 0,
-            transform: isMobileView
-              ? 'translateX(1000px)'
-              : 'translateY(1000px)',
-          },
-        };
+  const springConfig = {
+    previous: {
+      transform: isMobileView ? 'translateX(0px)' : 'translateY(0px)',
+      from: {
+        opacity: 0,
+        transform: isMobileView
+          ? 'translateX(-1000px)'
+          : 'translateY(-1000px)',
+      },
+    },
+    next: {
+      transform: isMobileView ? 'translateX(0px)' : 'translateY(0px)',
+      from: {
+        opacity: 0,
+        transform: isMobileView
+          ? 'translateX(1000px)'
+          : 'translateY(1000px)',
+      },
+    },
+    loading: {
+      transform: isMobileView ? 'translateX(0px)' : 'translateY(0px)',
+      from: {
+        opacity: 0,
+        transform: isMobileView
+          ? 'translateX(0px)'
+          : 'translateY(0px)',
+      },
+    }
+  }
+
+
+
+    // direction === 'previous'
+    //   ? {
+    //       transform: isMobileView ? 'translateX(0px)' : 'translateY(0px)',
+    //       from: {
+    //         opacity: 0,
+    //         transform: isMobileView
+    //           ? 'translateX(-1000px)'
+    //           : 'translateY(-1000px)',
+    //       },
+    //     }
+    //   : {
+    //       transform: isMobileView ? 'translateX(0px)' : 'translateY(0px)',
+    //       from: {
+    //         opacity: 0,
+    //         transform: isMobileView
+    //           ? 'translateX(1000px)'
+    //           : 'translateY(1000px)',
+    //       },
+    //     };
 
   const springProps = useSpring({
     opacity: 1,
@@ -83,7 +116,7 @@ const Home = () => {
     config: { tension: 300, friction: 70 },
 
     reset: currentStep,
-    ...springConfig,
+    ...springConfig[direction],
   });
 
   return currentStep >= 1 ? (
@@ -91,7 +124,7 @@ const Home = () => {
       <animated.div
         style={{
           ...springProps,
-          height: '100vh',
+          height: '100%',
         }}
       >
         <RenderSelectedFormPath
@@ -103,6 +136,10 @@ const Home = () => {
     </ContainerSteps>
   ) : (
     <Container isMobileView={isMobileView} currentStep={currentStep}>
+      <SEO
+        title="Máquina dos sonhos BeCapital"
+        description="Máquina dos sonhos BeCapital"
+      />
       <Header isMobileView={isMobileView}>
         <Logo />
       </Header>

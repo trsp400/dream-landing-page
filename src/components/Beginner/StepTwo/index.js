@@ -16,6 +16,7 @@ import {
   BoxButton,
   Footer,
   InputContainer,
+  BoxMessageFeedback
 } from './styles';
 
 const StepTwo = () => {
@@ -87,6 +88,7 @@ const StepTwo = () => {
   return isMobileView ? (
     <Container isMobileView={isMobileView} isActiveInput={isActiveInput}>
       <Body>
+      <BoxMessageFeedback>
         <MessageFeedbackStyle
           placing="above"
           animationSpeed={2000}
@@ -105,7 +107,7 @@ const StepTwo = () => {
         >
           De quanto você precisa?
         </MessageFeedbackStyle>
-
+      </BoxMessageFeedback>
         <BoxInput isMobileView={isMobileView}>
           <Input
             state={inputValue}

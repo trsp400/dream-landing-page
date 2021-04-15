@@ -1,6 +1,8 @@
 import styled, { keyframes, css } from 'styled-components';
 import { Container as BootstrapContainer } from 'react-bootstrap';
 import { Modal, Header } from '../../CustomComponents/Modal';
+import Input from '../../CustomComponents/Input';
+
 
 import MessageFeedback from '../../CustomComponents/MessageFeedback';
 
@@ -17,13 +19,13 @@ export const Container = styled(BootstrapContainer)`
       ? css`
           display: flex;
           width: 100%;
-          height: 100vh;
+          height: 100%;
           flex-direction: column;
           padding: 0;
         `
       : css`
           width: 1024px;
-          height: 100vh;
+          height: 100%;
           display: flex;
           justify-content: center;
           align-items: center;
@@ -47,7 +49,7 @@ export const MessageFeedbackStyle = styled(MessageFeedback)`
           font-size: 48px;
 
           position: absolute;
-          top: 25%;
+          top: 15%;
 
           span {
             line-height: 45px;
@@ -60,8 +62,8 @@ export const BoxInput = styled.div`
   display: flex;
   flex-direction: column;
 
-  justify-content: center;
-  align-items: center;
+  /* justify-content: center; */
+
 
   width: 100%;
   height: auto;
@@ -72,45 +74,76 @@ export const BoxInput = styled.div`
   ${props =>
     props?.isMobileView
       ? css`
+          align-items: center;
+
           > span[class="box-input_warning"] {
             color: #fff;
-            font: lighter 1.1em/16px Trasandina;
+            font: lighter 1.1em/18px Trasandina;
             text-align: center;
             margin-bottom: 45px;
-            padding: 0 15px;
+            padding: 0 8px;
 
-            @media(max-height: 737px) and (max-width: 415px){
+
+
+            /* @media(max-height: 737px) and (max-width: 415px){
               margin-bottom: 8px;
               font-size: 13px;
               line-height: 12px;
+            } */
+
+          }
+
+          div {
+            width: 100%;
+            height: 100%;
+
+            input {
+              width: 100%;
+              height: 50px;
+              padding-top: 14px;
+
             }
 
+
+            /* @media(max-width: 375px) {
+              input {
+                padding-top: 10px;
+                height: 60px;
+              }
+
+            } */
           }
         `
       : css`
-          flex-direction: row;
+          flex-direction: column;
           justify-content: start;
-          padding: 0 0 25px 0;
+          padding: 0 0 20px 0;
 
           div {
             width: 50%;
-
           }
 
 
           input {
             width: 100%;
+            height: 1.5em;
+            padding-top: 14px;
           }
 
         `}
+
+  @media(max-width: 375px) {
+    margin-top: 0px;
+    padding-top: 0px;
+  }
+
 `;
 
 export const ErrorInformation = styled.span`
   position: absolute;
   bottom: 4px;
-
-  color: #fff200;
   font-weight: bold;
+  color: ${props => props.theme.mobileTheme.colors.primary.orange};
 
   animation: ${animateErrorinformation} 1.3s cubic-bezier(0.17, 0.89, 1, 1.27);
 `;
@@ -121,9 +154,19 @@ export const Body = styled.div`
   flex-direction: column;
 `;
 
+export const BoxMessageFeedback = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 100%;
+  height: 3rem;
+  padding-left: 20px;
+  margin-bottom: 74px;
+`
+
 export const InputContainer = styled.div`
   position: absolute;
-  top: 50%;
+  top: 12rem;
   width: 100%;
   height: auto;
   padding-left: 50px;
@@ -140,7 +183,12 @@ export const InputContainer = styled.div`
 
   }
 
+
 `;
+
+export const StylesInput = styled(Input)`
+
+`
 
 export const BoxButton = styled.div`
   display: flex;
@@ -150,22 +198,22 @@ export const BoxButton = styled.div`
   button {
     display: flex;
     width: 5em;
-    align-items: baseline;
+    align-items: center;
 
-    padding-left: 6px;
+    /* padding-left: 6px; */
 
 
-    svg {
+    /* svg {
       height: .7em;
       fill: #fff;
       margin-left: 4px;
-    }
+    } */
   }
 `
 
 export const Footer = styled.div`
   position: fixed;
-  bottom: 8em;
+  bottom: 5em;
   width: 100%;
   height: 3.5em;
   display: flex;
@@ -178,7 +226,12 @@ export const Footer = styled.div`
     position: relative;
   }
 
-  @media(max-height: 737px) and (max-width: 415px){
+
+  @media(max-width: 375px) {
+    bottom: 1.5em;
+  }
+
+  /* @media(max-height: 737px) and (max-width: 415px){
     height: 3em;
     bottom: 7em;
   }
@@ -186,7 +239,7 @@ export const Footer = styled.div`
   @media (max-height: 569px) and (max-width: 321px) {
     height: 3em;
     bottom: ${props => props.isActiveInput ? "1.7em" : "7em"};
-  }
+  } */
 `;
 
 export const ButtonContainer = styled.div`

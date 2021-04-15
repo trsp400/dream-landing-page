@@ -24,7 +24,7 @@ const question2 = {
 
 const question3 = {
   quest:
-    'As oscilações do mercado podem depreciar seus investimentos consideravelmente. O que você faria?',
+    `As oscilações do mercado podem depreciar seus investimentos consideravelmente.`,
   options: {
     Conservador:
       '<span>Retiraria todo o seu dinheiro, a fim de preservar seu patrimônio e evitar novas perdas.</span>',

@@ -14,6 +14,7 @@ import {
   BoxButton,
   Footer,
   ListDecisionStyled,
+  BoxMessageFeedback
 } from './styles';
 
 import { question3 } from '../../../utils/questionsToProfile';
@@ -62,22 +63,32 @@ const StepEight = () => {
   return isMobileView ? (
     <Container isMobileView={isMobileView}>
       <Body>
+        <BoxMessageFeedback>
         <MessageFeedbackStyle
-          placing="above"
-          animationSpeed={2000}
-          animationDelay={900}
-          isMobileView={isMobileView}
-        >
-          Legal, entendi!
-        </MessageFeedbackStyle>
-        <MessageFeedbackStyle
-          placing="bellow"
-          animationSpeed={2000}
-          animationDelay={1800}
-          isMobileView={isMobileView}
-        >
-          {question3?.quest}
-        </MessageFeedbackStyle>
+            placing="above"
+            animationSpeed={2000}
+            animationDelay={900}
+            isMobileView={isMobileView}
+          >
+            Legal, entendi!
+          </MessageFeedbackStyle>
+          <MessageFeedbackStyle
+            placing="bellow"
+            animationSpeed={2000}
+            animationDelay={1800}
+            isMobileView={isMobileView}
+          >
+            {question3?.quest}
+          </MessageFeedbackStyle>
+          <MessageFeedbackStyle
+            placing="bellow"
+            animationSpeed={2000}
+            animationDelay={3600}
+            isMobileView={isMobileView}
+          >
+            O que você faria?
+          </MessageFeedbackStyle>
+        </BoxMessageFeedback>
         <BoxListDecision isMobileView={isMobileView}>
           <ListDecision
             options={question3?.options}
@@ -127,6 +138,15 @@ const StepEight = () => {
       >
         {question3.quest}
       </MessageFeedbackStyle>
+      <MessageFeedbackStyle
+        placing="bellow"
+        animationSpeed={2000}
+        animationDelay={3600}
+        isMobileView={isMobileView}
+      >
+        O que você faria?
+      </MessageFeedbackStyle>
+
       <BoxListDecision isMobileView={isMobileView}>
         <ListDecisionStyled
           options={question3.options}
