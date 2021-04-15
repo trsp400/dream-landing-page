@@ -1,4 +1,10 @@
 version: 0.1
+
+env:
+  variables:
+    GATSBY_API_URL: 'https://api.be.capital/core/api/v1/'
+    GATSBY_ENV: 'production'
+
 phases:
   install:
     commands:
@@ -9,11 +15,11 @@ phases:
       - 'npm install'
   build:
     commands:
-      - 'npm run build-homolog'
+      - 'npm run build-production'
   post_build:
     commands:
       - 'aws s3 sync "public/" "s3://dream-machine-production" --delete --acl "public-read"'
-      - 'aws cloudfront create-invalidation --distribution-id E3O0TWLR7G6LNE --paths "/*"'
+      - 'aws cloudfront create-invalidation --distribution-id E3O0TWLR7G6LNE --paths "/index.html"'
 artifacts:
   base-directory: public
   files:
