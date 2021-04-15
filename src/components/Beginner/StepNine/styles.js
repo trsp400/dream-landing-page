@@ -19,7 +19,7 @@ export const Container = styled(BootstrapContainer)`
       ? css`
           display: flex;
           width: 100%;
-          height: 100%;
+          height: auto;
           flex-direction: column;
           padding: 0;
         `
@@ -67,7 +67,7 @@ export const BoxInput = styled.div`
 
   width: 100%;
   height: auto;
-  margin-top: 25px;
+  /* margin-top: 25px; */
 
   padding: 25px;
 
@@ -80,7 +80,7 @@ export const BoxInput = styled.div`
             color: #fff;
             font: lighter 1.1em/18px Trasandina;
             text-align: center;
-            margin-bottom: 45px;
+            margin-bottom: 25px;
             padding: 0 8px;
 
 
@@ -100,7 +100,7 @@ export const BoxInput = styled.div`
             input {
               width: 100%;
               height: 50px;
-              padding-top: 14px;
+              /* padding-top: 14px; */
 
             }
 
@@ -161,7 +161,7 @@ export const BoxMessageFeedback = styled.div`
   width: 100%;
   height: 3rem;
   padding-left: 20px;
-  margin-bottom: 74px;
+  margin-bottom: 34px;
 `
 
 export const InputContainer = styled.div`
@@ -212,11 +212,12 @@ export const BoxButton = styled.div`
 `
 
 export const Footer = styled.div`
-  position: fixed;
-  bottom: 5em;
+  position: relative;
+  /* bottom: 5em; */
   width: 100%;
   height: 3.5em;
   display: flex;
+  margin-bottom: 25px;
 
   justify-content: space-between;
   padding: 0 10%;
@@ -228,7 +229,7 @@ export const Footer = styled.div`
 
 
   @media(max-width: 375px) {
-    bottom: 1.5em;
+    /* bottom: 1.5em; */
   }
 
   /* @media(max-height: 737px) and (max-width: 415px){

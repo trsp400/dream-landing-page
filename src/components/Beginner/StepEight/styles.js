@@ -84,7 +84,11 @@ export const MessageFeedbackStyle = styled(MessageFeedback)`
 
       `
       : css`
-        top: 4em;
+        top: 4.7em;
+
+        @media(max-width: 1280px) {
+           top: 4.5em;
+        }
 
         @media(max-width: 1199px) {
            top: 5.6em;
