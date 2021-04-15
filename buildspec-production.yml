@@ -19,7 +19,7 @@ phases:
   post_build:
     commands:
       - 'aws s3 sync "public/" "s3://dream-machine-production" --delete --acl "public-read"'
-      - 'aws cloudfront create-invalidation --distribution-id E3O0TWLR7G6LNE --paths "/*"'
+      - 'aws cloudfront create-invalidation --distribution-id E3O0TWLR7G6LNE --paths "/index.html"'
 artifacts:
   base-directory: public
   files:
