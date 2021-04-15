@@ -1,5 +1,6 @@
 import React, { FC, InputHTMLAttributes } from 'react';
 import NumberFormat from 'react-number-format';
+import { useSelector } from 'react-redux';
 
 import {
   InputStyledNumber,
@@ -17,7 +18,20 @@ interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   setIsActiveInput?: (value: boolean) => void;
 }
 
+interface DataSettingsStore {
+  isMobileView: boolean,
+  screenSize: number,
+}
+
+interface RootState {
+  dreamMachine: Object,
+  settings: DataSettingsStore,
+  theme: Object
+}
+
 const Input: FC<InputProps> = ({ state, type, setState, placeholder, setIsActiveInput, ...props }) => {
+
+  const isMobileView = useSelector((store: RootState) => store.settings.isMobileView)
 
   function checkFunction (event:Event, fn:Function, value:boolean):Function  {
     const { type } = event;
@@ -53,9 +67,9 @@ const Input: FC<InputProps> = ({ state, type, setState, placeholder, setIsActive
         {...props}
       />
     ) : type === 'text' ? (
-      <InputStyledTextContainer>
+      <InputStyledTextContainer isMobileView={isMobileView}>
         <InputStyledText
-          placeholder="Outros"
+          placeholder={placeholder || "Outros"}
           value={state || ''}
           type={type}
           onChange={event => setState(event?.target?.value)}
@@ -65,7 +79,7 @@ const Input: FC<InputProps> = ({ state, type, setState, placeholder, setIsActive
         />
       </InputStyledTextContainer>
     ) : type === 'email' ? (
-      <InputStyledTextContainer>
+      <InputStyledTextContainer isMobileView={isMobileView}>
         <InputStyledText
           placeholder="E-mail"
           value={state || ''}
@@ -94,6 +108,19 @@ const Input: FC<InputProps> = ({ state, type, setState, placeholder, setIsActive
           onFocus={event => checkFunction(event, setIsActiveInput,true)}
         {...props}
       />
+    ) : type === "phone" ? (
+      <InputStyledTextContainer isMobileView={isMobileView}>
+          <NumberFormat
+            format="(##) # #### ####"
+            displayType="input"
+            allowNegative={false}
+            placeholder={placeholder || "Telefone"}
+            customInput={InputStyledText}
+            value={state || ''}
+            onChange={event => setState(event?.target?.value)}
+            {...props}
+          />
+       </InputStyledTextContainer>
     ) : (
       <div />
     )}

@@ -1,5 +1,9 @@
 import styled from 'styled-components';
 
+interface PropsInputStyledTextContainer {
+  isMobileView: boolean
+}
+
 export const InputStyledNumber = styled.input`
   border: 0;
   border-bottom: 3px solid transparent;
@@ -24,9 +28,9 @@ export const InputStyledNumber = styled.input`
   }
 `;
 
-export const InputStyledTextContainer = styled.div`
+export const InputStyledTextContainer = styled.div<PropsInputStyledTextContainer>`
   border-radius: 5px;
-  margin-bottom: 5px;
+  margin-bottom: ${props => props.isMobileView ? "20px" : "10px"};
   padding: 5px 15px;
   width: max-content;
   box-shadow: 0px 0px 8px 2px rgba(0, 0, 0, 0.51);

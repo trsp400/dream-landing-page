@@ -80,6 +80,14 @@ const StepEight = () => {
           >
             {question3?.quest}
           </MessageFeedbackStyle>
+          <MessageFeedbackStyle
+            placing="bellow"
+            animationSpeed={2000}
+            animationDelay={3600}
+            isMobileView={isMobileView}
+          >
+            O que você faria?
+          </MessageFeedbackStyle>
         </BoxMessageFeedback>
         <BoxListDecision isMobileView={isMobileView}>
           <ListDecision
@@ -130,6 +138,15 @@ const StepEight = () => {
       >
         {question3.quest}
       </MessageFeedbackStyle>
+      <MessageFeedbackStyle
+        placing="bellow"
+        animationSpeed={2000}
+        animationDelay={3600}
+        isMobileView={isMobileView}
+      >
+        O que você faria?
+      </MessageFeedbackStyle>
+
       <BoxListDecision isMobileView={isMobileView}>
         <ListDecisionStyled
           options={question3.options}
