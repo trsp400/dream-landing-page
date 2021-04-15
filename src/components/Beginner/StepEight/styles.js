@@ -50,11 +50,56 @@ export const MessageFeedbackStyle = styled(MessageFeedback)`
         : css`
             position: absolute;
             top: 15%;
+            width: 100%;
 
             span {
               line-height: 50px;
+
             }
           `}
+  }
+
+  &:nth-child(3) {
+    position: absolute;
+
+    ${props => props.isMobileView
+      ? css`
+        top: 5em;
+
+        @media(max-width: 1024px) {
+           top: 4em;
+        }
+
+        @media(max-width: 767px) {
+           top: 5em;
+        }
+
+        @media(max-width: 475px) {
+           top: 6em;
+        }
+
+        @media(max-width: 378px) {
+
+        }
+
+      `
+      : css`
+        top: 4em;
+
+        @media(max-width: 1199px) {
+           top: 5.6em;
+        }
+
+      `
+    }
+
+    width: 100%;
+
+    svg {
+      display: none;
+    }
+
+
   }
 `;
 
@@ -71,7 +116,12 @@ export const BoxMessageFeedback = styled.div`
   width: 100%;
   height: 5rem;
   padding-left: 20px;
+
   margin-bottom: 74px;
+
+  @media(max-width: 475px) {
+    margin-bottom: 6em;
+  }
 
   @media(max-width: 320px) {
    height: 4rem;
