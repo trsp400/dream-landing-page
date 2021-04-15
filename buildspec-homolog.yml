@@ -1,0 +1,31 @@
+version: 0.1
+
+env:
+  variables:
+    GATSBY_API_URL: 'https://homolog-api.be.capital/core/api/v1/'
+    GATSBY_ENV: 'homolog'
+
+phases:
+  install:
+    commands:
+      - 'touch .npmignore'
+      - 'npm install -g gatsby'
+  pre_build:
+    commands:
+      - 'npm install'
+  build:
+    commands:
+      - 'npm run build-homolog'
+  post_build:
+    commands:
+      - 'aws s3 sync "public/" "s3://dream-machine-homolog" --delete --acl "public-read"'
+      - 'aws cloudfront create-invalidation --distribution-id E1EFVF3YAEZ3YD --paths "/*"'
+artifacts:
+  base-directory: public
+  files:
+    - '**/*'
+  discard-paths: no
+cache:
+  paths:
+    - '.cache/*'
+    - 'public/*'
