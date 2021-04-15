@@ -9,6 +9,7 @@ import { changeFormState } from '../../redux/dream_machine/actions';
 import Layout from '../../Layout';
 import SEO from '../../components/CustomComponents/Seo';
 import resultProfile from '../../utils/resultProfile';
+import Loading from '../../components/CustomComponents/Loading';
 
 import DownArrow from '../../assets/icons/down-arrow.svg';
 
@@ -36,12 +37,26 @@ import {
   FooterContextProfile,
 } from './styles';
 
+const LoadingComponent = ({
+  resultSuccess,
+  loading,
+  setLoading,
+  comingFromLastStep,
+}) => {
+  useEffect(() => {
+    setTimeout(() => {
+      if (!comingFromLastStep) navigate('/');
+      setLoading(false);
+    }, 1400);
+  }, [resultSuccess]);
+  return loading && <Loading />;
+};
+
 const Result = () => {
   const dispatch = useDispatch();
 
-  const [showGraphic, setShowGraphic] = useState(false);
-
   const [isVisibleChart, setIsVisibleChart] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   const { isMobileView } = useSelector(({ settings }) => settings);
   const store = useSelector(({ dreamMachine }) => dreamMachine);
@@ -59,6 +74,10 @@ const Result = () => {
     comingFromLastStep,
     finishSimulation,
   } = store;
+
+  const { resultSuccess } = store;
+
+  console.log(resultSuccess);
 
   const urls = fileUrl?.urls || '';
 
@@ -186,7 +205,14 @@ const Result = () => {
     return femaleProfileStructure[lowerCaseProfile];
   };
 
-  return (
+  return loading ? (
+    <LoadingComponent
+      resultSuccess={resultSuccess}
+      loading={loading}
+      setLoading={setLoading}
+      comingFromLastStep={comingFromLastStep}
+    />
+  ) : (
     <Layout finishSimulation={finishSimulation}>
       <SEO title="Resultado | Máquina dos Sonhos" />
       <Container isVisibleChart={isVisibleChart}>

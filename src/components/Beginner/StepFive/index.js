@@ -14,11 +14,11 @@ import {
   Body,
   Footer,
   InputContainer,
-  BoxMessageFeedback
+  BoxMessageFeedback,
 } from './styles';
 
 import Lefticon from '../../../assets/icons/left-icon.svg';
-import OkIcon from '../../../assets/icons/ok-icon.svg'
+import OkIcon from '../../../assets/icons/ok-icon.svg';
 
 const StepFive = () => {
   const dispatch = useDispatch();
@@ -88,24 +88,24 @@ const StepFive = () => {
   return isMobileView ? (
     <Container isMobileView={isMobileView}>
       <Body>
-      <BoxMessageFeedback>
-        <MessageFeedbackStyle
-          placing="above"
-          animationSpeed={2000}
-          animationDelay={900}
-          isMobileView={isMobileView}
-        >
-          Beleza!
-        </MessageFeedbackStyle>
-        <MessageFeedbackStyle
-          placing="bellow"
-          animationSpeed={2000}
-          animationDelay={1300}
-          isMobileView={isMobileView}
-        >
-          Quanto você pode investir por mês?
-        </MessageFeedbackStyle>
-      </BoxMessageFeedback>
+        <BoxMessageFeedback>
+          <MessageFeedbackStyle
+            placing="above"
+            animationSpeed={2000}
+            animationDelay={900}
+            isMobileView={isMobileView}
+          >
+            Beleza!
+          </MessageFeedbackStyle>
+          <MessageFeedbackStyle
+            placing="bellow"
+            animationSpeed={2000}
+            animationDelay={1300}
+            isMobileView={isMobileView}
+          >
+            Quanto você pode investir por mês?
+          </MessageFeedbackStyle>
+        </BoxMessageFeedback>
         <BoxInput isMobileView={isMobileView}>
           <Input
             state={inputValue}
@@ -157,12 +157,12 @@ const StepFive = () => {
         </MessageFeedbackStyle>
 
         <InputContainer>
-            <Input
-              state={inputValue}
-              setState={setInputValue}
-              type="currency"
-              setIsActiveInput={setIsActiveInput}
-            />
+          <Input
+            state={inputValue}
+            setState={setInputValue}
+            type="currency"
+            setIsActiveInput={setIsActiveInput}
+          />
           <BoxButton>
             <Button
               ripple
@@ -182,7 +182,7 @@ const StepFive = () => {
               OK <OkIcon />
             </Button>
           </BoxButton>
-       </InputContainer>
+        </InputContainer>
       </Body>
     </Container>
   );
