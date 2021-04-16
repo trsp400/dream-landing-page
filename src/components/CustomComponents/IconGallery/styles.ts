@@ -3,20 +3,19 @@ import {
   Card,
   Container as BootstrapContainer,
   Row as BootstrapRow,
-  CardProps as BootstrapCardProps
+  CardProps as BootstrapCardProps,
 } from 'react-bootstrap';
 
-
 interface PropsCardBody {
-  checked: boolean,
-  iconsize: number,
-  backgroundcolor: string
+  checked: boolean;
+  iconsize: number;
+  backgroundcolor: string;
 }
 
 interface PropsCardFooter {
-  labelSize: number,
-  color: string,
-  checked: boolean
+  labelSize: number;
+  color: string;
+  checked: boolean;
 }
 
 interface PropsGrid {
@@ -28,7 +27,6 @@ export const Container = styled(BootstrapContainer)`
 
   display: flex;
   flex-direction: column;
-
 `;
 
 export const Grid = styled.section<PropsGrid>`
@@ -36,7 +34,7 @@ export const Grid = styled.section<PropsGrid>`
   position: relative;
   align-items: baseline;
 
-  justify-content: ${props => props.lonelySon ? "center" : "space-between"} ;
+  justify-content: ${props => (props.lonelySon ? 'center' : 'space-between')};
 `;
 
 export const CardContainer = styled(Card)`
@@ -50,8 +48,6 @@ export const CardContainer = styled(Card)`
 
   background-color: transparent;
   cursor: pointer;
-
-
 `;
 
 export const CardBody = styled(Card.Body)<PropsCardBody>`
@@ -67,23 +63,21 @@ export const CardBody = styled(Card.Body)<PropsCardBody>`
   }
 
   @media (max-height: 569px) and (max-width: 321px) {
-    padding: .5em;
+    padding: 0.5em;
   }
-
 
   ${props =>
     props.checked &&
     css`
       transform: scale(1.3);
       box-shadow: none;
-      filter: drop-shadow(2px 2px 0 #9E402E);
+      filter: drop-shadow(2px 2px 0 #9e402e);
 
       svg {
         transform: scale(1.3);
-        filter: drop-shadow(2px 2px 0 #9E402E);
+        filter: drop-shadow(2px 2px 0 #9e402e);
       }
-
-  `}
+    `}
 
   svg {
     height: 3em;
@@ -94,9 +88,8 @@ export const CardBody = styled(Card.Body)<PropsCardBody>`
     }
 
     @media (max-height: 569px) and (max-width: 321px) {
-      height: 1.7em
+      height: 1.7em;
     }
-
   }
 `;
 
@@ -111,18 +104,19 @@ export const CardFooter = styled(Card.Footer)<PropsCardFooter>`
   color: ${props => props.color};
   background: transparent;
   font-weight: 600;
-  font-size: .8em;
+  font-size: 0.8em;
   text-align: center;
   line-height: 14px;
 
-  ${props => props.checked && css`
-    line-height: 45px;
-    transform: scale(1.2);
-  `}
+  ${props =>
+    props.checked &&
+    css`
+      line-height: 45px;
+      transform: scale(1.2);
+    `}
 
   @media (max-height: 737px) and (max-width: 415px) {
-    font-size: .7em;
+    font-size: 0.7em;
     line-height: 12px;
   }
-
 `;

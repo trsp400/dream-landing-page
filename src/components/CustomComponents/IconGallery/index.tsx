@@ -48,7 +48,7 @@ const IconGallery: React.FC<GalleryProps> = ({
   );
 };
 
-export const Row: React.FC<RowProps> = ({ children ,...props }) => {
+export const Row: React.FC<RowProps> = ({ children, ...props }) => {
   return (
     <Grid lonelySon={!children?.length}>
       {children.length > 1
@@ -76,9 +76,8 @@ export const Card: React.FC<CardProps> = ({
   objectiveValue,
   labelSize,
 }) => {
-
   return (
-    <CardContainer onClick={event => (onClick ? onClick(event, label) : null)} >
+    <CardContainer onClick={event => (onClick ? onClick(event, label) : null)}>
       <CardBody
         checked={objectiveValue === label}
         iconsize={iconSize}
@@ -90,7 +89,7 @@ export const Card: React.FC<CardProps> = ({
         labelSize={labelSize || 15}
         color={labelColor}
         checked={objectiveValue === label}
-        >
+      >
         {label}
       </CardFooter>
     </CardContainer>

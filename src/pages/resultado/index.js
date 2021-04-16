@@ -37,19 +37,13 @@ import {
   FooterContextProfile,
 } from './styles';
 
-const LoadingComponent = ({
-  resultSuccess,
-  loading,
-  setLoading,
-  comingFromLastStep,
-}) => {
+const LoadingComponent = ({ resultSuccess, loading, setLoading }) => {
   useEffect(() => {
     setTimeout(() => {
-      if (!comingFromLastStep) navigate('/');
-      setLoading(false);
-    }, 1400);
+      if (resultSuccess) setLoading(false);
+    }, 2500);
   }, [resultSuccess]);
-  return loading && <Loading />;
+  return loading ? <Loading /> : null;
 };
 
 const Result = () => {
@@ -77,13 +71,9 @@ const Result = () => {
 
   const { resultSuccess } = store;
 
-  console.log(resultSuccess);
-
   const urls = fileUrl?.urls || '';
 
   const objectiveCost = store.objectiveCost;
-
-  if (!comingFromLastStep) navigate('/');
 
   const resultRiskProfile = resultProfile(riskProfile, monthlyRate);
 
@@ -306,15 +296,6 @@ const Result = () => {
                     </p>
                   ) : (
                     <>
-                      {/* <p
-                  style={{
-                    fontWeight: 'bolder',
-                    marginBottom: '1px',
-                  }}
-                >
-                  O seu perfil é{' '}
-                  <span style={{ color: '#e2381a' }}>{riskProfile}</span>
-                </p> */}
                       <p>{resultRiskProfile || ''}</p>
                     </>
                   )}

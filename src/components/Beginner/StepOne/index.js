@@ -27,7 +27,7 @@ import {
   DesktopBody,
   DesktopGalleryContainer,
   BoxIconGallery,
-  BoxMessageFeedback
+  BoxMessageFeedback,
 } from './styles';
 
 const labelSize = 8.8;
@@ -67,13 +67,14 @@ const StepOne = () => {
   }, [objective]);
 
   useEffect(() => {
-
-    if(!isVisibleModal && objectiveValue === "OUTROS" || !isVisibleModal && inputValue) {
-      setInputValue("");
-      setObjectiveValue("");
+    if (
+      (!isVisibleModal && objectiveValue === 'OUTROS') ||
+      (!isVisibleModal && inputValue)
+    ) {
+      setInputValue('');
+      setObjectiveValue('');
     }
-
-  }, [objectiveValue, inputValue, isVisibleModal])
+  }, [objectiveValue, inputValue, isVisibleModal]);
 
   const handleDispatch = useCallback(
     (objectiveValue, step, direction) => {
@@ -108,8 +109,7 @@ const StepOne = () => {
         handleDispatch(value, 2, 'next');
       },
       others: () => {
-        if(!value) return notify('Por favor, digite um objetivo!');
-
+        if (!value) return notify('Por favor, digite um objetivo!');
 
         const valueUpperCase = value.toUpperCase();
         handleDispatch(valueUpperCase, 2, 'next');
@@ -178,7 +178,10 @@ const StepOne = () => {
           </MessageFeedbackStyle>
         </BoxMessageFeedback>
         <BoxIconGallery>
-          <IconGallery onClick={handleCardClick} objectiveValue={objectiveValue}>
+          <IconGallery
+            onClick={handleCardClick}
+            objectiveValue={objectiveValue}
+          >
             <Row>
               <Card
                 backgroundColor="#EA5E45"
@@ -246,7 +249,7 @@ const StepOne = () => {
             </Row>
           </IconGallery>
         </BoxIconGallery>
-        </Container>
+      </Container>
       <ModalStyled
         visible={isVisibleModal}
         setVisible={setIsVisibleModal}
@@ -286,89 +289,85 @@ const StepOne = () => {
     </>
   ) : (
     <Container>
+      <MessageFeedbackStyle
+        placing="above"
+        animationSpeed={3000}
+        animationDelay={900}
+        isMobileView={isMobileView}
+      >
+        Olá, vamos começar?
+      </MessageFeedbackStyle>
 
-        <MessageFeedbackStyle
-          placing="above"
-          animationSpeed={3000}
-          animationDelay={900}
-          isMobileView={isMobileView}
-        >
-          Olá, vamos começar?
-        </MessageFeedbackStyle>
-
-        <MessageFeedbackStyle
-          placing="bellow"
-          animationSpeed={3000}
-          animationDelay={1500}
-          isMobileView={isMobileView}
-        >
-          Qual o seu objetivo de vida?
-        </MessageFeedbackStyle>
-        <DesktopGalleryContainer>
-          <IconGallery
-            onClick={handleCardClick}
-            objectiveValue={objectiveValue}
-          >
-            <Row>
-              <Card
-                backgroundColor="#EA5E45"
-                icon={<WeddingIcon />}
-                iconSize={70}
-                label="CASAMENTO"
-                labelColor="#FFF"
-                labelSize={15}
-              />
-              <Card
-                backgroundColor="#EA5E45"
-                icon={<HouseIcon />}
-                iconSize={70}
-                label="CASA"
-                labelColor="#FFF"
-                labelSize={15}
-              />
-              <Card
-                backgroundColor="#EA5E45"
-                icon={<BeachIcon />}
-                iconSize={70}
-                label="APOSENTADORIA"
-                labelColor="#FFF"
-                labelSize={15}
-              />
-              <Card
-                backgroundColor="#EA5E45"
-                icon={<WorldIcon />}
-                iconSize={70}
-                label="INTERCÂMBIO"
-                labelColor="#FFF"
-                labelSize={15}
-              />
-              <Card
-                backgroundColor="#EA5E45"
-                icon={<CarIcon />}
-                iconSize={70}
-                label="AUTOMÓVEL"
-                labelColor="#FFF"
-                labelSize={15}
-              />
-              <Card
-                backgroundColor="#EA5E45"
-                icon={<MoneyIcon />}
-                iconSize={70}
-                label="INDEPENDÊNCIA FINANCEIRA"
-                labelColor="#FFF"
-                labelSize={15}
-              />
-              <Card
-                backgroundColor="#EA5E45"
-                icon={<OtherIcon />}
-                iconSize={70}
-                label="OUTROS"
-                labelColor="#FFF"
-                labelSize={15}
-              />
-            </Row>
-          </IconGallery>
-        </DesktopGalleryContainer>
+      <MessageFeedbackStyle
+        placing="bellow"
+        animationSpeed={3000}
+        animationDelay={1500}
+        isMobileView={isMobileView}
+      >
+        Qual o seu objetivo de vida?
+      </MessageFeedbackStyle>
+      <DesktopGalleryContainer>
+        <IconGallery onClick={handleCardClick} objectiveValue={objectiveValue}>
+          <Row>
+            <Card
+              backgroundColor="#EA5E45"
+              icon={<WeddingIcon />}
+              iconSize={70}
+              label="CASAMENTO"
+              labelColor="#FFF"
+              labelSize={15}
+            />
+            <Card
+              backgroundColor="#EA5E45"
+              icon={<HouseIcon />}
+              iconSize={70}
+              label="CASA"
+              labelColor="#FFF"
+              labelSize={15}
+            />
+            <Card
+              backgroundColor="#EA5E45"
+              icon={<BeachIcon />}
+              iconSize={70}
+              label="APOSENTADORIA"
+              labelColor="#FFF"
+              labelSize={15}
+            />
+            <Card
+              backgroundColor="#EA5E45"
+              icon={<WorldIcon />}
+              iconSize={70}
+              label="INTERCÂMBIO"
+              labelColor="#FFF"
+              labelSize={15}
+            />
+            <Card
+              backgroundColor="#EA5E45"
+              icon={<CarIcon />}
+              iconSize={70}
+              label="AUTOMÓVEL"
+              labelColor="#FFF"
+              labelSize={15}
+            />
+            <Card
+              backgroundColor="#EA5E45"
+              icon={<MoneyIcon />}
+              iconSize={70}
+              label="INDEPENDÊNCIA FINANCEIRA"
+              labelColor="#FFF"
+              labelSize={15}
+            />
+            <Card
+              backgroundColor="#EA5E45"
+              icon={<OtherIcon />}
+              iconSize={70}
+              label="OUTROS"
+              labelColor="#FFF"
+              labelSize={15}
+            />
+          </Row>
+        </IconGallery>
+      </DesktopGalleryContainer>
 
       <ModalStyled
         visible={isVisibleModal}

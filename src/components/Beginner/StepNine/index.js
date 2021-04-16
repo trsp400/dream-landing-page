@@ -82,7 +82,7 @@ const StepSeven = () => {
     );
 
     navigate('/resultado');
-  });
+  }, []);
 
   function emailIsValid(dataEmail) {
     return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(dataEmail);
@@ -114,11 +114,11 @@ const StepSeven = () => {
     return valid;
   };
 
-  useEffect(() => {
-    if (yearlyAverageArray?.length) {
-      navigate('/resultado');
-    }
-  }, [yearlyAverageArray]);
+  // useEffect(() => {
+  //   if (yearlyAverageArray?.length) {
+  //     return navigate('/resultado');
+  //   }
+  // }, [yearlyAverageArray]);
 
   useEffect(() => {
     const listener = event => {
@@ -163,8 +163,8 @@ const StepSeven = () => {
               type="text"
               placeholder="Nome"
               autoCapitalize={false}
-              autoComplete={false}
-              autoCorrect={false}
+              autoComplete="false"
+              autoCorrect="false"
               setIsActiveInput={setIsActiveInput}
               style={{
                 paddingBottom: 10,
@@ -175,8 +175,8 @@ const StepSeven = () => {
               setState={setInputValuePhone}
               type="phone"
               autoCapitalize={false}
-              autoComplete={false}
-              autoCorrect={false}
+              autoComplete="false"
+              autoCorrect="false"
               setIsActiveInput={setIsActiveInput}
               style={{
                 paddingBottom: 10,
@@ -187,8 +187,8 @@ const StepSeven = () => {
               setState={checkValidEmailOnInputChange}
               type="email"
               autoCapitalize={false}
-              autoComplete={false}
-              autoCorrect={false}
+              autoComplete="false"
+              autoCorrect="false"
               setIsActiveInput={setIsActiveInput}
               style={{
                 paddingBottom: 10,
@@ -242,8 +242,8 @@ const StepSeven = () => {
                 setState={setInputValueName}
                 type="text"
                 autoCapitalize={false}
-                autoComplete={false}
-                autoCorrect={false}
+                autoComplete="false"
+                autoCorrect="false"
                 placeholder="Nome"
                 setIsActiveInput={setIsActiveInput}
                 style={{
@@ -255,8 +255,8 @@ const StepSeven = () => {
                 setState={setInputValuePhone}
                 type="phone"
                 autoCapitalize={false}
-                autoComplete={false}
-                autoCorrect={false}
+                autoComplete="false"
+                autoCorrect="false"
                 setIsActiveInput={setIsActiveInput}
                 style={{
                   paddingBottom: 10,
@@ -267,8 +267,8 @@ const StepSeven = () => {
                 setState={checkValidEmailOnInputChange}
                 type="email"
                 autoCapitalize={false}
-                autoComplete={false}
-                autoCorrect={false}
+                autoComplete="false"
+                autoCorrect="false"
                 setIsActiveInput={setIsActiveInput}
                 style={{
                   paddingBottom: 10,
